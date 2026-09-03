@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>&nbsp;</title>
+    <!--<link rel="stylesheet" href="http://CiscoLIMS.rnisolutions.in:8608/css/CRF_style.css" media="all" />-->
+    <link rel="stylesheet" href="css/CRF_style.css" media="all" />
+    <link rel="stylesheet" href="../css/CRF_style.css" media="all" />
+    <style>
+        .a4-page {
+            background: white; /* The page color */
+            width: 21cm; /* A4 width */
+            display: block;
+            margin: 0 auto; /* Center the page horizontally */
+            margin-bottom: 0.5cm; /* Space between multiple pages in a long scroll */
+            box-shadow: 0 0 0.5cm rgba(0, 0, 0, 0.5); /* Adds a subtle shadow for depth */
+            box-sizing: border-box; /* Ensures padding/border are included in the specified width/height */
+            padding: 1cm 1.5cm; /* Example internal margins/padding for content */
+        }
+
+        @media print {
+            .a4-page {
+                background: white; /* The page color */
+                width: 21cm; /* A4 width */
+                display: block;
+                margin: 0 auto; /* Center the page horizontally */
+                margin-bottom: 0.5cm; /* Space between multiple pages in a long scroll */
+                box-shadow: none !important; /* Adds a subtle shadow for depth */
+                box-sizing: border-box; /* Ensures padding/border are included in the specified width/height */
+                padding: 1cm 1.5cm; /* Example internal margins/padding for content */
+            }
+
+            .no-print {
+                display: none;
+            }
+        }
+    </style>
+    <style>
+        .space {
+            border-collapse: separate;
+            border-spacing: 0 15px;
+        }
+
+        .page {
+            width: 21cm;
+            min-height: 29.7cm;
+            padding: 2cm;
+            margin: 1cm auto;
+            border: 1px #D3D3D3 solid;
+            border-radius: 5px;
+            background: white;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+    <style media="screen">
+        .noPrint1 {
+        }
+
+        .noScreen1 {
+            display: none;
+        }
+
+        .noPrint {
+        }
+
+        .noScreen {
+            display: none;
+        }
+
+        #header {
+            display: block;
+            position: relative;
+            left: 0px;
+            top: 0px;
+            right: 0px;
+            font-size: 10px;
+        }
+
+        #footer {
+            display: block;
+            position: relative;
+            left: 0px;
+            bottom: 0px;
+            right: 0px;
+            font-size: 10px;
+        }
+    </style>
+    <style>
+        .space {
+            border-collapse: separate;
+            border-spacing: 0 15px;
+        }
+
+        .tab1 {
+            border: 1px solid;
+            border-bottom: 1px solid;
+        }
+
+            .tab1 td {
+                border: 1px solid;
+                padding: 5px;
+            }
+
+        .blank {
+            border: none !important;
+            padding: 5px;
+        }
+    </style>
+    <style>
+        .space {
+            border-collapse: separate;
+            border-spacing: 0 15px;
+        }
+
+        .tab {
+            border-collapse: collapse;
+            border: none !important;
+            border-bottom: none;
+        }
+
+            .tab td {
+                border-collapse: collapse;
+                border: none !important;
+                padding: 5px;
+            }
+
+        .blank {
+            border: none !important;
+            padding: 5px;
+        }
+    </style>
+    <style type="text/css" media="print">
+        @page {
+            size: auto; /* auto is the initial value */
+            margin: 0; /* this affects the margin in the printer settings */
+        }
+        /*   table {
+            table-layout: fixed;
+        }*/
+    </style>
+</head>
+<body style="margin:2% !important; width:95%; overflow:scroll">
+    <div class="no-print">
+        <button onclick="window.print()">Print</button>
+    </div>
+    <center>
+        <div class='a4-page'>
+                <div class='table-responsive'>
+                    <table style="margin-right:5px">
+                        <thead>
+                            <tr>
+                                <td style="border: 2px solid">
+                                    <table>
+                                        <tr>
+                                            <td style="text-align:center">Doc No : TSQ-LAB-QAF-112</td>
+                                            <td style="float:right">Rev 00 - March 2021</td>
+                                        </tr>
+                                        <tr>
+                                            <td><img src="assets/img/logo.png" height='80px' alt="PT Qualis" /></td>
+                                            <td><h1>Quotation No. {QuotationNo}</h1></td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="margin-top:250px">
+                                    <table style='width: 100%; border: 1px solid; margin-top: 10px; ' class='tab'>
+                                        <tr>
+                                            <td style="width:20%"><b>Prepared for Request No. : {RequestNo}</b></td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>Date</b> </td>
+                                            <td>:</td>
+                                            <td colspan="5">{Date}</td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>Company</b> </td>
+                                            <td>:</td>
+                                            <td>{CompanyName}</td>
+                                            <td><b>From</b> </td>
+                                            <td>:</td>
+                                            <td style="width:30%">{ContactPerson}</td>
+                                        </tr>
+                                        <tr>
+                                            <td rowspan="3"><b>Address</b> </td>
+                                            <td rowspan="3">:</td>
+                                            <td rowspan="3">{Address}</td>
+                                            <td><b>Dept</b></td>
+                                            <td>:</td>
+                                            <td>{Dept}</td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>Fax</b></td>
+                                            <td>:</td>
+                                            <td>{Fax}</td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>Telephone</b></td>
+                                            <td>:</td>
+                                            <td>{FromTelephone}</td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>To</b></td>
+                                            <td>:</td>
+                                            <td>{To}</td>
+                                            <td><b>Email</b></td>
+                                            <td>:</td>
+                                            <td>{FromEmail}</td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>Telephone</b></td>
+                                            <td>:</td>
+                                            <td>{ToTelephone}</td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>Email</b></td>
+                                            <td>:</td>
+                                            <td>{ToEmail}</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="4">
+                                                <br />
+                                                Dear Our Value Customers<br />
+                                                Thank you for your enquiry. We are pleased to quote the following:<br />
+                                                <br />
+                                                <!--Sample Description : {SampleDescription}<br />-->
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="7">
+                                                {TestItems}
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <table style="width:100%" class="tab">
+                                        <tr>
+                                            <td style="text-align:right;width:90%">Sub Total</td>
+                                            <td style="text-align: right; border-left: none !important">{SubTotal}</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align:right">Discount {DiscountPercent}</td>
+                                            <td style="text-align:right">{Discount}</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align:right">Total before tax</td>
+                                            <td style="text-align:right">{Totalbeforetax}</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align:right">VAT (11%)</td>
+                                            <td style="text-align:right">{VAT}</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align:right">Grand Total</td>
+                                            <td style="text-align:right">{Grandtotal}</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">Payment Term : {PaymentTerm}</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">Currency : {CurrencyName}</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">Note : {Remarks}</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">
+                                                We hope that our quotation meets your requirements. For confirmation, please sign below, and return this to us by the above fax number and via<br />
+                                                We look forward to hear from you soon.<br /><br />
+                                                Kindly confirm this quotation by signing below and please send your payment to the stated address below.<br />
+
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td>
+                                    <table style='width:100%; font-family:Times New Roman; font-size:11px' class='tab1'>
+                                        <tr>
+                                            <td rowspan="2" style="width:30%">
+                                                Prepared By :
+                                                {SignPreparedBy}
+                                            </td>
+                                            <td rowspan="2" style="width:40%">
+                                                Customer Approval :
+                                            </td>
+                                            <td style="width:30%">
+                                                PT. Qualis Indonesia
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:30%">
+                                                Note:<br />For Payment, Please transfer to our <br />account:a/n. PT QUALIS INDONESIA<br />A/C 125.001.0456.671 (RP) A/C<br /> 125.001.1000.569 (USD)<br />FULL AMOUNT<br />Bank Mandiri Cab.Graha Rekso<br />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Name: <b>{PreparedBy}</b><br />
+                                                Title:<b>{Designation}</b>
+                                            </td>
+                                            <td>
+                                                Name: <br />
+                                                Title:
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="3" style="border-bottom:none !important">Note : Please indicate our R no / Wo number when making payment.</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="border-collapse:collapse; border:none !important; border-top: none !important">
+                                                www.qualis-indonesia.com
+                                            </td>
+                                            <td colspan="2" style="border-collapse:collapse; border:none !important; border-top: none !important">
+                                                <img src="assets/img/certifications.png" alt="certifications"  width="500" />
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+           </div>
+            </center>
+       
+
+</body>
+</html>

@@ -1,0 +1,121 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>LIMS- Test Report</title>
+    <!-- Bootstrap Core Css -->
+    <!--<link href="../plugins/bootstrap/css/bootstrap.css" rel="stylesheet">-->
+    <style>
+	#SivaDiv {
+            background: url(../assets/img/Signature/ValidSign.png) no-repeat !important;
+            width: 205px;
+            height: 200px;
+			float:right; 
+			-webkit-print-color-adjust: exact !important;
+        }
+        @media print {
+            .page-break {
+                display: block;
+                page-break-before: always;
+                margin:0;
+            }
+        }
+
+        @media screen {
+            div.divFooter {
+                display: none;
+                text-align: center;
+            }
+        }
+
+        @media print {
+            div.divFooter {
+                position: fixed;
+                bottom: 0;
+                text-align: center;
+                margin:0;
+            }
+        }
+        th, td {
+            padding-left: 15px;
+            text-align: left;
+            font-size: 12px;
+            border: 1px solid black !important;
+        }
+    </style>
+	<style>
+	h1 {
+    border-bottom: 3px solid #cc9900;
+    font: 2.75em/1.75em Georgia, serif;
+    color: #000;
+}
+
+ul {
+    list-style-type: none;
+}
+
+body {
+    margin: 0;
+    padding: 1em;
+    background-color: #ffffff;
+    font: 75%/1.75em "Trebuchet MS", Verdana, sans-serif;
+    color: #000;
+}
+
+#list {
+    margin: 1em 0 7em -3em;
+    padding: 1em 0 0 0;
+    background-color: #ffffff;
+    color: #000;
+    width: 25%;
+    float: left;
+}
+
+#header, #footer {
+    margin: 0;
+    padding: 0;
+    color: #000;
+}
+.table-footer {
+  border: 1px solid black;
+  min-height: 100px;
+  vertical-align: top;
+}
+.table-header {
+  border: 1px solid black;
+  min-height: 100px;
+  vertical-align: top;
+}
+@media print {
+div.divHeader {
+    position: fixed;
+    top: 0;
+  }
+  div.divFooter {
+    position: fixed;
+    bottom: 0;
+	margin-top:10px;
+	 height: 50px;	 
+  }
+table {
+
+    -fs-table-paginate: paginate;
+}
+}
+table{
+border-collapse: collapse;
+}
+	</style>
+</head>
+<body>
+    <center>
+        <div>         
+            <main style="padding-right:5%; padding-left:5%">
+
+                {TestResult}
+            </main>
+
+        </div>
+    </center>
+</body>
+</html>

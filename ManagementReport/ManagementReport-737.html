@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Management Report</title>
+    <style>
+        @media print {
+            .a4-page {
+                page-break-after: always;
+                box-shadow: none;
+            }
+
+                .a4-page:last-child {
+                    page-break-after: auto;
+                }
+
+            thead {
+                display: table-header-group;
+            }
+
+            tfoot {
+                display: table-footer-group;
+            }
+
+            /* Show footer in print */
+            .footer {
+                display: block !important;
+            }
+
+            .header-table {
+                border: 2px solid #000 !important;
+                border-collapse: collapse !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .tab1, .tab1 td {
+                border: 1px solid #000 !important;
+            }
+        }
+
+        body {
+            margin-left: 5% !important;
+            width: 96%;
+            overflow: scroll;
+            font-family: Arial, sans-serif;
+            font-size: 11px;
+        }
+
+        .a4-page {
+            background: white;
+            width: 21cm;
+            display: block;
+            margin: 0 auto;
+            margin-bottom: 0.5cm;
+            box-shadow: 0 0 0.5cm rgba(0, 0, 0, 0.5);
+            box-sizing: border-box;
+            padding: 1cm 1.5cm;
+            position: relative;
+            min-height: 29.7cm;
+            padding-bottom: 3.5cm;
+        }
+
+        .tab1 {
+            border: 1px solid #000;
+            border-collapse: collapse;
+        }
+
+            .tab1 td {
+                border: 1px solid #000;
+                padding: 5px;
+            }
+
+        .header-table {
+            width: 100%;
+            border: 2px solid #000;
+            margin-top: 10px;
+            border-collapse: collapse;
+        }
+
+        .info-section {
+            width: 100%;
+            margin-top: 15px;
+        }
+
+            .info-section td {
+                padding: 3px 0;
+            }
+
+        .left-align {
+            text-align: left;
+        }
+
+        .right-align {
+            text-align: right;
+        }
+
+        /* Hide footer on screen, show only in print */
+        .footer {
+            display: none;
+        }
+
+        @media print {
+            .footer {
+                display: block !important;
+            }
+        }
+
+        .footer {
+            position: absolute;
+            bottom: 0.5cm;
+            left: 1.5cm;
+            right: 1.5cm;
+            text-align: center;
+            font-size: 10px;
+        }
+
+        .footer-line {
+            border-top: 1px solid #000;
+            margin-bottom: 8px;
+        }
+
+        .footer-content {
+            margin-bottom: 3px;
+        }
+
+        .page-number-top {
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            font-size: 10px;
+        }
+
+        /* Page break control */
+        .page-break-inside-avoid {
+            page-break-inside: avoid;
+            break-inside: avoid;
+        }
+
+        /* Table rows should not break across pages */
+        .tab1 tr {
+            page-break-inside: avoid;
+            break-inside: avoid;
+        }
+    </style>
+</head>
+<body>
+    <div class="a4-page">
+        <center>
+            <div class='table-responsive'>
+                <table style="width: 100%;">
+                    <thead>
+                        <tr>
+                            <td>
+                                <table class='header-table' style="border: 2px solid #000 !important; width: 100%; border-collapse: collapse;">
+                                    <tr>
+                                        <td align="center" style="width: 15%; vertical-align: middle; border-right: 2px solid #000; padding: 5px;">
+                                            <img src="assets/img/logo.png" alt="PT Qualis" height="80" />
+                                        </td>
+                                        <td style="width: 85%; vertical-align: middle; background-color: #f2f2f2; text-align: center; position: relative; padding: 10px;">
+                                            <div class="page-number-top">
+                                                <span class="page-number"></span>
+                                            </div>
+                                            <b style="color: darkblue; font-size: large;">Management Report</b>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <table class="info-section">
+                                    <tr>
+                                        <td style="width: 70%;" class="left-align">
+                                            <strong>Request no. : 2025000737 --- QQ2025120012 --- In Lab</strong>
+                                        </td>
+                                        <td style="width: 30%;" class="right-align">
+                                            17/12/2025
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="left-align">
+                                            PT. K3L Dec Trial Handuk
+                                        </td>
+                                        <td class="right-align">
+                                            PIC : Accounts User
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="left-align">
+                                            Jalan Pajajaran No 17 Desa Gandasari Kecamatan Jatiuwung,,,Indonesia,15137
+                                        </td>
+                                        <td class="right-align">
+                                            Dept : Softline
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <td style="width: 100%;">
+                                <div style="width: 100%; overflow-x: auto;">
+                                    
+<table style='width: 100%; border: 2px solid #000; padding: 10px; margin-bottom: 20px;'>
+    <tr>
+        <td style='padding: 10px;'>
+    <tr>
+        <td class='tab1' style='text-align: center;'>1</td>
+        <td class='tab1'>Handuk Betha</td>
+        <td class='tab1' style='text-align: center;'>SNI 7334: 2009, SNI ISO 14184-1: 2015, SNI ISO 24362-1: 2015</td>
+        <td class='tab1' style='text-align: center;'>1.00</td>
+        <td class='tab1' style='text-align: right;'>1,500,000.00</td>
+        <td class='tab1' style='text-align: right;'>1,500,000.00</td>
+    </tr>
+        </td>
+    </tr>
+</table>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 100%;">
+                                <div style="width: 100%; overflow-x: auto;">
+                                    
+<table style='width: 100%; border: 2px solid #000; padding: 10px; margin-bottom: 20px;'>
+    <tr>
+        <td style='padding: 10px;'>
+    <tr>
+        <td colspan='2' style='padding: 10px; vertical-align: top;'>
+            <strong>Sample Code</strong> : smp/25120137<br/>
+            <strong>Remark</strong> : Handuk Betha , 1 pcs , NA
+        </td>
+        <td colspan='4' style='padding: 10px; vertical-align: top;'>
+            <strong>Sample Description</strong> : Handuk Betha,,1 pcs
+        </td>
+    </tr>
+    <tr>
+        <td colspan='6' style='padding: 0; border: 0;'>
+            <table style='width: 100%; border-collapse: collapse; border: 1px solid #000;'>
+                <tr style='background-color: #f2f2f2;'>
+                    <th rowspan='2' style='border: 1px solid #000; padding: 5px; text-align: center; width: 30%;'>Tests</th>
+                    <th rowspan='2' style='border: 1px solid #000; padding: 5px; text-align: center; width: 20%;'>Method</th>
+                    <th colspan='2' style='border: 1px solid #000; padding: 5px; text-align: center; width: 30%;'>Date Of Test</th>
+                    <th rowspan='2' style='border: 1px solid #000; padding: 5px; text-align: center; width: 20%;'>Remark</th>
+                </tr>
+                <tr style='background-color: #f2f2f2;'>
+                    <th style='border: 1px solid #000; padding: 5px; text-align: center;'>Start Test</th>
+                    <th style='border: 1px solid #000; padding: 5px; text-align: center;'>End Test</th>
+                </tr>
+                <tr>
+                    <td style='border: 1px solid #000; padding: 5px;'>Extractable Heavy Metal - Nickel (Ni)</td>
+                    <td style='border: 1px solid #000; padding: 5px; text-align: center;'>SNI 7334: 2009</td>
+                    <td style='border: 1px solid #000; padding: 5px; text-align: center;'>16/12/2025</td>
+                    <td style='border: 1px solid #000; padding: 5px; text-align: center;'>22/12/2025</td>
+                    <td style='border: 1px solid #000; padding: 5px;'></td>
+                </tr>
+                <tr>
+                    <td style='border: 1px solid #000; padding: 5px;'>Extractable Heavy Metal - Lead (Pb)</td>
+                    <td style='border: 1px solid #000; padding: 5px; text-align: center;'>SNI 7334: 2009</td>
+                    <td style='border: 1px solid #000; padding: 5px; text-align: center;'>16/12/2025</td>
+                    <td style='border: 1px solid #000; padding: 5px; text-align: center;'>22/12/2025</td>
+                    <td style='border: 1px solid #000; padding: 5px;'></td>
+                </tr>
+                <tr>
+                    <td style='border: 1px solid #000; padding: 5px;'>Extractable Heavy Metal - Cadmium (Cd)</td>
+                    <td style='border: 1px solid #000; padding: 5px; text-align: center;'>SNI 7334: 2009</td>
+                    <td style='border: 1px solid #000; padding: 5px; text-align: center;'>16/12/2025</td>
+                    <td style='border: 1px solid #000; padding: 5px; text-align: center;'>22/12/2025</td>
+                    <td style='border: 1px solid #000; padding: 5px;'></td>
+                </tr>
+                <tr>
+                    <td style='border: 1px solid #000; padding: 5px;'>Extractable Heavy Metal - Copper (Cu)</td>
+                    <td style='border: 1px solid #000; padding: 5px; text-align: center;'>SNI 7334: 2009</td>
+                    <td style='border: 1px solid #000; padding: 5px; text-align: center;'>16/12/2025</td>
+                    <td style='border: 1px solid #000; padding: 5px; text-align: center;'>22/12/2025</td>
+                    <td style='border: 1px solid #000; padding: 5px;'></td>
+                </tr>
+                <tr>
+                    <td style='border: 1px solid #000; padding: 5px;'>Formaldehyde - Formaldehyde</td>
+                    <td style='border: 1px solid #000; padding: 5px; text-align: center;'>SNI ISO 14184-1: 2015</td>
+                    <td style='border: 1px solid #000; padding: 5px; text-align: center;'>16/12/2025</td>
+                    <td style='border: 1px solid #000; padding: 5px; text-align: center;'>22/12/2025</td>
+                    <td style='border: 1px solid #000; padding: 5px;'></td>
+                </tr>
+                <tr>
+                    <td style='border: 1px solid #000; padding: 5px;'>Azo dyes - 4-aminobiphenyl / biphenyl-4-ylamine / xenylamine</td>
+                    <td style='border: 1px solid #000; padding: 5px; text-align: center;'>SNI ISO 24362-1: 2015</td>
+                    <td style='border: 1px solid #000; padding: 5px; text-align: center;'>16/12/2025</td>
+                    <td style='border: 1px solid #000; padding: 5px; text-align: center;'>22/12/2025</td>
+                    <td style='border: 1px solid #000; padding: 5px;'></td>
+                </tr>
+                <tr>
+                    <td style='border: 1px solid #000; padding: 5px;'>Azo dyes - Benzidine</td>
+                    <td style='border: 1px solid #000; padding: 5px; text-align: center;'>SNI ISO 24362-1: 2015</td>
+                    <td style='border: 1px solid #000; padding: 5px; text-align: center;'>16/12/2025</td>
+                    <td style='border: 1px solid #000; padding: 5px; text-align: center;'>22/12/2025</td>
+                    <td style='border: 1px solid #000; padding: 5px;'></td>
+                </tr>
+                <tr>
+                    <td style='border: 1px solid #000; padding: 5px;'>Azo dyes - 4-chloro-o-toluidine</td>
+                    <td style='border: 1px solid #000; padding: 5px; text-align: center;'>SNI ISO 24362-1: 2015</td>
+                    <td style='border: 1px solid #000; padding: 5px; text-align: center;'>16/12/2025</td>
+                    <td style='border: 1px solid #000; padding: 5px; text-align: center;'>22/12/2025</td>
+                    <td style='border: 1px solid #000; padding: 5px;'></td>
+                </tr>
+                <tr>
+                    <td style='border: 1px solid #000; padding: 5px;'>Azo dyes - 2-naphthylamine</td>
+                    <td style='border: 1px solid #000; padding: 5px; text-align: center;'>SNI ISO 24362-1: 2015</td>
+                    <td style='border: 1px solid #000; padding: 5px; text-align: center;'>16/12/2025</td>
+                    <td style='border: 1px solid #000; padding: 5px; text-align: center;'>22/12/2025</td>
+                    <td style='border: 1px solid #000; padding: 5px;'></td>
+                </tr>
+                <tr>
+                    <td style='border: 1px solid #000; padding: 5px;'>Azo dyes - o-aminoazotoluene / 4-amino-2’,3-dimethylazobenzene / 4-o-tolylazo-o-toluidine</td>
+                    <td style='border: 1px solid #000; padding: 5px; text-align: center;'>SNI ISO 24362-1: 2015</td>
+                    <td style='border: 1px solid #000; padding: 5px; text-align: center;'>16/12/2025</td>
+                    <td style='border: 1px solid #000; padding: 5px; text-align: center;'>22/12/2025</td>
+                    <td style='border: 1px solid #000; padding: 5px;'></td>
+                </tr>
+                <tr>
+                    <td style='border: 1px solid #000; padding: 5px;'>Azo dyes - 5-nitro-o-toluidine / 2-amino-4-nitrotoluene</td>
+                    <td style='border: 1px solid #000; padding: 5px; text-align: center;'>SNI ISO 24362-1: 2015</td>
+                    <td style='border: 1px solid #000; padding: 5px; text-align: center;'>16/12/2025</td>
+                    <td style='border: 1px solid #000; padding: 5px; text-align: center;'>22/12/2025</td>
+                    <td style='border: 1px solid #000; padding: 5px;'></td>
+                </tr>
+                <tr>
+                    <td style='border: 1px solid #000; padding: 5px;'>Azo dyes - 4-chloroaniline</td>
+                    <td style='border: 1px solid #000; padding: 5px; text-align: center;'>SNI ISO 24362-1: 2015</td>
+                    <td style='border: 1px solid #000; padding: 5px; text-align: center;'>16/12/2025</td>
+                    <td style='border: 1px solid #000; padding: 5px; text-align: center;'>22/12/2025</td>
+                    <td style='border: 1px solid #000; padding: 5px;'></td>
+                </tr>
+                <tr>
+                    <td style='border: 1px solid #000; padding: 5px;'>Azo dyes - 2,4-diaminoanisole / 4-methoxy-m-phenylenediamine</td>
+                    <td style='border: 1px solid #000; padding: 5px; text-align: center;'>SNI ISO 24362-1: 2015</td>
+                    <td style='border: 1px solid #000; padding: 5px; text-align: center;'>16/12/2025</td>
+                    <td style='border: 1px solid #000; padding: 5px; text-align: center;'>22/12/2025</td>
+                    <td style='border: 1px solid #000; padding: 5px;'></td>
+                </tr>
+                <tr>
+                    <td style='border: 1px solid #000; padding: 5px;'>Azo dyes - 4,4’-diaminodiphenylmethane / 4,4’-methylenedianiline</td>
+                    <td style='border: 1px solid #000; padding: 5px; text-align: center;'>SNI ISO 24362-1: 2015</td>
+                    <td style='border: 1px solid #000; padding: 5px; text-align: center;'>16/12/2025</td>
+                    <td style='border: 1px solid #000; padding: 5px; text-align: center;'>22/12/2025</td>
+                    <td style='border: 1px solid #000; padding: 5px;'></td>
+                </tr>
+                <tr>
+                    <td style='border: 1px solid #000; padding: 5px;'>Azo dyes - 3,3’-dichlorobenzidine / 3,3’-dichlorobiphenyl-4,4’-ylenediamine</td>
+                    <td style='border: 1px solid #000; padding: 5px; text-align: center;'>SNI ISO 24362-1: 2015</td>
+                    <td style='border: 1px solid #000; padding: 5px; text-align: center;'>16/12/2025</td>
+                    <td style='border: 1px solid #000; padding: 5px; text-align: center;'>22/12/2025</td>
+                    <td style='border: 1px solid #000; padding: 5px;'></td>
+                </tr>
+                <tr>
+                    <td style='border: 1px solid #000; padding: 5px;'>Azo dyes - 3,3’ dimethoxybenzidine / o-dianisidine</td>
+                    <td style='border: 1px solid #000; padding: 5px; text-align: center;'>SNI ISO 24362-1: 2015</td>
+                    <td style='border: 1px solid #000; padding: 5px; text-align: center;'>16/12/2025</td>
+                    <td style='border: 1px solid #000; padding: 5px; text-align: center;'>22/12/2025</td>
+                    <td style='border: 1px solid #000; padding: 5px;'></td>
+                </tr>
+                <tr>
+                    <td style='border: 1px solid #000; padding: 5px;'>Azo dyes - 3,3’-dimethylbenzidine / 4,4’-bi-o-toluidine</td>
+                    <td style='border: 1px solid #000; padding: 5px; text-align: center;'>SNI ISO 24362-1: 2015</td>
+                    <td style='border: 1px solid #000; padding: 5px; text-align: center;'>16/12/2025</td>
+                    <td style='border: 1px solid #000; padding: 5px; text-align: center;'>22/12/2025</td>
+                    <td style='border: 1px solid #000; padding: 5px;'></td>
+                </tr>
+                <tr>
+                    <td style='border: 1px solid #000; padding: 5px;'>Azo dyes - 4,4’-methylenedi-o-toluidine</td>
+                    <td style='border: 1px solid #000; padding: 5px; text-align: center;'>SNI ISO 24362-1: 2015</td>
+                    <td style='border: 1px solid #000; padding: 5px; text-align: center;'>16/12/2025</td>
+                    <td style='border: 1px solid #000; padding: 5px; text-align: center;'>22/12/2025</td>
+                    <td style='border: 1px solid #000; padding: 5px;'></td>
+                </tr>
+                <tr>
+                    <td style='border: 1px solid #000; padding: 5px;'>Azo dyes - p-cresidine / 6-methoxy-m-toluidine</td>
+                    <td style='border: 1px solid #000; padding: 5px; text-align: center;'>SNI ISO 24362-1: 2015</td>
+                    <td style='border: 1px solid #000; padding: 5px; text-align: center;'>16/12/2025</td>
+                    <td style='border: 1px solid #000; padding: 5px; text-align: center;'>22/12/2025</td>
+                    <td style='border: 1px solid #000; padding: 5px;'></td>
+                </tr>
+                <tr>
+                    <td style='border: 1px solid #000; padding: 5px;'>Azo dyes - 4,4’-methylene-bis-(2-chloroaniline) / 2,2;-dichloro-4-4’-methylene-dianiline</td>
+                    <td style='border: 1px solid #000; padding: 5px; text-align: center;'>SNI ISO 24362-1: 2015</td>
+                    <td style='border: 1px solid #000; padding: 5px; text-align: center;'>16/12/2025</td>
+                    <td style='border: 1px solid #000; padding: 5px; text-align: center;'>22/12/2025</td>
+                    <td style='border: 1px solid #000; padding: 5px;'></td>
+                </tr>
+                <tr>
+                    <td style='border: 1px solid #000; padding: 5px;'>Azo dyes - 4,4’-oxydianiline</td>
+                    <td style='border: 1px solid #000; padding: 5px; text-align: center;'>SNI ISO 24362-1: 2015</td>
+                    <td style='border: 1px solid #000; padding: 5px; text-align: center;'>16/12/2025</td>
+                    <td style='border: 1px solid #000; padding: 5px; text-align: center;'>22/12/2025</td>
+                    <td style='border: 1px solid #000; padding: 5px;'></td>
+                </tr>
+                <tr>
+                    <td style='border: 1px solid #000; padding: 5px;'>Azo dyes - 4,4’-thiodianiline</td>
+                    <td style='border: 1px solid #000; padding: 5px; text-align: center;'>SNI ISO 24362-1: 2015</td>
+                    <td style='border: 1px solid #000; padding: 5px; text-align: center;'>16/12/2025</td>
+                    <td style='border: 1px solid #000; padding: 5px; text-align: center;'>22/12/2025</td>
+                    <td style='border: 1px solid #000; padding: 5px;'></td>
+                </tr>
+                <tr>
+                    <td style='border: 1px solid #000; padding: 5px;'>Azo dyes - o-toluidine / 2-aminotoluene</td>
+                    <td style='border: 1px solid #000; padding: 5px; text-align: center;'>SNI ISO 24362-1: 2015</td>
+                    <td style='border: 1px solid #000; padding: 5px; text-align: center;'>16/12/2025</td>
+                    <td style='border: 1px solid #000; padding: 5px; text-align: center;'>22/12/2025</td>
+                    <td style='border: 1px solid #000; padding: 5px;'></td>
+                </tr>
+                <tr>
+                    <td style='border: 1px solid #000; padding: 5px;'>Azo dyes - 2,4-toluendiamine / 4-methyl-m-phenylenediamine / 2,4-diaminotoluene</td>
+                    <td style='border: 1px solid #000; padding: 5px; text-align: center;'>SNI ISO 24362-1: 2015</td>
+                    <td style='border: 1px solid #000; padding: 5px; text-align: center;'>16/12/2025</td>
+                    <td style='border: 1px solid #000; padding: 5px; text-align: center;'>22/12/2025</td>
+                    <td style='border: 1px solid #000; padding: 5px;'></td>
+                </tr>
+                <tr>
+                    <td style='border: 1px solid #000; padding: 5px;'>Azo dyes - 2,4,5-trimethylaniline</td>
+                    <td style='border: 1px solid #000; padding: 5px; text-align: center;'>SNI ISO 24362-1: 2015</td>
+                    <td style='border: 1px solid #000; padding: 5px; text-align: center;'>16/12/2025</td>
+                    <td style='border: 1px solid #000; padding: 5px; text-align: center;'>22/12/2025</td>
+                    <td style='border: 1px solid #000; padding: 5px;'></td>
+                </tr>
+                <tr>
+                    <td style='border: 1px solid #000; padding: 5px;'>Azo dyes - 2-methoxyaniline / o-anisidine</td>
+                    <td style='border: 1px solid #000; padding: 5px; text-align: center;'>SNI ISO 24362-1: 2015</td>
+                    <td style='border: 1px solid #000; padding: 5px; text-align: center;'>16/12/2025</td>
+                    <td style='border: 1px solid #000; padding: 5px; text-align: center;'>22/12/2025</td>
+                    <td style='border: 1px solid #000; padding: 5px;'></td>
+                </tr>
+                <tr>
+                    <td style='border: 1px solid #000; padding: 5px;'>Azo dyes - 4-aminoazobenzene*</td>
+                    <td style='border: 1px solid #000; padding: 5px; text-align: center;'>SNI ISO 24362-1: 2015</td>
+                    <td style='border: 1px solid #000; padding: 5px; text-align: center;'>16/12/2025</td>
+                    <td style='border: 1px solid #000; padding: 5px; text-align: center;'>22/12/2025</td>
+                    <td style='border: 1px solid #000; padding: 5px;'></td>
+                </tr>
+                <tr>
+                    <td style='border: 1px solid #000; padding: 5px;'>Azo dyes - 6-methoxy-m-toluidine/ p-cresidine</td>
+                    <td style='border: 1px solid #000; padding: 5px; text-align: center;'>SNI ISO 24362-1: 2015</td>
+                    <td style='border: 1px solid #000; padding: 5px; text-align: center;'>16/12/2025</td>
+                    <td style='border: 1px solid #000; padding: 5px; text-align: center;'>22/12/2025</td>
+                    <td style='border: 1px solid #000; padding: 5px;'></td>
+                </tr></table></td></tr></table>
+        </td>
+    </tr>
+</table>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </center>
+
+        <!-- Footer -->
+        <div class="footer">
+            <div class="footer-content" style="font-style: italic; text-align: center;">
+                This document is electronically generated therefore bare no signature
+            </div>
+            <div class="footer-line"></div>
+            <div class="footer-content" style="text-align: right; margin-bottom: 8px;">
+                <span class="page-number"></span>
+            </div>
+            <div class="footer-content" style="font-weight: bold;">
+                PT. Qualis Indonesia
+            </div>
+            <div class="footer-content">
+                Jl. Pasjaran No. 17 Desa Gandasari, Kecamatan Jatiuwung, Tangerang, Banten, Indonesia
+            </div>
+            <div class="footer-content">
+                Phone : +62 (21) 5565 2585/86 Fax: +62 (21) 5565 2489
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Auto-generate page numbers when content flows to multiple pages
+        function updatePageNumbers() {
+            const pages = document.querySelectorAll('.a4-page');
+            const totalPages = pages.length;
+
+            pages.forEach((page, index) => {
+                const pageNum = index + 1;
+                const pageNumberElements = page.querySelectorAll('.page-number');
+                pageNumberElements.forEach(element => {
+                    element.textContent = `Page ${pageNum} of ${totalPages}`;
+                });
+            });
+        }
+
+        // Run after page loads
+        window.addEventListener('load', function () {
+            updatePageNumbers();
+        });
+
+        // Also run before printing
+        window.addEventListener('beforeprint', function () {
+            updatePageNumbers();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,207 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>LIMS- Test Report</title>
+    <!--<link rel="stylesheet" href="../css/CRF_style.css" media="all" />-->
+    <style>
+        /*.space {
+            border-collapse: separate;
+            border-spacing: 0 15px;
+        }*/
+        @media print {
+            .page-break {
+                display: block;
+                page-break-before: always;
+            }
+        }
+
+        @media screen {
+            div.divFooter {
+                display: none;
+                text-align: center;
+            }
+        }
+
+        @media print {
+            div.divFooter {
+                position: fixed;
+                bottom: 0;
+                text-align: center;
+            }
+        }
+
+        .td {
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <center>
+        <header class="clearfix">
+            <table>
+                <tr>
+                    <td style="grid-column-align:start">
+                        <div id="logo">
+                            <img src="../images/hemshell-logo.png" height="50%" width="50%" />
+                        </div>
+                    </td>
+                </tr>
+                <tr><td>&nbsp;</td></tr>
+                <tr><td>&nbsp;</td></tr>
+            </table>
+        </header>
+        <main>
+            <table border="1" style="border-spacing:0px;width:100%" cellpadding="3">
+                <tr><td colspan="5" style="text-align:center; font-size:24px;"><b><u>TEST REPORT</u></b></td></tr>
+                <tr>
+                    <td style="width:10%"><b>Certificate No:</b> </td>
+                    <td style="width:20%">{TestReportNo}</td>
+                    <td colspan="3" style="text-align:left; width:30%"><b>ULR No:</b> {ULRNo}</td>
+                </tr>
+                <tr>
+                    <td><b>Date Of Issue:</b> </td>
+                    <td>{DateOfIssue}</td>
+                    <td colspan="3" style="text-align:left; width:30%"><b>Discipline:</b> {Department}</td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td colspan="3" style="text-align:left; width:30%"><b>Group:</b> {ProductGroup}</td>
+                </tr>
+                <tr>
+                    <td><b>Customer Name & Address</b></td>
+                    <td><b>Sample Details</b></td>
+                    <td><b>Test Conditions:</b></td>
+                    <td style="text-align:center"><b>WVTR</b></td>
+                    <td style="text-align:center"><b>OTR</b></td>
+                </tr>
+                <tr>
+                    <td rowspan="6" style="text-align:center"><b>{CustomerName}</b></td>
+                    <td rowspan="11" style="vertical-align:top;">
+                        <div><b>Lab Sample ID:</b> {LabSampleId}</div>
+                        <div><b>No of Sample:</b> {NoOfSample}</div>
+                        <div><b>Received Date:</b> {ReceivedDate}</div>
+                        <div><b>Sampling Method:</b> {SampleMethod}</div>
+                        <div><b>Sample Condition:</b> {SampleCondition}</div>
+                    </td>
+                    <td>
+                        <div><b>STD Used:</b></div>
+                    </td>
+                    <td style="text-align:center">{STDWVTR}</td>
+                    <td style="text-align:center">{STDOTR}</td>
+                </tr>
+                <tr>
+                    <td><div><b>Method Used:</b></div></td>
+                    <td style="text-align:center">{MethodWVTR}</td>
+                    <td style="text-align:center">{MethodOTR}</td>
+                </tr>
+                <tr>
+                    <td><div><b>Room Temp:</b></div></td>
+                    <td style="text-align:center">{RoomTempWVTR}</td>
+                    <td style="text-align:center">{RoomTempOTR}</td>
+                </tr>
+                <tr>
+                    <td><div><b>Test Temp:</b></div></td>
+                    <td style="text-align:center">{TestTempWVTR}</td>
+                    <td style="text-align:center">{TestTempOTR}</td>
+                </tr>
+                <tr>
+                    <td><div><b>Test RH:</b></div></td>
+                    <td style="text-align:center">{TestWVTR}</td>
+                    <td style="text-align:center">{TestOTR}</td>
+                </tr>
+                <tr>
+                    <td><div><b>Carrier RH:</b></div></td>
+                    <td style="text-align:center">{CarrierWVTR}</td>
+                    <td style="text-align:center">{CarrierOTR}</td>
+                </tr>
+                <tr>
+                    <td rowspan="5" style="text-align:center"><b>{Address}</b></td>
+                    <td><div><b>Conditioning:</b></div></td>
+                    <td style="text-align:center">{ConditioningWVTR}</td>
+                    <td style="text-align:center">{ConditioningOTR}</td>
+                </tr>
+                <tr>
+                    <td><div><b>Test Area:</b></div></td>
+                    <td style="text-align:center">{TestAreaWVTR}</td>
+                    <td style="text-align:center">{TestAreaOTR}</td>
+                </tr>
+                <tr>
+                    <td><div><b>Test Gas Side:</b></div></td>
+                    <td style="text-align:center">{TestGasSideWVTR}</td>
+                    <td style="text-align:center">{TestGasSideOTR}</td>
+                </tr>
+                <tr>
+                    <td><div><b>O<sub>2</sub> Cone:</b></div></td>
+                    <td style="text-align:center">{O2ConeWVTR}</td>
+                    <td style="text-align:center">{O2ConeOTR}</td>
+                </tr>
+                <tr>
+                    <td><div><b>Test Operator:</b></div></td>
+                    <td>{TestOperatorWVTR}</td>
+                    <td>{TestOperatorOTR}</td>
+                </tr>
+                <tr><td colspan="5" style="text-align:center; font-size:18px;"><b>DETAILS OF MACHINE USED FOR TESTING</b></td></tr>
+                <tr>
+                    <td colspan="1" width="30%;">
+                        <div><b>Make/Model:</b></div>
+                        <div><b>Sr. No.:</b></div>
+                        <div><b>Calibration Certificate No. & Date:</b></div>
+                        <div><b>Calibration Due On:</b></div>
+                        <div><b>Calibrated By:</b></div>
+                        <div><b>Calibrated At:</b></div>
+                    </td>
+                    <td colspan="2" width="40%">
+                        <div>{ModelWVTR}</div>
+                        <div>{SrNoWVTR}</div>
+                        <div>{CalibrationCertificateNoWVTR} / {CalibrationCertificateDateWVTR}</div>
+                        <div>{CalibrationDueDateWVTR}</div>
+                        <div>{CalibratedByWVTR}</div>
+                        <div>{CalibratedAtWVTR}</div>
+                    </td>
+                    <td colspan="2" width="40%">
+                        <div>{ModelOTR}</div>
+                        <div>{SrNoOTR}</div>
+                        <div>{CalibrationCertificateNoOTR} / {CalibrationCertificateDateOTR}</div>
+                        <div>{CalibrationDueDateOTR}</div>
+                        <div>{CalibratedByOTR}</div>
+                        <div>{CalibratedAtOTR}</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="5">
+                        <div class="table-responsive clearfix">
+                            {TestResult}
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <br /><br /><br /><br />
+            <div class="clearfix">
+                <table border="1" style="border-spacing:0px; width:100%">
+                    <tr>
+                        <td>
+                            <div>1. This report refers only to the perticular item tested at our lab.</div>
+                            <div>2. The test results reported are valid at the time of and under the condition of measurement.</div>
+                            <div>3. This report may not be reproduced, except in full without in prior permision of LIMS SERVICES.</div>
+                            <div>4. This information represents our best judgement based on work done, but the company (LIMS SERVICES) assumes no liability whatsoever in connection with the use of information or findings contained herein.</div>
+                            <div>5. Uncertainty of Measurement at 95 % Confidence level is +/-3.32 % for WVTR & +/- 5.28 % for OTR with coverage factor 2.</div>
+                            <div>6. Please see the embossed seal to confirm the authenticity of this report.</div>
+                            <div>7. Any correction in this certificate, invalidates the certificate.</div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="divFooter">
+                <b>LIMS SERVICES- CT & T Center</b>
+                <br />903/1 , Makarpura GIDC Estate, Makarpura, Vadodara 390 010, Gujarat, India.
+                <br />Phone: +91 265 2631053/2646999, Telefax: +91-022-26860692
+                <br /><b>Email: support@hemshellservices.com * Website: www.hemshellservices.com, www.hemetek.com</b>
+            </div>
+        </main>
+
+        </div>
+    </center>
+</body>
+</html>

@@ -1,0 +1,465 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+
+        /* Main Container Styles */
+        .wrapper {
+            background-color: #ffffff; /* Pure white background */
+            padding: 20px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* Card Styles */
+        .card {
+            background: #ffffff;
+            border-radius: 0; /* Square corners */
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05); /* Very subtle shadow */
+            margin-bottom: 20px;
+            border: 1px solid #e9ecef; /* Light gray border */
+        }
+
+        .panel_header {
+            background: #b34788; /* Using the specified color for headers */
+            color: white;
+            padding: 12px 20px;
+            border-radius: 0; /* Square corners */
+        }
+
+            .panel_header h2 {
+                font-size: 18px;
+                font-weight: 600;
+                margin: 0;
+                color: #ffffff;
+                letter-spacing: 0.5px;
+            }
+
+        /* Profile Section */
+        .uprofile-image img {
+            max-width: 120px;
+            border-radius: 0; /* Square image */
+            border: none;
+            margin: 20px auto;
+            display: block;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .uprofile-name {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+            .uprofile-name h3 {
+                color: #343a40; /* Dark gray */
+                font-size: 22px;
+                margin-bottom: 5px;
+                font-weight: 600;
+            }
+
+                .uprofile-name h3 a {
+                    color: #b34788; /* Using accent color for links */
+                    text-decoration: none;
+                }
+
+        .uprofile-status {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-left: 10px;
+        }
+
+            .uprofile-status.online {
+                background-color: #28a745; /* Green status indicator */
+            }
+
+        .uprofile-title {
+            color: #6c757d; /* Medium gray */
+            font-size: 16px;
+        }
+
+        /* Content Sections */
+        .content-body {
+            padding: 20px;
+        }
+
+        h4 {
+            color: #b34788; /* Using accent color for headings */
+            font-size: 18px;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #b34788; /* Accent color border */
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        hr {
+            border-color: #e9ecef;
+            margin: 25px 0;
+        }
+
+        /* Table Styles */
+        .table {
+            width: 100%;
+            margin-bottom: 20px;
+            color: #212529;
+            border-collapse: collapse;
+        }
+
+        .table-striped tbody tr:nth-of-type(odd) {
+            background-color: #f8f9fa; /* Very light gray */
+        }
+
+        .table td, .table th {
+            padding: 12px 15px;
+            vertical-align: top;
+            border-top: 1px solid #e9ecef;
+        }
+
+            .table td:first-child {
+                font-weight: 600;
+                color: #495057;
+                width: 30%;
+            }
+
+        /* Add hover effect to table rows */
+        .table tbody tr:hover {
+            background-color: rgba(179, 71, 136, 0.05); /* Light tint of accent color */
+        }
+
+        /* Footer Section */
+        .uprofile-info {
+            background: #ffffff;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid #e9ecef;
+        }
+
+        /* Verification Section */
+        #divVerify {
+            background: white;
+            padding: 0;
+        }
+
+        /* Add accent color to important elements */
+        .accent-text {
+            color: #b34788;
+        }
+
+        .accent-border {
+            border-color: #b34788;
+        }
+
+        /* Button styles using accent color */
+        .btn-accent {
+            background-color: #b34788;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+            .btn-accent:hover {
+                background-color: #9a3c74;
+                color: white;
+            }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .table td, .table th {
+                padding: 8px 10px;
+            }
+
+            .uprofile-image img {
+                max-width: 80px;
+            }
+
+            h4 {
+                font-size: 16px;
+            }
+        }
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .table td, .table th {
+                padding: 8px 10px;
+            }
+
+            .uprofile-image img {
+                max-width: 80px;
+            }
+        }
+    </style>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+    <meta charset="utf-8" />
+    <title>RNI ERP : Vendor Profile</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta content="" name="description" />
+    <meta content="" name="author" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <link rel="shortcut icon" href="https://ProcureSoft.rnisolutions.in:8636/assets/images/favicon.png" type="image/x-icon" />    <!-- Favicon -->
+    <link rel="apple-touch-icon-precomposed" href="https://ProcureSoft.rnisolutions.in:8636/assets/images/apple-touch-icon-57-precomposed.png">	<!-- For iPhone -->
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://ProcureSoft.rnisolutions.in:8636/assets/images/apple-touch-icon-114-precomposed.png">    <!-- For iPhone 4 Retina display -->
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://ProcureSoft.rnisolutions.in:8636/assets/images/apple-touch-icon-72-precomposed.png">    <!-- For iPad -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://ProcureSoft.rnisolutions.in:8636/assets/images/apple-touch-icon-144-precomposed.png">    <!-- For iPad Retina display -->
+    <!-- CORE CSS FRAMEWORK - START -->
+    <link href="https://ProcureSoft.rnisolutions.in:8636/assets/plugins/pace/pace-theme-flash.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="https://ProcureSoft.rnisolutions.in:8636/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <!-- <link href="https://ProcureSoft.rnisolutions.in:8636/assets/plugins/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css"/> -->
+    <link href="https://ProcureSoft.rnisolutions.in:8636/assets/fonts/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css" />
+    <link href="https://ProcureSoft.rnisolutions.in:8636/assets/css/animate.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://ProcureSoft.rnisolutions.in:8636/assets/plugins/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" type="text/css" />
+    <!-- CORE CSS FRAMEWORK - END -->
+    <!-- HEADER SCRIPTS INCLUDED ON THIS PAGE - START -->
+    <!-- HEADER SCRIPTS INCLUDED ON THIS PAGE - END -->
+    <!-- CORE CSS TEMPLATE - START -->
+    <link href="assets/css/style2.css" rel="stylesheet" type="text/css" />
+    <link href="assets/css/responsive.css" rel="stylesheet" type="text/css" />
+    <!-- CORE CSS TEMPLATE - END -->
+
+</head>
+<!-- END HEAD -->
+<!-- BEGIN BODY -->
+<body class=" ">
+    <!-- START TOPBAR -->
+    <div class='page-topbar '>
+        <div class='logo-area'>
+
+        </div>
+    </div>
+    <!-- END TOPBAR -->
+    <!-- START CONTAINER -->
+    <div class="page-container row-fluid container-fluid">
+
+
+        <!-- START CONTENT -->
+
+        <section class="wrapper main-wrapper row" style=''>
+
+            <div class="clearfix"></div>
+            <div class="col-xl-12" id="divVerify" runat="server">
+                <section class="card">
+                    <header class="panel_header">
+                        <h2 class="title float-left"></h2>
+                        <div class="actions panel_actions float-right">
+                        </div>
+                    </header>
+                    <div class="content-body">
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-12">
+                                <div class="uprofile-image">
+                                    <img src="../assets/img/logo.png" class="img-fluid" />
+                                </div>
+                                <div class="uprofile-name">
+                                    <h3>
+                                        <a href="#">testing customer</a>
+                                        <!-- Available statuses: online, idle, busy, away and offline -->
+                                        <span class="uprofile-status online"></span>
+                                    </h3>
+                                    <p class="uprofile-title">
+                                        Service Provider
+                                    </p>
+                                </div>
+                                <div class="uprofile-info">
+
+                                    <div class="col-lg-12 col-md-12 col-12">
+
+                                        <div class="uprofile-content">
+                                            <div class="clearfix"></div>
+                                            <h4>Company Details:</h4>
+                                            <p>
+                                                <div class="col-xl-12">
+                                                    <section class="card">
+                                                        <div class="content-body">
+                                                            <div class="row">
+                                                                <div class="col-12">
+                                                                    <table class="table table-striped">
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td width="30%"><b>Company Name:</b> </td>
+                                                                                <td>testing customer</td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td><b>Year of Establishment:</b> </td>
+                                                                                <td>1976</td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td><b>Type of Establishment :</b> </td>
+                                                                                <td>Others</td>
+                                                                            </tr>
+
+                                                                            <tr>
+                                                                                <td><b>Type of Business:</b> </td>
+                                                                                <td>Service Provider</td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td><b>Company Size:</b> </td>
+                                                                                <td>B</td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td><b>Dealer:</b> </td>
+                                                                                <td>sales</td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </section>
+                                                </div>
+                                            </p>
+                                            <hr>
+                                            <h4>Company Address:</h4>
+                                            <p>
+                                                <section class="card">
+                                                    <div class="content-body">
+                                                        <div class="row">
+                                                            <div class="col-12">
+                                                                <table cellpadding='0' align:center cellspacing='0' width='100%' style='font-size: 14px;font-family:Times New Roman;'><tr><td style='widt2h:20%'><div class='text-muted table table-striped'><h6><b>Manufacturing Office</b></h6></div><div><b>Miss diya patel</b></div><div>+91 9878984565</div><div>rnisolutions2017@gmail.com</div><div><b>Addrress:</b></div><div>mumbai, bandra, bombay</div><div>bombay, Andhra Pradesh, India</div><td style='widt2h:20%'><div class='text-muted table table-striped'><h6><b>Registered Office</b></h6></div><div><b>Miss diya patel</b></div><div>+91 9878984565</div><div>rnisolutions2017@gmail.com</div><div><b>Addrress:</b></div><div>mumbai, bandra, bombay</div><div>bombay, Andhra Pradesh, India</div></td></tr></table>
+                                                                     
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                </section>
+                                            </p>
+                                            <div class="clearfix"></div>
+                                            <hr>
+
+                                            <h4>Registrations:</h4>
+                                            <p>
+                                                <div class="col-xl-12">
+                                                    <section class="card">
+                                                        <div class="content-body">
+                                                            <div class="row">
+                                                                <div class="col-12">
+                                                                    <table class="table table-striped">
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td width="30%"><b>Company Registration :</b> </td>
+                                                                                <td>12345</td>
+                                                                            </tr>
+                                                                            <!--<tr>
+                                                                                <td><b>PAN Number:</b> </td>
+                                                                                <td></td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td><b>GST#:</b> </td>
+                                                                                <td></td>
+                                                                            </tr>-->
+                                                                            <tr>
+                                                                                <td><b>	PF Number:</b> </td>
+                                                                                <td>-</td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td><b>MSME Number:</b> </td>
+                                                                                <td>100234567890</td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td><b>ESIC Number:</b> </td>
+                                                                                <td> UDYAM-MH-12-3456</td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </section>
+                                                </div>
+                                            </p>
+                                            <div class="clearfix"></div>
+                                            <hr>
+                                            <h4>Company Turn Over:</h4>
+                                            <div class="col-xl-12">
+                                                <section class="card">
+                                                    <div class="content-body">
+                                                        <div class="row">
+                                                            <div class="col-12">
+                                                                <table class="table table-striped">
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <td width="30%"><b>[2024] : </b></td>
+                                                                            <td>150000.00</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td width="30%"><b>[2023] : </b></td>
+                                                                            <td>150000.00</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td width="30%"><b>[2022] : </b></td>
+                                                                            <td>150000.00</td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </section>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                            <hr>
+                                            <h4>Bank Details:</h4>
+                                            <table cellpadding='0' align:center cellspacing='0' width='100%' style='font-size: 14px;font-family:Times New Roman;'><tr><td colspan='3'></td><td><h4>Bank Details</h4></td><td colspan='2'></td></tr><tr><td style='text-align:center; border: 1px solid #2F4F4F'><b>Account Name</b></td><td style='text-align:center; border: 1px solid #2F4F4F'><b>Bank Name</b></td><td style='text-align:center; border: 1px solid #2F4F4F'><b>Bank Branch</b></td><td style='text-align:center; border: 1px solid #2F4F4F'><b>Account Number</b></td><td style='text-align:center; border: 1px solid #2F4F4F'><b>IFS Code</b></td><td style='text-align:center; border: 1px solid #2F4F4F'><b>Swift Code</b></td></tr></table><br />
+                                            <div class="clearfix"></div>
+
+                                            <hr>
+                                           
+                                            <div class="clearfix"></div>
+                                            <hr>
+                                            <h4>Documents:</h4>
+                                            <p>
+                                                <div class="col-xl-12">
+                                                    <section class="card">
+                                                        <div class="content-body">
+                                                            <div class="row">
+                                                                <div class="col-12">
+                                                                    
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </section>
+                                                </div>
+                                            </p>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                </div>
+                                        </div>
+                    </div>
+                </section>
+            </div>
+        </section>
+    </div>
+    <!-- END CONTAINER -->
+    <!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
+    <!-- CORE JS FRAMEWORK - START -->
+    <script src="https://ProcureSoft.rnisolutions.in:8636/assets/js/jquery-3.2.1.min.js" type="text/javascript"></script>
+    <script src="https://ProcureSoft.rnisolutions.in:8636/assets/js/popper.min.js" type="text/javascript"></script>
+    <script src="https://ProcureSoft.rnisolutions.in:8636/assets/js/jquery.easing.min.js" type="text/javascript"></script>
+    <script src="https://ProcureSoft.rnisolutions.in:8636/assets/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="https://ProcureSoft.rnisolutions.in:8636/assets/plugins/pace/pace.min.js" type="text/javascript"></script>
+    <script src="https://ProcureSoft.rnisolutions.in:8636/assets/plugins/perfect-scrollbar/perfect-scrollbar.min.js" type="text/javascript"></script>
+    <script src="https://ProcureSoft.rnisolutions.in:8636/assets/plugins/viewport/viewportchecker.js" type="text/javascript"></script>
+    <script>window.jQuery || document.write('<script src="https://ProcureSoft.rnisolutions.in:8636/assets/js/jquery-1.11.2.min.js"><\/script>');</script>
+    <!-- CORE JS FRAMEWORK - END -->
+    <!-- OTHER SCRIPTS INCLUDED ON THIS PAGE - START -->
+
+    <script src="https://ProcureSoft.rnisolutions.in:8636/assets/plugins/autosize/autosize.min.js" type="text/javascript"></script>
+    <script src="https://ProcureSoft.rnisolutions.in:8636/assets/plugins/sparkline-chart/jquery.sparkline.min.js" type="text/javascript"></script>
+    <script src="https://ProcureSoft.rnisolutions.in:8636/assets/js/chart-sparkline.js" type="text/javascript"></script>
+    <!-- OTHER SCRIPTS INCLUDED ON THIS PAGE - END -->
+    <!-- CORE TEMPLATE JS - START -->
+    <script src="https://ProcureSoft.rnisolutions.in:8636/assets/js/scripts.js" type="text/javascript"></script>
+    <!-- END CORE TEMPLATE JS - END -->
+</body>
+</html>
+
+
+

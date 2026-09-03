@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>&nbsp;</title>
+    <!--<link rel="stylesheet" href="http://CiscoLIMS.rnisolutions.in:8608/css/CRF_style.css" media="all" />-->
+    <link rel="stylesheet" href="css/CRF_style.css" media="all" />
+    <link rel="stylesheet" href="../css/CRF_style.css" media="all" />
+    <style>
+
+        .clause {
+            font-size: 15px;
+            margin-bottom: 6px;
+        }
+
+        .number {
+            font-size: 15px;
+            font-weight: bold;
+            margin-right: 6px;
+        }
+
+        .title {
+            font-size: 15px;
+            font-weight: bold;
+            text-decoration: underline;
+        }
+
+        .sub {
+            font-size: 15px;
+            margin-left: 30px;
+        }
+    </style>
+    <style>
+        .space {
+            border-collapse: separate;
+            border-spacing: 0 15px;
+        }
+
+        .page {
+            width: 21cm;
+            min-height: 29.7cm;
+            padding: 2cm;
+            margin: 1cm auto;
+            border: 1px #D3D3D3 solid;
+            border-radius: 5px;
+            background: white;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+    <style media="screen">
+        .noPrint1 {
+        }
+
+        .noScreen1 {
+            display: none;
+        }
+
+        .noPrint {
+        }
+
+        .noScreen {
+            display: none;
+        }
+
+        #header {
+            display: block;
+            position: relative;
+            left: 0px;
+            top: 0px;
+            right: 0px;
+            font-size: 10px;
+        }
+
+        #footer {
+            display: block;
+            position: relative;
+            left: 0px;
+            bottom: 0px;
+            right: 0px;
+            font-size: 10px;
+        }
+    </style>
+    <style>
+        .space {
+            border-collapse: separate;
+            border-spacing: 0 15px;
+        }
+
+        .tab1 {
+            border: 1px solid;
+            border-bottom: 1px solid;
+        }
+
+            .tab1 td {
+                border: 1px solid;
+                padding: 5px;
+            }
+
+        .blank {
+            border: none !important;
+            padding: 5px;
+        }
+    </style>
+    <style>
+        .space {
+            border-collapse: separate;
+            border-spacing: 0 15px;
+        }
+
+        .tab {
+            border-collapse: collapse;
+            border: none !important;
+            border-bottom: none;
+        }
+
+            .tab td {
+                border-collapse: collapse;
+                border: none !important;
+                padding: 5px;
+            }
+
+        .blank {
+            border: none !important;
+            padding: 5px;
+        }
+    </style>
+    <style type="text/css" media="print">
+        @page {
+            size: auto; /* auto is the initial value */
+            margin: 0; /* this affects the margin in the printer settings */
+        }
+        /*   table {
+            table-layout: fixed;
+        }*/
+    </style>
+</head>
+<body style="margin:2% !important; width:95%; overflow:scroll">
+    <center>
+        <div class='table-responsive'>
+            <table>
+                <thead>
+                    <tr>
+                        <td>
+                            <table>
+                                <tr>
+                                    <td>	<img src="assets/img/logo.png" height='80px' alt="PT Qualis" /></td>
+                                    <td><h2>TEST APPLICATION FORM</h2></td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="margin-top:250px">
+                            <table style="width: 100%; border: 1px solid; margin-top: 10px;" class='tab1'>
+                                <tr>
+                                    <td class="tab1" style="width:20%"><b>Register No.</b></td>
+                                    <td style="width:2%">:</td>
+                                    <td class="tab1" colspan="5" style="text-align:left;">
+                                        R/2026001033
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="tab1"><b>Applicant/Customer Name</b> </td>
+                                    <td>:</td>
+                                    <td class="tab1" colspan="5">Coba 1 ya</td>
+                                </tr>
+                                <tr>
+                                    <td class="tab1"><b>Address</b> </td>
+                                    <td>:</td>
+                                    <td class="tab1" colspan="5">Jl raya jakarta bogor ,</td>
+                                </tr>
+                                <tr>
+                                    <td class="tab1"><b>Contact Person</b> </td>
+                                    <td>:</td>
+                                    <td style="width:30%">Mrs Fian Fian</td>
+                                    <td class="tab1" style="width:5%"><b>Telp :</b></td>
+                                    <td style="width:10%">123456</td>
+                                    <td class="tab1" style="width:5%"><b>Fax :</b></td>
+                                    <td style="width:10%"></td>
+                                </tr>
+                                <tr>
+                                    <td class="tab1"><b>Email Address</b> </td>
+                                    <td>:</td>
+                                    <td class="tab1" colspan="5">pennywijaya2004@yahoo.com</td>
+                                </tr>
+                                <tr>
+                                    <td class="tab1"><b>Buyer Name</b> </td>
+                                    <td>:</td>
+                                    <td style="width:30%">Coba 1 ya</td>
+                                    <td class="tab1" style="width:10%"><b>Country :</b></td>
+                                    <td class="tab1" colspan="3" style="width:10%">Indonesia</td>
+                                </tr>
+                                <tr>
+                                    <td class="tab1" rowspan="3"><b>Sample Description</b> </td>
+                                    <td rowspan="3">:</td>
+                                    <td class="tab1" colspan="5">tes sample one,</td>
+                                </tr>
+                                <tr><td class="tab1" colspan="5">&nbsp;</td></tr>
+                                <tr><td class="tab1" colspan="2">&nbsp;</td><td><b>Sample Quantity :</b></td><td colspan="2">1000</td></tr>
+                                <tr>
+                                    <td class="tab1"><b>Other Details</b> </td>
+                                    <td>:</td>
+                                    <td class="tab1" colspan="5"></td>
+                                </tr>
+                                <tr>
+                                    <td class="tab1">Product Type / End Use</td>
+                                    <td>:</td>
+                                    <td class="tab1" colspan="5">tes</td>
+                                </tr>
+                                <tr>
+                                    <td class="tab1">PO/Order No. </td>
+                                    <td>:</td>
+                                    <td colspan="2"></td>
+                                    <td>Country of Origin</td>
+                                    <td colspan="2" class="tab1">tes</td>
+                                </tr>
+                                <tr>
+                                    <td class="tab1">Item/Style No.</td>
+                                    <td>:</td>
+                                    <td colspan="2">tes</td>
+                                    <td>Country of Destination</td>
+                                    <td colspan="2" class="tab1">tes</td>
+                                </tr>
+                                <tr>
+                                    <td class="tab1"><b>Service Required</b> </td>
+                                    <td>:</td>
+                                    <td class="tab1" colspan="5">
+                                        <input type='checkbox' id='Regular' name='Regular' value='Regular'><label for='Regular'> Regular</label><input type='checkbox' id='Express' name='Express' value='Express'><label for='Express'> Express</label><input type='checkbox' id='Urgent' name='Urgent' value='Urgent'><label for='Urgent'> Urgent</label><input type='checkbox' id='One Day' name='One Day' value='One Day' checked='checked'><label for='One Day'> One Day</label><input type='checkbox' id='Same Day' name='Same Day' value='Same Day'><label for='Same Day'> Same Day</label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="7">
+                                        <b>Test(s) Required</b><br /><br />
+                                        <table style="height:300px">
+                                            <tr>
+                                                <td style="height:30px; width:30%; text-align:center">Sample Name/Type</td>
+                                                <td style="width: 20%; text-align: center">Test Request</td>
+                                                <td style="width: 20%; text-align: center">Method</td>
+                                                <td style="width: 10%; text-align: center">LOD</td>
+                                                <td style="width: 10%; text-align: center">LOQ</td>
+                                                <td style="width: 10%; text-align: center">Remarks</td>
+                                            </tr>
+                                            <tr>
+                                                <td>tes sample one,<br/></td>
+                                                <td><br/><b>new requirement 18th aug</b><br/><br/><b>18th aug new</b><br/>- 18th aug new test<br/><br/><b>A-01</b><br/><br/><b>Dimetylfumarate</b><br/>- DMFu<br/>- DMFu<br/></td>
+                                                <td><br/><br/><br/><br/>new test method 18th aug<br/><br/><br/><br/><br/>DIN EN ISO 16186 : 2021<br/>DIN EN ISO 16186 : 2021<br/></td>
+                                                <td><br/><br/><br/><br/>-<br/><br/><br/><br/><br/>-<br/>-<br/></td>
+                                                <td><br/><br/><br/><br/>-<br/><br/><br/><br/><br/>-<br/>-<br/></td>
+                                                <td><br/><br/><br/><br/>lod 0.01 loq 0.03 spec 0.02<br/><br/><br/><br/><br/>no remarks<br/>no remarks<br/></td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="7">
+                                        <table class='tab'><tr><td>Sample Return:</td><td><input type='checkbox' id='yes' name='yes' value='yes'><label for='yes'> Yes</label></td><td><input type='checkbox' id='no' name='no' value='no' checked='checked'><label for='no'> No</label></td><td>Report Recipient:</td><td><input type='checkbox' id='applicant' name='applicant' value='applicant'><label for='applicant'> Applicant</label></td><td><input type='checkbox' id='Payer' name='Payer' value='Payer' checked='checked'><label for='Payer'> Payer</label></td></tr><tr><td>Invoice Recipient:</td><td colspan='2'><input type='checkbox' id='applicant' name='applicant' value='applicant' checked='checked'><label for='applicant'> Applicant</label></td><td><input type='checkbox' id='other' name='other' value='other'><label for='other'> If other, provide the information:</label></td><tr><td>Payer's Name:</td><td colspan='2' style='border-bottom:1px solid !important'>Coba 1 ya</td><td>Contact Person:</td><td colspan='2' style='border-bottom:1px solid !important'>Mrs Fian Fian</td></tr><tr><td>E-mail Address:</td><td colspan='2' style='border-bottom:1px solid !important'>pennywijaya2004@yahoo.com</td><td>Contact No:</td><td colspan='2' style='border-bottom:1px solid !important'>0800000123</td></tr><tr><td>Billing Address:</td><td colspan='5' style='border-bottom:1px solid !important'>Jl raya jakarta bogor ,</td></tr><tr><td colspan='6' style='text-align:center;'><br/><b>THE ABOVE REQUESTED TESTS ARE SUBJECT TO THE TERMS & CONDITIONS SET FORTH BY THE RESPECTIVE PT. QUALIS INDONESIA LABS.</b></td></tr><tr><td colspan='3' style='text-align:center;'>Authorized Signature / Company Stamp / Date:<br /><br /><br /><br /><br /></td><td colspan='3' style='text-align:center;'>Checked & Received by PT. QUALIS INDONESIA / Date & Time<br /><br /><br /><br /><br /></td></tr></table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td>
+                            <table style='width:100%; font-family:Times New Roman; font-size:11px' class='tab1'>
+                                <tr>
+                                    <td colspan="6">
+                                        PT Qualis Indonesia	Jl. Raya Pajajaran No.17, RT.001/RW.003, Kec. Jatiuwung, Kota Tangerang,INDONESIA Tel:+62 (21) 55652583 Fax:+62 (21) 55652489<br /><hr />Doc No: TSQ-LAB-QAF-100
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </center>
+    <table style="page-break-before: always;">
+        <tr>
+            <td style="font-family: Arial; font-size: 15px; font-weight: bold; text-align: center"><br /><br />Terms and Conditions</td>
+        </tr>
+        <tr>
+            <td style="font-family: Arial; font-size: 15px; font-weight: bold; text-align: center">Syarat Dan Ketentuan</td>
+        </tr>
+        <tr><td><hr /></td></tr>
+        <tr>
+            <td style="font-family: Arial; font-size: 15px;">
+                <b>TERMS & CONDITIONS GOVERNING PRODUCT TESTING SERVICES PROVIDED BY PT. QUALIS INDONESIA</b><br />
+                SYARAT & KETENTUAN LAYANAN PENGUJIAN PRODUK YANG DITETAPKAN YANG DIBERIKAN OLEH PT. QUALIS INDONESIA<br /><br />
+            </td>
+        </tr>
+        <tr>
+            <td>
+
+                <!-- 1 -->
+                <div class="clause">
+                    <span class="number">1.</span>
+                    <span class="title">Introduction</span><br>
+                    These Terms and Conditions are applicable to all Product Testing Services
+                    (“the Technical Services”) provided by PT. QUALIS INDONESIA.
+                </div>
+
+                <div class="clause">
+                    <span class="number">1.</span>
+                    <span class="title">Pengantar</span><br>
+                    Syarat dan Ketentuan ini berlaku untuk semua Layanan Pengujian Produk
+                    ("Layanan Teknis") yang disediakan oleh PT. QUALIS INDONESIA.
+                </div>
+
+                <!-- 2 -->
+                <div class="clause">
+                    <span class="number">2.</span>
+                    <span class="title">Request Procedure</span>
+                </div>
+
+                <div class="sub clause">
+                    <span class="number">2.1.</span>
+                    Clients requesting for the Technical Services from PT. QUALIS INDONESIA  shall submit to PT. QUALIS INDONESIA, a duly completed “Request for Technical Services” in the form as prescribed by PT. QUALIS INDONESIA  before or at the time the Client’s product / equipment is delivered PT. QUALIS INDONESIA. The Client shall be fully responsible for the delivery to PT. QUALIS INDONESIA  of all products / equipment required for the Technical Services.
+                </div>
+
+                <div class="sub clause">
+                    <span class="number">2.2.</span>
+                    Any Request for Technical Services submitted by the Client is subject to the acceptance by PT. QUALIS INDONESIA. PT. QUALIS INDONESIA reserves the right to reject any Request of Technical Services without the need to give any reasons for the rejection. The submission by the Client of the Request for Technical Services and acceptance by PT. QUALIS INDONESIA  shall constitute a binding agreement between the Client and PT. QUALIS INDONESIA and the terms and conditions set out herein shall apply accordingly.
+                </div>
+
+                <div class="sub clause">
+                    <span class="number">2.3.</span>
+                    A job number will be assigned by PT. QUALIS INDONESIA to each product / equipment when the Request for Technical Services is accepted. The job number shall be referred to in all subsequent communications.
+                </div>
+
+                <div class="clause">
+                    <span class="number">2.</span>
+                    <span class="title">Prosedur Permintaan</span>
+                </div>
+
+                <div class="sub clause">
+                    <span class="number">2.1.</span>
+                    Klien yang meminta Layanan Teknis dari PT. QUALIS INDONESIA akan mengirimkan “Permintaan Layanan Teknis” yang sudah lengkap dalam bentuk seperti yang ditentukan kepada PT. QUALIS INDONESIA sebelum atau pada saat produk / peralatan Klien dikirimkan PT. QUALIS INDONESIA. Klien akan bertanggung jawab penuh atas pengiriman ke PT. QUALIS INDONESIA dari semua produk / peralatan yang diperlukan untuk Layanan Teknis.
+                </div>
+
+                <div class="sub clause">
+                    <span class="number">2.2.</span>
+                    Setiap Permintaan Layanan Teknis yang dikirimkan oleh Klien tunduk pada penerimaan oleh PT. QUALIS INDONESIA. PT. QUALIS INDONESIA berhak menolak Permintaan Layanan Teknis tanpa perlu memberikan alasan apa pun atas penolakan tersebut. Pengajuan oleh Klien dari Permintaan Layanan Teknis dan penerimaan oleh PT. QUALIS INDONESIA merupakan perjanjian yang mengikat antara Klien dan PT. QUALIS INDONESIA dan syarat dan ketentuan yang ditetapkan akan berlaku sebagaimana mestinya.
+                </div>
+
+                <div class="sub clause">
+                    <span class="number">2.3.</span>
+                    Nomor pekerjaan akan ditetapkan oleh PT. QUALIS INDONESIA untuk setiap produk / peralatan ketika Permintaan Layanan Teknis diterima. Nomor pekerjaan harus dirujuk dalam semua komunikasi selanjutnya.
+                </div>
+
+                <!-- 3 -->
+                <div class="clause">
+                    <span class="number">
+                        3.
+                    </span>
+                    <span class="title">
+                        Client’s Undertakings
+                    </span>
+                </div>
+                <div class="sub clause">
+                    <span class="number">
+                        3.1.
+                    </span>
+                    The Client shall supply the necessary accessories, information and / or documents, for the Technical Services including any foreign test reports, company test reports, product specifications, catalogues and instruction manuals. Until all necessary accessories, information or documents are supplied, PT. QUALIS INDONESIA will not commence the Technical Services.
+                </div>
+                <div class="sub clause">
+                    <span class="number">
+                        3.2.
+                    </span>	PT. QUALIS INDONESIA, at its sole discretion, reserves the right not to undertake the Technical Services and terminate the agreement for the same in the event the Client fails to comply with the terms and conditions set out herein.
+                </div>
+                <div class="sub clause">
+                    <span class="number">
+                        3.3.
+                    </span>	If the Client fails to supply the necessary accessories, information and / or documents upon notification by PT. QUALIS INDONESIA, a storage fee of $10 to $50 per day, depending on the type and nature of the product / equipment, will be charged within one week from the date of notification. In the event that the Client fails to provide the necessary accessories, information and / or documents within one month from the date of notification, the agreement for the Technical Services will be deemed terminated and PT. QUALIS INDONESIA will dispose of the product / equipment in accordance with the provisions of Clause 8.
+                </div>
+                <div class="sub clause">
+                    <span class="number">3.4.</span>	The Client warrants that all information and / or documents supplied to PT. QUALIS INDONESIA is accurate and correct in all aspect and shall indemnify PT. QUALIS INDONESIA for all loss and damages arising from the Technical Services herein caused by incorrect information and / or document supplied by the Client.
+                </div>
+
+                <div class="clause">
+                    <span class="number">
+                        3.
+                    </span>
+                    <span class="title">
+                        Kemandirian Klien
+                    </span>
+                </div>
+                <div class="sub clause">
+                    <span class="number">
+                        3.1.
+                    </span>
+                    Klien harus menyediakan aksesori, informasi dan / atau dokumen yang diperlukan, untuk Layanan Teknis termasuk laporan tes asing, laporan uji perusahaan, spesifikasi produk, katalog dan instruksi manual. Sampai semua aksesori, informasi atau dokumen yang diperlukan disediakan, PT. QUALIS INDONESIA tidak akan memulai Layanan Teknis.
+                </div>
+                <div class="sub clause">
+                    <span class="number">
+                        3.2.
+                    </span>PT. QUALIS INDONESIA, atas kebijakannya sendiri, berhak untuk tidak melakukan Layanan Teknis dan mengakhiri perjanjian untuk hal yang sama jika Klien gagal mematuhi persyaratan dan ketentuan yang ditetapkan di sini.
+                </div>
+                <div class="sub clause">
+                    <span class="number">
+                        3.3.
+                    </span>Jika Klien gagal menyediakan aksesori, informasi dan / atau dokumen yang diperlukan pada saat pemberitahuan oleh PT. QUALIS INDONESIA, biaya penyimpanan $ 10 hingga $ 50 per hari, tergantung pada jenis dan sifat produk / peralatan, akan dikenakan dalam waktu satu minggu sejak tanggal pemberitahuan. Dalam hal Klien gagal memberikan aksesori, informasi dan / atau dokumen yang diperlukan dalam waktu satu bulan dari tanggal pemberitahuan, perjanjian untuk Layanan Teknis akan dianggap dihentikan dan PT. QUALIS INDONESIA akan membuang produk / peralatan sesuai dengan ketentuan Klausul 8.
+                </div>
+                <div class="sub clause">
+                    <span class="number">3.4.</span>Klien menjamin bahwa semua informasi dan / atau dokumen diberikan kepada PT. QUALIS INDONESIA akurat dan benar dalam semua aspek dan akan memberikan ganti rugi kepada PT. QUALIS INDONESIA untuk semua kerugian dan kerusakan yang timbul dari Layanan Teknis yang disebabkan oleh informasi dan / atau dokumen yang tidak benar yang disediakan oleh Klien.
+                </div>
+
+                <!-- 4 -->
+                <div class="clause">
+                    <span class="number">
+                        4.
+                    </span>
+                    <span class="title">
+                        Services
+                    </span>
+                </div>
+                <div class="sub clause">
+                    <span class="number">
+                        4.1.
+                    </span>
+                    The product / equipment submitted for the Technical services will be compatible with the Client’s specifications. Upon receipt, the product / instrument will be inspected physically and if found below certain standards or faulty, the Client will be informed accordingly. The Client or his representative may be present at the time of inspection
+                </div>
+                <div class="sub clause">
+                    <span class="number">
+                        4.2.
+                    </span>If defects necessitating repair are found after the Technical Services has begun, the Client will be informed accordingly and no further work will be carried out until the defects are rectified by the client. A fee will still be charged in accordance with the amount of work done by PT. QUALIS INDONESIA if the Client chooses to have the Technical Services terminated after the discovery of defects.
+                </div>
+                <div class="clause">
+                    <span class="number">
+                        4.
+                    </span>
+                    <span class="title">
+                        Layanan
+                    </span>
+                </div>
+                <div class="sub clause">
+                    <span class="number">
+                        4.1.
+                    </span>
+                    Produk / perangkat yang dikirimkan untuk layanan Teknis akan kompatibel dengan spesifikasi Klien. Setelah diterima, produk / instrumen akan diperiksa secara fisik dan jika ditemukan di bawah standar atau kesalahan tertentu, Klien akan diberi informasi yang sesuai. Klien atau wakilnya dapat hadir pada saat pemeriksaan.
+                </div>
+                <div class="sub clause">
+                    <span class="number">
+                        4.2.
+                    </span>Jika cacat yang memerlukan perbaikan ditemukan setelah Layanan Teknis dimulai, Klien akan diberitahu sesuai dan tidak ada pekerjaan lebih lanjut yang akan dilakukan sampai cacat diperbaiki oleh klien. Biaya masih akan dikenakan sesuai dengan jumlah pekerjaan yang dilakukan oleh PT. QUALIS INDONESIA jika Klien memilih untuk Layanan Teknis diakhiri setelah penemuan cacat.
+                </div>
+                <div class="clause">
+                    <span class="number">
+                        5.
+                    </span>
+                    <span class="title">
+                        Reports
+                    </span>
+                </div>
+                <div class="sub clause">
+                    <span class="number">
+                        5.1.
+                    </span>
+                    Results of the Technical Services in the form of a report will be issued within a reasonable time after the services has been completed or terminated.
+                </div>
+                <div class="sub clause">
+                    <span class="number">
+                        5.2.
+                    </span>	Unless otherwise requested, a report shall contain only technical results. Analysis and interpretation of the results and professional opinion and recommendations will only be provided by PT. QUALIS INDONESIA upon the express request of the Client and on payment of additional fee by the Client.
+                </div>
+                <div class="sub clause">
+                    <span class="number">
+                        5.3.
+                    </span>	The report issued in respect of the Technical Services is not a Certificate of Quality. It only applies to the sample of the specific product / equipment given at the time of its testing / certification / inspection. The results shall not be used to indicate or imply that they are applicable to other similar items. In addition, such results must not be used to indicate or imply that PT. QUALIS INDONESIA  approves, recommends or endorses the manufacturer, supplier or user of such product / equipment, or that PT. QUALIS INDONESIA in any way gives guarantee or warranty in respect of the performance or capabilities of the product / equipment
+                </div>
+                <div class="sub clause">
+                    <span class="number">
+                        5.4.
+                    </span>Additional copies of the report are available to the Client at an additional fee. No third party can obtain such report through PT. QUALIS INDONESIA unless with the written consent of the Client authorizing PT. QUALIS INDONESIA to release the report to the said third party.
+                </div>
+                <div class="sub clause">
+                    <span class="number">
+                        5.5.
+                    </span>The report shall not be reproduced wholly or in parts and no reference shall be made by the Client to PT. QUALIS INDONESIA or to the report or results furnished by PT. QUALIS INDONESIA in any advertising or sales promotion.
+                </div>
+                <div class="sub clause">
+                    <span class="number">
+                        5.6.
+                    </span>PT. QUALIS INDONESIA may at its sole discretion add or amend the conditions of this clause at the time of issue of the report and such additions or amendments shall be binding on the Client.
+                </div>
+                <div class="sub clause">
+                    <span class="number">
+                        5.7.
+                    </span>	All copyright in the report shall remain with PT. QUALIS INDONESIA and Client shall upon payment of PT. QUALIS INDONESIA’s fees for carrying out of the Technical Services, be granted a license to use or publish the report to third parties subject to the terms and conditions herein, provided always that PT. QUALIS INDONESIA may at its absolute discretion be entitled to impose further conditions on such license as it sees fit
+                </div>
+                <div class="sub clause">
+                    <span class="number">
+                        5.8.
+                    </span>The report issued in respect of the Technical Services does not indicate or imply in any way that the product / equipment tested would be approved for use in any country. The Client is advised to seek approval from the relevant authorities before supplying or advertising for supply of the product / equipment in INDONESIA and where applicable, apply for registration of the product / equipment with the relevant authority
+                </div>
+                <div class="clause">
+                    <span class="number">
+                        5.
+                    </span>
+                    <span class="title">
+                        Laporan
+                    </span>
+                </div>
+                <div class="sub clause">
+                    <span class="number">
+                        5.1.
+                    </span>
+                    Hasil Layanan Teknis dalam bentuk laporan akan diterbitkan dalam waktu yang wajar setelah layanan telah selesai atau dihentikan.
+                </div>
+                <div class="sub clause">
+                    <span class="number">
+                        5.2.
+                    </span>	Kecuali jika diminta, laporan hanya akan berisi hasil teknis. Analisis dan interpretasi hasil dan pendapat profesional dan rekomendasi hanya akan disediakan oleh PT. QUALIS INDONESIA atas permintaan Ekspres dari Klien dan pembayaran biaya tambahan oleh Klien.
+                </div>
+                <div class="sub clause">
+                    <span class="number">
+                        5.3.
+                    </span>Laporan yang dikeluarkan sehubungan dengan Layanan Teknis bukan merupakan Sertifikat Kualitas. Ini hanya berlaku untuk sampel produk / peralatan tertentu yang diberikan pada saat pengujian / sertifikasi / inspeksi. Hasilnya tidak boleh digunakan untuk menunjukkan atau menyiratkan bahwa mereka berlaku untuk barang-barang serupa lainnya. Selain itu, hasil tersebut tidak boleh digunakan untuk menunjukkan atau menyiratkan bahwa PT. QUALIS INDONESIA menyetujui, merekomendasikan atau mengesahkan pabrikan, pemasok atau pengguna dari produk / peralatan tersebut, atau bahwa PT. QUALIS INDONESIA dengan cara apapun memberikan jaminan atau jaminan sehubungan dengan kinerja atau kemampuan produk / peralatan.
+                </div>
+                <div class="sub clause">
+                    <span class="number">
+                        5.4.
+                    </span>Salinan tambahan dari laporan tersedia untuk Klien dengan biaya tambahan. Tidak ada pihak ketiga yang dapat memperoleh laporan tersebut melalui PT. QUALIS INDONESIA kecuali dengan persetujuan tertulis dari Klien yang memberi kuasa kepada PT. QUALIS INDONESIA untuk merilis laporan kepada pihak ketiga tersebut.
+                </div>
+                <div class="sub clause">
+                    <span class="number">
+                        5.5.
+                    </span>Laporan tidak boleh direproduksi seluruhnya atau sebagian dan tidak ada referensi yang dibuat oleh Klien untuk PT. QUALIS INDONESIA atau laporan atau hasil yang disediakan oleh PT. QUALIS INDONESIA dalam setiap iklan atau promosi penjualan.
+                </div>
+                <div class="sub clause">
+                    <span class="number">
+                        5.6.
+                    </span>PT. QUALIS INDONESIA atas kebijakannya sendiri dapat menambah atau mengubah ketentuan-ketentuan dari klausul ini pada saat menerbitkan laporan dan penambahan atau amandemen tersebut harus mengikat Klien.
+                </div>
+                <div class="sub clause">
+                    <span class="number">
+                        5.7.
+                    </span>Semua hak cipta dalam laporan milik PT. QUALIS INDONESIA dan Klien setelah melakukan pembayaran untuk melaksanakan Layanan Teknis, diberikan lisensi untuk menggunakan atau mempublikasikan laporan kepada pihak ketiga yang tunduk pada syarat dan ketentuan, PT. QUALIS INDONESIA dengan kebijaksanaan mutlaknya berhak untuk memberlakukan ketentuan lebih lanjut mengenai lisensi yang dianggapnya sesuai.
+                </div>
+                <div class="sub clause">
+                    <span class="number">
+                        5.8.
+                    </span>Laporan yang dikeluarkan sehubungan dengan Layanan Teknis tidak menunjukkan atau menyiratkan dengan cara apa pun bahwa produk / peralatan yang diuji akan disetujui untuk digunakan di negara mana pun. Klien disarankan untuk meminta persetujuan dari pihak berwenang yang relevan sebelum memasok atau mengiklankan untuk penyediaan produk / peralatan di INDONESIA dan jika berlaku, mengajukan permohonan pendaftaran produk / peralatan dengan otoritas yang relevan.
+                </div>
+
+                <div class="clause">
+                    <span class="number">
+                        6.
+                    </span>
+                    <span class="title">
+                        Fees
+                    </span>
+                </div>
+                <div class="sub clause">
+                    <span class="number">
+                        6.1.
+                    </span>
+                    Fees are charged for all Technical Services performed.  An estimate of the fees involved will be supplied on request before the commencement of work.
+                </div>
+                <div class="sub clause">
+                    <span class="number">
+                        6.2.
+                    </span>When a Client decides to withdraw his product / equipment from the Technical Services, he may only do so by giving a notice in writing to PT. QUALIS INDONESIA within three working days after his submission of the request for technical services.  The Client will be charged for all Technical Services performed prior to such withdrawal.  If PT. QUALIS INDONESIA does not receive any written notice of such withdrawal within this period, the full fee for the Technical Services will be charged.
+                </div>
+                <div class="sub clause">
+                    <span class="number">
+                        6.3.
+                    </span>Companies who are not given any credit terms by PT. QUALIS INDONESIA have to pay in advance.
+                </div>
+                <div class="sub clause">
+                    <span class="number">
+                        6.4.
+                    </span>For companies who are given credit terms by PT. QUALIS INDONESIA, an invoice will be issued when a job is completed and the fees shall be remitted to PT. QUALIS INDONESIA within thirty days of presentation of the invoice or upon return of the product / equipment to the Client, whichever is earlier, failing which, interest at a rate of 1% per month shall be imposed.  A copy of the invoice shall be forwarded with the remittance of the fees and an official receipt will subsequently be issued by PT. QUALIS INDONESIA.
+                </div>
+                <div class="clause">
+                    <span class="number">
+                        6.
+                    </span>
+                    <span class="title">
+                        Biaya
+                    </span>
+                </div>
+                <div class="sub clause">
+                    <span class="number">
+                        6.1.
+                    </span>
+                    Biaya dibebankan untuk semua Layanan Teknis yang dilakukan. Perkiraan biaya yang terlibat akan diberikan berdasarkan permintaan sebelum dimulainya pekerjaan.
+                </div>
+                <div class="sub clause">
+                    <span class="number">
+                        6.2.
+                    </span>	Ketika Klien memutuskan untuk menarik produk / peralatannya dari Layanan Teknis, ia hanya dapat melakukannya dengan memberikan pemberitahuan secara tertulis kepada PT. QUALIS INDONESIA dalam waktu tiga hari kerja setelah dia mengajukan permohonan untuk layanan teknis. Klien akan dikenakan biaya untuk semua Layanan Teknis yang dilakukan sebelum penarikan tersebut. Jika PT. QUALIS INDONESIA tidak menerima pemberitahuan tertulis mengenai penarikan tersebut dalam periode ini, biaya penuh untuk Layanan Teknis akan dikenakan.
+                </div>
+                <div class="sub clause">
+                    <span class="number">
+                        6.3.
+                    </span>	Perusahaan yang tidak diberikan persyaratan kredit oleh PT. QUALIS INDONESIA harus membayar di muka.
+                </div>
+                <div class="sub clause">
+                    <span class="number">
+                        6.4.
+                    </span>Untuk perusahaan yang diberi persyaratan kredit oleh PT. QUALIS INDONESIA, faktur akan diterbitkan ketika pekerjaan selesai dan biaya akan disetorkan ke PT. QUALIS INDONESIA dalam waktu tiga puluh hari sejak penyajian faktur atau setelah pengembalian produk / peralatan kepada Klien, yang mana sebelumnya, jika gagal, bunga sebesar 1% per bulan akan dikenakan. Salinan tagihan akan diteruskan dengan pengiriman biaya dan tanda terima resmi yang selanjutnya akan diterbitkan oleh PT. QUALIS INDONESIA.
+                </div>
+                <div class="clause">
+                    <span class="number">
+                        7.
+                    </span>
+                    <span class="title">
+                        Taxes
+                    </span>
+                    <div class="sub clause">
+                        The Client agrees to indemnify and pay PT. QUALIS INDONESIA for all taxes, levies and duties including, but not limited to, goods and services tax or withholding tax which PT. QUALIS INDONESIA may be liable to pay as a result of providing the services to the Client herein.
+                        </div>
+                    </div>
+                <div class="clause">
+                    <span class="number">
+                        7.
+                    </span>
+                    <span class="title">
+                        Pajak
+                    </span>
+                    <div class="sub clause">
+                        Klien setuju untuk mengganti kerugian dan membayar PT. QUALIS INDONESIA untuk semua pajak, retribusi dan tugas termasuk, tetapi tidak terbatas pada, pajak barang dan jasa atau pajak pemotongan yang PT. QUALIS INDONESIA dapat dikenakan biaya sebagai akibat dari penyediaan layanan kepada Klien.
+                        </div>
+                    </div>
+                    <div class="clause">
+                        <span class="number">
+                            8.
+                        </span>
+                        <span class="title">
+                            Collection of Tested Product
+                        </span>
+                    </div>
+                    <div class="sub clause">
+                        <span class="number">
+                            8.1.
+                        </span>
+                        Upon completion of the Technical Services, the Client undertakes to collect all products / equipment within four weeks from the date of PT. QUALIS INDONESIA’s report. If the Client fails to collect the product / equipment within the stipulated time, PT. QUALIS INDONESIA shall send a written reminder to the Client giving the Client an additional seven days to collect the tested product. If the Client shall fails to collect the product / equipment, PT. QUALIS INDONESIA shall proceed to dispose the product / equipment in any manner it deems fit without further notice to the Client and charge the Client a disposal fee of $50 to $200 depending on the type and nature of the product / equipment.
+                    </div>
+                    <div class="sub clause">
+                        <span class="number">
+                            8.2.
+                        </span>Subject to PT. QUALIS INDONESIA’s acceptance, the Client may request PT. QUALIS INDONESIA for the product / equipment to be delivered to the Client’s premises in INDONESIA for an additional fee.
+                    </div>
+                    <div class="sub clause">
+                        <span class="number">
+                            8.3.
+                        </span>	For Clients who are not in Indonesia, if delivery of the product / equipment is requested by the Client, PT. QUALIS INDONESIA may, arrange with a carrier of its own choice (unless specified otherwise by the Client) for the delivery of the product / equipment. The delivery of the product / equipment shall be at the Client’s cost and risk.6.3.	Companies who are not given any credit terms by PT. QUALIS INDONESIA have to pay in advance.
+                    </div>
+                    <div class="sub clause">
+                        <span class="number">
+                            8.4.
+                        </span>	The Client shall not in any circumstances use the product / equipment submitted for the Technical Services or any parts or components thereof for any purpose whatsoever. PT. QUALIS INDONESIA shall not be responsible to the Client or any third party for any loss or damage whether direct of consequential arising from the use of the product / equipment which has been submitted for the Technical Services or part or component thereof by the Client.
+                    </div>
+
+                    <div class="clause">
+                        <span class="number">
+                            8.
+                        </span>
+                        <span class="title">
+                            Koleksi Produk yang Diuji
+                        </span>
+                    </div>
+                    <div class="sub clause">
+                        <span class="number">
+                            8.1.
+                        </span>
+                        Setelah menyelesaikan Layanan Teknis, Klien menyanggupi untuk mengumpulkan semua produk / peralatan dalam waktu empat minggu sejak tanggal Laporan PT. QUALIS INDONESIA. Jika Klien gagal mengumpulkan produk / peralatan dalam waktu yang ditentukan, PT. QUALIS INDONESIA akan mengirimkan pengingat tertulis kepada Klien yang memberi Klien tambahan tujuh hari untuk mengumpulkan produk yang diuji. Jika Klien gagal mengumpulkan produk / peralatan, PT. QUALIS INDONESIA akan melanjutkan untuk membuang produk / peralatan dengan cara apa pun yang dianggap sesuai tanpa pemberitahuan lebih lanjut kepada Klien dan mengenakan biaya pembuangan kepada Klien sebesar $ 50 hingga $ 200 tergantung pada jenis dan sifat produk / peralatan.
+                    </div>
+                    <div class="sub clause">
+                        <span class="number">
+                            8.2.
+                        </span>	Tunduk pada Penerimaan PT. QUALIS INDONESIA, Klien dapat meminta PT. QUALIS INDONESIA untuk mengirimkan produk / peralatan ke tempat Klien di INDONESIA dengan biaya tambahan.
+                    </div>
+                    <div class="sub clause">
+                        <span class="number">
+                            8.3.
+                        </span>	Untuk Klien yang tidak berada di Indonesia, jika pengiriman produk / peralatan diminta oleh Klien, PT. QUALIS INDONESIA dapat, mengatur dengan operator pilihannya sendiri (kecuali ditentukan lain oleh Klien) untuk pengiriman produk / peralatan. Pengiriman produk / peralatan harus berdasarkan biaya dan risiko Klien.
+                    </div>
+                    <div class="sub clause">
+                        <span class="number">
+                            8.4.
+                        </span>	Klien tidak boleh dalam keadaan apa pun menggunakan produk / peralatan yang dikirim untuk Layanan Teknis atau bagian atau komponen apa pun daripadanya untuk tujuan apa pun. PT. QUALIS INDONESIA tidak bertanggung jawab kepada Klien atau pihak ketiga manapun atas kehilangan atau kerusakan baik langsung konsekuensial yang timbul dari penggunaan produk / peralatan yang telah diserahkan untuk Layanan Teknis atau sebagian atau komponennya oleh Klien.
+                    </div>
+                    <div class="clause">
+                        <span class="number">
+                            9.
+                        </span>
+                        <span class="title">
+                            PT. QUALIS INDONESIA’s Liability
+                        </span>
+                    </div>
+                    <div class="sub clause">
+                        <span class="number">
+                            9.1.
+                        </span>
+                        PT. QUALIS INDONESIA shall not under any circumstances be responsible for any loss or damage to the product / equipment during transit or while in the custody of PT. QUALIS INDONESIA. All reasonable care will be taken where the product / equipment is in PT. QUALIS INDONESIA’s custody, but insurance against accidental loss or damage, either in transit or at PT. QUALIS INDONESIA shall be arranged by the Client.
+                    </div>
+                    <div class="sub clause">
+                        <span class="number">
+                            9.2.
+                        </span>	PT. QUALIS INDONESIA warrants that it in will exercise reasonable care and diligence performing the service herein and except as provided herein, all other warranties, whether expressed or implied, are hereby expressly excluded.
+                    </div>
+                    <div class="sub clause">
+                        <span class="number">
+                            9.3.
+                        </span>	Subject to the provisions herein, PT. QUALIS INDONESIA shall under no circumstances be liable to the Client or its agents, servants or representatives, for any direct or indirect loss or damage suffered by the Client, its agents, servants or representative however arising in connection with the services provided by PT. QUALIS INDONESIA herein. In the event that PT. QUALIS INDONESIA is found liable to the Clients, its agents, servants or representatives by operation of law, the maximum amount of PT. QUALIS INDONESIA’s liability shall not exceed the amount of fees paid by the Client to PT. QUALIS INDONESIA in respect of the Technical Services.
+                    </div>
+
+                    <div class="clause">
+                        <span class="number">
+                            9.
+                        </span>
+                        <span class="title">
+                            Tanggung jawab PT QUALIS INDONESIA
+                        </span>
+                    </div>
+                    <div class="sub clause">
+                        <span class="number">
+                            9.1.
+                        </span>
+                        PT. QUALIS INDONESIA tidak dalam keadaan apa pun bertanggung jawab atas kehilangan atau kerusakan pada produk / peralatan selama transit atau saat berada di pemeliharaan PT. QUALIS INDONESIA. Semua perawatan yang masuk akal akan diambil di mana produk / peralatan berada di PT. QUALIS INDONESIA, tetapi asuransi terhadap kehilangan atau kerusakan yang tidak disengaja, baik saat transit atau di PT. QUALIS INDONESIA akan diatur oleh Klien.
+                    </div>
+                    <div class="sub clause">
+                        <span class="number">
+                            9.2.
+                        </span>	PT. QUALIS INDONESIA menjamin bahwa mereka akan melakukan perawatan dan ketekunan yang wajar dalam melaksanakan layanan di sini dan kecuali sebagaimana yang ditetapkan di sini, semua jaminan lain, baik yang tersurat maupun tersirat, dengan ini secara tegas dikecualikan.
+                    </div>
+                    <div class="sub clause">
+                        <span class="number">
+                            9.3.
+                        </span>	Tunduk pada ketentuan di sini, PT. QUALIS INDONESIA tidak akan bertanggung jawab kepada Klien atau agennya, pegawai atau perwakilannya, atas kerugian atau kerusakan langsung atau tidak langsung yang diderita oleh Klien, agennya, pegawai atau perwakilannya namun timbul sehubungan dengan layanan yang diberikan oleh PT. QUALIS INDONESIA disini. Dalam hal PT. QUALIS INDONESIA ditemukan bertanggung jawab kepada Klien, agennya, pegawai atau perwakilan dengan operasi hukum, jumlah maksimum PT. Tanggung jawab QUALIS INDONESIA tidak akan melebihi jumlah biaya yang dibayarkan oleh Klien kepada PT. QUALIS INDONESIA berkenaan dengan Layanan Teknis.
+                    </div>
+
+                    <div class="clause">
+                        <span class="number">
+                            10.
+                        </span>
+                        <span class="title">
+                            Lien
+                        </span>
+                        <div class="sub clause"> In addition to any right of lien to which PT. QUALIS INDONESIA may be entitled by law, PT. QUALIS INDONESIA shall be entitled to a general lien on all product / equipment of the Client submitted for the Technical Services.</div>
+
+                    </div>
+                    <div class="clause">
+                        <span class="number">
+                            10.
+                        </span>
+                        <span class="title">
+                            Hak Gadai
+                        </span>
+                        <div class=" sub clause">Selain hak gadai apa pun kepada PT. QUALIS INDONESIA dapat diberi hak oleh hukum, PT. QUALIS INDONESIA berhak mendapatkan hak gadai umum atas semua produk / peralatan Klien yang dikirimkan untuk Layanan Teknis.</div>
+                    </div>
+                    <div class="clause">
+                        <span class="number">
+                            11.
+                        </span>
+                        <span class="title">
+                            Indemnity
+                        </span>
+                        <div class=" sub clause">
+                            The Client shall indemnify PT. QUALIS INDONESIA fully against all loss or damages suffered and cost and expenses incurred by PT. QUALIS INDONESIA and all claims by any third parties as a result of any breach of the terms and conditions herein by the Client including but not limited to the improper use of the test reports and / or for any promotional or advertising activities in breach of the terms and conditions herein, and / or supply of inaccurate information and / or documents to PT. QUALIS INDONESIA or any claim by third party for infringement or intellectual property rights and / or for discovery of information and / or for delivery of documents or products / equipment.
+
+                        </div>
+                    </div>
+                    <div class="clause">
+                        <span class="number">
+                            11.
+                        </span>
+                        <span class="title">
+                            Ganti Rugi
+                        </span>
+                        <div class=" sub clause">
+                            Klien harus mengganti rugi PT. QUALIS INDONESIA sepenuhnya terhadap semua kerugian atau kerusakan yang diderita serta biaya dan pengeluaran yang dikeluarkan oleh PT. QUALIS INDONESIA dan semua klaim oleh pihak ketiga sebagai akibat dari pelanggaran syarat dan ketentuan di sini oleh Klien termasuk tetapi tidak terbatas pada penggunaan laporan pengujian yang tidak tepat dan / atau untuk kegiatan promosi atau iklan apa pun yang melanggar ketentuan dan kondisi di sini, dan / atau penyediaan informasi dan / atau dokumen yang tidak akurat kepada PT. QUALIS INDONESIA atau klaim apa pun oleh pihak ketiga untuk pelanggaran atau hak kekayaan intelektual dan / atau untuk penemuan informasi dan / atau untuk pengiriman dokumen atau produk / peralatan.
+
+                        </div>
+                    </div>
+                    <div class="clause">
+                        <span class="number">
+                            12.
+                        </span>
+                        <span class="title">
+                            Court Appearance
+                        </span>
+                        <div class=" sub clause">
+                            In the event any of the employees of PT. QUALIS INDONESIA is requested by the Client or summoned by the court upon application by the Client or any other parties for his attendance in court as an expert witness on the subject of the Technical Services provided, the Client agrees and shall pay PT. QUALIS INDONESIA for such attendance in court based on PT. QUALIS INDONESIA’s prevailing rates for court attendance. PT. QUALIS INDONESIA may at its sole discretion revise its rates for court attendance from time to time.
+
+                        </div>
+                    </div><div class="clause">
+                        <span class="number">
+                            12.
+                        </span>
+                        <span class="title">
+                            Kedatangan ke Pengadilan
+                        </span>
+                        <div class=" sub clause">
+                            Dalam kegiatan tersebut salah satu karyawan PT. QUALIS INDONESIA diminta oleh Klien atau dipanggil oleh pengadilan setelah aplikasi oleh Klien atau pihak lain untuk kehadirannya di pengadilan sebagai saksi ahli tentang subjek Layanan Teknis yang disediakan, Klien setuju dan akan membayar PT. QUALIS INDONESIA untuk hadir di pengadilan berdasarkan tarif PT. QUALIS INDONESIA yang berlaku untuk hadir di pengadilan. PT. QUALIS INDONESIA dapat, atas kebijakannya sendiri, merevisi tarifnya untuk hadir di pengadilan dari waktu ke waktu.
+
+                        </div>
+                    </div>
+                    <div class="clause">
+                        <span class="number">
+                            13.
+                        </span>
+                        <span class="title">
+                            Governing Law
+                        </span>
+                        <div class=" sub clause">
+                            This Agreement shall be governed by and construed in accordance with the Laws of INDONESIA and the Client agrees to submit to the non-exclusive jurisdiction of the Indonesia Courts.
+
+                        </div>
+                    </div>
+                    <div class="clause">
+                        <span class="number">
+                            13.
+                        </span>
+                        <span class="title">
+                            Hukum yang Mengatur
+                        </span>
+                        <div class=" sub clause">
+                            Perjanjian ini akan diatur oleh dan ditafsirkan sesuai dengan Hukum INDONESIA dan Klien setuju untuk tunduk pada yurisdiksi non-eksklusif Pengadilan Indonesia
+
+                        </div>
+                    </div>
+</td>
+        </tr>
+    </table>
+</body>
+</html>

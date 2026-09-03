@@ -1,0 +1,223 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>LIMS- Test Report</title>
+    <!-- Bootstrap Core Css -->
+    <!--<link href="../plugins/bootstrap/css/bootstrap.css" rel="stylesheet">-->
+    <style>
+	#SivaDiv {
+            background: url(../assets/img/Signature/ValidSign.png) no-repeat !important;
+            width: 205px;
+            height: 200px;
+			float:right; 
+			-webkit-print-color-adjust: exact !important;
+        }
+        @media print {
+            .page-break {
+                display: block;
+                page-break-before: always;
+                margin:0;
+            }
+        }
+
+        @media screen {
+            div.divFooter {
+                display: none;
+                text-align: center;
+            }
+        }
+
+        @media print {
+            div.divFooter {
+                position: fixed;
+                bottom: 0;
+                text-align: center;
+                margin:0;
+            }
+        }
+        th, td {
+            padding-left: 15px;
+            text-align: left;
+            font-size: 12px;
+            border: 1px solid black !important;
+        }
+    </style>
+</head>
+<body>
+    <center>
+        <div>
+          <!--  <header class="clearfix">
+                <table style="width:100%">
+                    <tr>
+                        <td style="text-align:center">
+                            <div id="logo">
+                                <img src="http://CiscoLIMS.rnisolutions.in:8608/assets/img/hemshell-logo.png" />
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+
+
+            </header>-->
+           <main style="padding-right:5%; padding-left:5%">
+
+                <h5>TEST REPORT</h5>
+                <br />
+                <table border="1" style="border-spacing:0px;width:100%" cellpadding="5">
+                    <tr>
+                        <td rowspan="2" style="text-align:left; width:15%">
+                            <div><b>ISSUED TO</b></div>
+                        </td>
+                        <td rowspan="2" style="text-align:left; width:35%"><b>{CustomerName}</b></td>
+                        <td>
+                            <div><b>ULR No</b></div>
+                        </td>
+                        <td><b>{ULRNo}</b></td>
+                    </tr>
+                    <tr>                        
+                        <td>
+                            <div style="text-align:left"><b>Test Report No</b></div>
+                        </td>
+                        <td><b>{TestReportNo}</b></td>
+                    </tr>
+                    <tr>
+                        <td rowspan="6" colspan="2">
+                            {Address}<br />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div><b>Discipline</b></div>
+                        </td>
+                        <td>{Department}</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div><b>Group</b></div>
+                        </td>
+                        <td>{ProductGroup}</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div><b>Issue Date</b></div>
+                        </td>
+                        <td>{DateOfIssue}</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div><b>Customer Ref</b></div>
+                        </td>
+                        <td>As per CRF</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div><b>Dated</b></div>
+                        </td>
+                        <td>{SampleRegistrationDate}</td>
+                    </tr>
+                </table>
+                <br />
+                <div id="SampleTest" class="clearfix table-responsive">
+                    <table border="1" style="border-spacing:0px;width:100%" cellpadding="5">
+                        <tr>
+                            <td style="width:25%"><b>Sample Registration Date</b></td>
+                            <td style="width:25%">{SampleRegistrationDate}</td>
+                            <td style="width:25%"><b>SampleId</b></td>
+                            <td style="width:25%">{LabSampleId}</td>
+                        </tr>
+                        <tr>
+                            <td><b>Analysis Starting Date</b></td>
+                            <td>{StartDate}</td>
+                            <td><b>Analysis Completion Date</b></td>
+                            <td>{CompletionDate}</td>
+                        </tr>
+                        <tr>
+                            <td><b>Name Of Product</b></td>
+                            <td>{NameOfProduct}</td>
+                            <td><b>Date Of Mfg.</b></td>
+                            <td>{DateOfMfg}</td>
+                        </tr>
+                        <tr>
+                            <td><b>Sample Package & Quantity</b></td>
+                            <td>{SampleQuantity}</td>
+                            <td><b>Date Of Exp.</b></td>
+                            <td>{ExpDate}</td>
+                        </tr>
+                        <tr>
+                            <td><b>Sample Receive Date</b></td>
+                            <td>{ReceivedDate}</td>
+                            <td><b>Batch/Lot No.</b></td>
+                            <td>{BatchNo}</td>
+                        </tr>
+                        <tr>
+                            <td><b>Test Required</b></td>
+                            <td>{TestRequired}</td>
+                            <td><b>Sample Condition</b></td>
+                            <td>{SampleCondition}</td>
+                        </tr>
+						<tr>
+                            <td><b>Sampling Date/Location</b></td>
+                            <td>{DateOfSampling}/{SamplingLocation}</td>
+                            <td><b>Transport & Receipt Temp.</b></td>
+                            <td>{TransportAndReceiptTemp}</td>
+                        </tr> 
+                    </table>
+                </div>
+                <br />
+                <table border="1" style="border-spacing:0px;width:100%" cellpadding="5">
+                   <tr>
+                        <td colspan="4" style="text-align:center">
+                            <b><h5>TEST RESULTS</h5></b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            {TestResult}
+                        </td>
+                    </tr>
+                   <tr>
+					<td colspan="4">{Remarks}</td>
+					</tr>
+                    <tr>					
+                        <td colspan="2" style="border-right: none !important"><br />
+						                   
+                        </td>					
+                        <td colspan="2" style="text-align:right;border-left: none !important">
+							<table style="width:100%;">
+								<tr>
+									<td style="width:70%;vertical-align:center;text-align:right;border-left: none !important;border: none !important ">
+						{QRCode}
+                        </td>					
+									<td style="text-align:right;border: none !important">
+							
+						{Signature} 
+							 </td>
+								</tr>
+							</table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4" style="text-align:center">
+                            ****** END OF THE TEST REPORT******
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            <div style="display: inline-block; font-size:0.7vw">Note: 1. Tested sample (s) not drawn by the laboratory. 2. The results relate to the submitted sample (s) only. 3. The report shall not be reproduced except in full, without written approval of the laboratory. 4. Laboratory is not responsible for the authenticity of photocopied test report. 5. The test items will not be retained for perishable products and 1 month in the case of non - perishable samples unless otherwise agreed with the customer or as required by the applicable regulation. 6. Please see  Embossed seal  to confirm the authenticity of this report.</div>
+                        </td>
+                    </tr>
+                </table>
+				{ReportFormatNumber}
+               <!--  <div class="divFooter">
+                   <b>LIMS SERVICES- CT & T Center</b>
+                    <br />903/1 , Makarpura GIDC Estate, Makarpura, Vadodara 390 010, Gujarat, India.
+                    <br />Phone: +91 265 2631053/2646999, Telefax: +91-022-26860692
+                    <br /><b>Email: support@hemshellservices.com * Website: www.hemshellservices.com, www.hemetek.com</b>
+                </div>-->
+            </main>
+
+        </div>
+    </center>
+</body>
+</html>

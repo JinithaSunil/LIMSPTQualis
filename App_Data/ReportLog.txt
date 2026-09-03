@@ -1,0 +1,95 @@
+2. Word Created
+Template Path = D:\Projects\LIMSPTQualis\Inputfiles\Chemical_TemplateGeneralK3L.docx
+Template Exists = True
+Before Open
+After Open
+3. Template Opened
+2. Word Created
+Template Path = D:\Projects\LIMSPTQualis\Inputfiles\Chemical_TemplateGeneralK3L.docx
+Template Exists = True
+3. Template Opened
+4. Doc Saved
+2. Word Created
+Template Path = D:\Projects\LIMSPTQualis\Inputfiles\Chemical_TemplateGeneralK3L.docx
+Template Exists = True
+Before Open True
+After Open True
+3. Template Opened
+3-2. InsertImagesIntoDocument done
+Line#126
+Line#128
+GetSafeValue done
+GetSafeDate done
+GetSafeDate1 done
+Before FindAndReplace block
+After replace sampleIDSeries
+After FindAndReplace block
+Line#206
+Line#253
+3-3.PASS
+Before ResultTable
+13
+17
+18
+19
+20
+3-1. Directory: D:\Projects\LIMSPTQualis\TestReport
+4. Doc Saved
+testDoc null=False
+Documents.Count=1
+testDoc null=False
+Documents.Count=1
+2. Word Created
+Template Path = D:\Projects\LIMSPTQualis\Inputfiles\Chemical_TemplateGeneralK3L.docx
+Template Exists = True
+Before Open True
+3. Template Opened
+3-2. InsertImagesIntoDocument done
+Line#126
+Line#128
+GetSafeValue done
+GetSafeDate done
+GetSafeDate1 done
+Before FindAndReplace block
+doc before FindAndReplace null=False
+doc hash before FindAndReplace=17924607
+After replace sampleIDSeries
+After FindAndReplace block
+Line#206
+Line#253
+3-3.PASS
+Before ResultTable
+13
+17
+18
+19
+20
+3-1. Directory: D:\Projects\LIMSPTQualis\TestReport
+4. Doc Saved
+2. Word Created
+Template Path = D:\Projects\LIMSPTQualis\Inputfiles\Chemical_TemplateGeneralK3L.docx
+Template Exists = True
+Before Open True
+3. Template Opened
+3-2. InsertImagesIntoDocument done
+Line#126
+Line#128
+GetSafeValue done
+GetSafeDate done
+GetSafeDate1 done
+Before FindAndReplace block
+doc before FindAndReplace null=False
+doc hash before FindAndReplace=49382823
+After replace sampleIDSeries
+After FindAndReplace block
+Line#206
+Line#253
+3-3.PASS
+Before ResultTable
+13
+17
+18
+19
+20
+3-1. Directory: D:\Projects\LIMSPTQualis\TestReport
+4. Doc Saved

@@ -1,0 +1,87 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>TEST ALLOCATION</title>
+    <link rel="stylesheet" href="../css/CRF_style.css" media="all" />
+	 <link rel="stylesheet" href="css/CRF_style.css" media="all" />
+    <style>
+        .space {
+            border-collapse: separate;
+            border-spacing: 0 15px;
+        }
+    </style>
+</head>
+<body style='background-color:lightgrey;height:100%'>
+    <center>
+        <div style='width:100%; height:100%; text-align:center;background-color:white; padding:2% 5% 5% 5%'>
+            <header class="clearfix">
+                <table width="90%">
+                    <tr>
+                        <td style="grid-column-align:start">
+                            <div id="logo">
+                                <img src="images/hemshell-logo.png" height="50%" width="50%" alt="logo">
+                            </div>
+                        </td>
+                        <td>
+                            <div id="company" style="text-align:right;">
+                              {Organization}
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+
+
+            </header>
+            <main>
+                <div><h2>SAMPLE VERIFICATION FORM</h2></div>
+                <div id="details" class="clearfix">
+                    <div>
+                        <table cellspacing="30" width="100">
+                            <tr>
+                                <td>
+                                    <div><b>Sample Verified By: {SampleVerifiedBy}</b></div>
+                                    <div><b>Customer Details: {CustomerName}</b></div><br />
+                                    <div><b>SampleId: {SamplesIdSeries}</b></div>
+                                    <div><b>Sample Received Date:</b> {SampleReceivedDate}</div><br />
+									<div><b>Temperature:</b> {temperature}</div>
+									<div><b>Humidity:</b> {humidity}</div>
+									<div><b>Sampling Method:</b> {samplingmethod}</div><br />
+                                    <div><b>Product Category:</b> {ProductCategory}</div>
+                                </td>
+
+                                <td>
+                                    <div></div>
+                                </td>
+								<td>
+                                    <div></div>
+                                </td>
+                                <td style="text-align:right;">
+                                    <h3>BatchNo#: {BatchNo} </h3>
+                                    <div class="date"><b>Request Date:</b> {Date}</div>
+                                </td>
+                            </tr>
+                        </table>
+
+
+                    </div>
+                    <div id="invoice">
+
+                    </div>
+                </div>
+                <div><h3>Sample Checklist</h3></div>
+                <div class="table-responsive">
+                    {SampleChecklist}
+
+                </div>
+                <div>
+                    <footer style="padding-bottom:2%">
+
+                    </footer>
+                </div>
+            </main>
+
+        </div>
+    </center>
+</body>
+</html>

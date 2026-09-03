@@ -1,0 +1,757 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="PTQualisMaster.master.cs" Inherits="LIMS.PTQualisMaster" %>
+
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
+
+
+<!DOCTYPE html>
+<html lang="en">
+    <head runat="server">
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <title>PT Qualis ERP</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="favicon.png" type="image/x-icon" />
+
+    <!-- Preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap"
+          rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons&display=swap"
+          rel="stylesheet">
+
+    <!-- Critical CSS -->
+    <link href="plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="css/style.css?v=1"
+          rel="stylesheet">
+
+    
+<link rel="stylesheet" href="assets/vendor/fonts/remixicon/remixicon.css" />
+<link rel="stylesheet" href="assets/css/font-awesome.min.css" />
+<link rel="stylesheet" href="assets/css/all.min.css" />
+<link rel="stylesheet" href="plugins/node-waves/waves.css">
+<!--<link rel="stylesheet" href="plugins/animate-css/animate.css">-->
+<link rel="stylesheet" href="plugins/morrisjs/morris.css">
+<%--<link rel="stylesheet" href="css/themes/all-themes.css">--%>
+
+    <!-- Fallback For No JavaScript -->
+    <noscript>
+
+        <%--<link rel="stylesheet"
+              href="assets/vendor/fonts/remixicon/remixicon.css" />--%>
+
+        <link rel="stylesheet"
+              href="assets/css/font-awesome.min.css" />
+
+        <link rel="stylesheet"
+              href="assets/css/all.min.css" />
+
+        <link rel="stylesheet"
+              href="plugins/node-waves/waves.css" />
+
+        <link rel="stylesheet"
+              href="plugins/animate-css/animate.css" />
+
+        <link rel="stylesheet"
+              href="plugins/morrisjs/morris.css" />
+
+        <link rel="stylesheet"
+              href="css/themes/all-themes.css" />
+
+    </noscript>
+
+    <!-- Inline Critical CSS -->
+    <style>
+
+        html, body {
+            zoom: 1;
+        }
+
+        body.no-scroll {
+            overflow: hidden;
+        }
+
+        hr.violet {
+            border: 2px solid #b34788;
+        }
+
+        @font-face {
+            font-family: 'TrajanPro';
+            src: url('assets/fonts/TrajanPro-Regular.ttf') format('truetype');
+            font-display: swap;
+        }
+
+        .trajan-text {
+            font-family: 'TrajanPro', serif;
+            font-size: 22px;
+        }
+
+        .bars:before {
+            display: none !important;
+            content: none !important;
+        }
+
+        .bars {
+            display: none !important;
+            margin-bottom: 0 !important;
+            background: none;
+            border: none;
+            outline: none;
+        }
+
+        .bars i {
+            font-size: 26px;
+            color: white;
+        }
+
+        @media (max-width: 991px) {
+            .bars {
+                display: block !important;
+            }
+        }
+
+        input[type="checkbox"] {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            width: 0;
+            height: 0;
+            margin: 0;
+            position: absolute;
+            opacity: 0;
+        }
+
+        input[type="checkbox"] + span {
+            position: relative;
+            padding-left: 26px;
+            line-height: 20px;
+            cursor: pointer;
+            font-size: 13px;
+        }
+
+        input[type="checkbox"] + span::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 2px;
+            width: 16px;
+            height: 16px;
+            border: 2px solid #666;
+            background: #fff;
+        }
+
+        input[type="checkbox"]:checked + span::after {
+            content: "";
+            position: absolute;
+            left: 4px;
+            top: 6px;
+            width: 6px;
+            height: 10px;
+            border: solid #c2185b;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+
+    </style>
+
+    <!-- Deferred Inline Script -->
+    <script defer>
+
+        document.addEventListener("DOMContentLoaded", function () {
+
+            const menuBtn = document.getElementById("mobileMenuBtn");
+            const sidebar = document.getElementById("leftsidebar");
+            const overlay = document.getElementById("menuOverlay");
+
+            if (menuBtn) {
+
+                menuBtn.addEventListener("click", function () {
+
+                    sidebar.classList.toggle("active");
+                    overlay.classList.toggle("active");
+
+                    document.body.classList.toggle("no-scroll");
+
+                });
+
+            }
+
+            if (overlay) {
+
+                overlay.addEventListener("click", function () {
+
+                    sidebar.classList.remove("active");
+                    overlay.classList.remove("active");
+
+                    document.body.classList.remove("no-scroll");
+
+                });
+
+            }
+
+        });
+
+    </script>
+
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+
+</head>
+<%--<head runat="server">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <title>PT Qualis ERP</title>
+    <!-- Favicon-->
+    <link rel="icon" href="favicon.png" type="image/x-icon" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="assets/vendor/fonts/remixicon/remixicon.css" />
+    <link href="assets/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="assets/css/all.min.css" rel="stylesheet" />
+    <!-- Bootstrap Core Css -->
+    <link href="plugins/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <!-- Waves Effect Css -->
+    <link href="plugins/node-waves/waves.css" rel="stylesheet" />
+    <!-- Animation Css -->
+    <link href="plugins/animate-css/animate.css" rel="stylesheet" />
+    <!-- Morris Chart Css-->
+    <link href="plugins/morrisjs/morris.css" rel="stylesheet" />
+    <!-- Custom Css -->
+    <link href="css/style.css" rel="stylesheet">
+
+    <link href="css/themes/all-themes.css" rel="stylesheet" />
+
+    <style>
+        body.no-scroll {
+            overflow: hidden;
+        }
+
+        .bars:before {
+            display: none !important;
+            content: none !important;
+        }
+
+        .bars {
+            display: none !important;
+            margin-bottom: 0px !important;
+            background: none;
+            border: none;
+            outline: none;
+        }
+
+            .bars i {
+                font-size: 26px;
+                color: white;
+            }
+        /* Hide by default (desktop) */
+        .bars {
+            display: none !important;
+        }
+
+        /* Show only on mobile & tablet */
+        @media (max-width: 991px) {
+            .bars {
+                display: block !important;
+            }
+        }
+    </style>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            const menuBtn = document.getElementById("mobileMenuBtn");
+            const sidebar = document.getElementById("leftsidebar");
+            const overlay = document.getElementById("menuOverlay");
+
+            if (menuBtn) {
+                menuBtn.addEventListener("click", function () {
+                    sidebar.classList.toggle("active");
+                    overlay.classList.toggle("active");
+                    document.body.classList.toggle("no-scroll");
+                });
+            }
+
+            if (overlay) {
+                overlay.addEventListener("click", function () {
+                    sidebar.classList.remove("active");
+                    overlay.classList.remove("active");
+                    document.body.classList.remove("no-scroll");
+                });
+            }
+
+        });
+    </script>
+    <style>
+        html, body {
+            zoom: 1;
+        }
+
+        hr.violet {
+            border: 2px solid #b34788;
+        }
+
+        @font-face {
+            font-family: 'TrajanPro';
+            src: url('assets/fonts/TrajanPro-Regular.ttf') format('truetype');
+        }
+
+        .trajan-text {
+            font-family: 'TrajanPro', serif;
+            font-size: 22px;
+        }
+
+        input[type="checkbox"] {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            width: 0;
+            height: 0;
+            margin: 0;
+            position: absolute;
+            opacity: 0;
+        }
+            /* checkbox box */
+            input[type="checkbox"] + span {
+                position: relative;
+                padding-left: 26px;
+                line-height: 20px;
+                cursor: pointer;
+                font-size: 13px;
+            }
+
+                /* unchecked box */
+                input[type="checkbox"] + span::before {
+                    content: "";
+                    position: absolute;
+                    left: 0;
+                    top: 2px;
+                    width: 16px;
+                    height: 16px;
+                    border: 2px solid #666;
+                    background: #fff;
+                }
+
+            /* checked state */
+            input[type="checkbox"]:checked + span::after {
+                content: "";
+                position: absolute;
+                left: 4px;
+                top: 6px;
+                width: 6px;
+                height: 10px;
+                border: solid #c2185b;
+                border-width: 0 2px 2px 0;
+                transform: rotate(45deg);
+            }
+    </style>
+
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>--%>
+
+
+<body class="theme-red ls-closed">
+    <form id="form1" runat="server">
+        <!-- Page Loader -->
+        <div class="page-loader-wrapper">
+            <div class="loader">
+                <div class="preloader">
+                    <div class="spinner-layer pl-red">
+                        <div class="circle-clipper left">
+                            <div class="circle"></div>
+                        </div>
+                        <div class="circle-clipper right">
+                            <div class="circle"></div>
+                        </div>
+                    </div>
+                </div>
+                <p>Please wait...</p>
+            </div>
+        </div>
+        <!-- #END# Page Loader -->
+        <!-- Overlay For Sidebars -->
+        <div class="overlay"></div>
+        <!-- #END# Overlay For Sidebars -->
+        <!-- Search Bar -->
+        <div class="search-bar">
+            <div class="search-icon">
+                <i class="material-icons">search</i>
+            </div>
+            <input type="text" placeholder="START TYPING...">
+            <div class="close-search">
+                <i class="material-icons">close</i>
+            </div>
+        </div>
+        <!-- #END# Search Bar -->
+        <!-- Top Bar -->
+
+        <section>
+
+            <!-- Left Sidebar -->
+            <aside id="leftsidebar" class="sidebar">
+                <!-- User Info -->
+                <div class="user-info">
+                    <div>
+                        <table>
+                            <tr>
+                                <td>
+                                    <img src="assets/img/qualis.png" width="auto" height="70" alt="User" />
+                                    <%--<img src="assets/img/logo9.png" width="auto" height="70" alt="User" />--%>
+                                </td>
+                                <td>
+                                    <h1 style="color: white;" cssclass="trajan-text">ERP</h1>
+                                </td>
+                            </tr>
+                        </table>
+
+                    </div>
+                    <div class="info-container">
+                        <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <asp:Label ID="lblUserName" runat="server"></asp:Label>
+                        </div>
+                        <div class="email">
+                            <asp:Label ID="lblUserEmail" runat="server"></asp:Label>
+                        </div>
+
+
+                        <div class="btn-group user-helper-dropdown">
+                            <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</i>
+                            <ul class="dropdown-menu pull-right">
+                                <li><a href="EmployeeProfile.aspx"><i class="material-icons">person</i>Profile</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="javascript:void(0);"><i class="material-icons">group</i>Supervisors</a></li>
+                                <li><a href="WorkList.aspx"><i class="material-icons">business_center</i>WorkList</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="Login.aspx"><i class="material-icons">input</i>Sign Out</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- #User Info -->
+
+                <asp:Repeater ID="DynamicMenuRepeater" runat="server">
+                    <HeaderTemplate>
+                        <div class="menu">
+                            <ul class="list">
+                                <li class="header">MAIN NAVIGATION</li>
+                    </HeaderTemplate>
+                    <ItemTemplate>
+                        <li class='<%# IsCurrentPage(Eval("Url").ToString()) ? "active" : HasActiveChild(Eval("SubItems") as List<LIMS.Models.MenuItem>) ? "active" : "" %>'>
+                            <!-- For menu items without children -->
+                            <asp:Panel runat="server" Visible='<%# ((List<LIMS.Models.MenuItem>)Eval("SubItems")).Count == 0 %>'>
+                                <a href='<%# Eval("Url") %>' target='<%# Convert.ToBoolean(Eval("OpenInNewTab")) ? "_blank" : "_self" %>'>
+                                    <i class='material-icons <%# Eval("IconClassName") %>' style="font-size: 20px;"></i>
+                                    <span><%# Eval("Title") %></span>
+                                </a>
+                            </asp:Panel>
+
+                            <!-- For menu items with children -->
+                            <asp:Panel runat="server" Visible='<%# ((List<LIMS.Models.MenuItem>)Eval("SubItems")).Count > 0 %>'>
+                                <a href="javascript:void(0);" class='menu-toggle <%# HasActiveChild(Eval("SubItems") as List<LIMS.Models.MenuItem>) ? "toggled" : "" %>' target='<%# Convert.ToBoolean(Eval("OpenInNewTab")) ? "_blank" : "_self" %>'>
+                                    <i class='material-icons <%# Eval("IconClassName") %>' style="font-size: 20px;"></i>
+                                    <span><%# Eval("Title") %></span>
+                                </a>
+                                <ul class="ml-menu" style='<%# HasActiveChild(Eval("SubItems") as List<LIMS.Models.MenuItem>) ? "display: block;": "" %>'>
+                                    <asp:Repeater ID="SubMenuRepeater" runat="server" DataSource='<%# Eval("SubItems") %>'>
+                                        <ItemTemplate>
+                                            <li class='<%# IsCurrentPage(Eval("Url").ToString()) ? "active" : "" %>'>
+                                                <!-- For sub-menu items without children -->
+                                                <asp:Panel runat="server" Visible='<%# ((List<LIMS.Models.MenuItem>)Eval("SubItems")).Count == 0 %>'>
+                                                    <a href='<%# Eval("Url") %>' target='<%# Convert.ToBoolean(Eval("OpenInNewTab")) ? "_blank" : "_self" %>'>
+                                                        <i class='material-icons <%# Eval("IconClassName") %>' style="font-size: 15px;"></i>
+                                                        <span><%# Eval("Title") %></span>
+                                                    </a>
+                                                </asp:Panel>
+
+                                                <!-- For sub-menu items with children -->
+                                                <asp:Panel runat="server" Visible='<%# ((List<LIMS.Models.MenuItem>)Eval("SubItems")).Count > 0 %>'>
+                                                    <a href="javascript:void(0);" class='menu-toggle <%# HasActiveChild(Eval("SubItems") as List<LIMS.Models.MenuItem>) ? "toggled" : "" %>' target='<%# Convert.ToBoolean(Eval("OpenInNewTab")) ? "_blank" : "_self" %>'>
+                                                        <span><%# Eval("Title") %></span>
+                                                    </a>
+                                                    <ul class="ml-menu" style='<%# HasActiveChild(Eval("SubItems") as List<LIMS.Models.MenuItem>) ? "display: block;": "" %>'>
+                                                        <asp:Repeater ID="SubSubMenuRepeater" runat="server" DataSource='<%# Eval("SubItems") %>'>
+                                                            <ItemTemplate>
+                                                                <li class='<%# IsCurrentPage(Eval("Url").ToString()) ? "active" : "" %>'>
+                                                                    <a href='<%# Eval("Url") %>' target='<%# Convert.ToBoolean(Eval("OpenInNewTab")) ? "_blank" : "_self" %>'>
+                                                                        <i class='material-icons <%# Eval("IconClassName") %>' style="font-size: 15px;"></i>
+                                                                        <span><%# Eval("Title") %></span>
+                                                                    </a>
+                                                                </li>
+                                                            </ItemTemplate>
+                                                        </asp:Repeater>
+                                                    </ul>
+                                                </asp:Panel>
+                                            </li>
+                                        </ItemTemplate>
+                                    </asp:Repeater>
+                                </ul>
+                            </asp:Panel>
+                        </li>
+                    </ItemTemplate>
+                    <FooterTemplate>
+                        </ul>
+        </div>
+                    </FooterTemplate>
+                </asp:Repeater>
+
+            </aside>
+
+
+
+            <!-- #END# Left Sidebar -->
+            <!-- Right Sidebar -->
+            <aside id="rightsidebar" class="right-sidebar">
+                <ul class="nav nav-tabs tab-nav-right" role="tablist">
+                    <li role="presentation" class="active"><a href="#skins" data-toggle="tab">SKINS</a></li>
+                    <li role="presentation"><a href="#settings" data-toggle="tab">SETTINGS</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane fade in active in active" id="skins">
+                        <ul class="demo-choose-skin">
+                            <li data-theme="red" class="active">
+                                <div class="red"></div>
+                                <span>Red</span>
+                            </li>
+                            <li data-theme="pink">
+                                <div class="pink"></div>
+                                <span>Pink</span>
+                            </li>
+                            <li data-theme="purple">
+                                <div class="purple"></div>
+                                <span>Purple</span>
+                            </li>
+                            <li data-theme="deep-purple">
+                                <div class="deep-purple"></div>
+                                <span>Deep Purple</span>
+                            </li>
+                            <li data-theme="indigo">
+                                <div class="indigo"></div>
+                                <span>Indigo</span>
+                            </li>
+                            <li data-theme="blue">
+                                <div class="blue"></div>
+                                <span>Blue</span>
+                            </li>
+                            <li data-theme="light-blue">
+                                <div class="light-blue"></div>
+                                <span>Light Blue</span>
+                            </li>
+                            <li data-theme="cyan">
+                                <div class="cyan"></div>
+                                <span>Cyan</span>
+                            </li>
+                            <li data-theme="teal">
+                                <div class="teal"></div>
+                                <span>Teal</span>
+                            </li>
+                            <li data-theme="green">
+                                <div class="green"></div>
+                                <span>Green</span>
+                            </li>
+                            <li data-theme="light-green">
+                                <div class="light-green"></div>
+                                <span>Light Green</span>
+                            </li>
+                            <li data-theme="lime">
+                                <div class="lime"></div>
+                                <span>Lime</span>
+                            </li>
+                            <li data-theme="yellow">
+                                <div class="yellow"></div>
+                                <span>Yellow</span>
+                            </li>
+                            <li data-theme="amber">
+                                <div class="amber"></div>
+                                <span>Amber</span>
+                            </li>
+                            <li data-theme="orange">
+                                <div class="orange"></div>
+                                <span>Orange</span>
+                            </li>
+                            <li data-theme="deep-orange">
+                                <div class="deep-orange"></div>
+                                <span>Deep Orange</span>
+                            </li>
+                            <li data-theme="brown">
+                                <div class="brown"></div>
+                                <span>Brown</span>
+                            </li>
+                            <li data-theme="grey">
+                                <div class="grey"></div>
+                                <span>Grey</span>
+                            </li>
+                            <li data-theme="blue-grey">
+                                <div class="blue-grey"></div>
+                                <span>Blue Grey</span>
+                            </li>
+                            <li data-theme="black">
+                                <div class="black"></div>
+                                <span>Black</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div role="tabpanel" class="tab-pane fade" id="settings">
+                        <div class="demo-settings">
+                            <p>GENERAL SETTINGS</p>
+                            <ul class="setting-list">
+                                <li>
+                                    <span>Report Panel Usage</span>
+                                    <div class="switch">
+                                        <label>
+                                            <input type="checkbox" checked><span class="lever"></span></label>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span>Email Redirect</span>
+                                    <div class="switch">
+                                        <label>
+                                            <input type="checkbox"><span class="lever"></span></label>
+                                    </div>
+                                </li>
+                            </ul>
+                            <p>SYSTEM SETTINGS</p>
+                            <ul class="setting-list">
+                                <li>
+                                    <span>Notifications</span>
+                                    <div class="switch">
+                                        <label>
+                                            <input type="checkbox" checked><span class="lever"></span></label>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span>Auto Updates</span>
+                                    <div class="switch">
+                                        <label>
+                                            <input type="checkbox" checked><span class="lever"></span></label>
+                                    </div>
+                                </li>
+                            </ul>
+                            <p>ACCOUNT SETTINGS</p>
+                            <ul class="setting-list">
+                                <li>
+                                    <span>Offline</span>
+                                    <div class="switch">
+                                        <label>
+                                            <input type="checkbox"><span class="lever"></span></label>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span>Location Permission</span>
+                                    <div class="switch">
+                                        <label>
+                                            <input type="checkbox" checked><span class="lever"></span></label>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+            <asp:Button ID="hdButton" runat="server" Visible="false" />
+            <!-- #END# Right Sidebar -->
+
+        </section>
+
+        <section class="content">
+            <div class="container-fluid">
+                <button type="button" class="bars">
+                    <i class="material-icons">menu</i>
+                </button>
+                <asp:ContentPlaceHolder ID="ContentPlaceHolderBody" runat="server">
+                </asp:ContentPlaceHolder>
+            </div>
+
+
+
+            <div class="footer" style="border-top: 1px solid #ddd; font-family: Arial, sans-serif; font-size: 14px; color: #333; padding: 10px 0; margin-bottom: 5px;">
+                <div class="legal" style="text-align: center;">
+                    <div class="copyright" style="color: #555; margin: 0;">
+                        &copy; Copyright &copy; 2019-<script>document.write(new Date().getFullYear())</script>
+                        <a href="http://www.rnisolutions.in" target="_blank" style="color: #007bff; text-decoration: none;">RNI Solutions Pvt. Ltd.</a>.
+            <b>Version: </b>1.0.1
+                    </div>
+                </div>
+            </div>
+
+
+
+        </section>
+
+        <!-- Jquery Core Js -->
+        <script src="plugins/jquery/jquery.min.js"></script>
+
+        <!-- Bootstrap Core Js -->
+        <script src="plugins/bootstrap/js/bootstrap.js"></script>
+
+        <!-- Select Plugin Js
+    <script src="plugins/bootstrap-select/js/bootstrap-select.js"></script> -->
+
+        <!-- Slimscroll Plugin Js -->
+        <script src="plugins/jquery-slimscroll/jquery.slimscroll.js"></script>
+
+        <!-- Jquery Validation Plugin Css -->
+        <script src="plugins/jquery-validation/jquery.validate.js"></script>
+
+        <!-- JQuery Steps Plugin Js -->
+        <script src="plugins/jquery-steps/jquery.steps.js"></script>
+
+        <!-- Sweet Alert Plugin Js -->
+        <script src="plugins/sweetalert/sweetalert.min.js"></script>
+
+        <!-- Waves Effect Plugin Js -->
+        <script src="plugins/node-waves/waves.js"></script>
+
+        <!-- Jquery Knob Plugin Js -->
+        <script src="plugins/jquery-knob/jquery.knob.min.js"></script>
+
+        <!-- Jquery CountTo Plugin Js -->
+        <script src="plugins/jquery-countto/jquery.countTo.js"></script>
+
+        <!-- Morris Plugin Js -->
+        <script src="plugins/raphael/raphael.min.js"></script>
+        <!--<script src="plugins/morrisjs/morris.js"></script>-->
+
+        <!-- ChartJs -->
+        <%--<script src="plugins/chartjs/Chart.bundle.js"></script>--%>
+
+        <!-- Flot Charts Plugin Js -->
+        <script src="plugins/flot-charts/jquery.flot.js"></script>
+        <script src="plugins/flot-charts/jquery.flot.resize.js"></script>
+        <script src="plugins/flot-charts/jquery.flot.pie.js"></script>
+        <script src="plugins/flot-charts/jquery.flot.categories.js"></script>
+        <script src="plugins/flot-charts/jquery.flot.time.js"></script>
+
+        <!-- Sparkline Chart Plugin Js -->
+        <script src="plugins/jquery-sparkline/jquery.sparkline.js"></script>
+
+        <!-- Custom Js -->
+
+        <script src="js/admin.js"></script>
+        <script src="js/pages/ui/modals.js"></script>
+
+        <script src="js/form-wizard.js"></script>
+        <script src="js/pages/charts/jquery-knob.js"></script>
+
+        <!--<script src="js/index.js"></script>-->
+
+        <!-- Demo Js -->
+        <script src="js/demo.js"></script>
+
+
+    </form>
+</body>
+
+</html>
+

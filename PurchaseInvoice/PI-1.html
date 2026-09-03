@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>&nbsp;</title>
+    <!--<link rel="stylesheet" href="http://CiscoLIMS.rnisolutions.in:8608/css/CRF_style.css" media="all" />-->
+    <link rel="stylesheet" href="css/CRF_style.css" media="all" />
+    <link rel="stylesheet" href="../css/CRF_style.css" media="all" />
+    <style>
+        .a4-page {
+            background: white; /* The page color */
+            width: 21cm; /* A4 width */
+            display: block;
+            margin: 0 auto; /* Center the page horizontally */
+            margin-bottom: 0.5cm; /* Space between multiple pages in a long scroll */
+            box-shadow: 0 0 0.5cm rgba(0, 0, 0, 0.5); /* Adds a subtle shadow for depth */
+            box-sizing: border-box; /* Ensures padding/border are included in the specified width/height */
+            padding: 1cm 1.5cm; /* Example internal margins/padding for content */
+        }
+
+        @media print {
+            .a4-page {
+                background: white; /* The page color */
+                width: 21cm; /* A4 width */
+                display: block;
+                margin: 0 auto; /* Center the page horizontally */
+                margin-bottom: 0.5cm; /* Space between multiple pages in a long scroll */
+                box-shadow: none !important; /* Adds a subtle shadow for depth */
+                box-sizing: border-box; /* Ensures padding/border are included in the specified width/height */
+                padding: 1cm 1.5cm; /* Example internal margins/padding for content */
+            }
+
+            .no-print {
+                display: none;
+            }
+        }
+
+        .space {
+            border-collapse: separate;
+            border-spacing: 0 15px;
+        }
+
+        .page {
+            width: 21cm;
+            min-height: 29.7cm;
+            padding: 2cm;
+            margin: 1cm auto;
+            border: 1px #D3D3D3 solid;
+            border-radius: 5px;
+            background: white;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .tab1 {
+            border: 1px solid;
+            border-bottom: 1px solid;
+        }
+
+            .tab1 td {
+                border: 1px solid;
+                padding: 1px;
+            }
+    </style>
+    <style media="screen">
+        .noPrint1 {
+        }
+
+        .noScreen1 {
+            display: none;
+        }
+
+        .noPrint {
+        }
+
+        .noScreen {
+            display: none;
+        }
+
+        #header {
+            display: block;
+            position: relative;
+            left: 0px;
+            top: 0px;
+            right: 0px;
+            font-size: 10px;
+        }
+
+        #footer {
+            display: block;
+            position: relative;
+            left: 0px;
+            bottom: 0px;
+            right: 0px;
+            font-size: 10px;
+        }
+    </style>
+    <style>
+        .space {
+            border-collapse: separate;
+            border-spacing: 0 15px;
+        }
+
+        .tab1 {
+            border: 1px solid;
+            border-bottom: 1px solid;
+        }
+
+            .tab1 td {
+                border: 1px solid;
+                padding: 5px;
+            }
+
+        .blank {
+            border: none !important;
+            padding: 5px;
+        }
+    </style>
+    <style>
+        .space {
+            border-collapse: separate;
+            border-spacing: 0 15px;
+        }
+
+        .tab {
+            border-collapse: collapse;
+            border: none !important;
+            border-bottom: none;
+        }
+
+            .tab td {
+                border-collapse: collapse;
+                border: none !important;
+                padding: 5px;
+            }
+
+        .blank {
+            border: none !important;
+            padding: 5px;
+        }
+    </style>
+    <style type="text/css" media="print">
+        @page {
+            size: auto; /* auto is the initial value */
+            margin: 0; /* this affects the margin in the printer settings */
+        }
+        /*   table {
+            table-layout: fixed;
+        }*/
+    </style>
+</head>
+<body style="background-color:lightgray">
+    <div class="no-print">
+        <button onclick="window.print()">Print</button>
+    </div>
+    <center>
+        <div class='a4-page'>
+            <table style="margin-right:5px">
+                <thead>
+                    <tr>
+                        <td width="15%">
+                            <img src="assets/img/qualis-2.png" alt="Logo" height="80" />
+                        </td>
+                        <td width="25%">
+                            <span style="color: #b34788; font-weight: bold">PT Qualis Indonesia</span><br />
+                            <span style="font-size:10px">
+                                Laboratory:<br />
+                                Jalan Pajajaran No. 17<br />
+                                Desa Gandasari Kec. Jati Uwung<br />
+                                Tangerang 15137, Indonesia
+                            </span>
+                        </td>
+                        <td>&nbsp;</td>
+                        <td style="font-size: 22px; float: right;">
+                            PURCHASE INVOICE
+                        </td>
+                    </tr>
+                    <tr><td></td><td></td><td colspan="2" style="border-bottom: 4px solid #b34788"></td></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td style="float:right">Page No.: 1</td>
+                    </tr>
+                    <tr><td colspan="4">&nbsp;</td></tr>
+                    <tr><td colspan="4">&nbsp;</td></tr>
+                    <tr>
+                        <td colspan="2">Vendor Name :dipen</td>
+                        <td rowspan="4" colspan="2">
+                            <table>
+                                <tr>
+                                    <td>Date:</td>
+                                    <td>13-08-2025</td>
+                                </tr>
+                                <tr>
+                                    <td>No. Purchase Invoice:</td>
+                                    <td>0001-08-2025/PQI-PI</td>
+                                </tr>
+                                <tr>
+                                    <td>No. Purchase Order:</td>
+                                    <td>PO/00002/25-26</td>
+                                </tr>
+                                <tr>
+                                    <td>No. Purchase Requisition:</td>
+                                    <td></td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">No. Delivery Order:</td>
+                    </tr>
+                    <tr><td>&nbsp;</td></tr>
+                    <tr><td>&nbsp;</td></tr>
+                    <tr>
+                        <td colspan="4" height="350px"><table style='width:100%' class='tab1'></table></td>
+                    </tr>
+                    <tr><td colspan="4">&nbsp;</td></tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="4" style="text-align:center">
+                            <table width="100%" style="font-size:12px; text-align:center !important" class="tab1">
+                                <tr>
+                                    <td>Created By:</td>
+                                    <td>Authorized By:</td>
+                                    <td>Approved By:</td>
+                                    <td>Receipt By:</td>
+                                </tr>
+                                <tr>
+                                    <td><br /><br /><br /><br /></td>
+                                    <td><br /><br /><br /><br /></td>
+                                    <td><br /><br /><br /><br /></td>
+                                    <td><br /><br /><br /><br /></td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </center>
+</body>
+</html>

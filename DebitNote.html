@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Debit Note</title>
+    <!--<link rel="stylesheet" href="http://CiscoLIMS.rnisolutions.in:8608/css/CRF_style.css" media="all" />-->
+    <link rel="stylesheet" href="css/CRF_style.css" media="all" />
+    <link rel="stylesheet" href="../css/CRF_style.css" media="all" />
+    <style>
+        .space {
+            border-collapse: separate;
+            border-spacing: 0 15px;
+        }
+
+        .page {
+            width: 21cm;
+            min-height: 29.7cm;
+            padding: 2cm;
+            margin: 1cm auto;
+            border: 1px #D3D3D3 solid;
+            border-radius: 5px;
+            background: white;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+    <style media="screen">
+        .noPrint1 {
+        }
+
+        .noScreen1 {
+            display: none;
+        }
+
+        .noPrint {
+        }
+
+        .noScreen {
+            display: none;
+        }
+
+        #header {
+            display: block;
+            position: relative;
+            left: 0px;
+            top: 0px;
+            right: 0px;
+            font-size: 10px;
+        }
+
+        #footer {
+            display: block;
+            position: relative;
+            left: 0px;
+            bottom: 0px;
+            right: 0px;
+            font-size: 10px;
+        }
+    </style>
+    <style>
+        .space {
+            border-collapse: separate;
+            border-spacing: 0 15px;
+        }
+
+        .tab1 {
+            border: 1px solid;
+            border-bottom: 1px solid;
+        }
+
+            .tab1 td {
+                border: 1px solid;
+                padding: 5px;
+            }
+
+        .blank {
+            border: none !important;
+            padding: 5px;
+        }
+    </style>
+    <style>
+        .space {
+            border-collapse: separate;
+            border-spacing: 0 15px;
+        }
+
+        .tab {
+            border-collapse: collapse;
+            border: none !important;
+            border-bottom: none;
+        }
+
+            .tab td {
+                border-collapse: collapse;
+                border: none !important;
+                padding: 5px;
+            }
+
+        .blank {
+            border: none !important;
+            padding: 5px;
+        }
+    </style>
+    <style type="text/css" media="print">
+        @page {
+            size: auto; /* auto is the initial value */
+            margin: 0; /* this affects the margin in the printer settings */
+        }
+        /*   table {
+            table-layout: fixed;
+        }*/
+    </style>
+</head>
+<body style="margin:2% !important; width:95%; overflow:scroll">
+    <center>
+        <div class='table-responsive'>
+            <table style="margin-right:5px">
+                <thead>
+                    <tr>
+                        <td colspan="2">
+                            <table style="font-family: 'Times New Roman'">
+                                <tr>
+                                    <td width="25%"><img src="assets/img/logo.png" height='100' alt="PT Qualis" /></td>
+                                    <td width="25%">
+                                        <span style="color: #810081">PT Qualis Indonesia</span><br /><br />
+                                        Jalan Pajajaran No. 17<br />
+                                        Desa Gandasari Kec. Jati Uwung<br />
+                                        Tangerang 15137, Indonesia
+                                    </td>
+                                    <td width="25%">
+                                        <br /><br /><br />T. +62-21-5565 2583/86<br />F. +62-21-5565 2489
+                                    </td>
+                                    <td width="25%" style="font-size:24px; ">
+                                        DEBIT NOTE
+                                    </td>
+                                </tr>
+                                <tr><td></td><td colspan="3"><hr /></td></tr>
+                                <tr><td>&nbsp;</td></tr>
+                                <tr>
+                                    <td>
+                                        <table style="margin-left:20%">
+                                            <tr>
+                                                <td>DN No.</td>
+                                                <td>:</td>
+                                                <td>{DebitNoteNo}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Date</td>
+                                                <td>:</td>
+                                                <td colspan="5">{DebitNoteDate}</td>
+                                            </tr>
+                                         
+                                        </table>
+                                    </td>
+                                    <td>&nbsp;</td>
+                                    <td colspan="2">
+                                        <table style="margin-left:20%">
+                                            <tr>
+                                                <td>Bill To:</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{VendorName}</td>
+                                            </tr>
+                                            <tr><td>&nbsp;</td></tr>
+                                            <tr>
+                                                <td>{AddressLine1}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{AddressLine2}</td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+
+                        </td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="2" style="margin-top:250px">
+                            <table style='width: 100%;'>
+                                <tr>
+                                    <td colspan="7">
+                                        {DebitNoteItems}
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                   
+                   
+                    <tr>
+                        <td colspan="2">
+                            <table style='width:100%; font-family:Times New Roman; font-size:12px'>
+                                <tr>
+                                    <td style="width:100%">
+                                        Note:For Payment, Please Transfer to Our Account:<br />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <table style="width:60% !important" class="tab1">
+                                            <tr>
+                                                <td colspan="3" style="text-align:center">PT. QUALIS INDONESIA</td>
+                                            </tr>
+                                            <tr>
+                                                <td>BANK</td>
+                                                <td>MANDIRI Cab. Graha Resko</td>
+                                                <td>BCA Cab. Artha Gading</td>
+                                            </tr>
+                                            <tr>
+                                                <td>A/C</td>
+                                                <td>
+                                                    125.001.0456.671 (RP) <br />
+                                                    125.001.1000.569 (USD) FULL AMOUNT
+                                                </td>
+                                                <td>840 016 1969 (RP)</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Swift Code</td>
+                                                <td>BMRIIDJA</td>
+                                                <td>&nbsp;</td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td width="25%">
+                                        <img src="assets/img/logo.png" height='100' alt="PT Qualis" /><hr />
+                                        PT QUALIS INDONESIA
+                                    </td>
+                                </tr>
+                                <tr><td colspan="2"></td><td style="float:right">Page 1 of 1</td></tr>
+                                <tr><td>&nbsp;</td></tr>
+                                <tr><td>&nbsp;</td></tr>
+                               
+                            </table>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </center>
+</body>
+</html>

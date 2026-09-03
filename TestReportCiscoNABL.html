@@ -1,0 +1,188 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>LIMS- Test Report</title>
+    <!-- Bootstrap Core Css -->
+    <!--<link href="../plugins/bootstrap/css/bootstrap.css" rel="stylesheet">-->
+    <style>
+        body{
+            font-size:14px;
+        }
+        #SivaDiv {
+            background: url(../assets/img/Signature/ValidSign.png) no-repeat !important;
+            width: 205px;
+            height: 200px;
+            float: right;
+            -webkit-print-color-adjust: exact !important;
+        }
+
+        @media print {
+            .page-break {
+                display: block;
+                page-break-before: always;
+                margin: 0;
+            }
+        }
+
+        @media screen {
+            div.divFooter {
+                display: none;
+                text-align: center;
+            }
+        }
+
+        @media print {
+            div.divFooter {
+                position: fixed;
+                bottom: 0;
+                text-align: center;
+                margin: 0;
+            }
+        }
+
+        .tab {
+            padding-left: 15px;
+            text-align: left;
+            font-size: 14px;
+            border: 1px solid black !important;
+        }
+        table, tr, td {
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <center>
+        <div>
+            <!--  <header class="clearfix">
+                  <table style="width:100%">
+                      <tr>
+                          <td style="text-align:center">
+                              <div id="logo">
+                                  <img src="http://lims.rnisolutions.in:4545/assets/img/hemshell-logo.png" />
+                              </div>
+                          </td>
+                      </tr>
+                  </table>
+
+
+              </header>-->
+            <main style="padding-right:5%; padding-left:5%">
+                <div style="float:right"><img src="images/NABL.png" height="100" width="auto" /></div>
+                <table style="width:100%; border-collapse:collapse" class="tab">
+                    <tr>
+                        <td style="border-bottom:1px solid">ULR No:</td>
+                        <td style="border-bottom:1px solid"><b>{ULRNo}</b></td>
+                        <td style="border-bottom:1px solid"></td>
+                        <td style="border-bottom:1px solid"></td>
+                    </tr>
+                    <tr>
+                        <td>Discipline:</td>
+                        <td><b>{Department}</b></td>
+                        <td>Report No:</td>
+                        <td><b>{TestReportNo}</b></td>
+                    </tr>
+                    <tr>
+                        <td>Product Group:</td>
+                        <td><b>{ProductGroup}</b></td>
+                        <td>Report Issue Date:</td>
+                        <td><b>{DateOfIssue}</b></td>
+                    </tr>
+                </table><br />
+                <table style="width:100%;border:none; border-collapse:collapse" cellspacing="0" cellpadding="0" border="0">
+                    <tr>
+                        <td style="width:25%"> Customer Name: </td>
+                        <td style="width:75%"><b>{CustomerName}</b></td>
+                    </tr>
+                    <tr>
+                        <td> Customer Address: </td>
+                        <td>{Address}</td>
+                    </tr>
+                    <tr>
+                        <td>  Kind Attention:</td>
+                        <td> {ContactPerson}</td>
+                    </tr>
+                </table>
+                <br />
+
+
+                <center><b><u>Sample Details</u></b></center><br />
+                <table style="border-spacing:0px;width:100%; border:none !important;" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td>Name of the Sample	:</td>
+                        <td>{NameOfProduct}</td>
+                        <td>Sample Received Date	:</td>
+                        <td>{ReceivedDate}</td>
+                    </tr>
+                    <tr>
+                        <td> Sample Type	:	</td>
+                        <td>{SampleType}</td>
+                        <td>Sample Registration Date	:</td>
+                        <td>{SampleRegistrationDate}</td>
+                    </tr>
+                    <tr>
+                        <td>Unique Identification No	:</td>
+                        <td>{IdentificationNo}</td>
+                        <td>Sample Quantity Received	:</td>
+                        <td>{SampleQuantity}</td>
+                    </tr>
+                    <tr>
+                        <td>Mark on Sample	:</td>
+                        <td>	SS240222RR52A</td>
+                    </tr>
+                </table>
+                <br />
+                <center> <b><u>Analysis Details</u></b></center><br />
+                <span style="float:left">Starting Date: {StartDate}</span>
+                <span style="float:right">Completion Date: {CompletionDate}</span>
+                
+                            {TestResult}
+                       
+                <table style="border-spacing:0px;width:100%; border:none !important;" cellspacing="0" cellpadding="0">
+                   
+                    <tr><td>&nbsp;</td></tr>
+                    <tr>
+                        <td colspan="4">
+                            <b>Environmental Condition:</b> 68% humidity and 26.9°C temperature was maintained during the analysis
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4"><b>Remarks: </b>{Remarks}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="border-right: none !important">
+                            <br />
+
+                        </td>
+                        <td colspan="2" style="text-align:right;border-left: none !important">
+                            <table style="width:100%;">
+                                <tr>
+                                    <td style="width:70%;vertical-align:center;text-align:right;border-left: none !important;border: none !important ">
+                                        
+                                    </td>
+                                    <td style="text-align:right;border: none !important">
+
+                                        {Signature}
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4" style="text-align:center">
+                            ****** END OF THE TEST REPORT******
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4" style="text-align:center">
+                            <div style="display: inline-block; font-size:1vw">Report shall not be reproduced except in full without approval of the laboratory</div>
+                        </td>
+                    </tr>
+                </table>
+            </main>
+
+        </div>
+    </center>
+</body>
+</html>

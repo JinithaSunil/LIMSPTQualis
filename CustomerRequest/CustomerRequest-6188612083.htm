@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>&nbsp;</title>
+    <!--<link rel="stylesheet" href="http://CiscoLIMS.rnisolutions.in:8608/css/CRF_style.css" media="all" />-->
+    <link rel="stylesheet" href="css/CRF_style.css" media="all" />
+    <link rel="stylesheet" href="../css/CRF_style.css" media="all" />
+    <style>
+        .space {
+            border-collapse: separate;
+            border-spacing: 0 15px;
+        }
+
+        .page {
+            width: 21cm;
+            min-height: 29.7cm;
+            padding: 2cm;
+            margin: 1cm auto;
+            border: 1px #D3D3D3 solid;
+            border-radius: 5px;
+            background: white;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+    <style media="screen">
+        .noPrint1 {
+        }
+
+        .noScreen1 {
+            display: none;
+        }
+
+        .noPrint {
+        }
+
+        .noScreen {
+            display: none;
+        }
+
+        #header {
+            display: block;
+            position: relative;
+            left: 0px;
+            top: 0px;
+            right: 0px;
+            font-size: 10px;
+        }
+
+        #footer {
+            display: block;
+            position: relative;
+            left: 0px;
+            bottom: 0px;
+            right: 0px;
+            font-size: 10px;
+        }
+    </style>
+    <style>
+        .space {
+            border-collapse: separate;
+            border-spacing: 0 15px;
+        }
+
+        .tab1 {
+            border: 1px solid;
+            border-bottom: 1px solid;
+        }
+
+            .tab1 td {
+                border: 1px solid;
+                padding: 5px;
+            }
+
+        .blank {
+            border: none !important;
+            padding: 5px;
+        }
+    </style>
+    <style>
+        .space {
+            border-collapse: separate;
+            border-spacing: 0 15px;
+        }
+
+        .tab {
+            border-collapse: collapse;
+            border: none !important;
+            border-bottom: none;
+        }
+
+            .tab td {
+                border-collapse: collapse;
+                border: none !important;
+                padding: 5px;
+            }
+
+        .blank {
+            border: none !important;
+            padding: 5px;
+        }
+    </style>
+    <style type="text/css" media="print">
+        @page {
+            size: auto; /* auto is the initial value */
+            margin: 0; /* this affects the margin in the printer settings */
+        }
+        /*   table {
+            table-layout: fixed;
+        }*/
+    </style>
+</head>
+<body style="margin:2% !important; width:95%; overflow:scroll">
+    <center>
+        <div class='table-responsive'>
+            <table>
+                <thead>
+                    <tr>
+                        <td>
+                            <table>
+                                <tr>
+                                    <td>	<img src="assets/img/logo.png" height='80px' alt="PT Qualis" /></td>
+                                    <td><h2>TEST APPLICATION FORM</h2></td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="margin-top:250px">
+                            <table style='width: 100%; border: 1px solid; margin-top: 10px; ' class='tab1'>
+                                <tr>
+                                    <td class="tab1" style="width:20%"><b>Register No.</b></td>
+                                    <td style="width:2%">:</td>
+                                    <td class="tab1" colspan="5" style="text-align:center; vertical-align:middle">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="tab1"><b>Applicant/Customer Name</b> </td>
+                                    <td>:</td>
+                                    <td class="tab1" colspan="5">{CustomerName}</td>
+                                </tr>
+                                <tr>
+                                    <td class="tab1"><b>Address</b> </td>
+                                    <td>:</td>
+                                    <td class="tab1" colspan="5">{Address}</td>
+                                </tr>
+                                <tr>
+                                    <td class="tab1"><b>Contact Person</b> </td>
+                                    <td>:</td>
+                                    <td style="width:30%">{ContactPerson}</td>
+                                    <td class="tab1" style="width:5%"><b>Telp :</b></td>
+                                    <td style="width:10%">{Phone}</td>
+                                    <td class="tab1" style="width:5%"><b>Fax :</b></td>
+                                    <td style="width:10%">{Fax}</td>
+                                </tr>
+                                <tr>
+                                    <td class="tab1"><b>Email Address</b> </td>
+                                    <td>:</td>
+                                    <td class="tab1" colspan="5">{Email}</td>
+                                </tr>
+                                <tr>
+                                    <td class="tab1"><b>Buyer Name</b> </td>
+                                    <td>:</td>
+                                    <td style="width:30%">{BuyerName}</td>
+                                    <td class="tab1" style="width:10%"><b>Country :</b></td>
+                                    <td class="tab1" colspan="3" style="width:10%">{Country}</td>
+                                </tr>
+                                <tr>
+                                    <td class="tab1" rowspan="3"><b>Sample Description</b> </td>
+                                    <td rowspan="3">:</td>
+                                    <td class="tab1" colspan="5">{SampleDescription1}</td>
+                                </tr>
+                                <tr><td class="tab1" colspan="5">{SampleDescription2}</td></tr>
+                                <tr><td class="tab1" colspan="2">{SampleDescription3}</td><td><b>Sample Quantity :</b></td><td colspan="2">{SampleQty}</td></tr>
+                                <tr>
+                                    <td class="tab1"><b>Other Details</b> </td>
+                                    <td>:</td>
+                                    <td class="tab1" colspan="5"></td>
+                                </tr>
+                                <tr>
+                                    <td class="tab1">Product Type / End Use</td>
+                                    <td>:</td>
+                                    <td class="tab1" colspan="5">{ProductType}</td>
+                                </tr>
+                                <tr>
+                                    <td class="tab1">PO/Order No. </td>
+                                    <td>:</td>
+                                    <td colspan="2">{PO}</td>
+                                    <td>Country of Origin</td>
+                                    <td colspan="2" class="tab1">{CountryOfOrigin}</td>
+                                </tr>
+                                <tr>
+                                    <td class="tab1">Item/Style No.</td>
+                                    <td>:</td>
+                                    <td colspan="2">{ItemStyle}</td>
+                                    <td>Country of Destination</td>
+                                    <td colspan="2" class="tab1">{CountryOfDestination}</td>
+                                </tr>
+                                <tr>
+                                    <td class="tab1"><b>Service Required</b> </td>
+                                    <td>:</td>
+                                    <td class="tab1" colspan="5">
+                                        <input type="checkbox" id="Regular" name="Regular" value="Regular">
+                                        <label for="Regular"> Regular</label>
+                                        <input type="checkbox" id="Express" name="Express" value="Express">
+                                        <label for="Express"> Express</label>
+                                        <input type="checkbox" id="Urgent" name="Urgent" value="Urgent">
+                                        <label for="Urgent"> Urgent</label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="7">
+                                        <b>Test(s) Required</b><br /><br />
+                                        <table style="height:350px">
+                                            <tr>
+                                                <td style="height:30px; width:25%; text-align:center">Sample Name/Type</td>
+                                                <td style="width: 25%; text-align: center">Test Request</td>
+                                                <td style="width: 25%; text-align: center">Method</td>
+                                                <td style="width: 25%; text-align: center">Remarks</td>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    </tr>
+<tr>
+                                    <td colspan="7">
+                                        <table class="tab">
+                                            <tr>
+                                                <td>Sample Return:</td>
+                                                <td>
+                                                    <input type="checkbox" id="yes" name="yes" value="yes">
+                                                    <label for="yes"> Yes</label>
+                                                </td>
+                                                <td>
+                                                    <input type="checkbox" id="no" name="no" value="no">
+                                                    <label for="no"> No</label>
+                                                </td>
+                                                <td>Report Recipient:</td>
+                                                <td>
+                                                    <input type="checkbox" id="applicant" name="applicant" value="applicant">
+                                                    <label for="applicant"> Applicant</label>
+                                                </td>
+                                                <td>
+                                                    <input type="checkbox" id="Payer" name="Payer" value="Payer">
+                                                    <label for="Payer"> Payer</label>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Invoice Recipient:</td>
+                                                <td colspan="2">
+                                                    <input type="checkbox" id="applicant" name="applicant" value="applicant">
+                                                    <label for="applicant"> Applicant</label>
+                                                </td>
+                                                <td>
+                                                    <input type="checkbox" id="other" name="other" value="other">
+                                                    <label for="other"> If other, provide the information:</label>
+                                                </td>
+                                                <td colspan="2">
+                                                    <input type="text" id="contactperson" name="contactperson">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Payer's Name:</td>
+                                                <td colspan="2">
+                                                    <u style="padding-top:10px">PT KRISMA ABADI PERKASA</u>
+                                                </td>
+                                                <td>Contact Person:</td>
+                                                <td colspan="2">
+                                                    <u style="padding-top:10px">PAUL GAN</u>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>E-mail Address:</td>
+                                                <td colspan="2">
+                                                    <u style="padding-top:10px">krismafood@gmail.com</u>
+                                                </td>
+                                                <td>Contact No:</td>
+                                                <td colspan="2">
+                                                    <u style="padding-top:10px">081288825555</u>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Billing Address:</td>
+                                                <td colspan="5">
+                                                    <u style="padding-top:10px">JL. Raya Salembaran	Pergudangan Royal Kosambi	Blok DD 3 & 4, Cengklong Kosambi Kab. Tangerang Banten</u>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="6" style="text-align:center;">
+                                                    <b>THE ABOVE REQUESTED TESTS ARE SUBJECT TO THE TERMS & CONDITIONS SET FORTH BY THE RESPECTIVE PT. QUALIS INDONESIA LABS.</b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="3" style="text-align:center;">Authorized Signature / Company Stamp / Date:<br /><br /><br /><br /><br /></td>
+                                                <td colspan="3" style="text-align:center;">Checked & Received by PT. QUALIS INDONESIA / Date & Time<br /><br /><br /><br /><br /></td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td>
+                            <table style='width:100%; font-family:Times New Roman; font-size:11px' class='tab1'>
+                                <tr>
+                                    <td colspan="6">
+                                        PT Qualis Indonesia	Jl. Raya Pajajaran No.17, RT.001/RW.003, Kec. Jatiuwung, Kota Tangerang,INDONESIA Tel:+62 (21) 55652583 Fax:+62 (21) 55652489<br /><hr />Doc No: TSQ-LAB-QAF-100
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </center>
+</body>
+</html>

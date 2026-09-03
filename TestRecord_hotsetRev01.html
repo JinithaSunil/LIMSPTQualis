@@ -1,0 +1,155 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>TEST RECORD</title>
+    <!--<link rel="stylesheet" href="http://CiscoLIMS.rnisolutions.in:8608/css/CRF_style.css" media="all" />-->
+    <link rel="stylesheet" href="css/CRF_style.css" media="all" />
+    <link rel="stylesheet" href="../css/CRF_style.css" media="all" />
+    <style>
+        .space {
+            border-collapse: separate;
+            border-spacing: 0 15px;
+        }
+
+        .page {
+            width: 21cm;
+            min-height: 29.7cm;
+            padding: 2cm;
+            margin: 1cm auto;
+            border: 1px #D3D3D3 solid;
+            border-radius: 5px;
+            background: white;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+    <style media="screen">
+        .noPrint1 {
+        }
+
+        .noScreen1 {
+            display: none;
+        }
+
+        .noPrint {
+        }
+
+        .noScreen {
+            display: none;
+        }
+
+        #header {
+            display: block;
+            position: relative;
+            left: 0px;
+            top: 0px;
+            right: 0px;
+            font-size: 10px;
+        }
+
+        #footer {
+            display: block;
+            position: relative;
+            left: 0px;
+            bottom: 0px;
+            right: 0px;
+            font-size: 10px;
+        }
+    </style>
+    <style>
+        .space {
+            border-collapse: separate;
+            border-spacing: 0 15px;
+        }
+
+        .tab1 {
+            border: 1px solid;
+            border-bottom: 1px solid;
+        }
+
+            .tab1 td {
+                border: 1px solid;
+                padding: 5px;
+                text-align: center;
+            }
+
+        .blank {
+            border: none !important;
+            padding: 5px;
+        }
+    </style>
+    <style type="text/css" media="print">
+        @page {
+            size: auto; /* auto is the initial value */
+            margin: 0; /* this affects the margin in the printer settings */
+        }
+    </style>
+</head>
+<body>
+    <center>
+        <div class='table-responsive'>
+            <table>
+                <thead>
+                    <tr>
+                        <td>
+                            <table style="width: 100%; border: 1px solid; border-collapse: collapse; margin-top: 10px;" class="tab1">
+                                <tr>
+                                    <!-- Left section: Document info -->
+                                    <td class="tab1" style="width: 25%; font-size: 15px; padding: 5px;">
+                                        <div style="display: flex; justify-content: space-between;">
+                                            <span><b>Revision</b><br />01</span>
+                                            <span><b>Effective as of</b><br />01/10/2013</span>
+                                        </div>
+                                        <div style="display: flex; justify-content: space-between; margin-top: 10px;">
+                                            <span><b>Doc. No.</b><br />TSQ-LAB-ERD-006</span>
+                                            <span><b>Page</b><br />1 of 1</span>
+                                        </div>
+                                    </td>
+
+                                    <!-- Center section: Test record title -->
+                                    <td class="tab1" style="text-align: center; background-color: #bebebe; font-size: 14px; font-weight: bold; padding: 10px;">
+                                        TEST RECORD
+                                        <br /><br />
+                                              <span style="font-size: 16px;">
+                                                  HOT SET TEST
+
+                                              </span>
+                                    </td>
+
+                                    <!-- Right section: Logo -->
+                                    <td class="tab1" style="width: 10%;" rowspan="1">
+                                        <img src="assets/img/logo.png" alt="PT Qualis" height="80" />
+                                    </td>
+                                </tr>
+                            </table>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            {Header}
+                        </td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="margin-top:250px">
+                            {TestDetails}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>{Dates}</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td>
+                            {Footer}
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </center>
+</body>
+</html>

@@ -1,0 +1,215 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>&nbsp;</title>
+    <!--<link rel="stylesheet" href="http://CiscoLIMS.rnisolutions.in:8608/css/CRF_style.css" media="all" />-->
+    <link rel="stylesheet" href="css/CRF_style.css" media="all" />
+    <link rel="stylesheet" href="../css/CRF_style.css" media="all" />
+    <style>
+        .space {
+            border-collapse: separate;
+            border-spacing: 0 15px;
+        }
+
+        .page {
+            width: 21cm;
+            min-height: 29.7cm;
+            padding: 2cm;
+            margin: 1cm auto;
+            border: 1px #D3D3D3 solid;
+            border-radius: 5px;
+            background: white;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+    <style media="screen">
+        .noPrint1 {
+        }
+
+        .noScreen1 {
+            display: none;
+        }
+
+        .noPrint {
+        }
+
+        .noScreen {
+            display: none;
+        }
+
+        #header {
+            display: block;
+            position: relative;
+            left: 0px;
+            top: 0px;
+            right: 0px;
+            font-size: 10px;
+        }
+
+        #footer {
+            display: block;
+            position: relative;
+            left: 0px;
+            bottom: 0px;
+            right: 0px;
+            font-size: 10px;
+        }
+    </style>
+    <style>
+        .space {
+            border-collapse: separate;
+            border-spacing: 0 15px;
+        }
+
+        .tab1 {
+            border: 1px solid;
+            border-bottom: 1px solid;
+        }
+
+            .tab1 td {
+                border: 1px solid;
+                padding: 5px;
+            }
+
+        .blank {
+            border: none !important;
+            padding: 5px;
+        }
+    </style>
+    <style type="text/css" media="print">
+        @page {
+            size: auto; /* auto is the initial value */
+            margin: 0; /* this affects the margin in the printer settings */
+        }
+        /*   table {
+            table-layout: fixed;
+        }*/
+    </style>
+</head>
+<body style="margin:2% !important; width:95%; overflow:scroll">
+    <center>
+        <div class='table-responsive'>
+            <table>
+                <tr>
+                    <td>
+                        <table style='width: 100%; border: 1px solid; margin-top: 10px; ' class='tab1'>
+                            <tr>
+                                <td class="tab1"><b>No. Dokumen:</b>{DocumentNo}</td>
+                                <td class="tab1" rowspan="4" style="text-align:center; vertical-align:middle">
+                                    FORM<br />
+                                    Pengembalian Sampel
+                                </td>
+                                <td class="tab1" rowspan="4" style="text-align:center; vertical-align:middle"><img src="assets/img/logo.png" height='80' alt="PT Qualis" /></td>
+                            </tr>
+                            <tr>
+                                <td class="tab1"><b>Revision No:</b> {Revision}</td>
+                            </tr>
+                            <tr>
+                                <td class="tab1"><b>Tanggal Efektif:</b> {IssueDate}</td>
+                            </tr>
+                            <tr><td class="tab1"><b>Halaman: </b>{Page}</td></tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+            <table>
+                <tr>
+                    <td style="margin-top:250px;">
+                        <table>
+                            <tr>
+                                <td>Tanggal Diterima</td>
+                                <td>:</td>
+                                <td> {DateReceived}</td>
+                                <td>
+                                    Prioritas
+                                </td>
+                                <td>:</td>
+                                <td>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Tanggal Dikembalikan
+                                </td>
+                                <td>:</td>
+                                <td>
+                                    {ReturnDate}
+                                </td>
+                                <td>
+                                    Lab Kalibrasi
+                                </td>
+                                <td>:</td>
+                                <td>
+                                    {Lab}
+                                </td>
+                            </tr>
+                            <tr><td>&nbsp;</td></tr>
+                            <tr>
+                                <td>
+                                    No. WO
+                                </td>
+                                <td>:</td>
+                                <td>
+                                    {WONumber}<br />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Kode Sampel</td>
+                                <td>:</td>
+                                <td>
+                                    {SampleIDSeries}                                           .
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Pelanggan</td>
+                                <td>:</td>
+                                <td>
+                                    {CustomerName}
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr><td><b>Identitas Sampel</b></td></tr>
+                <tr>
+                    <td>
+                        {Details}
+                    </td>
+                </tr>
+                <tr><td style="float:right">Tangerang,__________________<br /></td></tr>
+                <tr>
+                    <td>
+                        <table style="width:100%">
+                            <tr>
+                                <td style="width:34%; height:20px; border:1px solid black; text-align:center">Dibuat oleh</td>
+                                <td style="width: 33%; height: 20px; border: 1px solid black; text-align: center">Diperiksa oleh</td>
+                                <td style="width: 33%; height: 20px; border: 1px solid black; text-align: center">Disetujui oleh</td>
+                            </tr>
+                            <tr>
+                                <td style="width: 34%; height: 100px; border: 1px solid black;">Nama:{PreparedBy}<br />Tanggal :{PreparedDate}</td>
+                                <td style="width: 33%; height: 100px; border: 1px solid black">Nama:{CheckedBy}<br />Tanggal :{CheckedDate}</td>
+                                <td style="width: 33%; height: 100px; border: 1px solid black">Nama:{ApprovedBy}<br />Tanggal :{ApprovedDate}</td>
+                            </tr>
+                        </table>                       
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <table>
+                            <tr>
+                                <td style="width:34%; height:20px; border:1px solid black; text-align:center">Diberikan oleh</td>
+                                <td style="width: 33%; height: 20px; border: 1px solid black; text-align: center">Diterima oleh</td>
+                            </tr>
+                            <tr>
+                                <td style="width: 50%; height: 100px; border: 1px solid black;">Nama:{SentBy}<br />Tanggal :{SentDate}</td>
+                                <td style="width: 50%; height: 100px; border: 1px solid black">Nama:{AcceptedBy}<br />Tanggal :{AcceptedDate}</td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </center>
+</body>
+</html>

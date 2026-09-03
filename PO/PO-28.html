@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Purchase Order</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0 auto;
+            padding: 15px;
+            font-size: 12px;
+            width: 21cm; /* A4 paper width */
+            max-width: 100%;
+        }
+
+        .page-container {
+            width: 100%;
+            margin: 0 auto;
+            box-sizing: border-box;
+        }
+
+        .header {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .company-logo img {
+            height: 60px;
+            width: auto;
+        }
+
+        .company-name {
+            font-weight: bold;
+            font-size: 24px;
+            line-height: 1.2;
+        }
+
+        .company-address {
+            font-size: 12px;
+            line-height: 1.4;
+        }
+
+        .po-title {
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+            margin: 15px 0;
+            text-decoration: underline;
+        }
+
+        .po-info {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+            margin-bottom: 10px;
+        }
+
+            .po-info td {
+                padding: 4px 8px;
+                vertical-align: top;
+                border: none;
+            }
+
+            .po-info tr:not(:last-child) td {
+                padding-bottom: 6px;
+            }
+
+        .contact-info {
+            margin: 10px 0;
+            font-size: 12px;
+        }
+
+        .greeting {
+            margin: 10px 0;
+            font-size: 12px;
+            line-height: 1.4;
+            padding: 5px;
+        }
+
+        .terms-section {
+            margin-top: 15px;
+            font-size: 12px;
+        }
+
+        .terms-table {
+            width: 70%;
+            font-size: 12px;
+            margin-bottom: 10px;
+        }
+
+            .terms-table td {
+                padding: 4px;
+                vertical-align: top;
+            }
+
+        .signature-section {
+            margin-top: 20px;
+            font-size: 12px;
+        }
+
+        .signature-table {
+            width: 100%;
+            font-size: 12px;
+        }
+
+            .signature-table td {
+                padding: 8px;
+                vertical-align: top;
+            }
+
+        .signature-line {
+            height: 1px;
+            border-top: 1px solid #000;
+            margin-top: 40px;
+            width: 200px;
+        }
+
+        .items-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 10px 0;
+            font-size: 12px;
+        }
+
+            .items-table th {
+                background-color: #f2f2f2;
+                border: 1px solid #ddd;
+                padding: 6px;
+                text-align: left;
+            }
+
+            .items-table td {
+                border: 1px solid #ddd;
+                padding: 6px;
+            }
+
+        .text-right {
+            text-align: right;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .note {
+            margin-top: 10px;
+            font-size: 11px;
+            font-style: italic;
+        }
+
+        @media print {
+            body {
+                font-size: 11px;
+                padding: 0;
+                margin: 0;
+            }
+
+            .page-container {
+                padding: 1cm;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page-container">
+        <div class="header">
+            <div class="header-content">
+                <div>
+                    <div class="company-name">
+                        PT QUALIS INDONESIA
+                    </div>
+                    <div class="company-address">
+                        JL. Pajajaran No. 17, Desa Gandasari,<br />
+                        Kecamatan Jatiuwung, Tangerang 15137
+                    </div>
+                </div>
+                <div class="company-logo">
+                    <img src=".\assets\img\logo.png" alt="Company Logo">
+                </div>
+            </div>
+        </div>
+
+        <div class="po-title">
+            PURCHASE ORDER
+        </div>
+
+        <table class="po-info">
+            <tr>
+                <td style="width:20% !important">Kepada Yth / To</td>
+                <td style="width:40% !important"><strong>:Piyush sharma</strong></td>
+                <td style="width:15% !important">No.</td>
+                <td style="width:20% !important"><strong>:PO/00021/25-26</strong></td>
+            </tr>
+            <tr>
+                <td>Alamat / Address</td>
+                <td colspan="3">
+                    :mumbai<br>
+                    bandra <br>
+                    bombay - Maharashtra
+                </td>
+            </tr>
+            <tr>
+                <td>Telp</td>
+                <td>:+91 9863257894</td>
+                <td>Tgl. / Date</td>
+                <td>:21/Aug/2025</td>
+            </tr>
+            <tr>
+                <td>Fax</td>
+                <td>:{Fax}</td>
+                <td>No. PR/PP No.</td>
+                <td>:</td>
+            </tr>
+            <tr>
+                <td>Email</td>
+                <td>:rnisolutions2017@gmail.com</td>
+                <td>Quot. No.</td>
+                <td>:QT_7979</td>
+            </tr>
+            <tr>
+                <td>U.P / Attention</td>
+                <td colspan="3">:piyush patel</td>
+            </tr>
+        </table>
+
+        <div class="greeting">
+            <strong>Dear Sir,</strong><br>
+            Bersama ini kami bermaksud untuk membeli dari saudara, barang - barang dengan rincian sebagai berikut:<br>
+            <em>We confirm having from you the following goods, subject th the term's and conditions stated here in :</em>
+        </div>
+
+        <table style='border: 1px solid black;border-collapse:collapse;' cellpadding='1' cellspacing='1' width='100%' style='font-size: 12px;font-family:Arial;'><thead style='font-family: Arial, Helvetica, sans-serif; font-weight: 400; color: black'><tr><td style='text-align:center;border: 1px solid black;border-collapse:collapse;'><b>Sl#</b></td><td style='text-align:center;border: 1px solid black;border-collapse:collapse;'><b>Item Description</b></td><td style='text-align:center;border: 1px solid black;border-collapse:collapse;'><b>Delivery Date</b></td><td style='text-align:center;border: 1px solid black;border-collapse:collapse;'><b>Quantity</b></td><td style='text-align:center;border: 1px solid black;border-collapse:collapse;'><b>Unit</b></td><td style='text-align:center;border: 1px solid black;border-collapse:collapse;'><b>Rate On</b></td><td style='text-align:center;border: 1px solid black;border-collapse:collapse;'><b>Amount</b></td><td style='text-align:center;border: 1px solid black;border-collapse:collapse;'><b>Dis. %</b></td><td style='text-align:center;border: 1px solid black;border-collapse:collapse;'><b>Dis. (Amt.)</b></td><td style='text-align:center;border: 1px solid black;border-collapse:collapse;'><b>Tax %</b></td><td style='text-align:center;border: 1px solid black;border-collapse:collapse;'><b>Amount</b></td></tr></thead><tr><td style='width:2%; text-align:center;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>1</td><td style='width:30%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;padding:5px'>pen  89632<br/></td><td style='width:10%; text-align:center;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>30/Aug/2025</td><td style='width:5%; text-align:center;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>10.00</td><td style='width:10%; text-align:center;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>Nos.</td><td style='width:10%; text-align:center;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>90.000</td><td style='width:10%; text-align:center;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>900.000</td><td style='width:5%; text-align:center;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>0.00</td><td style='width:10%; text-align:center;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>117.00</td><td style='width:5%; text-align:center;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>11</td><td style='width:10%; text-align:center;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>783.000</td></tr><tr><td style='border-right:1px solid black;'>&nbsp;</td><td style='border-right:1px solid black;'>&nbsp;</td><td style='border-right:1px solid black;'>&nbsp;</td><td style='border-right:1px solid black;'>&nbsp;</td><td style='border-right:1px solid black;'>&nbsp;</td><td style='border-right:1px solid black;'>&nbsp;</td><td style='border-right:1px solid black;'>&nbsp;</td><td style='border-right:1px solid black;'>&nbsp;</td><td style='border-right:1px solid black;'>&nbsp;</td><td style='border-right:1px solid black;'>&nbsp;</td></tr><tr><td style='width:2%; text-align:center;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>2</td><td style='width:30%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;padding:5px'>pencil  89632<br/></td><td style='width:10%; text-align:center;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>28/Aug/2025</td><td style='width:5%; text-align:center;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>10.00</td><td style='width:10%; text-align:center;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>Nos.</td><td style='width:10%; text-align:center;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>70.000</td><td style='width:10%; text-align:center;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>700.000</td><td style='width:5%; text-align:center;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>0.00</td><td style='width:10%; text-align:center;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>77.00</td><td style='width:5%; text-align:center;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>11</td><td style='width:10%; text-align:center;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>623.000</td></tr><tr><td style='border-right:1px solid black;'>&nbsp;</td><td style='border-right:1px solid black;'>&nbsp;</td><td style='border-right:1px solid black;'>&nbsp;</td><td style='border-right:1px solid black;'>&nbsp;</td><td style='border-right:1px solid black;'>&nbsp;</td><td style='border-right:1px solid black;'>&nbsp;</td><td style='border-right:1px solid black;'>&nbsp;</td><td style='border-right:1px solid black;'>&nbsp;</td><td style='border-right:1px solid black;'>&nbsp;</td><td style='border-right:1px solid black;'>&nbsp;</td></tr><tr><td style='width:2%; text-align:center;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>3</td><td style='width:30%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;padding:5px'>SOCKET  89632<br/></td><td style='width:10%; text-align:center;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>29/Aug/2025</td><td style='width:5%; text-align:center;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>10.00</td><td style='width:10%; text-align:center;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>Nos.</td><td style='width:10%; text-align:center;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>80.000</td><td style='width:10%; text-align:center;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>800.000</td><td style='width:5%; text-align:center;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>0.00</td><td style='width:10%; text-align:center;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>96.00</td><td style='width:5%; text-align:center;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>11</td><td style='width:10%; text-align:center;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>704.000</td></tr><tr><td style='border-right:1px solid black;'>&nbsp;</td><td style='border-right:1px solid black;'>&nbsp;</td><td style='border-right:1px solid black;'>&nbsp;</td><td style='border-right:1px solid black;'>&nbsp;</td><td style='border-right:1px solid black;'>&nbsp;</td><td style='border-right:1px solid black;'>&nbsp;</td><td style='border-right:1px solid black;'>&nbsp;</td><td style='border-right:1px solid black;'>&nbsp;</td><td style='border-right:1px solid black;'>&nbsp;</td><td style='border-right:1px solid black;'>&nbsp;</td></tr><tr><td style='width:2%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:30%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:5%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:5%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:5%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td></tr><tr><td style='width:2%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:30%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:5%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:5%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:5%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td></tr><tr><td style='width:2%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:30%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:5%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:5%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:5%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td></tr><tr><td style='width:2%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:30%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:5%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:5%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:5%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td></tr><tr><td style='width:2%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:30%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:5%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:5%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:5%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td></tr><tr><td style='width:2%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:30%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:5%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:5%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:5%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td></tr><tr><td style='width:2%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:30%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:5%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:5%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:5%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td></tr><tr><td style='width:2%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:30%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:5%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:5%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:5%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td></tr><tr><td style='width:2%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:30%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:5%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:5%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:5%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td></tr><tr><td style='width:2%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:30%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:5%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:5%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:5%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td></tr><tr><td style='width:2%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:30%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:5%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:5%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:5%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td></tr><tr><td style='width:2%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:30%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:5%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:5%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:5%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td></tr><tr><td style='width:2%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:30%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:5%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:5%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:5%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td></tr><tr><td style='width:2%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:30%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:5%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:5%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:5%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td></tr><tr><td style='width:2%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:30%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:5%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:5%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:5%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td></tr><tr><td style='width:2%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:30%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:5%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:5%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:5%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td></tr><tr><td style='width:2%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:30%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:5%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:5%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:5%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td></tr><tr><td style='width:2%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:30%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:5%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:5%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:5%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td></tr><tr><td style='width:2%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:30%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:5%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:5%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:5%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td></tr><tr><td style='width:2%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:30%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:5%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:5%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:5%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td></tr><tr><td style='width:2%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:30%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:5%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:5%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:5%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td></tr><tr><td style='width:2%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:30%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:5%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:5%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:5%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td><td style='width:10%; text-align:left;border-right:1px solid black;border-collapse:collapse;border-bottom: none;'>&nbsp;</td></tr><tr><td colspan='7' style='text-align:left'><b>Amount in Words : TWO THOUSAND ONE HUNDRED AND TEN</b></td><td colspan='3' style='text-align:right'><b>Grand Total :</b></td><td style='width:10%; text-align:center'>2110.000</td></tr></table>
+
+        <div class="terms-section">
+            <table class="terms-table">
+                <tr>
+                    <td style="width:22% !important">Pembayaran / Payment</td>
+                    <td style="width:50% !important">:cash on delivery</td>
+                </tr>
+                <tr>
+                    <td style="width:22% !important">Penyerahan / Delivery</td>
+                    <td style="width:50% !important">:</td>
+                </tr>
+                <tr>
+                    <td style="width:22% !important">Keterangan / Remarks</td>
+                    <td style="width:50% !important"><strong>:NA3</strong></td>
+                </tr>
+            </table>
+            <table class="terms-table">
+                <tr>
+                    <td style="font-size: 12px; padding-top: 10px;">
+                        Sertifikat pemeriksaan barang harus diserahkan pada saat penyerahan barang kepada kami / <em>The test certificate must be submitted upon delivery of the goods to our address</em>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="font-size: 12px;">
+                        Copy dari surat pesanan ini agar dikembalikan pada kami setelah distempel dan ditanda-tangani / <em>Please return copy of this purchase order duly stamped and signed</em>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="signature-section">
+            <table class="signature-table">
+                <tr>
+                    <td style="width: 50%;">
+                        <div style=" padding-left: 40px;">Diterima Oleh /<em> Accepted by,</em></div>
+                        <div style=" padding-left: 71px;">{Signatureseller}</div>
+                        <div style="height: 25px; margin-top: 20px; padding-left: 60px;">________________</div>
+                        <div style="padding-left:75px;">Penjual /<em> Seller</em></div>
+                    </td>
+                    <td style="width: 50%; text-align: right;">
+                        <div style=" padding-right: 40px;">Hormat kami / <em>Yours</em></div>
+                        <div style=" padding-right: 51px;">{Signaturebuyer}</div>
+                        <div style="height: 25px; margin-top: 20px; padding-right: 40px;">________________</div>
+                        <div style="padding-right:53px;">Pembeli / <em>Buyer</em></div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div style="margin-top: 12px; font-size: 12px; padding-left:5px">
+            Note: Setiap penagihan harap mencantumkan copy Surat Pesanan PT. Qualis Indonesia<br />
+            <em>Note: For each billing, please include a copy of the PT. Qualis Indonesia Purchase Order Letter.</em>
+        </div>
+    </div>
+</body>
+</html>

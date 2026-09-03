@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>&nbsp;</title>
+    <link rel="stylesheet" href="css/CRF_style.css" media="all" />
+    <link rel="stylesheet" href="../css/CRF_style.css" media="all" />
+    <style>
+        .a4-page {
+            background: white; /* The page color */
+            width: 21cm; /* A4 width */
+            display: block;
+            margin: 0 auto; /* Center the page horizontally */
+            margin-bottom: 0.5cm; /* Space between multiple pages in a long scroll */
+            box-shadow: 0 0 0.5cm rgba(0, 0, 0, 0.5); /* Adds a subtle shadow for depth */
+            box-sizing: border-box; /* Ensures padding/border are included in the specified width/height */
+            padding: 1cm 1.5cm; /* Example internal margins/padding for content */
+        }
+
+        @media print {
+            .a4-page {
+                background: white; /* The page color */
+                width: 21cm; /* A4 width */
+                display: block;
+                margin: 0 auto; /* Center the page horizontally */
+                margin-bottom: 0.5cm; /* Space between multiple pages in a long scroll */
+                box-shadow: none !important; /* Adds a subtle shadow for depth */
+                box-sizing: border-box; /* Ensures padding/border are included in the specified width/height */
+                padding: 1cm 1.5cm; /* Example internal margins/padding for content */
+            }
+
+            .no-print {
+                display: none;
+            }
+        }
+    </style>
+    <style>
+        .space {
+            border-collapse: separate;
+            border-spacing: 0 15px;
+        }
+
+        .page {
+            width: 21cm;
+            min-height: 29.7cm;
+            padding: 2cm;
+            margin: 1cm auto;
+            border: 1px #D3D3D3 solid;
+            border-radius: 5px;
+            background: white;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+    <style media="screen">
+        .noPrint1 {
+        }
+
+        .noScreen1 {
+            display: none;
+        }
+
+        .noPrint {
+        }
+
+        .noScreen {
+            display: none;
+        }
+
+        #header {
+            display: block;
+            position: relative;
+            left: 0px;
+            top: 0px;
+            right: 0px;
+            font-size: 10px;
+        }
+
+        #footer {
+            display: block;
+            position: relative;
+            left: 0px;
+            bottom: 0px;
+            right: 0px;
+            font-size: 10px;
+        }
+    </style>
+    <style>
+        .space {
+            border-collapse: separate;
+            border-spacing: 0 15px;
+        }
+
+        .tab1 {
+            border: 1px solid;
+            border-bottom: 1px solid;
+        }
+
+            .tab1 td {
+                border: 1px solid;
+                padding: 5px;
+            }
+
+        .blank {
+            border: none !important;
+            padding: 5px;
+        }
+    </style>
+    <style>
+        .space {
+            border-collapse: separate;
+            border-spacing: 0 15px;
+        }
+
+        .tab {
+            border-collapse: collapse;
+            border: none !important;
+            border-bottom: none;
+        }
+
+            .tab td {
+                border-collapse: collapse;
+                border: none !important;
+                padding: 5px;
+            }
+
+        .blank {
+            border: none !important;
+            padding: 5px;
+        }
+    </style>
+    <style type="text/css" media="print">
+        @page {
+            size: auto; /* auto is the initial value */
+            margin: 0; /* this affects the margin in the printer settings */
+        }
+        /*   table {
+            table-layout: fixed;
+        }*/
+    </style>
+</head>
+<body style="margin:2% !important; width:95%; overflow:scroll">
+    <div class="no-print">
+        <button onclick="window.print()">Print</button>
+    </div>
+    <center>
+        <div class='a4-page'>
+        <div class='table-responsive'>
+                    <table style="margin-right:5px">
+                <thead>
+                    <tr>
+                        <td>
+                            <table style="margin-top:10px;">
+                                <tr>
+                                    <td><img src="assets/img/logo.png" height='80' alt="PT Qualis" /></td>
+                                    <td>
+                                        <span style="font-size:16px;">LABORATORIUM KALIBRASI</span><br />
+                                        <span style="font-size:14px;"><b>PT. QUALIS INDONESIA</b></span><br />
+                                        <span>
+                                            Jl. Pajajaran No. 17 Ds. Gandasari Kec. Jatiuwung Kota Tangerang 15137<br />
+                                            Telepon: (021) 5565 2583/86   Fax: 021 5565 2486<br />
+                                            Email : calibration@qualis-indonesia.com
+                                        </span>
+                                    </td>
+                                    <td><img src="assets/img/Cert-KAN-LK-IDN.png" height='80px' alt="PT Qualis" /></td>
+                                </tr>
+                                <tr><td colspan="3"><hr /></td></tr>
+                            </table>
+                        </td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="margin-top:250px; margin-right:20px !important">
+                            <table style='width: 100%; border: 1px solid; margin-top: 10px; ' class='tab'>
+                                <tr>
+                                    <td colspan="2">Tangerang, {Date}</td>
+                                    <td colspan="2">&nbsp;</td>
+                                    <td colspan="2" style="text-align:right; border: 1px solid black !important">No. Quotation {QuotationNo}</td>
+                                </tr>
+                                <tr>
+                                    <td><b>Kepada</b> </td>
+                                    <td style="width:1%">:</td>
+                                    <td style="text-align:left">{To}</td>
+                                    <td><b>Dari</b> </td>
+                                    <td style="width:1%">:</td>
+                                    <td>{From}</td>
+                                </tr>
+                                <tr>
+                                    <td><b>Perusahaan</b> </td>
+                                    <td>:</td>
+                                    <td>{CompanyName}</td>
+                                    <td><b>Perihal</b> </td>
+                                    <td>:</td>
+                                    <td style="width:30%"></td>
+                                </tr>
+                                <tr>
+                                    <td><b>Telp</b> </td>
+                                    <td>:</td>
+                                    <td>{ToTelephone}</td>
+                                    <td><b>Halaman</b> </td>
+                                    <td>:</td>
+                                    <td style="width:30%"></td>
+                                </tr>
+
+                                <tr>
+                                    <td>&nbsp;</td>
+                                </tr>
+                               
+                                <tr>
+                                    <td colspan="6">
+                                        <br />
+                                        Dengan hormat,<br /><br />
+
+                                        Terimakasih atas kepercayaan Perusahaan Bapak/Ibu yang telah memilih Laboratorium PT. Qualis Indonesia sebagai mitra bisnis.<br /><br />
+
+                                        Menindak lanjuti permintaan Bapak/Ibu, berikut ini kami sampaikan penawaran harga kalibrasi alat-alat sebagai berikut:<br />
+
+                                        <br />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="6">
+                                        {QuotationDetails}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="6">Demikian hal ini kami sampaikan, atas perhatian dan kerjasamanya kami ucapkan terimakasih.<br /><br /></td>
+                                </tr>
+
+                                <tr>
+                                    <td colspan="6">
+                                        Keterangan:<br />
+                                        Note:<br /><br />
+
+                                        1.	Pembayaran dilakukan setelah invoice diterbitkan dan sertifikat diberikan dengan menunjukkan bukti pembayaran.<br /><br />
+                                        
+                                        2. Jika kalibrasi dilaksanakan ditempat (in-situ), akan dikenakan biaya mobilisasi peralatan.<br /><br />
+                                        
+                                        3. Pelaksanaan kalibrasi memerlukan waktu {CalibrationDays} dan sertifikat akan diberikan setelah maksimal {CertificateDays} hari kerja terhitung sejak alat diterima/dikalibrasi oleh PT. Qualis Indonesia.<br /><br />
+
+                                        4. Pembayaran dilakukan maksimal {PaymentTerms} hari kerja setelah invoice diterbitkan atau sesuai kesepakatan bersama.<br /><br />
+
+                                        5. Pembayaran transfer dapat dilakukan melalui Bank Mandiri dengan {AccountDetails}<br />
+
+                                        6. Jadwal kalibrasi akan ditentukan maksimal {PostPODays} hari kerja setelah menunjukkan bukti PO (Purchasing Order).<br /><br />
+
+                                        7.   Penawaran ini berlaku selama {QuotationValidity} (tiga puluh) hari sejak tanggal penawaran ini dikirimkan.<br /><br />
+
+
+                                        Demikian yang dapat kami sampaikan.<br /><br />
+
+                                        Atas perhatian dan kerjasamanya, kami ucapkan terimakasih.<br /><br /><br />
+
+
+
+
+                                        Disetujui oleh*,<br /><br /><br />
+
+
+
+
+
+                                        (Tanda Tangan dan Cap Perusahaan)	                                      Hormat kami,<br />
+
+                                        PT. Qualis Indonesia<br />
+
+
+
+
+
+                                        (nama)<br />
+
+
+                                        *Apabila costumer menyetujui quotation silahkan bubuhkan tandatangan pada kolom disetujui beserta cap perusahaan<br />
+
+
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </center>
+</body>
+</html>

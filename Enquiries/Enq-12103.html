@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Enquiry Report</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/css/style2.css" rel="stylesheet" type="text/css" />
+    <style>
+        .enquiry-header {
+            background-color: #B94D8F;
+            color: white;
+            padding: 10px 15px;
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+
+        .enquiry-info {
+            padding: 10px 0;
+        }
+
+        .admin-text {
+            font-size: 18px;
+            color: #007bff;
+            text-align: right;
+            padding-top: 10px;
+        }
+
+        .company-info {
+            text-align: right;
+        }
+        .company-logo {
+            text-align: right;
+            
+        }
+
+        .enquiry-details {
+            margin-top: 20px;
+        }
+
+        .enquiry-content {
+            border-top: 1px solid #ddd;
+            padding-top: 15px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <!-- Header Section -->
+            <div class="col-2">
+                <div class="enquiry-header">Enquiry</div>
+            </div>
+            
+                <div class="col-5">
+                    <div class="enquiry-info">
+                        <span>
+                            Enquiry ID: 12103<br>
+                            Enquiry Date: 10/14/2025 4:27:50 PM
+                        </span>
+                    </div>
+                </div>
+                <div class="col-5">
+                    <div class="company-logo">
+                         <img src="assets/img/logo.png" class="img-responsive" alt="Qualis Logo" height="100">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-3">
+            <!-- Category and Vendor Section - Left Aligned -->
+            <div class="col-6">
+                <div>
+                    Category: Chemical<br>
+                    Vendor: local
+                </div>
+            </div>
+
+            <!-- Company Info - Right Aligned -->
+            <div class="col-6 company-info">
+                <div>
+                    <strong>COMPANY NAME:PTQualis</strong><br>
+                    
+                    Banten,Indonesia<br>
+                    Phone: +91-123456789<br>
+                    E-mail: rnisolutions2017@gmail.com
+                </div>
+            </div>
+        </div>
+
+        <!-- Enquiry Details Section -->
+        <div class="row enquiry-details">
+            <div class="col-12">
+                <h4>Enquiry Details</h4>
+                <div class="enquiry-content">
+                    
+        <style>
+            .enquiry-header { display: flex; justify-content: space-between; margin-bottom: 20px; }
+            .header-left { flex: 1; }
+            .header-right { flex: 0 0 200px; }
+            .enquiry-details { margin-bottom: 20px; }
+            .enquiry-table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+            .enquiry-table th, .enquiry-table td { 
+                border: 1px solid #ddd; 
+                padding: 8px; 
+                text-align: center; 
+            }
+            .enquiry-table th { 
+                background-color: #B94D8F; 
+                color: white; 
+                text-align: center;
+            }
+            .enquiry-table tr:nth-child(even) { background-color: #f2f2f2;  text-align: center;}
+            .ok-button {
+                margin-top: 20px;
+                text-align: center;
+            }
+            .ok-button button {
+                padding: 10px 40px;
+                background-color: #B94D8F;
+                color: white;
+                border: none;
+                cursor: pointer;
+                font-size: 13px;
+                width: 150px;
+            }
+            .ok-button button:hover {
+                background-color: #9a3a6f;
+            }
+        </style><div class='enquiry-details'><table class='enquiry-table'><thead><tr><th>PR#</th><th>Item Description</th><th>Quantity</th><th>UOM</th></tr></thead><tbody><tr><td><a href='ViewPR.aspx?ID=1019' target='_blank'>1019</a></td><td>chemical</td><td>10</td><td>µg/kg</td></tr></tbody></table></div>
+                <div class='ok-button'>
+                    <button onclick='window.location.href="FloatEnquiry.aspx"'>OK</button>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

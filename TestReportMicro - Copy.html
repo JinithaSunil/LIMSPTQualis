@@ -1,0 +1,252 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>LIMS- Test Report</title>
+    <!-- Bootstrap Core Css -->
+    <link href="../plugins/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <style>
+        /*.space {
+            border-collapse: separate;
+            border-spacing: 0 15px;
+        }*/
+        table {
+            border-collapse: collapse;
+            page-break-inside: auto;
+        }
+
+        table {
+            page-break-inside: auto;
+            LINE-HEIGHT: 10px;
+        }
+
+        tr {
+            page-break-inside: avoid;
+            page-break-after: auto;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+            font-size: 12px;
+        }
+
+        .noBorder {
+            border-collapse: collapse;
+        }
+
+        .no-border-right {
+            border-right: none;
+        }
+
+        @media print {
+            .page-break {
+                display: block;
+                page-break-before: always;
+            }
+
+            @page {
+                size: auto; /* auto is the initial value */
+                margin: 0; /* this affects the margin in the printer settings */
+            }
+        }
+
+        @media screen {
+            div.divFooter {
+                display: none;
+                text-align: center;
+            }
+        }
+
+        @media print {
+            div.divFooter {
+                position: fixed;
+                bottom: 0;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <center>
+        <div>
+            <header class="clearfix">
+                <!--<br /><br /><br />
+                <div id="logo">
+                    <img src="http://lims.rnisolutions.in:4545/assets/img/hemshell-logo.png" />
+                </div>-->
+                <br /><br />
+                <!--<td>
+                    <div id="company" style="text-align:right;">
+                        <h3 class="name">LIMS SERVICES</h3>
+                        <div>903/1, Makarpura, GIDC Estate, </div>
+                        <div>Makarpura, Vadodara - 390 010</div>
+                        <div>Gujarat - INDIA.</div>
+                        <div>Phone : +91 265 2631053/2646999</div>
+						  <div>Telefax: +91 022 268 60692</div>
+                        <div>E-mail : <a href="mailto:support@hemshellservices.com">support@hemshellservices.com</a>,</div>
+						  <div><a href="http://www.hemshellservices.com" target="_blank">www.hemshellservices.com</a>,<a href="http://www.hemetek.com" target="_blank">www.hemetek.com</a></div>
+                    </div>
+                </td>-->
+            </header>
+            <main style="padding-right:5%; padding-left:5%">
+                <!--<div><h3>LIMS SERVICES Microbiology Testing Laboratory</h3></div><br /><br />-->
+                <table class="table table-bordered table-striped table-hover js-basic-example dataTable" style="width:100%">
+                <tr><td colspan="4" style="border-style : hidden!important;">&nbsp;</td></tr>
+                    <tr><td colspan="4" style="border-style : hidden!important;">&nbsp;</td></tr>
+                    <tr>
+                        <td colspan="4" style="text-align:center; border-style : hidden!important;">
+                            <b>TEST REPORT</b>
+                        </td>
+                    </tr>
+                    <tr><td colspan="4" style="text-align:center; border-left:hidden!important; border-right:hidden!important">&nbsp;</td></tr>
+                    <tr>
+                        <td style='width:25%'>
+                            <b>Issued To: </b>
+                        </td>
+                        <td style='width:25%'>{CustomerName}</td>
+                        <td style='width:25%'>
+                            <b>ULR No.:</b>
+                        </td>
+                        <td style='width:25%'>
+                            {ULRNo}
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="2" rowspan="6">{Address}</td>
+                        <td>
+                            <b>Test Report No:</b>
+                        </td>
+                        <td>{TestReportNo}</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>Discipline:</b>
+                        </td>
+                        <td>{Department}</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>Group:</b>
+                        </td>
+                        <td>{ProductGroup}</td>
+                    <tr>
+                        <td>
+                            <b>Issue Date:</b>
+                        </td>
+                        <td>{DateOfIssue}</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>Customer Reference:</b>
+                        </td>
+                        <td>{CustomerReference}</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>Dated:</b>
+                        </td>
+                        <td>
+                            {Date}
+                        </td>
+                    </tr>
+                    </table><br />
+                    <table class="table table-bordered table-striped table-hover js-basic-example dataTable" style="width:100%">
+                        <tr>
+                            <td style='width:25%'><b>Sample Registration Date</b></td>
+                            <td style='width:25%'>{SampleRegistrationDate}</td>
+                            <td style='width:25%'><b>SampleId</b></td>
+                            <td style='width:25%'>{SampleId}</td>
+                        </tr>
+                        <tr>
+                            <td><b>Analysis Starting Date</b></td>
+                            <td>{StartDate}</td>
+                            <td><b>Analysis Completion Date</b></td>
+                            <td>{CompletionDate}</td>
+                        </tr>
+                        <tr>
+                            <td><b>Name Of Product</b></td>
+                            <td>{NameOfProduct}</td>
+                            <td><b>Date Of Mfg.</b></td>
+                            <td>{DateOfMfg}</td>
+                        </tr>
+                        <tr>
+                            <td><b>Sample Package & Quatity</b></td>
+                            <td>{SampleQuantity}</td>
+                            <td><b>Date Of Exp.</b></td>
+                            <td>{ExpDate}</td>
+                        </tr>
+                        <tr>
+                            <td><b>Sample Receive Date</b></td>
+                            <td>{ReceivedDate}</td>
+                            <td><b>Batch/Lot No.</b></td>
+                            <td>{BatchNo}</td>
+                        </tr>
+                        <tr>
+                            <td><b>Test Required</b></td>
+                            <td>{TestRequired}</td>
+                            <td><b>Sample Condition</b></td>
+                            <td>{SampleCondition}</td>
+                        </tr>
+                        <tr>
+                            <td><b>Sampling</b></td>
+                            <td>{Sampling}</td>
+                            <td><b>Sampling Method</b></td>
+                            <td>{SamplingMethod}</td>
+                        </tr>                      
+                    </table><br />
+
+                <table class="table table-bordered table-striped table-hover js-basic-example dataTable" style="width:100%">
+                   <tr>
+                        <td colspan="4" style="text-align:center">
+                            <b>TEST RESULTS</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            {TestResult}
+                        </td>
+                    </tr>
+                   <tr>
+					<td>{Remarks}</td>
+					</tr>
+                    <tr>					
+                        <td colspan="4" style="text-align:right; padding-right:1%">
+                            <br /><br /><br /><br /><br /><br />
+                            <span>AUTHORIZED SIGNATORY</span><br/>
+                            <span>{SignatoryName}</span><br/>
+                            <span>({SignatoryDesignation})</span><br/>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4" style="text-align:center">
+                            ****** END OF THE TEST REPORT******
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            <div style="display: inline-block">Note: 1. Tested sample (s) not drawn by the laboratory. 2. The results relate to the submitted sample (s) only. 3. The report shall not be reproduced except in full, without written approval of the laboratory. 4. Laboratory is not responsible for the authenticity of photocopied test report. 5. The test items will not be retained for perishable products and 1 month in the case of non - perishable samples unless otherwise agreed with the customer or as required by the applicable regulation. 6. Please see  Embossed seal  to confirm the authenticity of this report.</div>
+                        </td>
+                    </tr>
+                </table>
+
+                <br />
+
+
+                <div class="clearfix" style="padding-top:20px;">
+                    <table width="90%" border="1" style="border-spacing:0px;"></table>
+                </div>
+                <div class="divFooter">
+                    <!--<b>LIMS SERVICES- CT & T Center</b>
+                    <br />903/1 , Makarpura GIDC Estate, Makarpura, Vadodara 390 010, Gujarat, India.
+                    <br />Phone: +91 265 2631053/2646999, Telefax: +91-022-26860692
+                    <br /><b>Email: support@hemshellservices.com * Website: www.hemshellservices.com, www.hemetek.com</b>-->
+                </div>
+            </main>
+
+        </div>
+    </center>
+</body>
+
+</html>

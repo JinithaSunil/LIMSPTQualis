@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>&nbsp;</title>
+    <!--<link rel="stylesheet" href="http://CiscoLIMS.rnisolutions.in:8608/css/CRF_style.css" media="all" />-->
+    <link rel="stylesheet" href="css/CRF_style.css" media="all" />
+    <link rel="stylesheet" href="../css/CRF_style.css" media="all" />
+    <style>
+        .space {
+            border-collapse: separate;
+            border-spacing: 0 15px;
+        }
+
+        .page {
+            width: 21cm;
+            min-height: 29.7cm;
+            padding: 2cm;
+            margin: 1cm auto;
+            border: 1px #D3D3D3 solid;
+            border-radius: 5px;
+            background: white;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+    <style media="screen">
+        .noPrint1 {
+        }
+
+        .noScreen1 {
+            display: none;
+        }
+
+        .noPrint {
+        }
+
+        .noScreen {
+            display: none;
+        }
+
+        #header {
+            display: block;
+            position: relative;
+            left: 0px;
+            top: 0px;
+            right: 0px;
+            font-size: 10px;
+        }
+
+        #footer {
+            display: block;
+            position: relative;
+            left: 0px;
+            bottom: 0px;
+            right: 0px;
+            font-size: 10px;
+        }
+    </style>
+    <style>
+        .space {
+            border-collapse: separate;
+            border-spacing: 0 15px;
+        }
+
+        .tab1 {
+            border: 1px solid;
+            border-bottom: 1px solid;
+        }
+
+            .tab1 td {
+                border: 1px solid;
+                padding: 5px;
+            }
+
+        .blank {
+            border: none !important;
+            padding: 5px;
+        }
+    </style>
+    <style>
+        .space {
+            border-collapse: separate;
+            border-spacing: 0 15px;
+        }
+
+        .tab {
+            border-collapse: collapse;
+            border: none !important;
+            border-bottom: none;
+        }
+
+            .tab td {
+                border-collapse: collapse;
+                border: none !important;
+                padding: 5px;
+            }
+
+        .blank {
+            border: none !important;
+            padding: 5px;
+        }
+    </style>
+    <style type="text/css" media="print">
+        @page {
+            size: auto; /* auto is the initial value */
+            margin: 0; /* this affects the margin in the printer settings */
+        }
+        /*   table {
+            table-layout: fixed;
+        }*/
+    </style>
+</head>
+<body style="margin:2% !important; width:100%; overflow:scroll">
+    <center>
+        <div>
+            <table>
+                <thead>
+                    <tr>
+                        <td>
+                            <table>
+                                <tr>
+                                    <td>	<img src="assets/img/logo.png" height='80px' alt="PT Qualis" /></td>
+                                    <td><h2>TEST APPLICATION FORM</h2></td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="margin-top:250px">
+                            <table style="width: 95%; border: 1px solid; margin-top: 10px;" class='tab1'>
+                                <tr>
+                                    <td class="tab1" style="width:20%"><b>Register No.</b></td>
+                                    <!--<td style="width:2%">:</td>-->
+                                    <!--<td class="tab1" colspan="5" style="text-align:center; vertical-align:middle">{InquiryNumber} </td>-->
+                                    <td class="tab1" colspan="5">{InquiryNumber} </td>
+                                </tr>
+                                <tr>
+                                    <td class="tab1"><b>Applicant/Customer Name</b> </td>
+                                    <!--<td>:</td>-->
+                                    <td class="tab1" colspan="5">{CustomerName}</td>
+                                </tr>
+                                <tr>
+                                    <td class="tab1"><b>Address</b> </td>
+                                    <!--<td>:</td>-->
+                                    <td class="tab1" colspan="5">{Address}</td>
+                                </tr>
+                                <tr>
+                                    <td class="tab1"><b>Contact Person</b> </td>
+                                    <!--<td>:</td>-->
+                                    <td style="width:30%">{ContactPerson}</td>
+                                    <td class="tab1" style="width:5%"><b>Telp :</b></td>
+                                    <td style="width:10%">{Phone}</td>
+                                    <td class="tab1" style="width:5%"><b>Fax :</b></td>
+                                    <td style="width:10%">{Fax}</td>
+                                </tr>
+                                <tr>
+                                    <td class="tab1"><b>Email Address</b> </td>
+                                    <!--<td>:</td>-->
+                                    <td class="tab1" colspan="5">{Email}</td>
+                                </tr>
+                                <tr>
+                                    <td class="tab1"><b>Buyer Name</b> </td>
+                                    <!--<td>:</td>-->
+                                    <td style="width:30%">{BuyerName}</td>
+                                    <td class="tab1" style="width:10%"><b>Country :</b></td>
+                                    <td class="tab1" colspan="3" style="width:10%">{Country}</td>
+                                </tr>
+                                <tr>
+                                    <td class="tab1" rowspan="3"><b>Sample Description</b> </td>
+                                    <!--<td rowspan="3">:</td>-->
+                                    <td class="tab1" colspan="5">{SampleDescription1}</td>
+                                </tr>
+                                <tr><td class="tab1" colspan="5">{SampleDescription2}</td></tr>
+                                <tr><td class="tab1" colspan="1">{SampleDescription3}</td><td colspan="2"><b>Sample Quantity :</b></td><td colspan="2">{SampleQty}</td></tr>
+                                <tr>
+                                    <td class="tab1"><b>Other Details</b> </td>
+                                    <!--<td>:</td>-->
+                                    <td class="tab1" colspan="5"></td>
+                                </tr>
+                                <tr>
+                                    <td class="tab1">Product Type / End Use</td>
+                                    <!--<td>:</td>-->
+                                    <td class="tab1" colspan="5">{ProductType}</td>
+                                </tr>
+                                <tr>
+                                    <td class="tab1">PO/Order No. </td>
+                                    <!--<td>:</td>-->
+                                    <td colspan="2">{PO}</td>
+                                    <td>Country of Origin</td>
+                                    <td colspan="2" class="tab1">{CountryOfOrigin}</td>
+                                </tr>
+                                <tr>
+                                    <td class="tab1">Item/Style No.</td>
+                                    <!--<td>:</td>-->
+                                    <td colspan="2">{ItemStyle}</td>
+                                    <td>Country of Destination</td>
+                                    <td colspan="2" class="tab1">{CountryOfDestination}</td>
+                                </tr>
+                                <tr>
+                                    <td class="tab1"><b>Service Required</b> </td>
+                                    <!--<td>:</td>-->
+                                    <td class="tab1" colspan="5">
+                                       {ServiceRequired}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="7">
+                                        <b>Test(s) Required</b><br /><br />
+                                        <table style="height:300px">
+                                            <tr>
+                                                <td style="height:30px; width:25%; text-align:center">Sample Name/Type</td>
+                                                <td style="width: 25%; text-align: center">Test Request</td>
+                                                <td style="width: 25%; text-align: center">Method</td>
+                                                <td style="width: 25%; text-align: center">Remarks</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{SampleName}</td>
+                                                <td>{TestParameters}</td>
+                                                <td>{TestMethods}</td>
+                                                <td></td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="7">
+                                       {OtherDetails}
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td>
+                            <table style='width:95%; font-family:Times New Roman; font-size:11px' class='tab1'>
+                                <tr>
+                                    <td colspan="6" style="width:95%;">
+                                        PT Qualis Indonesia Jl. Raya Pajajaran No.17, RT.001/RW.003, Kec. Jatiuwung, Kota Tangerang,INDONESIA Tel:+62 (21) 55652583 Fax:+62 (21) 55652489<br /><hr />Doc No: TSQ-LAB-QAF-100
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </center>
+</body>
+</html>

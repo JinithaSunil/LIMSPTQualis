@@ -1,0 +1,26 @@
+--------------------------------------------------
+Date: 12/27/2025 12:28:31 PM
+Message: Thread was being aborted.
+Source: mscorlib
+Stack Trace:    at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at LIMS.CustomerCal.GenerateCalibrationRequest(Int32 InquiryId) in D:\Projects\Projects-2024-25\LIMSPTQualis\CustomerCal.aspx.cs:line 174
+--------------------------------------------------
+
+--------------------------------------------------
+Date: 12/27/2025 12:29:12 PM
+Message: Word cannot save this file because it is already open elsewhere. (D:\...\CalibrationRequest-754.docx)
+Source: Microsoft Word
+Stack Trace:    at Microsoft.Office.Interop.Word._Document.SaveAs2(Object& FileName, Object& FileFormat, Object& LockComments, Object& Password, Object& AddToRecentFiles, Object& WritePassword, Object& ReadOnlyRecommended, Object& EmbedTrueTypeFonts, Object& SaveNativePictureFormat, Object& SaveFormsData, Object& SaveAsAOCELetter, Object& Encoding, Object& InsertLineBreaks, Object& AllowSubstitutions, Object& LineEnding, Object& AddBiDiMarks, Object& CompatibilityMode)
+   at LIMS.CustomerCal.GenerateCalibrationRequest(Int32 InquiryId) in D:\Projects\Projects-2024-25\LIMSPTQualis\CustomerCal.aspx.cs:line 160
+--------------------------------------------------
+
+--------------------------------------------------
+Date: 12/27/2025 12:37:10 PM
+Message: The RPC server is unavailable. (Exception from HRESULT: 0x800706BA)
+Source: LIMS
+Stack Trace:    at Microsoft.Office.Interop.Word._Document.SaveAs2(Object& FileName, Object& FileFormat, Object& LockComments, Object& Password, Object& AddToRecentFiles, Object& WritePassword, Object& ReadOnlyRecommended, Object& EmbedTrueTypeFonts, Object& SaveNativePictureFormat, Object& SaveFormsData, Object& SaveAsAOCELetter, Object& Encoding, Object& InsertLineBreaks, Object& AllowSubstitutions, Object& LineEnding, Object& AddBiDiMarks, Object& CompatibilityMode)
+   at LIMS.CustomerCal.GenerateCalibrationRequest(Int32 InquiryId) in D:\Projects\Projects-2024-25\LIMSPTQualis\CustomerCal.aspx.cs:line 161
+--------------------------------------------------
+

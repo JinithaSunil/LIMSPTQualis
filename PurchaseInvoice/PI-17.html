@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>&nbsp;</title>
+    <!--<link rel="stylesheet" href="http://CiscoLIMS.rnisolutions.in:8608/css/CRF_style.css" media="all" />-->
+    <link rel="stylesheet" href="css/CRF_style.css" media="all" />
+    <link rel="stylesheet" href="../css/CRF_style.css" media="all" />
+    <style>
+        .a4-page {
+            background: white; /* The page color */
+            width: 21cm; /* A4 width */
+            display: block;
+            margin: 0 auto; /* Center the page horizontally */
+            margin-bottom: 0.5cm; /* Space between multiple pages in a long scroll */
+            box-shadow: 0 0 0.5cm rgba(0, 0, 0, 0.5); /* Adds a subtle shadow for depth */
+            box-sizing: border-box; /* Ensures padding/border are included in the specified width/height */
+            padding: 1cm 1.5cm; /* Example internal margins/padding for content */
+        }
+
+        @media print {
+            .a4-page {
+                background: white; /* The page color */
+                width: 21cm; /* A4 width */
+                display: block;
+                margin: 0 auto; /* Center the page horizontally */
+                margin-bottom: 0.5cm; /* Space between multiple pages in a long scroll */
+                box-shadow: none !important; /* Adds a subtle shadow for depth */
+                box-sizing: border-box; /* Ensures padding/border are included in the specified width/height */
+                padding: 1cm 1.5cm; /* Example internal margins/padding for content */
+            }
+
+            .no-print {
+                display: none;
+            }
+        }
+
+        .space {
+            border-collapse: separate;
+            border-spacing: 0 15px;
+        }
+
+        .page {
+            width: 21cm;
+            min-height: 29.7cm;
+            padding: 2cm;
+            margin: 1cm auto;
+            border: 1px #D3D3D3 solid;
+            border-radius: 5px;
+            background: white;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .tab1 {
+            border: 1px solid;
+            border-bottom: 1px solid;
+        }
+
+            .tab1 td {
+                border: 1px solid;
+                padding: 1px;
+            }
+    </style>
+    <style media="screen">
+        .noPrint1 {
+        }
+
+        .noScreen1 {
+            display: none;
+        }
+
+        .noPrint {
+        }
+
+        .noScreen {
+            display: none;
+        }
+
+        #header {
+            display: block;
+            position: relative;
+            left: 0px;
+            top: 0px;
+            right: 0px;
+            font-size: 10px;
+        }
+
+        #footer {
+            display: block;
+            position: relative;
+            left: 0px;
+            bottom: 0px;
+            right: 0px;
+            font-size: 10px;
+        }
+    </style>
+    <style>
+        .space {
+            border-collapse: separate;
+            border-spacing: 0 15px;
+        }
+
+        .tab1 {
+            border: 1px solid;
+            border-bottom: 1px solid;
+        }
+
+            .tab1 td {
+                border: 1px solid;
+                padding: 5px;
+            }
+
+        .blank {
+            border: none !important;
+            padding: 5px;
+        }
+    </style>
+    <style>
+        .space {
+            border-collapse: separate;
+            border-spacing: 0 15px;
+        }
+
+        .tab {
+            border-collapse: collapse;
+            border: none !important;
+            border-bottom: none;
+        }
+
+            .tab td {
+                border-collapse: collapse;
+                border: none !important;
+                padding: 5px;
+            }
+
+        .blank {
+            border: none !important;
+            padding: 5px;
+        }
+    </style>
+    <style type="text/css" media="print">
+        @page {
+            size: auto; /* auto is the initial value */
+            margin: 0; /* this affects the margin in the printer settings */
+        }
+        /*   table {
+            table-layout: fixed;
+        }*/
+    </style>
+</head>
+<body style="background-color:lightgray">
+    <div class="no-print">
+        <button onclick="window.print()">Print</button>
+    </div>
+    <center>
+        <div class='a4-page'>
+            <table style="margin-right:5px">
+                <thead>
+                    <tr>
+                        <td width="15%">
+                            <img src="assets/img/qualis-2.png" alt="Logo" height="80" />
+                        </td>
+                        <td width="25%">
+                            <span style="color: #b34788; font-weight: bold">PT Qualis Indonesia</span><br />
+                            <span style="font-size:10px">
+                                Laboratory:<br />
+                                Jalan Pajajaran No. 17<br />
+                                Desa Gandasari Kec. Jati Uwung<br />
+                                Tangerang 15137, Indonesia
+                            </span>
+                        </td>
+                        <td>&nbsp;</td>
+                        <td style="font-size: 22px; float: right;">
+                            PURCHASE INVOICE
+                        </td>
+                    </tr>
+                    <tr><td></td><td></td><td colspan="2" style="border-bottom: 4px solid #b34788"></td></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td style="float:right">Page No.: 1</td>
+                    </tr>
+                    <tr><td colspan="4">&nbsp;</td></tr>
+                    <tr><td colspan="4">&nbsp;</td></tr>
+                    <tr>
+                        <td colspan="2">Vendor Name :nova tes rni</td>
+                        <td rowspan="4" colspan="2">
+                            <table>
+                                <tr>
+                                    <td>Date:</td>
+                                    <td>08-06-2026</td>
+                                </tr>
+                                <tr>
+                                    <td>No. Purchase Invoice:</td>
+                                    <td>0009-01-2026/PQI-PI</td>
+                                </tr>
+                                <tr>
+                                    <td>No. Purchase Order:</td>
+                                    <td>0021-06-2026/PQI-PO-ITD</td>
+                                </tr>
+                                <tr>
+                                    <td>No. Purchase Requisition:</td>
+                                    <td>0050/03/2026/MKT, 0050/03/2026/MKT, 0050/03/2026/MKT, 0050/03/2026/MKT, 0050/03/2026/MKT, 0175/04/2026/ITD</td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">No. Delivery Order:</td>
+                    </tr>
+                    <tr><td>&nbsp;</td></tr>
+                    <tr><td>&nbsp;</td></tr>
+                    <tr>
+                        <td colspan="4" height="350px"><table style='width:100%' class='tab1'><thead><tr><td>No.</td><td>GR Date</td><td>GR No.</td><td>Item Code</td><td>Item</td><td>Qty</td><td>Measr</td><td>Price</td><td>Disc.(%)</td><td>Amount</td><td>Currency</td></tr></thead><tbody><tr><td>1</td><td>05-06-2026</td><td>GRN/2026/0021</td><td>000568</td><td>Adaptor Laptop Asus 19V 3.42A 64W</td><td>1</td><td>pcs</td><td>100.000,00</td><td>0%</td><td>100.000,00</td><td style='text-align:center'>IDR</td></tr><tr><td>2</td><td>05-06-2026</td><td>GRN/2026/0021</td><td>000569</td><td>Adaptor Monitor Asus 19V 1.75A</td><td>1</td><td>pcs</td><td>1.000.000,00</td><td>0%</td><td>1.000.000,00</td><td style='text-align:center'>IDR</td></tr><tr><td>3</td><td>05-06-2026</td><td>GRN/2026/0021</td><td>000570</td><td>Adaptor Monitor LG 19V 0.8A</td><td>1</td><td>pcs</td><td>100.000,00</td><td>0%</td><td>100.000,00</td><td style='text-align:center'>IDR</td></tr><tr><td>4</td><td>05-06-2026</td><td>GRN/2026/0021</td><td>000567</td><td>Adaptor Switch TPLink 5V 0.6A</td><td>1</td><td>pcs</td><td>100.000,00</td><td>0%</td><td>100.000,00</td><td style='text-align:center'>IDR</td></tr><tr><td>5</td><td>05-06-2026</td><td>GRN/2026/0021</td><td>000577</td><td>Smartswitch Unifi USW Pro 48  </td><td>1</td><td>pcs</td><td>1.000.000,00</td><td>0%</td><td>1.000.000,00</td><td style='text-align:center'>IDR</td></tr><tr><td>6</td><td>05-06-2026</td><td>GRN/2026/0021</td><td>000655</td><td>SERVICE PRINTER</td><td>1</td><td>UNIT</td><td>200.000,00</td><td>10%</td><td>180.000,00</td><td style='text-align:center'>IDR</td></tr></tbody></table><table class=footer-table'><tr><td width=80%' style='text-align:right'><b>SubTotal : </b></td><td colspan='2' style='text-align:right'><b>2.480.000,00</b></td></tr><tr><td width=80%' style='text-align:right'><b>PPN : </b></td><td colspan='2' style='text-align:right'><b>272.800,00</b></td></tr><tr><td width=80%' style='text-align:right'><b>Total : </b></td><td colspan='2' style='text-align:right'><b>2.752.800,00</b></td></tr></table></td>
+                    </tr>
+                    <tr><td colspan="4">&nbsp;</td></tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="4" style="text-align:center">
+                            <table width="100%" style="font-size:12px; text-align:center !important" class="tab1">
+                                <tr>
+                                    <td>Created By:</td>
+                                    <td>Authorized By:</td>
+                                    <td>Approved By:</td>
+                                    <td>Receipt By:</td>
+                                </tr>
+                                <tr>
+                                    <td><br /><br /><br /><br /></td>
+                                    <td><br /><br /><br /><br /></td>
+                                    <td><br /><br /><br /><br /></td>
+                                    <td><br /><br /><br /><br /></td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </center>
+</body>
+</html>

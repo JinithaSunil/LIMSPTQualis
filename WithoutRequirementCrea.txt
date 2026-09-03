@@ -1,0 +1,127 @@
+ private void WithoutRequirementCreateTable1(Application wordApp, Microsoft.Office.Interop.Word.Document doc, string placeholder, DataTable dt)
+        {
+            Table table = null;
+            Range range = null;
+
+            try
+            {
+                range = doc.Content;
+                range.Find.ClearFormatting();
+                range.Find.Text = placeholder;
+
+                if (range.Find.Execute())
+                {
+                    range.Text = "";
+
+                    var groups = dt.AsEnumerable()
+                        .GroupBy(row => row.Field<string>("Test Items(s)"))
+                        .ToList();
+
+                    int totalRows = 1; // Header row
+                    foreach (var group in groups)
+                    {
+                        // Only count rows with actual data
+                        totalRows += 1; // Main category row
+                        totalRows += group.Count(row => !string.IsNullOrEmpty(row["Test SubItems"].ToString()) || !string.IsNullOrEmpty(row["Test SubSubItems"].ToString())); // Count only rows with data
+                    }
+
+                    int numColumns = dt.Columns.Count - 2; // Exclude Test SubItems and Test SubSubItems
+                    table = doc.Tables.Add(range, totalRows, numColumns);
+                    table.Borders.Enable = 1;
+
+                    // Add headers dynamically
+                    int headerRow = 1;
+                    int colIndex = 1;
+                    foreach (DataColumn col in dt.Columns)
+                    {
+                        if (col.ColumnName != "Test SubItems" && col.ColumnName != "Test SubSubItems")
+                        {
+                            table.Cell(headerRow, colIndex).Range.Text = col.ColumnName;
+                            table.Cell(headerRow, colIndex).Range.Bold = 1;
+                            table.Cell(headerRow, colIndex).Range.Shading.BackgroundPatternColor = WdColor.wdColorGray15;
+                            colIndex++;
+                        }
+                    }
+
+                    int currentRow = 2;
+                    foreach (var group in groups)
+                    {
+                        string mainItem = group.Key;
+                        bool hasSubItems = group.Any(row => !string.IsNullOrEmpty(row["Test SubItems"].ToString()));
+                        bool hasSubSubItems = group.Any(row => !string.IsNullOrEmpty(row["Test SubSubItems"].ToString()));
+
+                        if (!hasSubItems && !hasSubSubItems)
+                        {
+                            // Scenario 1: Only Test Items(s) and its data
+                            // Check if the main item has any data
+                            table.Cell(currentRow, 1).Range.Text = mainItem;
+                            FillRow(table, currentRow, group.First(), dt.Columns, 1);
+                            currentRow++;
+                        }
+                        else if (hasSubItems && !hasSubSubItems)
+                        {
+                            // Scenario 2: Test Items(s) and Test SubItems
+                            table.Cell(currentRow, 1).Range.Text = mainItem;
+                            table.Cell(currentRow, 1).Range.Bold = 1;
+                            currentRow++;
+
+                            foreach (DataRow row in group)
+                            {
+                                string subItem = row["Test SubItems"].ToString();
+                                if (!string.IsNullOrEmpty(subItem))
+                                {
+                                    table.Cell(currentRow, 1).Range.Text = "- " + subItem;
+                                    table.Cell(currentRow, 1).Range.ParagraphFormat.LeftIndent = 10;
+                                    FillRow(table, currentRow, row, dt.Columns, 1);
+                                    currentRow++;
+                                }
+                            }
+                        }
+                        else if (hasSubItems && hasSubSubItems)
+                        {
+                            // Scenario 3: Test Items(s), Test SubItems, and Test SubSubItems
+                            table.Cell(currentRow, 1).Range.Text = mainItem;
+                            table.Cell(currentRow, 1).Range.Bold = 1;
+                            currentRow++;
+
+                            var subItems = group.Select(row => row["Test SubItems"].ToString()).Distinct();
+                            foreach (var subItem in subItems)
+                            {
+                                table.Cell(currentRow, 1).Range.Text = "• " + subItem;
+                                table.Cell(currentRow, 1).Range.ParagraphFormat.LeftIndent = 10;
+                                currentRow++;
+
+                                var subSubItems = group.Where(row => row["Test SubItems"].ToString() == subItem);
+                                foreach (var row in subSubItems)
+                                {
+                                    string subSubItem = row["Test SubSubItems"].ToString();
+                                    if (!string.IsNullOrEmpty(subSubItem))
+                                    {
+                                        table.Cell(currentRow, 1).Range.Text = "- " + subSubItem;
+                                        table.Cell(currentRow, 1).Range.ParagraphFormat.LeftIndent = 20;
+                                        FillRow(table, currentRow, row, dt.Columns, 1);
+                                        currentRow++;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    // Format table
+                    table.AutoFitBehavior(WdAutoFitBehavior.wdAutoFitContent);
+                    table.Rows[1].HeadingFormat = -1;
+
+                    // Add borders
+                    table.Borders.InsideLineStyle = WdLineStyle.wdLineStyleSingle;
+                    table.Borders.OutsideLineStyle = WdLineStyle.wdLineStyleSingle;
+                }
+                else
+                {
+                    throw new Exception($"Placeholder {placeholder} not found in document");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error creating table: {ex.Message}");
+            }
+        }

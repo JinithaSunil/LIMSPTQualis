@@ -1,0 +1,192 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>LIMS- Test Report</title>
+    <!--<link rel="stylesheet" href="css/CRF_style.css" media="all" />-->
+    <style>
+        /*.space {
+            border-collapse: separate;
+            border-spacing: 0 15px;
+        }*/
+        @media print {
+            .page-break {
+                display: block;
+                page-break-before: always;
+            }
+        }
+
+        @media screen {
+            div.divFooter {
+                display: none;
+                text-align: left;
+                font-size: 12px;
+            }
+        }
+
+        @media print {
+            div.divFooter {
+                position: fixed;
+                bottom: 0;
+                text-align: center;
+                font-size: 12px;
+            }
+        }
+        table, th, td {
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <center>
+        <div>
+            <header class="clearfix">
+                <table style="width:100%;padding-top:2%">
+                    <tr>
+                        <td style="text-align:center">
+                            <div id="logo">
+                                <img src="http://hemeteklims.rni-solutions.com/assets/img/hemshell-logo.png" />
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+
+
+            </header>
+            <main>
+                <div><h2><i>Hemeshell Services Plastic & Polymer Testing Laboratory</i></h2></div>
+                <table border="1" style="border-spacing:0px;width:100%" cellpadding="5">
+                    <tr>
+                        <td>
+                            <div style="text-align:center"><span style="font-size:14px"><b>TEST REPORT</b></span></div>
+                        </td>
+                    </tr>
+                </table><br />
+                <table border="1" style="border-spacing:0px;width:100%" cellpadding="5">
+                    <tr>
+                        <td rowspan="4" style="text-align:left; width:40%">
+                            <div style="text-transform:uppercase"><b>ISSUED TO: {CustomerName}</b></div></td>
+                        <td>
+                            <div><b>ULR NO: </b><b>{ULRNo}</b></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div style="text-align:left"><b>Discipline:</b> {Department}</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div style="text-align:left"><b>Group:</b> {ProductGroup}</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div style="text-align:left"><b>Test Report No: {TestReportNo}</b></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td rowspan="4">
+                            <div><b>Address:</b> {Address}</div>
+                        </td>
+                        <td>
+                            <div><b>Issue Date</b>: {DateOfIssue}</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div><b>Contact Person</b>: {ContactPerson}</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div><b>Contact Details:</b> {Mobile}</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div><b>Email:</b> {Email}</div>
+                        </td>
+                    </tr>                   
+                </table>
+
+
+                    <div id="SampleTest" class="clearfix table-responsive">
+                        <div><span style="font-size:14px"><b>Sample Test Details</b></span></div>
+                        <table border="1" style="width:100%;border-spacing:0px;" cellpadding="5">
+                            <tr>
+                                <td style="width:15%"><b>Sample Receiving Date</b></td>
+                                <td style="width:20%">{ReceivedDate}</td>
+                                <td style="width:20%"><b>Test Parameter</b></td>
+                                <td style="width:30%">{TestParameter}</td>
+                            </tr>
+                            <tr>
+                                <td><b>Analysis Starting Date</b></td>
+                                <td>{StartDate}</td>
+                                <td><b>Analysis Completion Date</b></td>
+                                <td>{CompletionDate}</td>
+                            </tr>
+                            <tr>
+                                <td><b>Sample Quantity</b></td>
+                                <td>{NoOfSample}</td>
+                                <td><b>Standard Test Method</b></td>
+                                <td>{TestMethod}</td>
+                            </tr>
+                            <tr>
+                                <td><b>Instrument Details</b></td>
+                                <td>{InstrumentDetails}</td>
+                                <td><b>Instrument Calibration Due Date</b></td>
+                                <td>{CalibrationDueOn}</td>
+                            </tr>
+                            <tr>
+                                <td><b>SampleName</b></td>
+                                <td>{SampleName}</td>
+                                <td><b>Certified Reference Material Details</b></td>
+                                <td>{MaterialDetails}</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <br />
+
+                    <div class="table-responsive clearfix">
+                        <div><span style="font-size:14px"><b>Test Results</b></span></div>
+                        {TestResult}
+                        <div style="text-align:right; padding-right:1%">
+                            <br /><br />
+							<hr style="width:20%;float:right;"><br/>
+                            <span>AUTHORIZED SIGNATORY</span><br/>
+                            <span>{}</span><br/>
+                            <span>({})</span><br/>
+                        </div>						
+                    </div>
+
+                    <div class="clearfix" style="padding-top:2%">
+                        <table border="1" style="border-spacing:0px;width:100%" cellpadding="5">
+                            <tr>
+                                <td>
+                                    <div>1. Tested Sample(s) not drawn by the laboratory. </div>
+                                    <div>2. The Results are Related to submitted Samples only.</div>
+                                    <div>3. The report shall not be reproduced except in full, without written approval of laboratory.</div>
+                                    <div>4. Laboratory is not responsible for authenticity of photocopied test report.</div>
+                                    <div>
+                                        5. The test items will not be retained for perishable products and 1 month in case of non-perishable samples unless otherwise agreed with the customer or as required by the application regulation.
+                                    </div>
+                                    <div>6. Uncertainity od measurement at 95% confidence level is 0.795dl/gm * 0.025 dl/gm for SIV with Coverage factor 2.</div>
+                                    <div>7. Please see the embossed seal to confirm the autheticity of the test product.</div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="divFooter">
+                        <b>Hemshell Services- CT & T Center</b>
+                        <br />903/1 , Makarpura GIDC Estate, Makarpura, Vadodara 390 010, Gujarat, India.
+                        <br />Phone: +91 265 2631053/2646999, Telefax: +91-022-26860692
+                        <br /><b>Email: support@hemshellservices.com * Website: www.hemshellservices.com, www.hemetek.com</b>
+                    </div>
+</main>
+
+        </div>
+    </center>
+</body>
+</html>

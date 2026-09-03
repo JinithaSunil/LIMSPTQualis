@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>&nbsp;</title>
+    <!--<link rel="stylesheet" href="http://CiscoLIMS.rnisolutions.in:8608/css/CRF_style.css" media="all" />-->
+    <link rel="stylesheet" href="css/CRF_style.css" media="all" />
+    <link rel="stylesheet" href="../css/CRF_style.css" media="all" />
+    <style>
+        .a4-page {
+            background: white; /* The page color */
+            width: 21cm; /* A4 width */
+            display: block;
+            margin: 0 auto; /* Center the page horizontally */
+            margin-bottom: 0.5cm; /* Space between multiple pages in a long scroll */
+            box-shadow: 0 0 0.5cm rgba(0, 0, 0, 0.5); /* Adds a subtle shadow for depth */
+            box-sizing: border-box; /* Ensures padding/border are included in the specified width/height */
+            padding: 1cm 1.5cm; /* Example internal margins/padding for content */
+        }
+
+        @media print {
+            .a4-page {
+                background: white; /* The page color */
+                width: 21cm; /* A4 width */
+                display: block;
+                margin: 0 auto; /* Center the page horizontally */
+                margin-bottom: 0.5cm; /* Space between multiple pages in a long scroll */
+                box-shadow: none !important; /* Adds a subtle shadow for depth */
+                box-sizing: border-box; /* Ensures padding/border are included in the specified width/height */
+                padding: 1cm 1.5cm; /* Example internal margins/padding for content */
+            }
+
+            .no-print {
+                display: none;
+            }
+        }
+    </style>
+    <style>
+        .space {
+            border-collapse: separate;
+            border-spacing: 0 15px;
+        }
+
+        .page {
+            width: 21cm;
+            min-height: 29.7cm;
+            padding: 2cm;
+            margin: 1cm auto;
+            border: 1px #D3D3D3 solid;
+            border-radius: 5px;
+            background: white;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+    <style media="screen">
+        .noPrint1 {
+        }
+
+        .noScreen1 {
+            display: none;
+        }
+
+        .noPrint {
+        }
+
+        .noScreen {
+            display: none;
+        }
+
+        #header {
+            display: block;
+            position: relative;
+            left: 0px;
+            top: 0px;
+            right: 0px;
+            font-size: 10px;
+        }
+
+        #footer {
+            display: block;
+            position: relative;
+            left: 0px;
+            bottom: 0px;
+            right: 0px;
+            font-size: 10px;
+        }
+    </style>
+    <style>
+        .space {
+            border-collapse: separate;
+            border-spacing: 0 15px;
+        }
+
+        .tab1 {
+            border: 1px solid;
+            border-bottom: 1px solid;
+        }
+
+            .tab1 td {
+                border: 1px solid;
+                padding: 5px;
+            }
+
+        .blank {
+            border: none !important;
+            padding: 5px;
+        }
+    </style>
+    <style>
+        .space {
+            border-collapse: separate;
+            border-spacing: 0 15px;
+        }
+
+        .tab {
+            border-collapse: collapse;
+            border: none !important;
+            border-bottom: none;
+        }
+
+            .tab td {
+                border-collapse: collapse;
+                border: none !important;
+                padding: 5px;
+            }
+
+        .blank {
+            border: none !important;
+            padding: 5px;
+        }
+    </style>
+    <style type="text/css" media="print">
+        @page {
+            size: auto; /* auto is the initial value */
+            margin: 0; /* this affects the margin in the printer settings */
+        }
+        /*   table {
+            table-layout: fixed;
+        }*/
+    </style>
+</head>
+<body style="margin:2% !important; width:95%; overflow:scroll">
+    <div class="no-print">
+        <button onclick="window.print()">Print</button>
+    </div>
+    <center>
+        <div class='a4-page'>
+                <div class='table-responsive'>
+                    <table style="margin-right:5px">
+                        <thead>
+                            <tr>
+                                <td style="border: 2px solid">
+                                    <table>
+                                        <tr>
+                                            <td style="text-align:center">Doc No : TSQ-LAB-QAF-112</td>
+                                            <td style="float:right">Rev 00 - March 2021</td>
+                                        </tr>
+                                        <tr>
+                                            <td><img src="assets/img/logo.png" height='80px' alt="PT Qualis" /></td>
+                                            <td><h1>Quotation No. QQ2026060006</h1></td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="margin-top:250px">
+                                    <table style='width: 100%; border: 1px solid; margin-top: 10px; ' class='tab'>
+                                        <tr>
+                                            <td style="width:20%"><b>Prepared for Request No. : R/2026001006</b></td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>Date</b> </td>
+                                            <td>:</td>
+                                            <td colspan="5">04-Jun-2026</td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>Company</b> </td>
+                                            <td>:</td>
+                                            <td>Queen Pacific Suksesabadi, PT</td>
+                                            <td><b>From</b> </td>
+                                            <td>:</td>
+                                            <td style="width:30%">Gunawan</td>
+                                        </tr>
+                                        <tr>
+                                            <td rowspan="3"><b>Address</b> </td>
+                                            <td rowspan="3">:</td>
+                                            <td rowspan="3">Jl. Daan Mogot, Km. 12,8, Komp Daan Mogot Prima, Blok B2/1 Rawa Buaya, Cengkareng  <br/>  - Indonesia</td>
+                                            <td><b>Dept</b></td>
+                                            <td>:</td>
+                                            <td>Softlines (Physical toys, baby wear, Sepatu, Cookware, Flatware, Packaging)</td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>Fax</b></td>
+                                            <td>:</td>
+                                            <td>1234567890</td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>Telephone</b></td>
+                                            <td>:</td>
+                                            <td>1234567890</td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>To</b></td>
+                                            <td>:</td>
+                                            <td>Ms Surianti  -</td>
+                                            <td><b>Email</b></td>
+                                            <td>:</td>
+                                            <td>gunawan@qualis-indonesia.com</td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>Telephone</b></td>
+                                            <td>:</td>
+                                            <td>'-</td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>Email</b></td>
+                                            <td>:</td>
+                                            <td>shipping@qps.co.id</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="4">
+                                                <br />
+                                                Dear Our Value Customers<br />
+                                                Thank you for your enquiry. We are pleased to quote the following:<br />
+                                                <br />
+                                                <!--Sample Description : {SampleDescription}<br />-->
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="7">
+                                                
+                    <table style='height:200px; border: 1px solid'>
+                        <tr>
+                            <td style='border: 1px solid !important'>No.</td>
+                            <td style='border: 1px solid !important; height: 30px; width: 35%; text-align:center'>Test Items</td>
+                            <td style='border: 1px solid !important; height: 30px; width: 25%; text-align:center'>Metoda</td>
+                            <td style='border: 1px solid !important; width: 10%; text-align: center;'>Quantity</td>
+                            <td style='border: 1px solid !important; width: 10%; text-align: center;'>Price</td>
+                            <td style='border: 1px solid !important; width: 10%; text-align: center;'>Amount(IDR)</td>  </tr>
+                        <tr>
+                            <td style='border: 1px solid !important;'>1</td>
+                            <td style='border: 1px solid !important;'><b><u>Footwear, VIVA STRIDE N01092618 (EVA/WEBBING) Merk. GREENLIGHT</u></b> <b>Footwear,</b><br/>Migration of certain elements<br/><br/>- Copper (Cu)<br/>- Lead (Pb)<br/>- Nickel (Ni)<br/><br/>Flame Retardant<br/>- Pentabromodiphenylether (PentaBDE)<br/><br/>Phthalate<br/>- Bis (2-ethylhexyl) phthalate (DEHP)<br/>- Dibutyl phthalate (DBP)<br/>- Benzyl butyl phthalate (BBP)<br/></td>
+                            <td style='border: 1px solid !important;'>SNI ISO 8124-3:2010
+
+SNI ISO 8124-3:2010
+
+SNI ISO 8124-3:2010
+
+
+
+SNI ISO 17881-1 : 2017
+
+
+ISO/TS 16181:2011
+ISO/TS 16181:2011
+ISO/TS 16181:2011
+</td>
+                            <td style='border: 1px solid !important; text-align:right'>1</td>
+                            <td style='border: 1px solid !important; text-align:right'>2.150.000,00</td>
+                            <td style='border: 1px solid !important; text-align: right'>2.150.000,00</td>
+                        </tr></table>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <table style="width:100%" class="tab">
+                                        <tr>
+                                            <td style="text-align:right;width:90%">Sub Total</td>
+                                            <td style="text-align: right; border-left: none !important">2.150.000,00</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align:right">Discount</td>
+                                            <td style="text-align:right">215.000,00</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align:right">Total before tax</td>
+                                            <td style="text-align:right">1.935.000,00</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align:right">VAT (11%)</td>
+                                            <td style="text-align:right">212.850,00</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align:right">Grand Total</td>
+                                            <td style="text-align:right">2.147.850,00</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">Payment Term : Advance</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">Currency : Indonesian Rupiah</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">Note : </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">
+                                                We hope that our quotation meets your requirements. For confirmation, please sign below, and return this to us by the above fax number and via<br />
+                                                We look forward to hear from you soon.<br /><br />
+                                                Kindly confirm this quotation by signing below and please send your payment to the stated address below.<br />
+
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td>
+                                    <table style='width:100%; font-family:Times New Roman; font-size:11px' class='tab1'>
+                                        <tr>
+                                            <td rowspan="2" style="width:30%">
+                                                Prepared By :
+                                                <div style='width:160px;text-align:center;font-family:Times New Roman;'><div> <img src='assets/img/Signature/10066.png' width='auto' height='50'></div><div style='position:relative;display:inline-block;'><img src='assets/img/Signature/ValidSign.png' width='auto' height='100'><div style='position:absolute; top:85px; font-size:10px; font-weight:bold;'> Date/Time: 04-06-2026 00:00</div></div></div>
+                                            </td>
+                                            <td rowspan="2" style="width:40%">
+                                                Customer Approval :
+                                            </td>
+                                            <td style="width:30%">
+                                                PT. Qualis Indonesia
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:30%">
+                                                Note:<br />For Payment, Please transfer to our <br />account:a/n. PT QUALIS INDONESIA<br />A/C 125.001.0456.671 (RP) A/C<br /> 125.001.1000.569 (USD)<br />FULL AMOUNT<br />Bank Mandiri Cab.Graha Rekso<br />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Name: <b>Gunawan</b><br />
+                                                Title:<b>Sales Manager</b>
+                                            </td>
+                                            <td>
+                                                Name: <br />
+                                                Title:
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="3" style="border-bottom:none !important">Note : Please indicate our R no / Wo number when making payment.</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="border-collapse:collapse; border:none !important; border-top: none !important">
+                                                www.qualis-indonesia.com
+                                            </td>
+                                            <td colspan="2" style="border-collapse:collapse; border:none !important; border-top: none !important">
+                                                <img src="assets/img/certifications.png" alt="certifications"  width="500" />
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+           </div>
+            </center>
+       
+
+</body>
+</html>

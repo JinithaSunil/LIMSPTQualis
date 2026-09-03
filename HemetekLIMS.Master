@@ -1,0 +1,558 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="HemetekLIMS.Master.cs" Inherits="CustomerManagement.CustomerMgmnt" %>
+
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
+<!DOCTYPE html>
+<html>
+
+<head runat="server">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <title>PT Qualis ERP</title>
+    <!-- Favicon-->
+    <link rel="icon" href="favicon.png" type="image/x-icon" />
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="assets/vendor/fonts/remixicon/remixicon.css" />
+
+    <!-- Bootstrap Core Css -->
+    <link href="plugins/bootstrap/css/bootstrap.css" rel="stylesheet">
+
+
+    <!-- Waves Effect Css -->
+    <link href="plugins/node-waves/waves.css" rel="stylesheet" />
+
+    <!-- Animation Css -->
+    <link href="plugins/animate-css/animate.css" rel="stylesheet" />
+
+    <!-- Morris Chart Css-->
+    <link href="plugins/morrisjs/morris.css" rel="stylesheet" />
+
+    <!-- Custom Css -->
+    <link href="css/style.css" rel="stylesheet">
+
+    <link href="css/themes/all-themes.css" rel="stylesheet" />
+    <style>
+        hr.violet {
+            border: 2px solid #b34788;
+        }
+    </style>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+
+    <!--Start of Tawk.to Script-->
+<script type="text/javascript">
+    var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+    (function () {
+        var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+        s1.async = true;
+        s1.src = 'https://embed.tawk.to/64fef7b10f2b18434fd7d95b/1ha1vf3vo';
+        s1.charset = 'UTF-8';
+        s1.setAttribute('crossorigin', '*');
+        s0.parentNode.insertBefore(s1, s0);
+    })();
+</script>
+<!--End of Tawk.to Script-->
+<body class="theme-red">
+    <form id="form1" runat="server">
+        <!-- Page Loader -->
+        <div class="page-loader-wrapper">
+            <div class="loader">
+                <div class="preloader">
+                    <div class="spinner-layer pl-red">
+                        <div class="circle-clipper left">
+                            <div class="circle"></div>
+                        </div>
+                        <div class="circle-clipper right">
+                            <div class="circle"></div>
+                        </div>
+                    </div>
+                </div>
+                <p>Please wait...</p>
+            </div>
+        </div>
+        <!-- #END# Page Loader -->
+        <!-- Overlay For Sidebars -->
+        <div class="overlay"></div>
+        <!-- #END# Overlay For Sidebars -->
+        <!-- Search Bar -->
+        <div class="search-bar">
+            <div class="search-icon">
+                <i class="material-icons">search</i>
+            </div>
+            <input type="text" placeholder="START TYPING...">
+            <div class="close-search">
+                <i class="material-icons">close</i>
+            </div>
+        </div>
+        <!-- #END# Search Bar -->
+        <!-- Top Bar -->
+        <section>
+            <!-- Left Sidebar -->
+            <aside id="leftsidebar" class="sidebar">
+                <!-- User Info -->
+                <div class="user-info">
+                    <div>
+                        <table>
+                            <tr>
+                                <td>
+                                    <img src="assets/img/qualis.png" width="100" height="70" alt="User" />
+                                </td>
+                                <td>
+                                    <h1 style="color: white">ERP</h1>
+                                </td>
+                            </tr>
+                        </table>
+
+                    </div>
+                    <div class="info-container">
+                        <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <asp:Label ID="lblUserName" runat="server"></asp:Label>
+                        </div>
+                        <div class="email">
+                            <asp:Label ID="lblUserEmail" runat="server"></asp:Label>
+                        </div>
+                        <div class="btn-group user-helper-dropdown">
+                            <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</i>
+                            <ul class="dropdown-menu pull-right">
+                                <li><a href="EmployeeProfile.aspx"><i class="material-icons">person</i>Profile</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="javascript:void(0);"><i class="material-icons">group</i>Supervisors</a></li>
+                                <li><a href="WorkList.aspx"><i class="material-icons">business_center</i>WorkList</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="Login.aspx"><i class="material-icons">input</i>Sign Out</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- #User Info -->
+                <!-- Menu -->
+                <div class="menu">
+                    <ul class="list">
+                        <li class="header">MAIN NAVIGATION</li>
+                        <li id="liHome1" runat="server">
+                            <a href="Default.aspx">
+                                <i class="material-icons">home</i>
+                                <span>Home</span>
+                            </a>
+                        </li>
+                        <li id="liCustomers1" runat="server">
+                            <a href="javascript:void(0);" class="menu-toggle">
+                                <i class="material-icons">work</i>
+                                <span>Customers</span>
+                            </a>
+                            <ul class="ml-menu">
+                                <li id="liNewCustomer2" runat="server">
+                                    <a href="CustomerAdd.aspx">New Customer</a>
+                                </li>
+
+                                <li id="liViewCompanies3" runat="server">
+                                    <a href="CustomerCompanyView.aspx">Search Customer</a>
+                                </li>
+                            </ul>
+                            </li>
+                        <li id="liInquiries1" runat="server">
+                            <a href="javascript:void(0);" class="menu-toggle">
+                                <i class="material-icons">help_outline</i>
+                                <span>Enquiries</span>
+                            </a>
+                            <ul class="ml-menu">
+                                <li id="liNewInquiry2" runat="server">
+                                    <a href="CustomerInquiry.aspx">New Enquiry</a>
+                                </li>
+                                <li id="liViewInquiries2" runat="server">
+                                    <a href="CustomerInquiryView.aspx">View Enquiries</a>
+                                </li>
+                                <li id="liInquiryStatus2" runat="server">
+                                    <a href="EnquiryCRFStatus.aspx">Enquiry v/s CRF Status</a>
+                                </li>
+                            </ul>
+                        </li>
+                    <li id="liQuotationList" runat="server">
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons">description</i>
+                            <span>Quotations</span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li id="li4" runat="server">
+                                <a href="Quotation.aspx">New Quotation</a>
+                            </li>
+                            <li id="li5" runat="server">
+                                <a href="QuotationList.aspx">View Quotations</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li id="liCRFList1" runat="server">
+                        <a href="CustomerCRFList.aspx">
+                            <i class="material-icons">insert_drive_file</i>
+                            <span>Customer Request Forms (CRF)</span>
+                        </a>
+                    </li>
+                    <li id="liSampleManagement1" runat="server">
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons">folder_special</i>
+                            <span>Sample Management</span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li id="liViewSamples2" runat="server">
+                                <a href="SampleList.aspx">Sample List</a>
+                            </li>
+                            <li id="liAllSamples2" runat="server">
+                                <a href="AllSamples.aspx">All Samples</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li id="liTestManagement1" runat="server">
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons">extension</i>
+                            <span>Test Management</span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li id="liWorkList2" runat="server">
+                                <a href="WorkList.aspx">Work List</a>
+                            </li>
+                            <li id="liWorkListCompleted2" runat="server">
+                                <a href="WorkListCompleted.aspx">Completed Work List</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li id="liQualityManagement1" runat="server">
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons">verified_user</i>
+                            <span>Quality Management</span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li id="liGenerateReport2" runat="server">
+                                <a href="GenerateReport.aspx">Generate Report </a>
+                            </li>
+                            <li id="liGenerateReportMocon2" runat="server">
+                                <a href="GenerateReportMocon.aspx">Generate Report Mocon</a>
+                            </li>
+                            <li id="liReviewReport2" runat="server">
+                                <a href="ReviewReport.aspx">Review Report </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li id="liReportManagement1" runat="server">
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons">assignment</i>
+                            <span>Report Management</span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li id="liSendReport2" runat="server">
+                                <a href="SendReport.aspx">Send Report </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li id="liCustomerFeedback1" runat="server">
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons">feedback</i>
+                            <span>Customer Feedback</span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li id="liTaskCompleted2" runat="server">
+                                <a href="TaskcompletedList.aspx">Task Completed List</a>
+                            </li>
+                            <li id="liCustomerFeedbackList2" runat="server">
+                                <a href="CustomerFeedbackList.aspx">Customer Feedback List</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li id="liUserManagement1" runat="server">
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons">people</i>
+                            <span>User Management</span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li id="liOrganization2" runat="server">
+                                <a href="Organization.aspx">Organization Chart</a>
+                            </li>
+                            <li id="liViewEmployee2" runat="server">
+                                <a href="Employees.aspx">Employees</a>
+                            </li>
+                            <li id="liViewUsers2" runat="server">
+                                <a href="Users.aspx">Users</a>
+                            </li>
+                            <li id="liAuthorizedSignatory2" runat="server">
+                                <a href="AuthorizedSignatory.aspx">Authorized Signatory</a>
+                            </li>
+                            <li id="liSampleRevert2" runat="server">
+                                <a href="SampleRevert.aspx">Sample Revert</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li id="liGroupManagement" runat="server">
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons">group_work</i>
+                            <span>Group Management</span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li id="li2" runat="server">
+                                <a href="ManageGroupSubGroup.aspx">Add Group / Sub Group</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li id="liTestParam" runat="server" visible="false">
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons">star_border</i>
+                            <span>Test Method/Parameter</span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li id="li3" runat="server">
+                                <a href="ManageTestParamMethod.aspx">Add Test Method / Parameter</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li id="liSupport1" runat="server">
+                        <a href="InboxSupportList.aspx">
+                            <i class="material-icons">move_to_inbox</i>
+                            <span>Inbox</span>
+                        </a>
+                    </li>
+                    <li id="liQRAnalyzer" runat="server">
+                        <a href="QRAnalyzer.aspx" target="_blank">
+                            <i class="material-icons">nfc</i>
+                            <span>QR Analyizer</span>
+                        </a>
+                    </li>
+                    </ul>
+                </div>
+                <!-- #Menu -->
+                <!-- Footer -->
+                <div class="legal" style="text-align: center">
+                    <div class="copyright">
+                        &copy; Copyright &copy; 2019-<script>document.write(new Date().getFullYear())</script><br />
+                        <a href="http://www.rnisolutions.in" target="_blank">RNI Solutions Pvt. Ltd.</a>.
+                   <br />
+                        <b>Version: </b>1.0.1
+                    </div>
+                </div>
+                <!-- #Footer -->
+            </aside>
+            <!-- #END# Left Sidebar -->
+            <!-- Right Sidebar -->
+            <aside id="rightsidebar" class="right-sidebar">
+                <ul class="nav nav-tabs tab-nav-right" role="tablist">
+                    <li role="presentation" class="active"><a href="#skins" data-toggle="tab">SKINS</a></li>
+                    <li role="presentation"><a href="#settings" data-toggle="tab">SETTINGS</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane fade in active in active" id="skins">
+                        <ul class="demo-choose-skin">
+                            <li data-theme="red" class="active">
+                                <div class="red"></div>
+                                <span>Red</span>
+                            </li>
+                            <li data-theme="pink">
+                                <div class="pink"></div>
+                                <span>Pink</span>
+                            </li>
+                            <li data-theme="purple">
+                                <div class="purple"></div>
+                                <span>Purple</span>
+                            </li>
+                            <li data-theme="deep-purple">
+                                <div class="deep-purple"></div>
+                                <span>Deep Purple</span>
+                            </li>
+                            <li data-theme="indigo">
+                                <div class="indigo"></div>
+                                <span>Indigo</span>
+                            </li>
+                            <li data-theme="blue">
+                                <div class="blue"></div>
+                                <span>Blue</span>
+                            </li>
+                            <li data-theme="light-blue">
+                                <div class="light-blue"></div>
+                                <span>Light Blue</span>
+                            </li>
+                            <li data-theme="cyan">
+                                <div class="cyan"></div>
+                                <span>Cyan</span>
+                            </li>
+                            <li data-theme="teal">
+                                <div class="teal"></div>
+                                <span>Teal</span>
+                            </li>
+                            <li data-theme="green">
+                                <div class="green"></div>
+                                <span>Green</span>
+                            </li>
+                            <li data-theme="light-green">
+                                <div class="light-green"></div>
+                                <span>Light Green</span>
+                            </li>
+                            <li data-theme="lime">
+                                <div class="lime"></div>
+                                <span>Lime</span>
+                            </li>
+                            <li data-theme="yellow">
+                                <div class="yellow"></div>
+                                <span>Yellow</span>
+                            </li>
+                            <li data-theme="amber">
+                                <div class="amber"></div>
+                                <span>Amber</span>
+                            </li>
+                            <li data-theme="orange">
+                                <div class="orange"></div>
+                                <span>Orange</span>
+                            </li>
+                            <li data-theme="deep-orange">
+                                <div class="deep-orange"></div>
+                                <span>Deep Orange</span>
+                            </li>
+                            <li data-theme="brown">
+                                <div class="brown"></div>
+                                <span>Brown</span>
+                            </li>
+                            <li data-theme="grey">
+                                <div class="grey"></div>
+                                <span>Grey</span>
+                            </li>
+                            <li data-theme="blue-grey">
+                                <div class="blue-grey"></div>
+                                <span>Blue Grey</span>
+                            </li>
+                            <li data-theme="black">
+                                <div class="black"></div>
+                                <span>Black</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div role="tabpanel" class="tab-pane fade" id="settings">
+                        <div class="demo-settings">
+                            <p>GENERAL SETTINGS</p>
+                            <ul class="setting-list">
+                                <li>
+                                    <span>Report Panel Usage</span>
+                                    <div class="switch">
+                                        <label>
+                                            <input type="checkbox" checked><span class="lever"></span></label>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span>Email Redirect</span>
+                                    <div class="switch">
+                                        <label>
+                                            <input type="checkbox"><span class="lever"></span></label>
+                                    </div>
+                                </li>
+                            </ul>
+                            <p>SYSTEM SETTINGS</p>
+                            <ul class="setting-list">
+                                <li>
+                                    <span>Notifications</span>
+                                    <div class="switch">
+                                        <label>
+                                            <input type="checkbox" checked><span class="lever"></span></label>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span>Auto Updates</span>
+                                    <div class="switch">
+                                        <label>
+                                            <input type="checkbox" checked><span class="lever"></span></label>
+                                    </div>
+                                </li>
+                            </ul>
+                            <p>ACCOUNT SETTINGS</p>
+                            <ul class="setting-list">
+                                <li>
+                                    <span>Offline</span>
+                                    <div class="switch">
+                                        <label>
+                                            <input type="checkbox"><span class="lever"></span></label>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span>Location Permission</span>
+                                    <div class="switch">
+                                        <label>
+                                            <input type="checkbox" checked><span class="lever"></span></label>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+            <asp:Button ID="hdButton" runat="server" Visible="false" />
+            <!-- #END# Right Sidebar -->
+        </section>
+
+        <section class="content">
+            <div class="container-fluid">
+                <asp:ContentPlaceHolder ID="ContentPlaceHolderBody" runat="server">
+                </asp:ContentPlaceHolder>
+            </div>
+        </section>
+
+        <!-- Jquery Core Js -->
+        <script src="plugins/jquery/jquery.min.js"></script>
+
+        <!-- Bootstrap Core Js -->
+        <script src="plugins/bootstrap/js/bootstrap.js"></script>
+
+        <!-- Select Plugin Js
+    <script src="plugins/bootstrap-select/js/bootstrap-select.js"></script> -->
+
+        <!-- Slimscroll Plugin Js -->
+        <script src="plugins/jquery-slimscroll/jquery.slimscroll.js"></script>
+
+        <!-- Jquery Validation Plugin Css -->
+        <script src="plugins/jquery-validation/jquery.validate.js"></script>
+
+        <!-- JQuery Steps Plugin Js -->
+        <script src="plugins/jquery-steps/jquery.steps.js"></script>
+
+        <!-- Sweet Alert Plugin Js -->
+        <script src="plugins/sweetalert/sweetalert.min.js"></script>
+
+        <!-- Waves Effect Plugin Js -->
+        <script src="plugins/node-waves/waves.js"></script>
+
+        <!-- Jquery Knob Plugin Js -->
+        <script src="plugins/jquery-knob/jquery.knob.min.js"></script>
+
+        <!-- Jquery CountTo Plugin Js -->
+        <script src="plugins/jquery-countto/jquery.countTo.js"></script>
+
+        <!-- Morris Plugin Js -->
+        <script src="plugins/raphael/raphael.min.js"></script>
+        <script src="plugins/morrisjs/morris.js"></script>
+
+        <!-- ChartJs -->
+        <script src="plugins/chartjs/Chart.bundle.js"></script>
+
+        <!-- Flot Charts Plugin Js -->
+        <script src="plugins/flot-charts/jquery.flot.js"></script>
+        <script src="plugins/flot-charts/jquery.flot.resize.js"></script>
+        <script src="plugins/flot-charts/jquery.flot.pie.js"></script>
+        <script src="plugins/flot-charts/jquery.flot.categories.js"></script>
+        <script src="plugins/flot-charts/jquery.flot.time.js"></script>
+
+        <!-- Sparkline Chart Plugin Js -->
+        <script src="plugins/jquery-sparkline/jquery.sparkline.js"></script>
+
+        <!-- Custom Js -->
+
+        <script src="js/admin.js"></script>
+        <script src="js/pages/ui/modals.js"></script>
+
+        <script src="js/form-wizard.js"></script>
+        <script src="js/pages/charts/jquery-knob.js"></script>
+
+        <script src="js/index.js"></script>
+
+        <!-- Demo Js -->
+        <script src="js/demo.js"></script>
+    </form>
+   
+</body>
+
+</html>
