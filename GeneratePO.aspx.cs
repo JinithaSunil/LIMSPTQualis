@@ -1,12 +1,15 @@
-﻿using System;
+﻿using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
+using DocumentFormat.OpenXml.VariantTypes;
+using System;
 using System.Collections;
 using System.Data;
+using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Web;
 using System.Web.UI;
-using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
 using static LIMS.DAL.GLModule;
 
 namespace LIMS
@@ -33,6 +36,7 @@ namespace LIMS
                         string Discount = "";
                         string DiscountAmount = "";
                         string Tax = "";
+                        bool PPN = true;
                         decimal TotalAmount = 0;
                         string SpecialInstruction = "";
                         decimal Amount = 0;
@@ -44,7 +48,8 @@ namespace LIMS
                         string Mobile = "";
                         string Email = "";
                         string ItemDescription = "";
-                        string Quantity = "";
+                        string ItemSpecification = "";
+                        int Quantity = 0;
                         string Rate = "";
                         string VAT = "";
                         string CompanyReg = "";
@@ -63,6 +68,7 @@ namespace LIMS
                         string FarmsonUnit = "";
 
                         string POHeader = "";
+                        string VendorQuotationID = "";
                         string VendorQuotation = "";
                         string ItemID = "";
                         string PRRemarks = "";
@@ -128,10 +134,11 @@ namespace LIMS
                             Guarantee = dt.Rows[0]["Guarantee"].ToString();
                             Remarks = dt.Rows[0]["Remarks"].ToString();
                             ContactPerson = dt.Rows[0]["ContactPersonName"].ToString();
+                            VendorQuotationID = dt.Rows[0]["VendorQuotationID"].ToString();
                             VendorQuotation = dt.Rows[0]["QuoteNo"].ToString();
                             EnquiryDetailsID = Convert.ToInt32(dt.Rows[0]["EnquiryDetailsID"].ToString());
-                            sbVendorQuotation.Append("<a href='./VendorQuotation/" + VendorQuotation + ".html' target='_blank'>" + VendorQuotation + "</a>");
-
+                            //sbVendorQuotation.Append("<a href='./VendorQuotation/" + VendorQuotation + ".html' target='_blank'>" + VendorQuotation + "</a>");
+                            sbVendorQuotation.Append("<a href='GenerateVendorQuotation.aspx?ID=" + VendorID + "&type="+ VendorQuotationID + "' target='_blank'>" + VendorQuotation + "</a>");
 
                             POHeader = "<img src='http://localhost:41414/assets/img/PO-header- style='display:block;width:100%;height:auto'/>";
                             dt2 = _cm.GetVendorDetails(VendorID);
@@ -147,6 +154,7 @@ namespace LIMS
                                 CompanyReg = dt2.Rows[0]["RegistrationNumber"].ToString();
                                 VAT = dt2.Rows[0]["VAT"].ToString();
                                 Fax = dt2.Rows[0]["Fax"].ToString();
+                                if (dt2.Rows[0]["VAT"].ToString() == "2") { PPN = false; }
                             }
 
                             // Start items table
@@ -178,6 +186,8 @@ namespace LIMS
 
                             DataTable dt3 = _cm.GetPurchaseItemsDetails(PurchaseOrderID);
                             decimal subtotal = 0;
+                            string additionalChargeDescription = "";
+                            decimal additionalCharges = 0;
                             decimal taxAmount = 0;
                             DataTable dtPRRemarks = new DataTable();
 
@@ -189,32 +199,31 @@ namespace LIMS
                                 PRRemarks = dtPRRemarks.Rows.Count > 0 ? dtPRRemarks.Rows[0]["Remarks"].ToString() : "";
 
                                 ItemDescription = row["ModelNo"].ToString() + " " + " " + row["ItemDescription"].ToString();
-                                Quantity = row["Quantity"].ToString();
+                                ItemSpecification = row["ItemSpecification"].ToString();
+                                Quantity = (int)decimal.Parse(row["Quantity"].ToString(), CultureInfo.InvariantCulture); 
 
                                 decimal price = Convert.ToDecimal(row["Rate"]);
                                 Amount = Convert.ToDecimal(row["TotalAmount"]);
 
-                                string strPrice = "", strAmount = "";
-                                switch (Currency)
-                                {
-                                    case "IDR":
-                                        strPrice = _cm.ToIDR(price);
-                                        strAmount = _cm.ToIDR(Amount);
-                                        break;
-                                    case "USD":
-                                        strPrice = _cm.ToUSD(price);
-                                        strAmount = _cm.ToUSD(Amount);
-                                        break;
-                                    default:
-                                        break;
-                                }
-
+                                string strPrice = "", strAmount = "", strDiscount="";
+                                strPrice = _cm.ToAnyCurrency(Currency, price);
+                                strAmount = _cm.ToAnyCurrency(Currency,Amount);
+                               
                                 Discount = row["Discount"].ToString();
                                 DiscountAmount = row["DiscountAmount"].ToString();
+                                strDiscount = _cm.ToAnyCurrency(Currency,Convert.ToDecimal(Discount));
+
                                 TotalAmount = Convert.ToDecimal(row["GrandTotal"].ToString());
-                                if (row["TotalVAT"].ToString() != "")
+                                additionalChargeDescription = row["additionalChargeDescription"].ToString();
+                                if (row["additionalCharges"].ToString() != "")
                                 {
-                                    taxAmount += Convert.ToDecimal(row["TotalVAT"].ToString());
+                                    additionalCharges = Convert.ToDecimal(row["additionalCharges"].ToString());
+                                }
+                                
+                                TotalAmount = Convert.ToDecimal(row["GrandTotal"].ToString());
+                                if ((row["TotalVAT"].ToString() != "")&&(PPN==true))
+                                {
+                                    taxAmount = Convert.ToDecimal(row["TotalVAT"].ToString());
                                 }
 
 
@@ -231,6 +240,7 @@ namespace LIMS
                                 DataTable dtPR1 = _cm.GetPR(EnquiryDetailsID);
                                 if (dtPR1.Rows.Count > 0)
                                 {
+                                    sbPR.Clear();
                                     PR = dtPR1.Rows[0]["PR"].ToString();
                                     sbPR.Append("<a href='GeneratePurchaseRequisitionReport.aspx?ID="+ dtPR1.Rows[0]["PRID"].ToString() + "' target='_blank'>" + PR + "</a>");
                                     sb.Append($"<td style='border:1px solid #ddd; padding:5px;text-align:center;'>" + sbPR.ToString() + "</td>");
@@ -240,37 +250,80 @@ namespace LIMS
                                     sb.Append($"<td style='border:1px solid #ddd; padding:5px;text-align:center;'>&nbsp;</td>");
                                 }
                                 //sb.Append($"<td style='border:1px solid #ddd; padding:5px;'>{ItemDescription}<br/>{PRRemarks}</td>");2Sep'26 Nova requested for PR remarks removal. Anton confirmed
-                                sb.Append($"<td style='border:1px solid #ddd; padding:5px;'>{ItemDescription}</td>");
+                                sb.Append($"<td style='border:1px solid #ddd; padding:5px;'>{ItemDescription}<br/>{ItemSpecification}</td>");
                                 sb.Append($"<td style='border:1px solid #ddd; padding:5px; text-align:center;'>{Quantity}</td>");
 
 
                                 string currencySymbol = Currency == "IDR" ? "Rp " : "";
                                 sb.Append($"<td style='border:1px solid #ddd; padding:5px; text-align:right;'>{strPrice}</td>");
-                                sb.Append($"<td style='border:1px solid #ddd; padding:5px; text-align:right;font-weight:bold;'>{Discount}</td>");
+                                sb.Append($"<td style='border:1px solid #ddd; padding:5px; text-align:right;font-weight:bold;'>{strDiscount}</td>");
                                 sb.Append($"<td style='border:1px solid #ddd; padding:5px; text-align:right;'>{strAmount}</td>");
                                 sb.Append("</tr>");
                             }
-
                             // Add subtotal row
                             sb.Append("<tr>");
                             sb.Append("<td colspan='6' style='border:1px solid #ddd; padding:5px; text-align:right; font-weight:bold;'>Sub Total</td>");
-                            string currencySymbolForTotals = Currency == "IDR" ? "Rp " : "";
-                            sb.Append($"<td colspan='1' style='border:1px solid #ddd; padding:5px; text-align:right;'>" + _cm.ToIDR(subtotal) + "</td>");
-                            sb.Append("</tr>");
 
+                            sb.Append("<td colspan='1' style='border:1px solid #ddd; padding:5px; text-align:right;'>");
+                            sb.Append(_cm.ToAnyCurrency(Currency, subtotal));
+                            sb.Append("</td>");
+
+                            sb.Append("</tr>");
+                            if (additionalChargeDescription != "")
+                            {
+                                sb.Append("<tr>");
+                                sb.Append("<td colspan='6' style='border:1px solid #ddd; padding:5px; text-align:right; font-weight:bold;'>" + additionalChargeDescription + "</td>");
+
+                                sb.Append("<td colspan='1' style='border:1px solid #ddd; padding:5px; text-align:right;'>");
+                                sb.Append(_cm.ToAnyCurrency(Currency, additionalCharges));
+                                sb.Append("</td>");
+
+                                sb.Append("</tr>");
+                            }
+                            
+                            // Add PPN only for IDR
                             if (Currency == "IDR")
                             {
                                 sb.Append("<tr>");
                                 sb.Append("<td colspan='6' style='border:1px solid #ddd; padding:5px; text-align:right; font-weight:bold;'>PPN</td>");
-                                sb.Append($"<td colspan='1' style='border:1px solid #ddd; padding:5px; text-align:right;'> " + _cm.ToIDR(taxAmount) + "</td>");
+
+                                sb.Append("<td colspan='1' style='border:1px solid #ddd; padding:5px; text-align:right;'>");
+                                sb.Append(_cm.ToAnyCurrency(Currency, taxAmount));
+                                sb.Append("</td>");
+
                                 sb.Append("</tr>");
                             }
+
 
                             // Add grand total row
                             sb.Append("<tr>");
                             sb.Append("<td colspan='6' style='border:1px solid #ddd; padding:5px; text-align:right; font-weight:bold;'>Total</td>");
-                            sb.Append($"<td colspan='1' style='border:1px solid #ddd; padding:5px; text-align:right; font-weight:bold;'>" + _cm.ToIDR(TotalAmount) + "</td>");
+
+                            sb.Append("<td colspan='1' style='border:1px solid #ddd; padding:5px; text-align:right; font-weight:bold;'>");
+                            sb.Append(_cm.ToAnyCurrency(Currency, TotalAmount));
+                            sb.Append("</td>");
+
                             sb.Append("</tr>");
+                            //// Add subtotal row
+                            //sb.Append("<tr>");
+                            //sb.Append("<td colspan='6' style='border:1px solid #ddd; padding:5px; text-align:right; font-weight:bold;'>Sub Total</td>");
+                            //string currencySymbolForTotals = Currency == "IDR" ? "Rp " : "";
+                            //sb.Append($"<td colspan='1' style='border:1px solid #ddd; padding:5px; text-align:right;'>" + _cm.ToIDR(subtotal) + "</td>");
+                            //sb.Append("</tr>");
+
+                            //if (Currency == "IDR")
+                            //{
+                            //    sb.Append("<tr>");
+                            //    sb.Append("<td colspan='6' style='border:1px solid #ddd; padding:5px; text-align:right; font-weight:bold;'>PPN</td>");
+                            //    sb.Append($"<td colspan='1' style='border:1px solid #ddd; padding:5px; text-align:right;'> " + _cm.ToIDR(taxAmount) + "</td>");
+                            //    sb.Append("</tr>");
+                            //}
+
+                            //// Add grand total row
+                            //sb.Append("<tr>");
+                            //sb.Append("<td colspan='6' style='border:1px solid #ddd; padding:5px; text-align:right; font-weight:bold;'>Total</td>");
+                            //sb.Append($"<td colspan='1' style='border:1px solid #ddd; padding:5px; text-align:right; font-weight:bold;'>" + _cm.ToIDR(TotalAmount) + "</td>");
+                            //sb.Append("</tr>");
 
                             sb.Append("</tbody>");
                             sb.Append("</table>");
@@ -282,8 +335,7 @@ namespace LIMS
                             {
                                 int approvedBy = Convert.ToInt32(dtApproval.Rows[0]["ApproveRejectBy"]);
                                 string approvedDate = Convert.ToDateTime(dtApproval.Rows[0]["ApproveRejectDate"])
-                                                      .ToString("dd-MM-yyyy HH:mm");
-
+                                                      .AddHours(1.5).ToString("dd-MMM-yyyy HH:mm");
                                 //Get signature of the employee who approved
                                 signature = _cm.GetSignature(approvedBy, "PO");
 
@@ -306,7 +358,7 @@ namespace LIMS
                                             string EmployeeID = Session["EmployeeID"].ToString();
                                             dtApproval = _cm.GetPOApprover(EmployeeID);
                                             ApproverName = dtApproval.Rows[0]["EmployeeName"].ToString().ToUpper();
-                                            string ApprovedDate = Convert.ToDateTime(dtApproval.Rows[0]["ApproveRejectDate"]).ToString("dd-MM-yyyy HH:mm");
+                                            string ApprovedDate = Convert.ToDateTime(dtApproval.Rows[0]["ApproveRejectDate"]).AddHours(1.5).ToString("dd-MMM-yyyy HH:mm");
 
                                             //if (dtApproval.Rows[0]["DigiSign"].ToString() != "")
                                             //{
@@ -396,7 +448,7 @@ namespace LIMS
                                         dt = _cm.GetVendorDetails(VendorID);
                                         if (dt.Rows.Count > 0)
                                         {
-                                            ToAddress = dt.Rows[0]["ContactEmail"].ToString();
+                                            ToAddress = dt.Rows[0]["ContactEmail"].ToString();                                            
                                         }
 
                                         dtEmail = _cm.getEmaildetails("Send PO");

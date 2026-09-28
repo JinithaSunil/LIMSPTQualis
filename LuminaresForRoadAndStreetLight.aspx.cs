@@ -32,13 +32,12 @@ namespace LIMS
     {
         string connectionString = ConfigurationManager.ConnectionStrings["CM"].ConnectionString;
         DAL.CM _cm = new DAL.CM();
-
-        // Constants for A4 page layout
+        // Constants for A4 page layout //
         private const int A4_PAGE_WIDTH_TWIPS = 12240;
         private const int LEFT_MARGIN_TWIPS = 1440;
         private const int RIGHT_MARGIN_TWIPS = 1440;
         private const int USABLE_WIDTH_TWIPS = A4_PAGE_WIDTH_TWIPS - LEFT_MARGIN_TWIPS - RIGHT_MARGIN_TWIPS;
-                
+        
         protected void Page_Load(object sender, EventArgs e)
         {
             try
@@ -168,11 +167,23 @@ namespace LIMS
                 txtproduct.Text = dt1.Rows[0]["ProductName"].ToString();
                 txtbrand.Text = dt1.Rows[0]["BrandProduct"].ToString();
                 txtmodel.Text = dt1.Rows[0]["ProductSerialNo"].ToString();
-                txtworkorder.Text = " ";
+               
                 txttestMethodNo.Text = dts.Rows[0]["TestMethod"].ToString();
                 ViewState["SampleIDSeriesVS"] = dts.Rows[0]["sampleIDSeries"].ToString();
 
-                string[] ids = StandardID.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+                string CloneCRFSampleID = dt1.Rows[0]["CloneCRFSampleID"].ToString();
+
+                DataTable dtst = _cm.CheckAllAllocated_LED(Convert.ToInt32(CloneCRFSampleID));
+                if (dtst.Rows.Count > 0)
+                {
+                    txtworkorder.Text = dtst.Rows[0]["WorkorderNumber"].ToString();
+                }
+                else
+                {
+                    txtworkorder.Text = " ";
+                }
+
+                    string[] ids = StandardID.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
                 List<string> standardIdList = ids.Select(id => id.Trim()).ToList();
                 DataTable filteredClauseTable = null;
 
@@ -716,6 +727,11 @@ namespace LIMS
                     DataTable dtReportT4 = GetReportDataForT2();
                     CreateReportTableT4OpenXML(wordDoc, dtReportT4);
 
+
+                    DataTable dtReportTC = GetReportDataRefer();
+                    CreateReportTableOpenXML_ReferTC(wordDoc, dtReportTC);
+
+
                     // Clean up unresolved placeholders
                     CleanupUnresolvedPlaceholders(wordDoc);
 
@@ -886,7 +902,6 @@ namespace LIMS
             foreach (var footerPart in mainPart.FooterParts)
                 if (footerPart.Footer != null) CleanElement(footerPart.Footer);
         }
-
         #endregion
 
         #region Template Variable Replacement
@@ -933,7 +948,6 @@ namespace LIMS
                 }
             }
         }
-
         #endregion
 
         #region Main Report Table
@@ -949,6 +963,200 @@ namespace LIMS
                 throw new Exception("Placeholder '{TestingAndMeasurement}' not found in the document template.");
 
             ReplaceInParagraphOpenXML(targetParagraph, "{TestingAndMeasurement}", "");
+
+            int dataRows = dt.Rows.Cast<DataRow>().Count(r => r["isHeader"].ToString() != "1");
+            int headerRows = dt.Rows.Cast<DataRow>().Count(r => r["isHeader"].ToString() == "1");
+            int totalRows = 1 + dataRows + headerRows;
+
+            Table table = new Table();
+
+            TableProperties tableProps = new TableProperties(
+                new TableBorders(
+                    new TopBorder() { Val = BorderValues.Single, Size = 4 },
+                    new BottomBorder() { Val = BorderValues.Single, Size = 4 },
+                    new LeftBorder() { Val = BorderValues.Single, Size = 4 },
+                    new RightBorder() { Val = BorderValues.Single, Size = 4 },
+                    new InsideHorizontalBorder() { Val = BorderValues.Single, Size = 4 },
+                    new InsideVerticalBorder() { Val = BorderValues.Single, Size = 4 }
+                ),
+                new TableLayout() { Type = TableLayoutValues.Fixed },
+                new TableWidth() { Width = USABLE_WIDTH_TWIPS.ToString(), Type = TableWidthUnitValues.Dxa }
+            );
+            table.AppendChild(tableProps);
+
+            // Column widths
+            float totalOriginalWidth = 0.6f + 3.4f + 2.0f + 1.0f;
+            float scaleFactor = USABLE_WIDTH_TWIPS / (totalOriginalWidth * 1440f);
+            int col1Width = (int)(0.7f * 1440f * scaleFactor);
+            int col2Width = (int)(3.3f * 1440f * scaleFactor);
+            int col3Width = (int)(2.0f * 1440f * scaleFactor);
+            int col4Width = (int)(1.0f * 1440f * scaleFactor);
+
+            TableGrid grid = new TableGrid();
+            grid.AppendChild(new GridColumn() { Width = col1Width.ToString() });
+            grid.AppendChild(new GridColumn() { Width = col2Width.ToString() });
+            grid.AppendChild(new GridColumn() { Width = col3Width.ToString() });
+            grid.AppendChild(new GridColumn() { Width = col4Width.ToString() });
+            table.AppendChild(grid);
+
+            // Header row
+            TableRow headerRow = new TableRow();
+            headerRow.AppendChild(new TableRowProperties(
+                new TableRowHeight() { Val = 400, HeightType = HeightRuleValues.AtLeast }
+            ));
+
+            string[] headers = { "Klausul\nClause", "Persyaratan\nRequirements", "Hasil\nResult", "*Keterangan\nRemark" };
+            for (int col = 0; col < 4; col++)
+            {
+                TableCell cell = new TableCell();
+                cell.AppendChild(new TableCellProperties(
+                    new TableCellVerticalAlignment() { Val = TableVerticalAlignmentValues.Center },
+                    new Shading() { Val = ShadingPatternValues.Clear, Color = "auto", Fill = "D3D3D3" }
+                ));
+                Paragraph para = new Paragraph();
+                para.ParagraphProperties = new ParagraphProperties(
+                    new Justification() { Val = JustificationValues.Center }
+                );
+                Run run = new Run();
+                run.AppendChild(new RunProperties(new Bold(), new FontSize() { Val = "20" }));
+                run.AppendChild(new WordText() { Text = headers[col], Space = SpaceProcessingModeValues.Preserve });
+                para.AppendChild(run);
+                cell.AppendChild(para);
+                headerRow.AppendChild(cell);
+            }
+            table.AppendChild(headerRow);
+
+            int currentRow = 1;
+            foreach (DataRow row in dt.Rows)
+            {
+                TableRow tableRow = new TableRow();
+                tableRow.AppendChild(new TableRowProperties(
+                    new TableRowHeight() { Val = 300, HeightType = HeightRuleValues.AtLeast }
+                ));
+
+                if (row["isHeader"].ToString() == "1")
+                {
+                    // Section header row
+                    TableCell clauseCell = new TableCell();
+                    clauseCell.AppendChild(new TableCellProperties(
+                        new TableCellVerticalAlignment() { Val = TableVerticalAlignmentValues.Center }
+                    ));
+                    Paragraph clausePara = new Paragraph();
+                    clausePara.ParagraphProperties = new ParagraphProperties(
+                        new Justification() { Val = JustificationValues.Center }
+                    );
+                    Run clauseRun = new Run();
+                    clauseRun.AppendChild(new RunProperties(new Bold(), new FontSize() { Val = "18" }));
+                    clauseRun.AppendChild(new WordText() { Text = row["ClauseNumber"]?.ToString() ?? "", Space = SpaceProcessingModeValues.Preserve });
+                    clausePara.AppendChild(clauseRun);
+                    clauseCell.AppendChild(clausePara);
+                    tableRow.AppendChild(clauseCell);
+
+                    TableCell titleCell = new TableCell();
+                    titleCell.AppendChild(new TableCellProperties(
+                        new TableCellVerticalAlignment() { Val = TableVerticalAlignmentValues.Center },
+                        new GridSpan() { Val = 2 }
+                    ));
+                    string clauseTitleBH = row["ClauseTitle_BH"]?.ToString() ?? "";
+                    string clauseTitle = row["ClauseTitle"]?.ToString() ?? "";
+                    // First line underlined, second line plain (matches corrected design in image 2)
+                    AppendTwoLineParagraph(titleCell, clauseTitleBH, clauseTitle, true, JustificationValues.Left, 18);
+                    tableRow.AppendChild(titleCell);
+
+                    TableCell remarkCell = new TableCell();
+                    remarkCell.AppendChild(new TableCellProperties(
+                        new TableCellVerticalAlignment() { Val = TableVerticalAlignmentValues.Top }
+                    ));
+                    string remarkText = GetRemarkText(row);
+                    Paragraph remarkPara = new Paragraph();
+                    remarkPara.ParagraphProperties = new ParagraphProperties(
+                        new Justification() { Val = JustificationValues.Left }
+                    );
+                    Run remarkRun = new Run();
+                    remarkRun.AppendChild(new RunProperties(new Bold(), new FontSize() { Val = "18" }));
+                    remarkRun.AppendChild(new WordText() { Text = remarkText, Space = SpaceProcessingModeValues.Preserve });
+                    remarkPara.AppendChild(remarkRun);
+                    remarkCell.AppendChild(remarkPara);
+                    tableRow.AppendChild(remarkCell);
+                }
+                else
+                {
+                    // Data row
+                    TableCell clauseNumCell = new TableCell();
+                    clauseNumCell.AppendChild(new TableCellProperties(
+                        new TableCellVerticalAlignment() { Val = TableVerticalAlignmentValues.Center }
+                    ));
+                    Paragraph clauseNumPara = new Paragraph();
+                    clauseNumPara.ParagraphProperties = new ParagraphProperties(
+                        new Justification() { Val = JustificationValues.Center }
+                    );
+                    Run clauseNumRun = new Run();
+                    clauseNumRun.AppendChild(new RunProperties(new FontSize() { Val = "18" }));
+                    clauseNumRun.AppendChild(new WordText() { Text = row["ClauseNumber"]?.ToString() ?? "", Space = SpaceProcessingModeValues.Preserve });
+                    clauseNumPara.AppendChild(clauseNumRun);
+                    clauseNumCell.AppendChild(clauseNumPara);
+                    tableRow.AppendChild(clauseNumCell);
+
+                    TableCell reqCell = new TableCell();
+                    reqCell.AppendChild(new TableCellProperties(
+                        new TableCellVerticalAlignment() { Val = TableVerticalAlignmentValues.Center }
+                    ));
+                    string reqBH = row["Requirement_BH"]?.ToString() ?? "";
+                    string reqEN = row["Requirement"]?.ToString() ?? "";
+                    // First line underlined, second line plain (matches corrected design in image 2)
+                    AppendTwoLineParagraph(reqCell, reqBH, reqEN, false, JustificationValues.Left, 18);
+                    tableRow.AppendChild(reqCell);
+
+                    TableCell resultCell = new TableCell();
+                    resultCell.AppendChild(new TableCellProperties(
+                        new TableCellVerticalAlignment() { Val = TableVerticalAlignmentValues.Top }
+                    ));
+                    string inputType = GetInputTypeFromClause(row);
+                    Paragraph resultPara = new Paragraph();
+                    resultPara.ParagraphProperties = new ParagraphProperties(
+                        new Justification() { Val = JustificationValues.Left }
+                    );
+                    // Builds checkbox glyph runs with a symbol-capable font so ☐ / ☒ actually render (fixes image 1 -> image 2)
+                    AppendCheckboxResultParagraph(resultPara, row, inputType);
+                    resultCell.AppendChild(resultPara);
+                    tableRow.AppendChild(resultCell);
+
+                    TableCell remarkCell = new TableCell();
+                    remarkCell.AppendChild(new TableCellProperties(
+                        new TableCellVerticalAlignment() { Val = TableVerticalAlignmentValues.Top }
+                    ));
+                    string remarkText = GetRemarkText(row);
+                    Paragraph remarkPara = new Paragraph();
+                    remarkPara.ParagraphProperties = new ParagraphProperties(
+                        new Justification() { Val = JustificationValues.Left }
+                    );
+                    Run remarkRun = new Run();
+                    remarkRun.AppendChild(new RunProperties(new FontSize() { Val = "18" }));
+                    remarkRun.AppendChild(new WordText() { Text = remarkText, Space = SpaceProcessingModeValues.Preserve });
+                    remarkPara.AppendChild(remarkRun);
+                    remarkCell.AppendChild(remarkPara);
+                    tableRow.AppendChild(remarkCell);
+                }
+
+                table.AppendChild(tableRow);
+                currentRow++;
+            }
+
+            targetParagraph.Parent.InsertAfter(table, targetParagraph);
+        }
+
+        private void CreateReportTableOpenXML_ReferTC(WordprocessingDocument doc, DataTable dt)
+        {
+            if (dt == null || dt.Rows.Count == 0) return;
+
+            var mainPart = doc.MainDocumentPart;
+            var body = mainPart.Document.Body;
+
+            Paragraph targetParagraph = FindParagraphContaining(body, "{LAMPIRAN_C-TERMINAL}");
+            if (targetParagraph == null)
+                throw new Exception("Placeholder '{LAMPIRAN_C-TERMINAL}' not found in the document template.");
+
+            ReplaceInParagraphOpenXML(targetParagraph, "{LAMPIRAN_C-TERMINAL}", "APPENDIX C – TERMINAL");
 
             int dataRows = dt.Rows.Cast<DataRow>().Count(r => r["isHeader"].ToString() != "1");
             int headerRows = dt.Rows.Cast<DataRow>().Count(r => r["isHeader"].ToString() == "1");
@@ -1518,7 +1726,8 @@ namespace LIMS
                             FROM Clauses c
                             inner JOIN TestResultsLED t ON c.ClauseID = t.ClauseID 
                                 AND t.SampleID = @SampleID
-                                AND t.ReportID = @ReportID
+                                AND t.ReportID = @ReportID 
+                                AND (c.isRefre is null or c.isRefre = 0 or c.isRefre = '')
                             ORDER BY c.ClauseID";
 
             using (SqlConnection conn = new SqlConnection(connectionString))
@@ -1535,6 +1744,46 @@ namespace LIMS
             }
             return dt;
         }
+
+        private DataTable GetReportDataRefer()
+        {
+            DataTable dt = new DataTable();
+
+            string query = @"SELECT 
+                                c.ClauseID,
+                                c.ClauseNumber,
+                                c.ClauseTitle,
+                                c.ClauseTitle_BH,
+                                c.Requirement,
+                                c.Requirement_BH,
+                                c.ResultOptions,
+                                c.ResultOptions_BH,
+                                c.isHeader, c.standard_ID,
+                                ISNULL(t.Result, '') as Results,
+                                ISNULL(t.Remark, '') as Remark,
+                                ISNULL(t.InputType, '') as SavedInputType
+                            FROM Clauses c
+                            inner JOIN TestResultsLED t ON c.ClauseID = t.ClauseID 
+                                AND t.SampleID = @SampleID
+                                AND t.ReportID = @ReportID 
+                                AND c.isRefre = 1
+                            ORDER BY c.ClauseID";
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlCommand cmd = new SqlCommand(query, conn))
+            {
+                cmd.Parameters.AddWithValue("@SampleID", lblSampleID.Text);
+                cmd.Parameters.AddWithValue("@ReportID", lblReportID.Text);
+
+                using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                {
+                    conn.Open();
+                    da.Fill(dt);
+                }
+            }
+            return dt;
+        }
+
 
         private DataTable GetReportDataForT2()
         {

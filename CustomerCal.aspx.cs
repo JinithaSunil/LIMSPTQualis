@@ -34,7 +34,18 @@ namespace LIMS
                     System.Data.DataTable dtInquiryStatus = _cm.GetEnquiryStatus(InquiryId);
                     if (dtInquiryStatus.Rows.Count > 0)
                     {
-                        if (dtInquiryStatus.Rows[0]["Instruments"].ToString() != "")
+                        int inquiryStatus = Convert.ToInt32(dtInquiryStatus.Rows[0]["inquiryStatusID"].ToString());
+                        if (inquiryStatus == 5)
+                        {
+                            int DepartmentID = Convert.ToInt32(dtInquiryStatus.Rows[0]["DepartmentID"].ToString());
+
+                            if (DepartmentID == 4013)
+                            {
+                                string url = "CustomerFMN_IAT.aspx?ID=" + InquiryId;
+                                Response.Redirect(url);
+                            }
+                        }
+                            if (dtInquiryStatus.Rows[0]["Instruments"].ToString() != "")
                         {
                             string[] s1 = dtInquiryStatus.Rows[0]["Instruments"].ToString().Split('|');
                             foreach (string s2 in s1)

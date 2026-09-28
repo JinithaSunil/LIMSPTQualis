@@ -230,7 +230,7 @@ namespace LIMS
                     hypCRA.NavigateUrl = string.Format("~/CalibrationRequest/CalibrationRequest-" + InquiryId + ".pdf");
                     hypCRA.Target = "_blank";
                     hypCRA.Visible = true;
-                    hypCRF.Visible = false;
+                    hypCRF.Visible = true;
                 }
                 else
                 {
@@ -266,6 +266,7 @@ namespace LIMS
                         if (containsAny)
                         {
                             btnTAF.Text = "CRA";
+                            btnTAF.Visible = true;
                             //hyp.Text = "CRA";
                             //hyp.NavigateUrl = string.Format("~/CustomerCal.aspx?ID=" + InquiryId);
                         }

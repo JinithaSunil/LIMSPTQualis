@@ -149,19 +149,9 @@ namespace LIMS
                     decimal amount = Convert.ToDecimal(row["TotalAmount"]);
 
                     string strPrice = "", strAmount = "";
-                    switch (CurrencyName)
-                    {
-                        case "Indonesian Rupiah":
-                            strPrice = _cm.ToIDR(price);
-                            strAmount = _cm.ToIDR(amount);
-                            break;
-                        case "US Dollar":
-                            strPrice = _cm.ToUSD(price);
-                            strAmount = _cm.ToUSD(amount);
-                            break;
-                        default:
-                            break;
-                    }
+                    strPrice = _cm.ToAnyCurrency(CurrencyCode,price);
+                    strAmount = _cm.ToAnyCurrency(CurrencyCode,amount);
+                    
                     // Add each row to the table
                     tableHtml += $@"
                         <tr>
@@ -195,29 +185,15 @@ namespace LIMS
                
                 // Close the table tag
                 tableHtml += "</table>";
-                string strSubTotal = "", strDiscount = "", strDiscountPercent = "", strTotalbeforetax = "", strVAT = "", strGrandtotal = "", strBalanceDue = "";
-                switch (CurrencyName)
-                {
-                    case "Indonesian Rupiah":
-                        strSubTotal = _cm.ToIDR(SubTotal);
-                        strDiscount = _cm.ToIDR(Discount);                        
-                        strTotalbeforetax = _cm.ToIDR(Totalbeforetax);
-                        strVAT = _cm.ToIDR(VAT);
-                        strGrandtotal = _cm.ToIDR(Grandtotal);
-                        strBalanceDue = _cm.ToIDR((Grandtotal - Discount)).ToString();
-                        break;
-                    case "US Dollar":
-                        strSubTotal = _cm.ToUSD(SubTotal);
-                        strDiscount = _cm.ToUSD(Discount);
-                        strTotalbeforetax = _cm.ToUSD(Totalbeforetax);
-                        strVAT = _cm.ToUSD(VAT);
-                        strGrandtotal = _cm.ToUSD(Grandtotal);
-                        strBalanceDue = _cm.ToUSD((Grandtotal - Discount)).ToString();
 
-                        break;
-                    default:
-                        break;
-                }
+                string strSubTotal = "", strDiscount = "", strDiscountPercent = "", strTotalbeforetax = "", strVAT = "", strGrandtotal = "", strBalanceDue = "";
+                strSubTotal = _cm.ToAnyCurrency(CurrencyCode, SubTotal);
+                strDiscount = _cm.ToAnyCurrency(CurrencyCode, Discount);
+                strTotalbeforetax = _cm.ToAnyCurrency(CurrencyCode,Totalbeforetax);
+                strVAT = _cm.ToAnyCurrency(CurrencyCode,VAT);
+                strGrandtotal = _cm.ToAnyCurrency(CurrencyCode,Grandtotal);
+                strBalanceDue = _cm.ToAnyCurrency(CurrencyCode,(Grandtotal - Discount)).ToString();
+                
                 strDiscountPercent = Math.Round(((Discount / SubTotal) * 100),0).ToString() + "%";
                 // Prepare the email body with the dynamic table
                 string body = objEmail.PrepareMailBodyWith("Quotation.html",

@@ -1,5 +1,9 @@
 ﻿using System;
 using System.Data;
+using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
+using System.IO;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 // Use alias to avoid naming conflicts
@@ -51,7 +55,7 @@ namespace LIMS
                             BindSamplingMethod();
                             BindSampleCheckList();
                             BindDeliveryDate(InquiryId);
-                            
+                            BindSampleImages();
                         }
                     }
                 }
@@ -144,10 +148,109 @@ namespace LIMS
             }
         }
 
-      
-       
+        private void BindSampleImages()
+        {
+            int InquiryId = Convert.ToInt32(ViewState["InquiryID"]);
+            DataTable dt = _cm.GetSampleImages(InquiryId);
+            GridView1.DataSource = dt;
+            GridView1.DataBind();
+        }
 
-      
+        protected void GridView1_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                DataRowView rowView = (DataRowView)e.Row.DataItem;
+                string fileName = rowView["filename"].ToString();
+                Image img = (Image)e.Row.FindControl("imgSample");
+                if (img != null && !string.IsNullOrEmpty(fileName))
+                {
+                    /* string smtpUrl = "http://localhost:41414"; */
+                    string smtpUrl = Session["WebsiteURL"] as string ?? "http://localhost:41414";
+                    string imageUrl = smtpUrl + "/SampleImages/" + fileName;
+                    img.ImageUrl = imageUrl;
+                }
+            }
+        }
+
+        protected void GridView1_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            if (e.CommandName == "DeleteRow")
+            {
+                try
+                {
+                    // Get the row index from command argument
+                    int rowIndex = Convert.ToInt32(e.CommandArgument);
+
+                    // Get the ID and filename from DataKeys
+                    int imageId = Convert.ToInt32(GridView1.DataKeys[rowIndex].Values["ID"]);
+                    string fileName = GridView1.DataKeys[rowIndex].Values["filename"].ToString();
+
+                    // Delete physical file
+                    bool fileDeleted = false;
+                    string fileMessage = "";
+
+                    if (!string.IsNullOrEmpty(fileName))
+                    {
+                        string folderPath = Server.MapPath("SampleImages/");
+                        string filePath = Path.Combine(folderPath, fileName);
+
+                        if (File.Exists(filePath))
+                        {
+                            try
+                            {
+                                File.Delete(filePath);
+                                fileDeleted = true;
+                                fileMessage = "File deleted successfully.";
+                            }
+                            catch (Exception ex)
+                            {
+                                fileDeleted = false;
+                                fileMessage = "File could not be deleted: " + ex.Message;
+                            }
+                        }
+                        else
+                        {
+                            fileMessage = "File not found in folder.";
+                        }
+                    }
+                    else
+                    {
+                        fileMessage = "No file associated with this record.";
+                    }
+
+                    // Delete from database
+                    bool isDeleted = _cm.DeleteSampleImage(imageId);
+
+                    if (isDeleted)
+                    {
+                        string successMessage = "Image deleted successfully! ";
+                        if (fileDeleted)
+                        {
+                            successMessage += "File also removed from folder.";
+                            lblMessage.ForeColor = System.Drawing.Color.Green;
+                        }
+                        else
+                        {
+                            successMessage += "Note: " + fileMessage;
+                            lblMessage.ForeColor = System.Drawing.Color.Orange;
+                        }
+                        lblMessage.Text = successMessage;
+                        BindSampleImages();
+                    }
+                    else
+                    {
+                        lblMessage.Text = "Error deleting image from database!";
+                        lblMessage.ForeColor = System.Drawing.Color.Red;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    lblMessage.Text = "Error: " + ex.Message;
+                    lblMessage.ForeColor = System.Drawing.Color.Red;
+                }
+            }
+        }
 
         private void BindSamplingMethod()
         {
@@ -639,7 +742,7 @@ namespace LIMS
             divDynamicTextBox.Visible = true;
             DataTable dt = new DataTable();
             string ProductCategory = lblCategoryType.Text.Trim();
-            dt = _cm.GetProductCategoryDetails(ProductCategory, 1);// _cm.GetProductCategoryDetails(ProductCategory);
+            dt = _cm.GetProductCategoryDetails(hdSampleCategory.Value);
             if (txtSampleReceivedDate.Text != "")
             {
                 if (dt.Rows.Count > 0)
@@ -649,6 +752,343 @@ namespace LIMS
                 }
             }
         }
-      
+        protected void btnUpload_Click(object sender, EventArgs e)
+        {
+            int flag = 0;
+            _cm.inquiryId = Convert.ToInt32(lblInquiryID.Text);
+            //string SampleID = Session["ID"].ToString();
+            // _cm.sampleId = Convert.ToInt32(SampleID);
+            if (txtSampleName.Text == "")
+            {
+                txtSampleName.BackColor = System.Drawing.Color.LightPink;
+                flag = 1;
+            }
+            else
+            {
+                txtSampleName.BackColor = System.Drawing.Color.Empty;
+
+                if (!fpSampleImage.HasFile)
+                {
+                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Notify", "alert('Select File');", true);
+                    fpSampleImage.BorderColor = System.Drawing.Color.Red;
+                    flag = 1;
+                }
+                else
+                {
+                    // Check if file is JPG/JPEG
+                    string fileExtension = Path.GetExtension(fpSampleImage.FileName).ToLower();
+                    if (fileExtension != ".jpg" && fileExtension != ".jpeg")
+                    {
+                        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage",
+                            "alert('Only JPG and JPEG files are allowed. Please select a JPG or JPEG image.');", true);
+                        fpSampleImage.BorderColor = Color.Red;
+                        return;
+                    }
+
+                    int count = 1;
+                    fpSampleImage.BorderColor = System.Drawing.Color.Empty;
+                    string folderPath = Server.MapPath("SampleImages/");
+                    //DataTable chkReport = _cm.CheckSampleImageExists(_cm);
+                    if (!Directory.Exists(folderPath))
+                    {
+                        Directory.CreateDirectory(folderPath);
+                    }
+                    DataTable chkReport = _cm.CheckSampleImageExistsOfEnquiry(_cm);
+                    if (chkReport.Rows.Count > 0)
+                    {
+                        count = chkReport.Rows.Count + 1;
+                    }
+
+                    // Process the uploaded image (resize if needed)
+                    byte[] processedImage = ProcessUploadedImage(fpSampleImage);
+
+                    if (processedImage == null)
+                    {
+                        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage",
+                            "alert('Failed to process image. Please try with a different image.');", true);
+                        return;
+                    }
+
+                    // ***** CHECK: Verify the processed image is under 300KB *****
+                    const int MAX_SIZE_KB = 300;
+                    const int MAX_SIZE_BYTES = MAX_SIZE_KB * 1024;
+
+                    if (processedImage.Length > MAX_SIZE_BYTES)
+                    {
+                        // File is STILL too large even after processing
+                        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage",
+                            $"alert('Image could not be compressed to under {MAX_SIZE_KB}KB. ' + \n" +
+                            $"'Current size: {(processedImage.Length / 1024)}KB. ' + \n" +
+                            "'Please upload a smaller image or reduce the image quality.');", true);
+                        fpSampleImage.BorderColor = Color.Red;
+                        return;
+                    }
+
+                    // Generate filename - always save as .jpg
+                    string fileName = lblInquiryID.Text + "-" + count + ".jpg";
+                    string filePath = Path.Combine(folderPath, fileName);
+
+                    // Save the processed image
+                    File.WriteAllBytes(filePath, processedImage);
+
+                    _cm.SampleFileName = fileName;
+                    _cm.SampleText = txtSampleName.Text;
+                    _cm.created = DateTime.Now.AddHours(12.5);
+
+                    int ID = _cm.SampleImageUpload(_cm);
+                    BindSampleImages();
+                    lblMessage.Text = "";
+                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('File Upload Successful')", true);
+                }
+            }
+        }
+
+        private byte[] ProcessUploadedImage(FileUpload fileUpload)
+        {
+            const int MAX_SIZE_KB = 300;
+            const int MAX_SIZE_BYTES = MAX_SIZE_KB * 1024;
+            const int TARGET_WIDTH = 1056;
+            const int TARGET_HEIGHT = 704;
+            const int TARGET_DPI = 200;
+
+            try
+            {
+                byte[] imageBytes = fileUpload.FileBytes;
+
+                // If already under 300KB, return as-is
+                if (imageBytes.Length <= MAX_SIZE_BYTES)
+                {
+                    return imageBytes;
+                }
+
+                using (MemoryStream ms = new MemoryStream(imageBytes))
+                using (DrawingImage originalImage = DrawingImage.FromStream(ms))
+                {
+                    // Calculate new dimensions maintaining aspect ratio
+                    int newWidth, newHeight;
+                    double aspectRatio = (double)originalImage.Width / originalImage.Height;
+
+                    // If image is smaller than target, keep original size but still compress
+                    if (originalImage.Width <= TARGET_WIDTH && originalImage.Height <= TARGET_HEIGHT)
+                    {
+                        newWidth = originalImage.Width;
+                        newHeight = originalImage.Height;
+                    }
+                    else if (aspectRatio > (double)TARGET_WIDTH / TARGET_HEIGHT)
+                    {
+                        newWidth = TARGET_WIDTH;
+                        newHeight = (int)(TARGET_WIDTH / aspectRatio);
+                    }
+                    else
+                    {
+                        newHeight = TARGET_HEIGHT;
+                        newWidth = (int)(TARGET_HEIGHT * aspectRatio);
+                    }
+
+                    using (Bitmap resizedImage = new Bitmap(newWidth, newHeight))
+                    using (Graphics graphics = Graphics.FromImage(resizedImage))
+                    {
+                        // Set high quality rendering
+                        graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                        graphics.SmoothingMode = SmoothingMode.HighQuality;
+                        graphics.PixelOffsetMode = PixelOffsetMode.HighQuality;
+                        graphics.CompositingQuality = CompositingQuality.HighQuality;
+                        graphics.DrawImage(originalImage, 0, 0, newWidth, newHeight);
+
+                        // Set DPI
+                        resizedImage.SetResolution(TARGET_DPI, TARGET_DPI);
+
+                        byte[] resultImage = null;
+                        long quality = 95; // Start with high quality
+
+                        // Try quality levels from 95 down to 10
+                        while (quality >= 10)
+                        {
+                            using (MemoryStream outputMs = new MemoryStream())
+                            {
+                                SaveImageAsJpeg(resizedImage, outputMs, quality);
+                                byte[] tempBytes = outputMs.ToArray();
+
+                                // Check if we got under 300KB
+                                if (tempBytes.Length <= MAX_SIZE_BYTES)
+                                {
+                                    resultImage = tempBytes;
+                                    break;
+                                }
+
+                                quality -= 5;
+                            }
+                        }
+
+                        // If still too large, try exact dimensions with lower quality
+                        if (resultImage == null && (newWidth != TARGET_WIDTH || newHeight != TARGET_HEIGHT))
+                        {
+                            using (Bitmap exactImage = new Bitmap(TARGET_WIDTH, TARGET_HEIGHT))
+                            using (Graphics graphicsExact = Graphics.FromImage(exactImage))
+                            {
+                                graphicsExact.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                                graphicsExact.SmoothingMode = SmoothingMode.HighQuality;
+                                graphicsExact.DrawImage(originalImage, 0, 0, TARGET_WIDTH, TARGET_HEIGHT);
+                                exactImage.SetResolution(TARGET_DPI, TARGET_DPI);
+
+                                quality = 85;
+                                while (quality >= 10)
+                                {
+                                    using (MemoryStream outputMs = new MemoryStream())
+                                    {
+                                        SaveImageAsJpeg(exactImage, outputMs, quality);
+                                        byte[] tempBytes = outputMs.ToArray();
+
+                                        if (tempBytes.Length <= MAX_SIZE_BYTES)
+                                        {
+                                            resultImage = tempBytes;
+                                            break;
+                                        }
+                                        quality -= 5;
+                                    }
+                                }
+                            }
+                        }
+
+                        // If STILL too large, resize to smaller dimensions
+                        if (resultImage == null)
+                        {
+                            int smallerWidth = 800;
+                            int smallerHeight = (int)(800 / aspectRatio);
+
+                            using (Bitmap smallImage = new Bitmap(smallerWidth, smallerHeight))
+                            using (Graphics graphicsSmall = Graphics.FromImage(smallImage))
+                            {
+                                graphicsSmall.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                                graphicsSmall.SmoothingMode = SmoothingMode.HighQuality;
+                                graphicsSmall.DrawImage(originalImage, 0, 0, smallerWidth, smallerHeight);
+                                smallImage.SetResolution(TARGET_DPI, TARGET_DPI);
+
+                                quality = 75;
+                                while (quality >= 10)
+                                {
+                                    using (MemoryStream outputMs = new MemoryStream())
+                                    {
+                                        SaveImageAsJpeg(smallImage, outputMs, quality);
+                                        byte[] tempBytes = outputMs.ToArray();
+
+                                        if (tempBytes.Length <= MAX_SIZE_BYTES)
+                                        {
+                                            resultImage = tempBytes;
+                                            break;
+                                        }
+                                        quality -= 5;
+                                    }
+                                }
+                            }
+                        }
+
+                        // If STILL too large, try even smaller (600px)
+                        if (resultImage == null)
+                        {
+                            int smallerWidth = 600;
+                            int smallerHeight = (int)(600 / aspectRatio);
+
+                            using (Bitmap smallImage = new Bitmap(smallerWidth, smallerHeight))
+                            using (Graphics graphicsSmall = Graphics.FromImage(smallImage))
+                            {
+                                graphicsSmall.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                                graphicsSmall.SmoothingMode = SmoothingMode.HighQuality;
+                                graphicsSmall.DrawImage(originalImage, 0, 0, smallerWidth, smallerHeight);
+                                smallImage.SetResolution(TARGET_DPI, TARGET_DPI);
+
+                                quality = 60;
+                                while (quality >= 10)
+                                {
+                                    using (MemoryStream outputMs = new MemoryStream())
+                                    {
+                                        SaveImageAsJpeg(smallImage, outputMs, quality);
+                                        byte[] tempBytes = outputMs.ToArray();
+
+                                        if (tempBytes.Length <= MAX_SIZE_BYTES)
+                                        {
+                                            resultImage = tempBytes;
+                                            break;
+                                        }
+                                        quality -= 5;
+                                    }
+                                }
+                            }
+                        }
+
+                        // If STILL too large, try very small (400px)
+                        if (resultImage == null)
+                        {
+                            int smallerWidth = 400;
+                            int smallerHeight = (int)(400 / aspectRatio);
+
+                            using (Bitmap smallImage = new Bitmap(smallerWidth, smallerHeight))
+                            using (Graphics graphicsSmall = Graphics.FromImage(smallImage))
+                            {
+                                graphicsSmall.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                                graphicsSmall.SmoothingMode = SmoothingMode.HighQuality;
+                                graphicsSmall.DrawImage(originalImage, 0, 0, smallerWidth, smallerHeight);
+                                smallImage.SetResolution(TARGET_DPI, TARGET_DPI);
+
+                                quality = 50;
+                                while (quality >= 10)
+                                {
+                                    using (MemoryStream outputMs = new MemoryStream())
+                                    {
+                                        SaveImageAsJpeg(smallImage, outputMs, quality);
+                                        byte[] tempBytes = outputMs.ToArray();
+
+                                        if (tempBytes.Length <= MAX_SIZE_BYTES)
+                                        {
+                                            resultImage = tempBytes;
+                                            break;
+                                        }
+                                        quality -= 5;
+                                    }
+                                }
+                            }
+                        }
+
+                        return resultImage; // Will return null if still too large
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Log the error if needed
+                return null;
+            }
+        }
+
+        private void SaveImageAsJpeg(DrawingImage image, MemoryStream ms, long quality)
+        {
+            EncoderParameters encoderParams = new EncoderParameters();
+            encoderParams.Param[0] = new EncoderParameter(Encoder.Quality, quality);
+
+            // Get JPEG codec
+            ImageCodecInfo jpegCodec = GetJpegCodec();
+
+            if (jpegCodec != null)
+            {
+                image.Save(ms, jpegCodec, encoderParams);
+            }
+            else
+            {
+                image.Save(ms, ImageFormat.Jpeg);
+            }
+        }
+
+        private ImageCodecInfo GetJpegCodec()
+        {
+            ImageCodecInfo[] codecs = ImageCodecInfo.GetImageEncoders();
+            foreach (ImageCodecInfo codec in codecs)
+            {
+                if (codec.FormatID == ImageFormat.Jpeg.Guid)
+                {
+                    return codec;
+                }
+            }
+            return null;
+        }
     }
 }

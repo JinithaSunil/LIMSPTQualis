@@ -166,6 +166,7 @@
                                 <asp:ListItem Text="25" Value="25" />
                                 <asp:ListItem Text="50" Value="50" />
                                 <asp:ListItem Text="100" Value="100" />
+                                <asp:ListItem Text="500" Value="500" /> 
                             </asp:DropDownList>
                             <span>records</span>
                         </span>
@@ -210,6 +211,7 @@
                                 <asp:BoundField DataField="CurrentTier" HeaderText="CurrentTier" SortExpression="CurrentTier" />
                                 <asp:BoundField DataField="CurrentApproverRole" HeaderText="CurrentApproverRole" SortExpression="CurrentApproverRole" />
                                 <asp:BoundField DataField="Remarks" HeaderText="Remarks" SortExpression="Remarks" ItemStyle-Width="5%" />
+                                <asp:BoundField DataField="QuotationSummary" HeaderText="QuotationSummary" SortExpression="QuotationSummary" ItemStyle-Width="5%" />
                             </Columns>
                             <FooterStyle BackColor="White" ForeColor="#333333" />
                             <PagerStyle BackColor="#b34788" ForeColor="White" HorizontalAlign="Center" />

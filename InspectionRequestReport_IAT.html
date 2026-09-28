@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Inspection Request Form - {DocNo}</title>
+<style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 11pt;
+        color: #000;
+        margin: 0;
+        padding: 0;
+        background: #e5e5e5;
+    }
+
+    .page {
+        background: #fff;
+        width: 210mm;
+        min-height: 297mm;
+        margin: 12px auto;
+        padding: 18mm 16mm;
+        box-sizing: border-box;
+        box-shadow: 0 0 6px rgba(0,0,0,0.15);
+    }
+
+    .header { display: table; width: 100%; margin-bottom: 6px; }
+    .header .logo-cell { display: table-cell; width: 90px; vertical-align: middle; }
+    .header .logo-cell img { height: 60px; }
+    .header .text-cell { display: table-cell; vertical-align: middle; }
+    .header h1 { font-size: 15pt; margin: 0 0 2px 0; letter-spacing: 0.5px; }
+    .header .company { font-weight: bold; font-size: 10.5pt; }
+    .header .company-addr { font-size: 9pt; color: #333; }
+
+    .hr-thick { border: none; border-top: 3px solid #000; margin: 6px 0 14px 0; }
+
+    table.top-info { width: 100%; border-collapse: collapse; margin-bottom: 10px; font-size: 10.5pt; }
+    table.top-info td { padding: 2px 4px; }
+    table.top-info td.label { font-weight: bold; width: 22%; }
+
+    table.form-table { width: 100%; border-collapse: collapse; margin-bottom: 14px; font-size: 10.5pt; }
+    table.form-table td { border: 1px solid #000; padding: 6px 8px; vertical-align: top; }
+    table.form-table td.label { font-weight: bold; width: 22%; background: #fafafa; }
+    table.form-table td.label-sm { font-weight: bold; width: 14%; background: #fafafa; }
+
+    .section-title {
+        text-align: center;
+        font-weight: bold;
+        font-size: 10.5pt;
+        border: 1px solid #000;
+        border-bottom: none;
+        padding: 6px;
+        background: #fafafa;
+    }
+    .section-title .note { font-weight: normal; font-style: italic; font-size: 9pt; }
+
+    .chk { display: inline-block; margin-right: 4px; white-space: nowrap; }
+    .chk-glyph { font-family: "Segoe UI Symbol", "Segoe UI", Arial, sans-serif; font-size: 12.5pt; vertical-align: -1px; }
+    .chk-label { font-size: 10.5pt; }
+    .chk-sep { display: inline-block; width: 22px; }
+
+    .footer {
+        margin-top: 18px;
+        padding-top: 6px;
+        border-top: 1px solid #000;
+        font-size: 8.5pt;
+        display: table;
+        width: 100%;
+    }
+    .footer .f-cell { display: table-cell; width: 33.33%; }
+    .footer .f-center { text-align: center; }
+    .footer .f-right { text-align: right; }
+
+    .notes-box { border: 1px solid #000; padding: 10px 12px; font-size: 9.5pt; margin-top: 10px; }
+    .notes-box ol { margin: 0; padding-left: 18px; }
+    .notes-box li { margin-bottom: 4px; }
+
+    table.tc-table { width: 100%; border-collapse: collapse; font-size: 9.5pt; margin-top: 8px; }
+    table.tc-table th, table.tc-table td { border: 1px solid #000; padding: 6px 8px; text-align: left; vertical-align: top; }
+    table.tc-table th { background: #fafafa; }
+    table.tc-table td.desc-col { width: 26%; font-weight: bold; }
+
+    @media print {
+        body { background: #fff; }
+        .page { margin: 0; box-shadow: none; page-break-after: always; }
+        .page:last-child { page-break-after: avoid; }
+    }
+</style>
+</head>
+<body>
+
+<!-- ============================== PAGE 1 ============================== -->
+<div class="page">
+
+    <div class="header">
+        <div class="text-cell">
+            <h1>INSPECTION REQUEST FORM</h1>
+            <div class="company">PT. Qualis Indonesia</div>
+            <div class="company-addr">Jl. Pajajaran No.17 Kel. Gandasari, Kec. Jatiuwung, Tangerang, Banten 15137</div>
+            <div class="company-addr">Phone: (021) 55652583 &ndash; 55652586&nbsp;&nbsp;&nbsp;Fax.: (021) 55652489</div>
+        </div>
+        <div class="logo-cell"><img src="assets/img/logo.png" alt="PT Qualis Indonesia" /></div>
+
+    </div>
+    <hr class="hr-thick" />
+
+    <table class="top-info">
+        <tr><td class="label">Commodity</td><td>: {Commodity}</td></tr>
+        <tr><td class="label">Booking Form No.</td><td>: {BookingNo}</td></tr>
+        <tr><td class="label">Date</td><td>: {RequestDate}</td></tr>
+    </table>
+
+    <table class="form-table">
+        <tr>
+            <td class="label-sm">To</td>
+            <td colspan="3">: PT. Qualis Indonesia</td>
+        </tr>
+        <tr>
+            <td class="label-sm">Attn</td>
+            <td colspan="3">: {Attn}</td>
+        </tr>
+        <tr>
+            <td class="label">Applicant / Company Name</td>
+            <td colspan="3">{ApplicantName}</td>
+        </tr>
+        <tr>
+            <td class="label">Address</td>
+            <td colspan="3">{Address}</td>
+        </tr>
+        <tr>
+            <td class="label">Contact Person</td>
+            <td>{ContactPerson}</td>
+            <td class="label-sm">Phone</td>
+            <td>{Phone}</td>
+        </tr>
+        <tr>
+            <td class="label">Email</td>
+            <td>{Email}</td>
+            <td class="label-sm">Fax</td>
+            <td>{Fax}</td>
+        </tr>
+        <tr>
+            <td class="label">Report Sent To</td>
+            <td>{ReportRecipientBoxes}</td>
+            <td class="label-sm">CC</td>
+            <td>{CC}</td>
+        </tr>
+        <tr>
+            <td class="label">Invoice Addressed To</td>
+            <td>{InvoiceRecipientBoxes}</td>
+            <td class="label-sm">Email</td>
+            <td>{InvoiceEmail}</td>
+        </tr>
+        <tr>
+            <td class="label">Other Instructions</td>
+            <td colspan="3">{OtherInstructions}</td>
+        </tr>
+    </table>
+
+    <div class="section-title">Type of PJU Performance Inspection Service</div>
+    <table class="form-table" style="margin-top:0;">
+        <tr>
+            <td colspan="4">{ServiceTypeBoxesRow1}</td>
+        </tr>
+        <tr>
+            <td colspan="4">{ServiceTypeBoxesRow2}</td>
+        </tr>
+        <tr>
+            <td colspan="2">{ReInspectionBox} {PreviousReportNo}</td>
+            <td colspan="2">{OtherServiceBox} {OtherServiceText}</td>
+        </tr>
+    </table>
+
+    <div class="section-title">PJU Lamp Technical Details</div>
+    <table class="form-table" style="margin-top:0;">
+        <tr>
+            <td class="label">Road / Street Section</td>
+            <td>{RoadLocation}</td>
+            <td class="label-sm">Lamp Power (Watt)</td>
+            <td>{LampPower}</td>
+        </tr>
+        <tr>
+            <td class="label">Number of Lamp Points</td>
+            <td>{NumberOfLampPoints}</td>
+            <td class="label-sm">Pole Height (m)</td>
+            <td>{PoleHeight}</td>
+        </tr>
+        <tr>
+            <td class="label">Lamp / Luminaire Type</td>
+            <td>{LampType}</td>
+            <td class="label-sm">Distance Between Lamps (m)</td>
+            <td>{LampSpacing}</td>
+        </tr>
+    </table>
+
+    <div class="section-title">Reference Documents Provided to the Inspection Body</div>
+    <table class="form-table" style="margin-top:0;">
+        <tr>
+            <td colspan="4">{ReferenceYesBox} {ReferenceNoBox}</td>
+        </tr>
+        <tr>
+            <td colspan="2">{RefLampPoleDataBox}</td>
+            <td colspan="2">{RefLampPointListBox}</td>
+        </tr>
+        <tr>
+            <td colspan="2">{RefLayoutBox}</td>
+            <td colspan="2">{RefCommissioningBox}</td>
+        </tr>
+        <tr>
+            <td colspan="4">{RefOtherBox} {OtherReference}</td>
+        </tr>
+    </table>
+
+    <div class="footer">
+        <div class="f-cell">No.Dok: {DocNo}</div>
+        <div class="f-cell f-center">No.Revisi: {RevNo}</div>
+        <div class="f-cell f-right">Tgl Efektif: {EffectiveDate} &mdash; Page 1 of 3</div>
+    </div>
+</div>
+
+<!-- ============================== PAGE 2 ============================== -->
+<div class="page">
+
+    <div class="header">
+        <div class="text-cell">
+            <h1>INSPECTION REQUEST FORM</h1>
+            <div class="company">PT. Qualis Indonesia</div>
+            <div class="company-addr">Jl. Pajajaran No.17 Kel. Gandasari, Kec. Jatiuwung, Tangerang, Banten 15137</div>
+            <div class="company-addr">Phone: (021) 55652583 &ndash; 55652586&nbsp;&nbsp;&nbsp;Fax.: (021) 55652489</div>
+        </div>
+        <div class="logo-cell"><img src="assets/img/logo.png" alt="PT Qualis Indonesia" /></div>
+
+    </div>
+    <hr class="hr-thick" />
+
+    <p style="font-style: italic; font-size: 9.5pt;">*) To be filled in by officer</p>
+
+    <div class="section-title">Additional Requirements / Changes</div>
+    <table class="form-table" style="margin-top:0;">
+        <tr>
+            <td class="label">Inspection Location</td>
+            <td colspan="3">{InspectionLocation}</td>
+        </tr>
+        <tr>
+            <td class="label">Applicant / Company Name</td>
+            <td colspan="3">{FactorySupplierName}</td>
+        </tr>
+        <tr>
+            <td class="label">Address</td>
+            <td colspan="3">{FactoryAddress}</td>
+        </tr>
+        <tr>
+            <td class="label">Contact Person</td>
+            <td>{FactoryContactPerson}</td>
+            <td class="label-sm">Phone / Fax</td>
+            <td>{FactoryPhone} / {FactoryFax}</td>
+        </tr>
+        <tr>
+            <td class="label">Requested Inspection Date</td>
+            <td colspan="3">{RequestedInspectionDate}</td>
+        </tr>
+    </table>
+
+    <div class="notes-box">
+        <strong>Notes:</strong>
+        <ol>
+            <li>Inspection requests must be submitted at least 5 working days before the scheduled inspection date.</li>
+            <li>To make sure QUALIS has received your booking form, please contact us by phone.</li>
+            <li>Resubmit this form to QUALIS for any changes.</li>
+            <li>Make sure the goods are ready for inspection according to the client's requirements once the QUALIS inspector arrives. If not, the inspection will be cancelled and you will be liable for the cancelled inspection fee, calculated as the agreed daily rate &times; number of inspectors, plus any costs incurred.</li>
+        </ol>
+    </div>
+
+    <div class="footer">
+        <div class="f-cell">No.Dok: {DocNo}</div>
+        <div class="f-cell f-center">No.Revisi: {RevNo}</div>
+        <div class="f-cell f-right">Tgl Efektif: {EffectiveDate} &mdash; Page 2 of 3</div>
+    </div>
+</div>
+
+<!-- ============================== PAGE 3 ============================== -->
+<div class="page">
+
+    <div class="header">
+        <div class="text-cell">
+            <h1>INSPECTION REQUEST FORM</h1>
+            <div class="company">PT. Qualis Indonesia</div>
+            <div class="company-addr">Jl. Pajajaran No.17 Kel. Gandasari, Kec. Jatiuwung, Tangerang, Banten 15137</div>
+            <div class="company-addr">Phone: (021) 55652583 &ndash; 55652586&nbsp;&nbsp;&nbsp;Fax.: (021) 55652489</div>
+        </div>
+        <div class="logo-cell"><img src="assets/img/logo.png" alt="PT Qualis Indonesia" /></div>
+
+    </div>
+    <hr class="hr-thick" />
+
+    <h2 style="text-align:center; font-size:12pt;">Terms and Conditions</h2>
+
+    <table class="tc-table">
+        <tr><th>Description</th><th>Definition / Condition</th></tr>
+        <tr><td class="desc-col">Booking Timeline</td><td>Inspection requests must be submitted at least 5 (five) working days before the scheduled inspection. The schedule is issued only after payment confirmation or a written agreement.</td></tr>
+        <tr><td class="desc-col">Scope of Service</td><td>Inspection using a Lux Meter &amp; Luminance Meter. Parameters: average illuminance level, uniformity of illuminance, glare (TI), and number of lamp points lit.</td></tr>
+        <tr><td class="desc-col">Required Documents</td><td>Must be submitted at least 3 (three) working days before the inspection: lamp specifications, road layout, number and position of lamps, and other relevant technical data. If incomplete or late, the report may not be concluded and/or a rescheduling fee may apply.</td></tr>
+        <tr><td class="desc-col">Man-Day &amp; Additional Costs</td><td>Inspections are conducted at night only (19:00&ndash;24:00). 1 man-day = 1 working day of inspection. Transportation and accommodation are borne by the applicant.</td></tr>
+        <tr><td class="desc-col">Cancellation &amp; Rescheduling</td><td>Cancellation with less than 1 day's notice (H-1) incurs a 100% fee. If site conditions are not ready, the full fee is still charged. Rescheduling with less than 3 working days' notice incurs an administrative fee of Rp 1,000,000.</td></tr>
+        <tr><td class="desc-col">Applicant's Obligations</td><td>Ensure the location is safe and accessible; ensure electricity and lamps function as planned; provide a field escort and technical documents.</td></tr>
+        <tr><td class="desc-col">Inspection Report</td><td>The report is valid only for the site conditions at the time of inspection. It cannot be considered a quality certificate or a guarantee of future performance. Reproduction/publication of the report requires PT. QUALIS INDONESIA's written permission. The report may not be used for advertising or promotion.</td></tr>
+        <tr><td class="desc-col">Data Storage &amp; Re-issued Copies</td><td>Inspection data is stored per internal procedure. Re-issuing a copy of the report incurs an additional administrative fee.</td></tr>
+        <tr><td class="desc-col">Inspection Body's Liability</td><td>Claims regarding inspection results must be made within 30 days of report issuance. Liability is limited to the service fee paid. The inspection body is not liable for financial or operational losses, or the applicant's technical decisions.</td></tr>
+        <tr><td class="desc-col">Force Majeure</td><td>The inspection body is not liable for delays or failures caused by natural disasters, government policy, extreme weather, power outages, or other emergencies.</td></tr>
+        <tr><td class="desc-col">Confidentiality</td><td>Applicant data and information are protected in accordance with the law and ISO/IEC 17020:2012, except where disclosure is legally required.</td></tr>
+        <tr><td class="desc-col">Payment</td><td>Inspection fees are payable in advance or per contract. The inspection schedule will not be issued without payment.</td></tr>
+        <tr><td class="desc-col">Taxes</td><td>All taxes, levies, or duties arising from the inspection service are the applicant's responsibility.</td></tr>
+        <tr><td class="desc-col">Lien / Report Retention</td><td>PT. QUALIS INDONESIA reserves the right to withhold the inspection report if the applicant's payment obligations have not been fulfilled.</td></tr>
+        <tr><td class="desc-col">Court Appearance</td><td>If PT. QUALIS INDONESIA staff are requested or summoned as an expert witness regarding inspection results, the applicant bears the appearance cost per the applicable rate.</td></tr>
+        <tr><td class="desc-col">Governing Law</td><td>This agreement is governed by the laws of Indonesia; disputes are resolved through the courts of Indonesia.</td></tr>
+    </table>
+
+    <div class="footer">
+        <div class="f-cell">No.Dok: {DocNo}</div>
+        <div class="f-cell f-center">No.Revisi: {RevNo}</div>
+        <div class="f-cell f-right">Tgl Efektif: {EffectiveDate} &mdash; Page 3 of 3</div>
+    </div>
+</div>
+
+</body>
+</html>

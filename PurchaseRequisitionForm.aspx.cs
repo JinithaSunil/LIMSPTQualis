@@ -11,6 +11,7 @@ using System.Web.UI;
 using System.Web.UI.DataVisualization.Charting;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
+using static LIMS.DAL.CM;
 
 namespace LIMS
 {
@@ -328,16 +329,6 @@ namespace LIMS
             }
         }
 
-        //Get Items for grid
-        public class ItemDetails
-        {
-            public string ItemCode { get; set; }
-            public string Description { get; set; }
-            public string UOMName { get; set; }
-            public string CategoryName { get; set; }
-            public string Stock { get; set; }
-            public string ItemType { get; set; }
-        }
         protected void txtCode_TextChanged(object sender, EventArgs e)
         {
             try
@@ -713,6 +704,7 @@ namespace LIMS
                         DataTable dtReporting = new DataTable();
                         if (Session["EmployeeID"] != null)
                         {
+                           
                             EmployeeID = Session["EmployeeID"].ToString();
                             dtReporting = _cm.GetReportingTo(EmployeeID);
                             if (dtReporting.Rows.Count > 0)
@@ -730,6 +722,8 @@ namespace LIMS
                                     _cm.PurchaserequisitionSetApprover(_cm);
                                 }
                             }
+
+
                         }
 
 

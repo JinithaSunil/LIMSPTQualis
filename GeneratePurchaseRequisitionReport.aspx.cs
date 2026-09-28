@@ -23,10 +23,17 @@ namespace LIMS
         {
             if (!IsPostBack)
             {
-                string prId = Request.QueryString["ID"];
-                if (!string.IsNullOrEmpty(prId))
+                if (Session["Email"] == null)
                 {
-                    GeneratePRReport(prId);
+                    Response.Redirect("AccessDenied.aspx");
+                }
+                else
+                {
+                    string prId = Request.QueryString["ID"];
+                    if (!string.IsNullOrEmpty(prId))
+                    {
+                        GeneratePRReport(prId);
+                    }
                 }
             }
         }

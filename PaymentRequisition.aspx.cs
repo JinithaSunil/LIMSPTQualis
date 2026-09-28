@@ -326,13 +326,18 @@ namespace LIMS
                             }
 
                             string s = _cm.Encode(_cm.PaymentRequisitionID.ToString());
-                            string url = $"GeneratePaymentRequisition.aspx?ID={s}";
+                            string url = "GeneratePaymentRequisition.aspx?ID=" + s;
+
+                            string script = @"
+                                            window.open('" + url + @"', '_blank');
+                                            window.location.href = 'PaymentRequisitionList.aspx';
+                                        ";
 
                             ScriptManager.RegisterStartupScript(
                                 this,
                                 this.GetType(),
-                                "OpenWindow",
-                                "window.open('" + url + "', '_blank');",
+                                "OpenAndRedirect",
+                                script,
                                 true
                             );
                         }

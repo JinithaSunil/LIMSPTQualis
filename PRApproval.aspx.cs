@@ -696,9 +696,17 @@ namespace LIMS
                     }
                     else
                     {
-                        hdNextApprovalLevel.Value = "2";
-                        _cm.CurrentTier = Convert.ToInt32(hdNextApprovalLevel.Value);
-                        _cm.CurrentApproverRole = ddl.SelectedItem.ToString();
+                            if (hdCurrentTier.Value != "4")
+                            {
+                                hdNextApprovalLevel.Value = "2";
+                                _cm.CurrentTier = Convert.ToInt32(hdNextApprovalLevel.Value);
+                                _cm.CurrentApproverRole = ddl.SelectedItem.ToString();
+                            }
+                            else
+                            {
+                                _cm.CurrentTier = Convert.ToInt32(hdCurrentTier.Value);
+                                _cm.CurrentApproverRole = hdCurrentApprover.Value;
+                            }  
                     }
                 }
                 else

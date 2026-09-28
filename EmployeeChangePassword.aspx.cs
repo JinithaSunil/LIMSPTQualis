@@ -60,7 +60,7 @@ namespace LIMS
 
             if (isPasswordCorrect)
             {
-                string updatePasswordQuery = "UPDATE Users SET Password = @NewPassword WHERE UserID = @UserID";
+                string updatePasswordQuery = "UPDATE Users SET Password = @NewPassword, PasswordResetRequired=0 WHERE UserID = @UserID";
 
                 using (SqlCommand command = new SqlCommand(updatePasswordQuery, con))
                 {

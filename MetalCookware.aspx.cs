@@ -56,8 +56,8 @@ namespace LIMS
                 {
                     PrefillTestResultsGrid(existingData);
                     PrefillAllData(existingData);
-                   // PrefillTestResultsGrid_cookingequ(existingData);
-                  //  PrefillAllData_cookingequ(existingData);
+                    // PrefillTestResultsGrid_cookingequ(existingData);
+                    //  PrefillAllData_cookingequ(existingData);
                     PrefillFormTest(existingData);
                     PrefillBaseMaterial(existingData);
                     PrefillFatigueResistance(existingData);
@@ -72,7 +72,7 @@ namespace LIMS
                     PrefillTestResultsGrid(existingData);
                     PrefillAllData(existingData);
                     //PrefillTestResultsGrid_cookingequ(existingData);
-                   // PrefillAllData_cookingequ(existingData);
+                    // PrefillAllData_cookingequ(existingData);
                     PrefillFormTest(existingData);
                     PrefillBaseMaterial(existingData);
                     PrefillFatigueResistance(existingData);
@@ -665,88 +665,88 @@ namespace LIMS
                         int sampleStatusID = 27;
 
                         int res1 = _cm.UpdateCRFSampleDetailsStatus_Flatware(sampleStatusID, cloneCFRsampleID, lblReportID.Text);
-                       if (res1 > 0)
+                        if (res1 > 0)
                         {
                             int res2 = _cm.UpdateCRFCloneStatus_Flatware(sampleStatusID, cloneCFRsampleID);
                             if (res2 > 0)
-                           {
+                            {
                                 int res3 = _cm.updateSampleDetailStatus_Flatware(sampleStatusID, lblSampleID.Text);
                                 if (res3 > 0)
-                        {
-                            // ── STRENGTH TEST TABLE (18967–18971) ────────────────────
-                            DataTable dtStrength = ViewState["TestData"] as DataTable;
-                            if (dtStrength == null || dtStrength.Rows.Count == 0)
-                            {
-                                ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('No strength test data to save!');", true);
-                                return;
-                            }
-
-                            List<string> strengthRpmList = new List<string>();
-                            List<string> strengthResultList = new List<string>();
-
-                            foreach (DataRow row in dtStrength.Rows)
-                            {
-                                strengthRpmList.Add("18967"); strengthResultList.Add(row["Diameter"].ToString());
-                                strengthRpmList.Add("18968"); strengthResultList.Add(row["TestDuration"].ToString());
-                                strengthRpmList.Add("18969"); strengthResultList.Add(row["TestResults"].ToString());
-                                strengthRpmList.Add("18970"); strengthResultList.Add(row["Decision"].ToString());
-                            }
-                            if (!string.IsNullOrEmpty(txtAdditionalinfo.Text.Trim()))
-                            {
-                                strengthRpmList.Add("20014");
-                                strengthResultList.Add(txtAdditionalinfo.Text.Trim());
-                            }
-
-                            _cm.TestResultsAdd_Flateware_RP(
-                                0, txtstartingdate.Text, txtcompletiondate.Text, "",
-                                sampleId, sampleIdSeries, "", language, ReportID, equipmentIdsCSV,
-                                txtworkorder.Text, txtTypeOfProducts_header.Text, txtBrand.Text, txtmodel.Text,
-                                lblstandardID.Text, txtstandard.Text, txttestmethod.Text, txttemp.Text, txthumidity.Text,
-                                strengthRpmList.ToArray(), strengthResultList.ToArray());
-
-                            // ── FORM TEST TABLE (19967–19972) ─────────────────────────
-                            DataTable dtFormTest = ViewState["TestData_FormTest"] as DataTable;
-                            if (dtFormTest != null && dtFormTest.Rows.Count > 0)
-                            {
-                                List<string> rpmList = new List<string>();
-                                List<string> resultList = new List<string>();
-                                foreach (DataRow row in dtFormTest.Rows)
                                 {
-                                    rpmList.Add("19967"); resultList.Add(row["D1"].ToString());
-                                    rpmList.Add("19968"); resultList.Add(row["D2"].ToString());
-                                    rpmList.Add("19969"); resultList.Add(row["RoundnessValue"].ToString());
-                                    rpmList.Add("19970"); resultList.Add(row["RoundnessValueTolerance"].ToString());
-                                    rpmList.Add("19971"); resultList.Add(row["Decision"].ToString());
-                                }
-                                if (!string.IsNullOrEmpty(txtFormTestAdditionalinfo.Text.Trim()))
-                                {
-                                    rpmList.Add("19972");
-                                    resultList.Add(txtFormTestAdditionalinfo.Text.Trim());
-                                }
-                                _cm.TestResultsAdd_Flateware_RP(
-                                    0, txtstartingdate.Text, txtcompletiondate.Text, "",
-                                    sampleId, sampleIdSeries, "", language, ReportID, equipmentIdsCSV,
-                                    txtworkorder.Text, txtTypeOfProducts_header.Text, txtBrand.Text, txtmodel.Text,
-                                    lblstandardID.Text, txtstandard.Text, txttestmethod.Text, txttemp.Text, txthumidity.Text,
-                                    rpmList.ToArray(), resultList.ToArray());
-                            }
+                                    // ── STRENGTH TEST TABLE (18967–18971) ────────────────────
+                                    DataTable dtStrength = ViewState["TestData"] as DataTable;
+                                    if (dtStrength == null || dtStrength.Rows.Count == 0)
+                                    {
+                                        ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('No strength test data to save!');", true);
+                                        return;
+                                    }
 
-                            // ── BASE MATERIAL THICKNESS TEST TABLE (19973–19979) ──────
-                            DataTable dtBase = ViewState["TestData_BaseMaterial"] as DataTable;
-                            if (dtBase != null && dtBase.Rows.Count > 0)
-                            {
-                                List<string> rpmList = new List<string>();
-                                List<string> resultList = new List<string>();
-                                foreach (DataRow row in dtBase.Rows)
-                                {
-                                    rpmList.Add("19973"); resultList.Add(row["Angle0"].ToString());
-                                    rpmList.Add("19974"); resultList.Add(row["Angle90"].ToString());
-                                    rpmList.Add("19975"); resultList.Add(row["Angle180"].ToString());
-                                    rpmList.Add("19976"); resultList.Add(row["Angle270"].ToString());
-                                    rpmList.Add("19977"); resultList.Add(row["Average"].ToString());
-                                    rpmList.Add("19978"); resultList.Add(row["ThicknessMin"].ToString());
-                                    rpmList.Add("19979"); resultList.Add(row["Decision"].ToString());
-                                }
+                                    List<string> strengthRpmList = new List<string>();
+                                    List<string> strengthResultList = new List<string>();
+
+                                    foreach (DataRow row in dtStrength.Rows)
+                                    {
+                                        strengthRpmList.Add("18967"); strengthResultList.Add(row["Diameter"].ToString());
+                                        strengthRpmList.Add("18968"); strengthResultList.Add(row["TestDuration"].ToString());
+                                        strengthRpmList.Add("18969"); strengthResultList.Add(row["TestResults"].ToString());
+                                        strengthRpmList.Add("18970"); strengthResultList.Add(row["Decision"].ToString());
+                                    }
+                                    if (!string.IsNullOrEmpty(txtAdditionalinfo.Text.Trim()))
+                                    {
+                                        strengthRpmList.Add("20014");
+                                        strengthResultList.Add(txtAdditionalinfo.Text.Trim());
+                                    }
+
+                                    _cm.TestResultsAdd_Flateware_RP(
+                                        0, txtstartingdate.Text, txtcompletiondate.Text, "",
+                                        sampleId, sampleIdSeries, "", language, ReportID, equipmentIdsCSV,
+                                        txtworkorder.Text, txtTypeOfProducts_header.Text, txtBrand.Text, txtmodel.Text,
+                                        lblstandardID.Text, txtstandard.Text, txttestmethod.Text, txttemp.Text, txthumidity.Text,
+                                        strengthRpmList.ToArray(), strengthResultList.ToArray());
+
+                                    // ── FORM TEST TABLE (19967–19972) ─────────────────────────
+                                    DataTable dtFormTest = ViewState["TestData_FormTest"] as DataTable;
+                                    if (dtFormTest != null && dtFormTest.Rows.Count > 0)
+                                    {
+                                        List<string> rpmList = new List<string>();
+                                        List<string> resultList = new List<string>();
+                                        foreach (DataRow row in dtFormTest.Rows)
+                                        {
+                                            rpmList.Add("19967"); resultList.Add(row["D1"].ToString());
+                                            rpmList.Add("19968"); resultList.Add(row["D2"].ToString());
+                                            rpmList.Add("19969"); resultList.Add(row["RoundnessValue"].ToString());
+                                            rpmList.Add("19970"); resultList.Add(row["RoundnessValueTolerance"].ToString());
+                                            rpmList.Add("19971"); resultList.Add(row["Decision"].ToString());
+                                        }
+                                        if (!string.IsNullOrEmpty(txtFormTestAdditionalinfo.Text.Trim()))
+                                        {
+                                            rpmList.Add("19972");
+                                            resultList.Add(txtFormTestAdditionalinfo.Text.Trim());
+                                        }
+                                        _cm.TestResultsAdd_Flateware_RP(
+                                            0, txtstartingdate.Text, txtcompletiondate.Text, "",
+                                            sampleId, sampleIdSeries, "", language, ReportID, equipmentIdsCSV,
+                                            txtworkorder.Text, txtTypeOfProducts_header.Text, txtBrand.Text, txtmodel.Text,
+                                            lblstandardID.Text, txtstandard.Text, txttestmethod.Text, txttemp.Text, txthumidity.Text,
+                                            rpmList.ToArray(), resultList.ToArray());
+                                    }
+
+                                    // ── BASE MATERIAL THICKNESS TEST TABLE (19973–19979) ──────
+                                    DataTable dtBase = ViewState["TestData_BaseMaterial"] as DataTable;
+                                    if (dtBase != null && dtBase.Rows.Count > 0)
+                                    {
+                                        List<string> rpmList = new List<string>();
+                                        List<string> resultList = new List<string>();
+                                        foreach (DataRow row in dtBase.Rows)
+                                        {
+                                            rpmList.Add("19973"); resultList.Add(row["Angle0"].ToString());
+                                            rpmList.Add("19974"); resultList.Add(row["Angle90"].ToString());
+                                            rpmList.Add("19975"); resultList.Add(row["Angle180"].ToString());
+                                            rpmList.Add("19976"); resultList.Add(row["Angle270"].ToString());
+                                            rpmList.Add("19977"); resultList.Add(row["Average"].ToString());
+                                            rpmList.Add("19978"); resultList.Add(row["ThicknessMin"].ToString());
+                                            rpmList.Add("19979"); resultList.Add(row["Decision"].ToString());
+                                        }
                                         if (!string.IsNullOrEmpty(txtBaseMaterialAdditionalinfo.Text.Trim()))
                                         {
                                             rpmList.Add("20013");
@@ -758,154 +758,154 @@ namespace LIMS
                                     txtworkorder.Text, txtTypeOfProducts_header.Text, txtBrand.Text, txtmodel.Text,
                                     lblstandardID.Text, txtstandard.Text, txttestmethod.Text, txttemp.Text, txthumidity.Text,
                                     rpmList.ToArray(), resultList.ToArray());
+                                    }
+
+                                    // ── FATIGUE RESISTANCE TEST TABLE (19980–19985) ───────────
+                                    DataTable dtFatigue = ViewState["TestData_FatigueResistance"] as DataTable;
+                                    if (dtFatigue != null && dtFatigue.Rows.Count > 0)
+                                    {
+                                        List<string> rpmList = new List<string>();
+                                        List<string> resultList = new List<string>();
+                                        foreach (DataRow row in dtFatigue.Rows)
+                                        {
+                                            rpmList.Add("19980"); resultList.Add(row["WaterVolume"].ToString());
+                                            rpmList.Add("19981"); resultList.Add(row["WaterVolume5x15"].ToString());
+                                            rpmList.Add("19982"); resultList.Add(row["NumberOfCycles"].ToString());
+                                            rpmList.Add("19983"); resultList.Add(row["TestResults"].ToString());
+                                            rpmList.Add("19985"); resultList.Add(row["Decision"].ToString());
+                                        }
+                                        if (!string.IsNullOrEmpty(txtFatigueAdditionalinfo.Text.Trim()))
+                                        {
+                                            rpmList.Add("19984");
+                                            resultList.Add(txtFatigueAdditionalinfo.Text.Trim());
+                                        }
+                                        _cm.TestResultsAdd_Flateware_RP(
+                                            0, txtstartingdate.Text, txtcompletiondate.Text, "",
+                                            sampleId, sampleIdSeries, "", language, ReportID, equipmentIdsCSV,
+                                            txtworkorder.Text, txtTypeOfProducts_header.Text, txtBrand.Text, txtmodel.Text,
+                                            lblstandardID.Text, txtstandard.Text, txttestmethod.Text, txttemp.Text, txthumidity.Text,
+                                            rpmList.ToArray(), resultList.ToArray());
+                                    }
+
+                                    // ── NON-STICK COATING ADHESION TEST TABLE (19986–19991) ───
+                                    DataTable dtNonStick = ViewState["TestData_NonStickCoating"] as DataTable;
+                                    if (dtNonStick != null && dtNonStick.Rows.Count > 0)
+                                    {
+                                        List<string> rpmList = new List<string>();
+                                        List<string> resultList = new List<string>();
+                                        foreach (DataRow row in dtNonStick.Rows)
+                                        {
+                                            rpmList.Add("19986"); resultList.Add(row["SoakingDuration"].ToString());
+                                            rpmList.Add("19987"); resultList.Add(row["NumberOfScratches"].ToString());
+                                            rpmList.Add("19988"); resultList.Add(row["StrokeDistance"].ToString());
+                                            rpmList.Add("19989"); resultList.Add(row["TestResults"].ToString());
+                                            rpmList.Add("19990"); resultList.Add(row["Decision"].ToString());
+                                        }
+                                        if (!string.IsNullOrEmpty(txtNonStickAdditionalinfo.Text.Trim()))
+                                        {
+                                            rpmList.Add("19991");
+                                            resultList.Add(txtNonStickAdditionalinfo.Text.Trim());
+                                        }
+                                        _cm.TestResultsAdd_Flateware_RP(
+                                            0, txtstartingdate.Text, txtcompletiondate.Text, "",
+                                            sampleId, sampleIdSeries, "", language, ReportID, equipmentIdsCSV,
+                                            txtworkorder.Text, txtTypeOfProducts_header.Text, txtBrand.Text, txtmodel.Text,
+                                            lblstandardID.Text, txtstandard.Text, txttestmethod.Text, txttemp.Text, txthumidity.Text,
+                                            rpmList.ToArray(), resultList.ToArray());
+                                    }
+
+                                    // ── THERMAL SHOCK TEST TABLE (19992–19996) ────────────────
+                                    DataTable dtThermal = ViewState["TestData_ThermalShock"] as DataTable;
+                                    if (dtThermal != null && dtThermal.Rows.Count > 0)
+                                    {
+                                        List<string> rpmList = new List<string>();
+                                        List<string> resultList = new List<string>();
+                                        foreach (DataRow row in dtThermal.Rows)
+                                        {
+                                            rpmList.Add("19992"); resultList.Add(row["TestTemp1"].ToString());
+                                            rpmList.Add("19993"); resultList.Add(row["TestTemp2"].ToString());
+                                            rpmList.Add("19994"); resultList.Add(row["TestResults"].ToString());
+                                            rpmList.Add("19995"); resultList.Add(row["Decision"].ToString());
+                                        }
+                                        if (!string.IsNullOrEmpty(txtThermalAdditionalinfo.Text.Trim()))
+                                        {
+                                            rpmList.Add("19996");
+                                            resultList.Add(txtThermalAdditionalinfo.Text.Trim());
+                                        }
+                                        _cm.TestResultsAdd_Flateware_RP(
+                                            0, txtstartingdate.Text, txtcompletiondate.Text, "",
+                                            sampleId, sampleIdSeries, "", language, ReportID, equipmentIdsCSV,
+                                            txtworkorder.Text, txtTypeOfProducts_header.Text, txtBrand.Text, txtmodel.Text,
+                                            lblstandardID.Text, txtstandard.Text, txttestmethod.Text, txttemp.Text, txthumidity.Text,
+                                            rpmList.ToArray(), resultList.ToArray());
+                                    }
+
+                                    // ── COATING THICKNESS TEST TABLE (19997–20007) ────────────
+                                    DataTable dtCoating = ViewState["TestData_CoatingThickness"] as DataTable;
+                                    if (dtCoating != null && dtCoating.Rows.Count > 0)
+                                    {
+                                        List<string> rpmList = new List<string>();
+                                        List<string> resultList = new List<string>();
+                                        foreach (DataRow row in dtCoating.Rows)
+                                        {
+                                            rpmList.Add("19997"); resultList.Add(row["TypeOfMaterial"].ToString());
+                                            rpmList.Add("19998"); resultList.Add(row["CoatingMaterial"].ToString());
+                                            rpmList.Add("19999"); resultList.Add(row["Measurement1"].ToString());
+                                            rpmList.Add("20002"); resultList.Add(row["Measurement2"].ToString());
+                                            rpmList.Add("20003"); resultList.Add(row["Measurement3"].ToString());
+                                            rpmList.Add("20004"); resultList.Add(row["Average"].ToString());
+                                            rpmList.Add("20005"); resultList.Add(row["MinLayerThickness"].ToString());
+                                            rpmList.Add("20006"); resultList.Add(row["Decision"].ToString());
+                                        }
+                                        if (!string.IsNullOrEmpty(txtCoatingAdditionalinfo.Text.Trim()))
+                                        {
+                                            rpmList.Add("20007");
+                                            resultList.Add(txtCoatingAdditionalinfo.Text.Trim());
+                                        }
+                                        _cm.TestResultsAdd_Flateware_RP(
+                                            0, txtstartingdate.Text, txtcompletiondate.Text, "",
+                                            sampleId, sampleIdSeries, "", language, ReportID, equipmentIdsCSV,
+                                            txtworkorder.Text, txtTypeOfProducts_header.Text, txtBrand.Text, txtmodel.Text,
+                                            lblstandardID.Text, txtstandard.Text, txttestmethod.Text, txttemp.Text, txthumidity.Text,
+                                            rpmList.ToArray(), resultList.ToArray());
+                                    }
+
+                                    /* -------- FILE GENERATION -------- */
+
+                                    string SampleUID = lblSampleID.Text + "_" + lblReportID.Text;
+                                    string pathout = Server.MapPath("~/TestReport/");
+                                    string templatePath = Server.MapPath("~/InputFiles/MetalCookwareTestRecord_1.docx");
+
+                                    if (!Directory.Exists(pathout))
+                                        Directory.CreateDirectory(pathout);
+
+                                    string outputPdfPath = Path.Combine(pathout, "TestReport-" + SampleUID + ".pdf");
+
+                                    Application wordApp = new Application();
+                                    Document doc = wordApp.Documents.Open(templatePath);
+
+                                    ReplaceTemplateVariables(doc);
+
+                                    CreateReportTable(wordApp, doc, "{TestingAndMeasurement}", GetReportData());
+                                    CreateReportTableStrength(wordApp, doc, "{Strengthtest}", GetReportDataForStrength());
+                                    CreateReportTableFormTest(wordApp, doc, "{FormTest}", GetReportDataForFormTest());
+                                    CreateReportTableBaseMaterial(wordApp, doc, "{BaseMaterial}", GetReportDataForBaseMaterial());
+                                    CreateReportTableFatigueResistance(wordApp, doc, "{FatigueResistance}", GetReportDataForFatigueResistance());
+                                    CreateReportTableNonStickCoating(wordApp, doc, "{NonStickCoating}", GetReportDataForNonStickCoating());
+                                    CreateReportTableThermalShock(wordApp, doc, "{ThermalShock}", GetReportDataForThermalShock());
+                                    CreateReportTableCoatingThickness(wordApp, doc, "{CoatingThickness}", GetReportDataForCoatingThickness());
+
+                                    doc.SaveAs2(outputPdfPath, WdSaveFormat.wdFormatPDF);
+                                    doc.Close(false);
+                                    wordApp.Quit();
+
+                                    Response.Clear();
+                                    Response.ContentType = "application/pdf";
+                                    Response.AddHeader("Content-Disposition", $"inline; filename=TestReport-{SampleUID}.pdf");
+                                    Response.TransmitFile(outputPdfPath);
+                                    Response.End();
+                                }
                             }
-
-                            // ── FATIGUE RESISTANCE TEST TABLE (19980–19985) ───────────
-                            DataTable dtFatigue = ViewState["TestData_FatigueResistance"] as DataTable;
-                            if (dtFatigue != null && dtFatigue.Rows.Count > 0)
-                            {
-                                List<string> rpmList = new List<string>();
-                                List<string> resultList = new List<string>();
-                                foreach (DataRow row in dtFatigue.Rows)
-                                {
-                                    rpmList.Add("19980"); resultList.Add(row["WaterVolume"].ToString());
-                                    rpmList.Add("19981"); resultList.Add(row["WaterVolume5x15"].ToString());
-                                    rpmList.Add("19982"); resultList.Add(row["NumberOfCycles"].ToString());
-                                    rpmList.Add("19983"); resultList.Add(row["TestResults"].ToString());
-                                    rpmList.Add("19985"); resultList.Add(row["Decision"].ToString());
-                                }
-                                if (!string.IsNullOrEmpty(txtFatigueAdditionalinfo.Text.Trim()))
-                                {
-                                    rpmList.Add("19984");
-                                    resultList.Add(txtFatigueAdditionalinfo.Text.Trim());
-                                }
-                                _cm.TestResultsAdd_Flateware_RP(
-                                    0, txtstartingdate.Text, txtcompletiondate.Text, "",
-                                    sampleId, sampleIdSeries, "", language, ReportID, equipmentIdsCSV,
-                                    txtworkorder.Text, txtTypeOfProducts_header.Text, txtBrand.Text, txtmodel.Text,
-                                    lblstandardID.Text, txtstandard.Text, txttestmethod.Text, txttemp.Text, txthumidity.Text,
-                                    rpmList.ToArray(), resultList.ToArray());
-                            }
-
-                            // ── NON-STICK COATING ADHESION TEST TABLE (19986–19991) ───
-                            DataTable dtNonStick = ViewState["TestData_NonStickCoating"] as DataTable;
-                            if (dtNonStick != null && dtNonStick.Rows.Count > 0)
-                            {
-                                List<string> rpmList = new List<string>();
-                                List<string> resultList = new List<string>();
-                                foreach (DataRow row in dtNonStick.Rows)
-                                {
-                                    rpmList.Add("19986"); resultList.Add(row["SoakingDuration"].ToString());
-                                    rpmList.Add("19987"); resultList.Add(row["NumberOfScratches"].ToString());
-                                    rpmList.Add("19988"); resultList.Add(row["StrokeDistance"].ToString());
-                                    rpmList.Add("19989"); resultList.Add(row["TestResults"].ToString());
-                                    rpmList.Add("19990"); resultList.Add(row["Decision"].ToString());
-                                }
-                                if (!string.IsNullOrEmpty(txtNonStickAdditionalinfo.Text.Trim()))
-                                {
-                                    rpmList.Add("19991");
-                                    resultList.Add(txtNonStickAdditionalinfo.Text.Trim());
-                                }
-                                _cm.TestResultsAdd_Flateware_RP(
-                                    0, txtstartingdate.Text, txtcompletiondate.Text, "",
-                                    sampleId, sampleIdSeries, "", language, ReportID, equipmentIdsCSV,
-                                    txtworkorder.Text, txtTypeOfProducts_header.Text, txtBrand.Text, txtmodel.Text,
-                                    lblstandardID.Text, txtstandard.Text, txttestmethod.Text, txttemp.Text, txthumidity.Text,
-                                    rpmList.ToArray(), resultList.ToArray());
-                            }
-
-                            // ── THERMAL SHOCK TEST TABLE (19992–19996) ────────────────
-                            DataTable dtThermal = ViewState["TestData_ThermalShock"] as DataTable;
-                            if (dtThermal != null && dtThermal.Rows.Count > 0)
-                            {
-                                List<string> rpmList = new List<string>();
-                                List<string> resultList = new List<string>();
-                                foreach (DataRow row in dtThermal.Rows)
-                                {
-                                    rpmList.Add("19992"); resultList.Add(row["TestTemp1"].ToString());
-                                    rpmList.Add("19993"); resultList.Add(row["TestTemp2"].ToString());
-                                    rpmList.Add("19994"); resultList.Add(row["TestResults"].ToString());
-                                    rpmList.Add("19995"); resultList.Add(row["Decision"].ToString());
-                                }
-                                if (!string.IsNullOrEmpty(txtThermalAdditionalinfo.Text.Trim()))
-                                {
-                                    rpmList.Add("19996");
-                                    resultList.Add(txtThermalAdditionalinfo.Text.Trim());
-                                }
-                                _cm.TestResultsAdd_Flateware_RP(
-                                    0, txtstartingdate.Text, txtcompletiondate.Text, "",
-                                    sampleId, sampleIdSeries, "", language, ReportID, equipmentIdsCSV,
-                                    txtworkorder.Text, txtTypeOfProducts_header.Text, txtBrand.Text, txtmodel.Text,
-                                    lblstandardID.Text, txtstandard.Text, txttestmethod.Text, txttemp.Text, txthumidity.Text,
-                                    rpmList.ToArray(), resultList.ToArray());
-                            }
-
-                            // ── COATING THICKNESS TEST TABLE (19997–20007) ────────────
-                            DataTable dtCoating = ViewState["TestData_CoatingThickness"] as DataTable;
-                            if (dtCoating != null && dtCoating.Rows.Count > 0)
-                            {
-                                List<string> rpmList = new List<string>();
-                                List<string> resultList = new List<string>();
-                                foreach (DataRow row in dtCoating.Rows)
-                                {
-                                    rpmList.Add("19997"); resultList.Add(row["TypeOfMaterial"].ToString());
-                                    rpmList.Add("19998"); resultList.Add(row["CoatingMaterial"].ToString());
-                                    rpmList.Add("19999"); resultList.Add(row["Measurement1"].ToString());
-                                    rpmList.Add("20002"); resultList.Add(row["Measurement2"].ToString());
-                                    rpmList.Add("20003"); resultList.Add(row["Measurement3"].ToString());
-                                    rpmList.Add("20004"); resultList.Add(row["Average"].ToString());
-                                    rpmList.Add("20005"); resultList.Add(row["MinLayerThickness"].ToString());
-                                    rpmList.Add("20006"); resultList.Add(row["Decision"].ToString());
-                                }
-                                if (!string.IsNullOrEmpty(txtCoatingAdditionalinfo.Text.Trim()))
-                                {
-                                    rpmList.Add("20007");
-                                    resultList.Add(txtCoatingAdditionalinfo.Text.Trim());
-                                }
-                                _cm.TestResultsAdd_Flateware_RP(
-                                    0, txtstartingdate.Text, txtcompletiondate.Text, "",
-                                    sampleId, sampleIdSeries, "", language, ReportID, equipmentIdsCSV,
-                                    txtworkorder.Text, txtTypeOfProducts_header.Text, txtBrand.Text, txtmodel.Text,
-                                    lblstandardID.Text, txtstandard.Text, txttestmethod.Text, txttemp.Text, txthumidity.Text,
-                                    rpmList.ToArray(), resultList.ToArray());
-                            }
-
-                            /* -------- FILE GENERATION -------- */
-
-                            string SampleUID = lblSampleID.Text + "_" + lblReportID.Text;
-                            string pathout = Server.MapPath("~/TestReport/");
-                            string templatePath = Server.MapPath("~/InputFiles/MetalCookwareTestRecord_1.docx");
-
-                            if (!Directory.Exists(pathout))
-                                Directory.CreateDirectory(pathout);
-
-                            string outputPdfPath = Path.Combine(pathout, "TestReport-" + SampleUID + ".pdf");
-
-                            Application wordApp = new Application();
-                            Document doc = wordApp.Documents.Open(templatePath);
-
-                            ReplaceTemplateVariables(doc);
-
-                            CreateReportTable(wordApp, doc, "{TestingAndMeasurement}", GetReportData());
-                            CreateReportTableStrength(wordApp, doc, "{Strengthtest}", GetReportDataForStrength());
-                            CreateReportTableFormTest(wordApp, doc, "{FormTest}", GetReportDataForFormTest());
-                            CreateReportTableBaseMaterial(wordApp, doc, "{BaseMaterial}", GetReportDataForBaseMaterial());
-                            CreateReportTableFatigueResistance(wordApp, doc, "{FatigueResistance}", GetReportDataForFatigueResistance());
-                            CreateReportTableNonStickCoating(wordApp, doc, "{NonStickCoating}", GetReportDataForNonStickCoating());
-                            CreateReportTableThermalShock(wordApp, doc, "{ThermalShock}", GetReportDataForThermalShock());
-                            CreateReportTableCoatingThickness(wordApp, doc, "{CoatingThickness}", GetReportDataForCoatingThickness());
-
-                            doc.SaveAs2(outputPdfPath, WdSaveFormat.wdFormatPDF);
-                            doc.Close(false);
-                            wordApp.Quit();
-
-                            Response.Clear();
-                            Response.ContentType = "application/pdf";
-                            Response.AddHeader("Content-Disposition", $"inline; filename=TestReport-{SampleUID}.pdf");
-                            Response.TransmitFile(outputPdfPath);
-                            Response.End();
-                        }
-                           }
                         }
                     }
                 }
@@ -917,7 +917,7 @@ namespace LIMS
             catch (Exception ex)
             {
                 throw;
-               // ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", $"alert('Error: {ex.Message}');", true);
+                // ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", $"alert('Error: {ex.Message}');", true);
             }
         }
         //protected void btnSave_Click(object sender, EventArgs e)
@@ -1644,7 +1644,7 @@ namespace LIMS
             }
             return dt;
         }
-  
+
         private void ApplyBorders(Cell cell)
         {
             cell.Borders[WdBorderType.wdBorderLeft].LineStyle = WdLineStyle.wdLineStyleSingle;
@@ -2478,7 +2478,7 @@ namespace LIMS
                 return rows[0]["Result"].ToString();
             return "";
         }
-    
+
 
         /******************************************************Form Test************************************************************************************/
         private void CreateGridTable_FormTest()

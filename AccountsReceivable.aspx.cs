@@ -87,6 +87,7 @@ namespace LIMS
             if (chkInvoice.SelectedIndex == -1) { flag = 1; chkInvoice.BackColor = Color.LightPink; } else { chkInvoice.BackColor = Color.Empty; }
             if (flag == 0)
             {
+                if (Session["EmployeeID"] != null) { _ar.EmployeeID = Convert.ToInt32(Session["EmployeeID"]); }
                 _ar.CustomerID = int.Parse(ddlCustomers.SelectedValue);
                 _ar.CurrencyCode = ddlCurrency.SelectedValue;
                 _ar.TotalAmount = decimal.Parse(txtAmount.Text);

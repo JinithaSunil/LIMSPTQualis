@@ -89,7 +89,30 @@ namespace LIMS
                 gvPO.DataBind();
             }
         }
-        
+        private void BindPendingDelivery()
+        {
+            DataTable dt = new DataTable();
+
+            if (Session["DeptName"].ToString() == "Purchase")
+            {
+                StoreType = "Engineering";
+            }
+            if (Session["DeptName"].ToString() == "RM Store")
+            {
+                StoreType = "RM";
+            }
+            dt = _cm.GetPOPendingDelivery(StoreType);
+            if (dt.Rows.Count > 0)
+            {
+                gvPO.DataSource = dt;
+                gvPO.DataBind();
+            }
+            else
+            {
+                gvPO.DataSource = null;
+                gvPO.DataBind();
+            }
+        }
         protected void gvPO_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             int rowIndex = int.Parse(e.CommandArgument.ToString());
@@ -270,6 +293,16 @@ namespace LIMS
             }
         }
 
-
+        protected void radChoice_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (radChoice.SelectedValue == "0")
+            {
+                BindPO();
+            }
+            else
+            {
+                BindPendingDelivery();
+            }
+        }
     }
 }

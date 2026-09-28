@@ -30,7 +30,7 @@ namespace LIMS
         {
             if (!IsPostBack)
             {
-                Populate();                
+                Populate();
                 txtValidityDate.Attributes.Add("autocomplete", "off");
 
                 if ((Request.QueryString["VendorQuotationID"] != null) && (Request.QueryString["Ven"] != null))
@@ -63,7 +63,7 @@ namespace LIMS
                 }
 
                 if (Request.QueryString["Reference"] != null && Request.QueryString["Enquiry"] != null)
-                {                    
+                {
                     string Reference = Request.QueryString["Reference"].ToString();
                     string EnquiryID = Request.QueryString["Enquiry"].ToString();
 
@@ -93,7 +93,7 @@ namespace LIMS
             else  // POSTBACK HANDLING
             {
                 // Re-bind dropdowns first (they lose their datasource on postback)
-               // BindQuoteCurrency();
+                // BindQuoteCurrency();
                 //BindVAT(ddlVAT);
 
                 // Preserve user-selected values BEFORE restoring from database
@@ -304,12 +304,12 @@ namespace LIMS
             }
 
         }
-        private void BindVAT(DropDownList ddlVAT,string VendorID)
+        private void BindVAT(DropDownList ddlVAT, string VendorID)
         {
-            DataTable dt = _cm.getVAT(); 
+            DataTable dt = _cm.getVAT();
             ddlVAT.DataSource = dt;
-            ddlVAT.DataTextField = "VATCode";        
-            ddlVAT.DataValueField = "VATID";         
+            ddlVAT.DataTextField = "VATCode";
+            ddlVAT.DataValueField = "VATID";
             ddlVAT.DataBind();
             ddlVAT.Items.Insert(0, new ListItem("Select TAX", ""));
             ddlVAT.Items.Add(new ListItem("Not Applicable", "0"));
@@ -318,10 +318,11 @@ namespace LIMS
             {
                 try
                 {
+                    ddlVAT.ClearSelection();
                     ddlVAT.Items.FindByValue(dtVen.Rows[0]["VAT"].ToString()).Selected = true;
                     ddlVAT.Enabled = false;
                 }
-                catch(Exception ex) { }
+                catch (Exception ex) { }
             }
         }
         private void CheckEnquiryClosed(string EnquiryID)
@@ -369,7 +370,7 @@ namespace LIMS
                 Session["TypeofEstablishment"] = txtTypeofEstablishment.Text;
                 Session["TypeofBusiness"] = txtTypeofBusiness.Text;
                 Session["YearofEstablishment"] = txtYearofEstablishment.Text;
-                BindVAT(ddlVAT,lblVendorID.Text);
+                BindVAT(ddlVAT, lblVendorID.Text);
             }
         }
         private void getEnquiryDetails(string EnquiryID, string Reference)
@@ -446,7 +447,7 @@ namespace LIMS
                 // Set default values in UI controls
                 //txtQuotationNumber.Text = "N/A-" + DateTime.Now.ToString("yyyyMMddHHmmss");
                 txtQuotationNumber.Text = "N/A";
-                ddlPaymentTerms.Items.FindByText("Advance").Selected=true;
+                ddlPaymentTerms.Items.FindByText("Advance").Selected = true;
                 ddlQuoteCurrency.SelectedIndex = 0;
                 ddlContactPerson.SelectedIndex = 0;
                 txtValidityDate.Text = DateTime.Now.AddDays(30).ToString("yyyy-MM-dd");
@@ -502,7 +503,7 @@ namespace LIMS
                 txtSpecialInstruction.Text = "";
                 txtRemarks.Text = "";
                 txtDelivery.Text = "";
-              
+
                 ddlQuoteCurrency.SelectedIndex = 0;
                 ddlContactPerson.SelectedIndex = 0;
                 ddlVAT.SelectedIndex = 0;
@@ -550,7 +551,7 @@ namespace LIMS
                 isValid = false;
             }
 
-            if ((ddlPaymentTerms.SelectedIndex==-1)|| (ddlPaymentTerms.SelectedIndex == 0))
+            if ((ddlPaymentTerms.SelectedIndex == -1) || (ddlPaymentTerms.SelectedIndex == 0))
             {
                 ddlPaymentTerms.BorderColor = System.Drawing.Color.Red;
                 isValid = false;
@@ -757,7 +758,7 @@ namespace LIMS
 
             if (txtDiscount != null && !string.IsNullOrEmpty(txtDiscount.Text))
             {
-                string discountText = txtDiscount.Text.Trim().Replace("%", "").Trim(); 
+                string discountText = txtDiscount.Text.Trim().Replace("%", "").Trim();
 
                 //if (discountText.EndsWith("%"))
                 //{
@@ -845,7 +846,6 @@ namespace LIMS
                         _cm.VendorQuotationID = Convert.ToInt32(lblVendorQuotationID.Text);
                         _cm.QuotationStatusID = 5; // Set status to Not Available
 
-
                         _cm.UpdateVendorQuotationDetailsForNotAvailable(_cm);
                     }
                     divVendor.Visible = false;
@@ -876,7 +876,20 @@ namespace LIMS
                     {
                         ddlContactPerson.BorderColor = System.Drawing.Color.Empty;
                     }
-
+                    if (!string.IsNullOrWhiteSpace(txtAdditionalCharge.Text) &&
+                        decimal.TryParse(txtAdditionalCharge.Text, out decimal charge) &&
+                        charge != 0)
+                    {
+                        if (txtAdditionalChargeDescription.Text == "")
+                        {
+                            txtAdditionalChargeDescription.BorderColor = Color.Red;
+                            isValid = false;
+                        }
+                        else
+                        {
+                            txtAdditionalChargeDescription.BorderColor = Color.Empty;
+                        }
+                    }
                     if (!isValid || !ValidateForm())
                     {
                         ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Please fill all required fields (marked in red)!');", true);
@@ -896,6 +909,8 @@ namespace LIMS
                     _cm.Subtotal = _cm.ConvertCurrencyStringToDecimal(lblSubTotal.Text);
                     _cm.GrandTotal = _cm.ConvertCurrencyStringToDecimal(lblGrandTotal.Text);
                     _cm.Remarks = txtRemarks?.Text.Trim();
+                    _cm.AdditionalChargeDescription = txtAdditionalChargeDescription.Text;
+                    _cm.AdditionalCharges = _cm.ConvertCurrencyStringToDecimal(txtAdditionalCharge.Text);
 
                     // Handle file uploads ONCE - outside the loop
                     string finalDocumentName = "";
@@ -963,6 +978,7 @@ namespace LIMS
                     for (int i = 0; i < gvEnquiry.Rows.Count; i++)
                     {
                         TextBox txtRate = (TextBox)gvEnquiry.Rows[i].FindControl("txtRate");
+                        TextBox txtSpecification = (TextBox)gvEnquiry.Rows[i].FindControl("txtSpecification");
                         TextBox txtDeliveryTime = (TextBox)gvEnquiry.Rows[i].FindControl("txtDeliveryTime");
                         TextBox txtDiscount = (TextBox)gvEnquiry.Rows[i].FindControl("txtDiscount");
                         TextBox txtRemarks1 = (TextBox)gvEnquiry.Rows[i].FindControl("txtRemarks1");
@@ -976,8 +992,8 @@ namespace LIMS
                         _cm.AvailableQuantity = Convert.ToDecimal(lblOrderedQty.Text);
                         _cm.Rate = _cm.ConvertCurrencyStringToDecimal(txtRate.Text);
                         _cm.DeliveryTime = Convert.ToInt32(txtDeliveryTime.Text);
+                        _cm.ItemSpecification = txtSpecification.Text;
 
-                   
                         string discountText = txtDiscount?.Text.Trim() ?? "0";
                         discountText = discountText.Replace("%", "").Trim();
 
@@ -1009,6 +1025,7 @@ namespace LIMS
                             _cm.Revision = 0;
                             _cm.AddVendorQuotationRevisionDetails(_cm);
                             _cm.UpdateVendorQuotation(_cm);
+
                             _cm.UpdateVendorQuotationDetails(_cm);
                             Session["VendorQuotationID"] = lblVendorQuotationID.Text;
                         }
@@ -1392,31 +1409,31 @@ namespace LIMS
                 ViewState["CurrencyID"] = newCurrencyId;
 
 
-                // If IDR is selected, automatically select VAT 11%
-                if (GetCurrencyCodeById(newCurrencyId)?.ToUpper() == "IDR")
-                {
-                    // Find VAT 11% option
-                    DataTable dtVAT = _cm.getVAT();
-                    DataRow[] rows = dtVAT.Select("Percentage = 11");
-                    if (rows.Length > 0)
-                    {
-                        int vatId11 = Convert.ToInt32(rows[0]["VATID"]);
-                        ddlVAT.SelectedValue = vatId11.ToString();
-                        ddlVAT.Enabled = false; // Disable user changes
-                    }
-                    else
-                    {
-                        // If no 11% VAT found, fallback
-                        ddlVAT.SelectedValue = "0"; // Not Applicable
-                        ddlVAT.Enabled = false;
-                    }
-                }
-                else
-                {
-                    // For other currencies, select Not Applicable and disable
-                    ddlVAT.SelectedValue = "0"; // Not Applicable
-                    ddlVAT.Enabled = false;
-                }
+                //// If IDR is selected, automatically select VAT 11%
+                //if (GetCurrencyCodeById(newCurrencyId)?.ToUpper() == "IDR")
+                //{
+                //    // Find VAT 11% option
+                //    DataTable dtVAT = _cm.getVAT();
+                //    DataRow[] rows = dtVAT.Select("Percentage = 11");
+                //    if (rows.Length > 0)
+                //    {
+                //        int vatId11 = Convert.ToInt32(rows[0]["VATID"]);
+                //        ddlVAT.SelectedValue = vatId11.ToString();
+                //        ddlVAT.Enabled = false; // Disable user changes
+                //    }
+                //    else
+                //    {
+                //        // If no 11% VAT found, fallback
+                //        ddlVAT.SelectedValue = "0"; // Not Applicable
+                //        ddlVAT.Enabled = false;
+                //    }
+                //}
+                //else
+                //{
+                //    // For other currencies, select Not Applicable and disable
+                //    ddlVAT.SelectedValue = "0"; // Not Applicable
+                //    ddlVAT.Enabled = false;
+                //}
 
                 // Remove currency symbols and reformat all values in grid
                 foreach (GridViewRow row in gvEnquiry.Rows)
@@ -1572,9 +1589,9 @@ namespace LIMS
                     lblTotalAmount.Text = "0.00";
                 }
             }
-             string currencySymbol = GetCurrencySymbolById(currencyId);
-    string script = $"simpleCurrencyProtect('{txtRate.ClientID}', '{currencySymbol}');";
-    ScriptManager.RegisterStartupScript(this, this.GetType(), $"protect_{txtRate.ClientID}", script, true);
+            string currencySymbol = GetCurrencySymbolById(currencyId);
+            string script = $"simpleCurrencyProtect('{txtRate.ClientID}', '{currencySymbol}');";
+            ScriptManager.RegisterStartupScript(this, this.GetType(), $"protect_{txtRate.ClientID}", script, true);
             txtRate.Style["border"] = "none";
             txtRate.Style["border-bottom"] = "1px solid #ced4da";
         }
@@ -1624,56 +1641,174 @@ namespace LIMS
             txtDiscount.Style["border"] = "none";
             txtDiscount.Style["border-bottom"] = "1px solid #ced4da";
         }
-        private void UpdateTotals() 
+        private void UpdateTotals()
         {
             int currencyId = 0;
+
             if (!string.IsNullOrEmpty(ddlQuoteCurrency.SelectedValue))
                 currencyId = int.Parse(ddlQuoteCurrency.SelectedValue);
+
+            // ==========================================
+            // 1. SUB TOTAL
+            // ==========================================
 
             decimal subTotal = 0;
 
             foreach (GridViewRow row in gvEnquiry.Rows)
             {
-                Label lblTotalAmount = row.FindControl("lblTotalAmount") as Label;
+                Label lblTotalAmount =
+                    row.FindControl("lblTotalAmount") as Label;
+
                 if (lblTotalAmount != null)
                 {
-                    decimal amount = _cm.ConvertCurrencyStringToDecimal(lblTotalAmount.Text);
+                    decimal amount =
+                        _cm.ConvertCurrencyStringToDecimal(
+                            lblTotalAmount.Text);
+
                     subTotal += amount;
                 }
             }
 
-            // Display formatted but store raw decimal
-            lblSubTotal.Text = FormatCurrency(subTotal, currencyId);
+            // ==========================================
+            // 2. ADDITIONAL CHARGE
+            // ==========================================
+
+            decimal additionalCharge = 0;
+
+            if (!string.IsNullOrWhiteSpace(txtAdditionalCharge.Text) &&
+                decimal.TryParse(txtAdditionalCharge.Text, out decimal charge) &&
+                charge != 0)
+            {
+                if (txtAdditionalChargeDescription.Text == "")
+                {
+                    txtAdditionalChargeDescription.BorderColor = Color.Red;
+                    return;
+                }
+                else
+                {
+                    txtAdditionalChargeDescription.BorderColor = Color.Empty;
+                    additionalCharge =
+                   _cm.ConvertCurrencyStringToDecimal(
+                       txtAdditionalCharge.Text);
+                }
+
+            }
+
+            // ==========================================
+            // 3. TOTAL BEFORE VAT
+            // ==========================================
+
+            decimal totalBeforeVAT =
+                subTotal + additionalCharge;
+
+            // ==========================================
+            // 4. VAT
+            // ==========================================
 
             decimal vatAmount = 0;
             decimal vatPercent = 0;
 
             if (!string.IsNullOrEmpty(ddlVAT.SelectedValue))
             {
-                int selectedVATID = int.Parse(ddlVAT.SelectedValue);
-                DataTable dtVAT = _cm.getVAT();
-                DataRow[] rows = dtVAT.Select("VATID = " + selectedVATID);
+                int selectedVATID =
+                    int.Parse(ddlVAT.SelectedValue);
 
-                if (rows.Length > 0 && rows[0]["Percentage"] != DBNull.Value)
+                DataTable dtVAT = _cm.getVAT();
+
+                DataRow[] rows =
+                    dtVAT.Select(
+                        "VATID = " + selectedVATID);
+
+                if (rows.Length > 0 &&
+                    rows[0]["Percentage"] != DBNull.Value)
                 {
-                    vatPercent = Convert.ToDecimal(rows[0]["Percentage"]);
-                    vatAmount = subTotal * vatPercent / 100;
+                    vatPercent =
+                        Convert.ToDecimal(
+                            rows[0]["Percentage"]);
+
+                    // VAT is calculated AFTER additional charges
+                    vatAmount =
+                        totalBeforeVAT * vatPercent / 100;
+                    lblVat.Text = vatAmount.ToString();
                 }
             }
 
-            decimal grandTotal = subTotal + vatAmount;
-            decimal roundedGrandTotal = Math.Round(grandTotal, 2, MidpointRounding.AwayFromZero);
+            // ==========================================
+            // 5. GRAND TOTAL
+            // ==========================================
 
-            // Display formatted but store raw decimal
-            lblGrandTotal.Text = FormatCurrency(roundedGrandTotal, currencyId);
+            decimal grandTotal =
+                totalBeforeVAT + vatAmount;
 
-            if (gvEnquiry.FooterRow != null)
-            {
-                gvEnquiry.FooterRow.Cells[9].Text = "Sub Total";
-                gvEnquiry.FooterRow.Cells[10].HorizontalAlign = HorizontalAlign.Center;
-                gvEnquiry.FooterRow.Cells[10].Text = FormatCurrency(subTotal, currencyId);
-            }
+            grandTotal =
+                Math.Round(
+                    grandTotal,
+                    2,
+                    MidpointRounding.AwayFromZero);
+
+            // ==========================================
+            // 6. DISPLAY
+            // ==========================================
+
+            lblSubTotal.Text =
+                FormatCurrency(subTotal, currencyId);
+
+            lblTotalBeforeVAT.Text =
+                FormatCurrency(totalBeforeVAT, currencyId);
+
+            lblGrandTotal.Text =
+                FormatCurrency(grandTotal, currencyId);
         }
+        //private void UpdateTotals() 
+        //{
+        //    int currencyId = 0;
+        //    if (!string.IsNullOrEmpty(ddlQuoteCurrency.SelectedValue))
+        //        currencyId = int.Parse(ddlQuoteCurrency.SelectedValue);
+
+        //    decimal subTotal = 0;
+
+        //    foreach (GridViewRow row in gvEnquiry.Rows)
+        //    {
+        //        Label lblTotalAmount = row.FindControl("lblTotalAmount") as Label;
+        //        if (lblTotalAmount != null)
+        //        {
+        //            decimal amount = _cm.ConvertCurrencyStringToDecimal(lblTotalAmount.Text);
+        //            subTotal += amount;
+        //        }
+        //    }
+
+        //    // Display formatted but store raw decimal
+        //    lblSubTotal.Text = FormatCurrency(subTotal, currencyId);
+
+        //    decimal vatAmount = 0;
+        //    decimal vatPercent = 0;
+
+        //    if (!string.IsNullOrEmpty(ddlVAT.SelectedValue))
+        //    {
+        //        int selectedVATID = int.Parse(ddlVAT.SelectedValue);
+        //        DataTable dtVAT = _cm.getVAT();
+        //        DataRow[] rows = dtVAT.Select("VATID = " + selectedVATID);
+
+        //        if (rows.Length > 0 && rows[0]["Percentage"] != DBNull.Value)
+        //        {
+        //            vatPercent = Convert.ToDecimal(rows[0]["Percentage"]);
+        //            vatAmount = subTotal * vatPercent / 100;
+        //        }
+        //    }
+
+        //    decimal grandTotal = subTotal + vatAmount;
+        //    decimal roundedGrandTotal = Math.Round(grandTotal, 2, MidpointRounding.AwayFromZero);
+
+        //    // Display formatted but store raw decimal
+        //    lblGrandTotal.Text = FormatCurrency(roundedGrandTotal, currencyId);
+
+        //    if (gvEnquiry.FooterRow != null)
+        //    {
+        //        gvEnquiry.FooterRow.Cells[9].Text = "Sub Total";
+        //        gvEnquiry.FooterRow.Cells[10].HorizontalAlign = HorizontalAlign.Center;
+        //        gvEnquiry.FooterRow.Cells[10].Text = FormatCurrency(subTotal, currencyId);
+        //    }
+        //}
         public string FormatCurrency(decimal amount)
         {
             if (ddlQuoteCurrency == null || string.IsNullOrEmpty(ddlQuoteCurrency.SelectedValue))
@@ -1688,38 +1823,7 @@ namespace LIMS
             string selectedCurrency = GetCurrencyCodeById(currencyId)?.ToUpper();
             if (string.IsNullOrEmpty(selectedCurrency))
                 return amount.ToString("N2");
-            switch (selectedCurrency)
-            {
-                case "USD":
-                    return ToUSD(amount);
-                case "IDR":
-                    return ToIDR(amount);
-                case "CNY":
-                    return ToCNY(amount);
-                default:
-                    return amount.ToString("N2");
-            }
-        }
-
-        // METHOD 6: ToUSD
-        public string ToUSD(decimal amount)
-        {
-            CultureInfo usdCulture = new CultureInfo("en-US");
-            return string.Format(usdCulture, "{0:C}", amount);
-        }
-
-        // METHOD 7: ToIDR
-        public string ToIDR(decimal amount)
-        {
-            CultureInfo idrCulture = new CultureInfo("id-ID");
-            return string.Format(idrCulture, "{0:C}", amount);
-        }
-
-        // METHOD 8: ToCNY
-        public string ToCNY(decimal amount)
-        {
-            CultureInfo cnyCulture = new CultureInfo("zh-CN");
-            return string.Format(cnyCulture, "{0:C}", amount);
+            return _cm.ToAnyCurrency(amount, currencyId);
         }
 
         // METHOD 9: GetCurrencyCodeById
@@ -1771,6 +1875,12 @@ namespace LIMS
                 txtPaymentTerms.Visible = false;
             }
         }
+
+        protected void txtAdditionalCharge_TextChanged(object sender, EventArgs e)
+        {
+            UpdateTotals();
+        }
+
 
         //protected void gvEnquiry_RowDataBound(object sender, GridViewRowEventArgs e)
         //{

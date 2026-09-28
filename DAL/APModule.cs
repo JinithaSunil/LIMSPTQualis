@@ -17,6 +17,7 @@ namespace LIMS.DAL
         DAL.CM _cm = new DAL.CM();
         private static string connStr = ConfigurationManager.ConnectionStrings["CM"].ConnectionString;
         int _VendorID; public int VendorID { get { return _VendorID; } set { _VendorID = value; } }
+        int _EmployeeID; public int EmployeeID { get { return _EmployeeID; } set { _EmployeeID=value;} }
         string _VendorTaxInvoiceNumber; public string VendorTaxInvoiceNumber { get { return _VendorTaxInvoiceNumber; } set { _VendorTaxInvoiceNumber = value; } }
         string _InvoiceNumber; public string InvoiceNumber { get { return _InvoiceNumber; } set { _InvoiceNumber = value; } }
         DateTime _InvoiceDate; public DateTime InvoiceDate { get { return _InvoiceDate; } set { _InvoiceDate = value; } }
@@ -257,7 +258,7 @@ namespace LIMS.DAL
                                         "AmountPaid," +
                                         "PIYear," +
                                         "PICount," +
-                                        "PINumber,GRNID) OUTPUT INSERTED.InvoiceID VALUES (@VendorId," +
+                                        "PINumber,GRNID,CreatedBy) OUTPUT INSERTED.InvoiceID VALUES (@VendorId," +
                                         "@VendorTaxInvoiceNumber," +
                                         "@InvoiceNumber," +
                                         "@InvoiceDate," +
@@ -269,7 +270,7 @@ namespace LIMS.DAL
                                         "@AmountPaid," +
                                         "@PIYear," +
                                         "@PICount," +
-                                        "@PINumber,@GRNID)";
+                                        "@PINumber,@GRNID,@CreatedBy)";
                     SqlParameter[] param = {
                         new SqlParameter("@VendorId", obj.VendorID),
                         new SqlParameter("@VendorTaxInvoiceNumber", obj.VendorTaxInvoiceNumber),
@@ -284,7 +285,8 @@ namespace LIMS.DAL
                         new SqlParameter("@PIYear", obj.Year),
                         new SqlParameter("@PICount", obj.Counter),
                         new SqlParameter("@PINumber", obj.Number),
-                        new SqlParameter("@GRNID", obj.GRNIDs)
+                        new SqlParameter("@GRNID", obj.GRNIDs),
+                        new SqlParameter("@CreatedBy", obj.EmployeeID)
                     };
                     InvoiceID = Convert.ToInt32(DbHelper.ExecuteInsertWithReturn(sql, param));
                     
@@ -303,7 +305,7 @@ namespace LIMS.DAL
                     ap.InvoiceNumber,payment,DATEADD(day, DayCount, PODate) AS DueDate  from PurchaseOrder p
                     inner join VendorDetails v on v.VendorID = p.VendorID
 					left join InvoiceAP ap on ap.PurchaseOrderID = p.PurchaseOrderID
-                    inner join PaymentTerms pt on pt.PaymentTermName = p.Payment
+                    inner join PurchasePaymentTerms pt on pt.PaymentTermName = p.Payment
                     where p.PurchaseOrderID='" + PurchaseOrderID + "'");
         }
         public int AddPayment(DAL.APModule obj, DataTable dt)
@@ -524,10 +526,11 @@ namespace LIMS.DAL
         }
         public DataTable GetEmployeePaymentRequisition(string EmployeeID)
         {
-            return DbHelper.ExecuteQuery(@"SELECT * FROM PaymentRequisitionMaster dm 
+            return DbHelper.ExecuteQuery(@"SELECT distinct dm.PaymentRequisitionID,dm.RequisitionNumber,TotalAmount, isnull(AmountPaid,0) as AmountPaid
+                                            FROM PaymentRequisitionMaster dm 
                                             inner join Employees e on e.ID = dm.RequisitionBy
                                             inner join PaymentRequisitionDetails dd on dd.PaymentRequisitionID=dm.PaymentRequisitionID 
-                                            where e.ID='" + EmployeeID + "'");
+                                            where e.ID='"+ EmployeeID + "' and TotalAmount > isnull(AmountPaid,0)");
         }
         public DataTable GetEmployees()
         {

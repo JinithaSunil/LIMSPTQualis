@@ -63,6 +63,7 @@ namespace LIMS
             {
                 lblVendorName.Text = dtVendor.Rows[0]["VendorName"].ToString();
                 lblBusinessType.Text = dtVendor.Rows[0]["TypeOfBusiness"].ToString();
+                lblPAN.Text= dtVendor.Rows[0]["PANNumber"].ToString();
             }
         }
 
@@ -883,6 +884,50 @@ namespace LIMS
                 VendorID = Convert.ToInt32(dt.Rows[0]["VendorID"].ToString());
             }
             BindVendorDocuments(VendorID);
+        }
+
+        protected void btnEditTIN_Click(object sender, EventArgs e)
+        {
+            txtTIN.Text = lblPAN.Text;
+
+            lblPAN.Visible = false;
+            btnEditTIN.Visible = false;
+
+            pnlTINEdit.Visible = true;
+        }
+
+        protected void btnSaveTIN_Click(object sender, EventArgs e)
+        {
+            int VendorID = 0;
+            string tin = txtTIN.Text.Trim();
+
+            if (string.IsNullOrEmpty(tin))
+            {
+                return;
+            }
+
+            // TODO: Update TIN in your database
+            // using a parameterized SQL UPDATE query.
+            if (Session["vendorID"] != null)
+            {
+                VendorID = Convert.ToInt32(Session["vendorID"]);
+                _cm.VendorID = VendorID;
+                _cm.PanNumber = tin;
+                _cm.UpdateVendorTIN(_cm);
+            }
+            lblPAN.Text = tin;
+
+            pnlTINEdit.Visible = false;
+            lblPAN.Visible = true;
+            btnEditTIN.Visible = true;
+        }
+
+        protected void btnCancelTIN_Click(object sender, EventArgs e)
+        {
+            pnlTINEdit.Visible = false;
+
+            lblPAN.Visible = true;
+            btnEditTIN.Visible = true;
         }
     }
 }

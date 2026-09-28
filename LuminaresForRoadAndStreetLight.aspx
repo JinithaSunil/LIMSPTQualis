@@ -526,8 +526,9 @@
                     </div>
 
 
-                    <h2 style="margin-top: 100px;">LAMPIRAN C – TERMINAL</h2>
-                    <div id="clauseContainerT1" runat="server" style="margin-bottom: 100px;"></div>
+                    <%--// {LAMPIRAN_C-TERMINAL} //--%>
+                    <%--<h2 style="margin-top: 100px;">LAMPIRAN C – TERMINAL</h2> 
+                    <div id="clauseContainerT1" runat="server" style="margin-bottom: 100px;"></div>--%>
 
                     <h2 style="margin-top: 100px;">LAMPIRAN D – UJI TERMAL</h2>
                     <table style="width: 100%; border-collapse: collapse; font-family: Arial, sans-serif; border: 1px solid #999;">

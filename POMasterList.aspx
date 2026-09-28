@@ -118,7 +118,14 @@
                     <h2>PO APPROVAL LIST</h2>
                 </div>
                 <div class="body">
-                    
+                     <div class="row">
+     <div class="col-4">
+         <asp:RadioButtonList ID="radChoice" runat="server" RepeatDirection="Horizontal" OnSelectedIndexChanged="radChoice_SelectedIndexChanged" AutoPostBack="true">
+             <asp:ListItem Value="0" Selected="True">PendingApproval</asp:ListItem>
+             <asp:ListItem Value="1">Approved PO-Pending Delivery</asp:ListItem>
+         </asp:RadioButtonList>
+     </div>
+ </div>
                     <div class="row clearfix">
                         <div class="col-12">
                             <div class="table-responsive">

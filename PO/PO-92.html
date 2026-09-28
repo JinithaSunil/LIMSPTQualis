@@ -1,0 +1,352 @@
+
+</<!DOCTYPE html>
+<html>
+<head>
+    <title>Purchase Order</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+        .a4-page {
+            background: white; /* The page color */
+            width: 21cm; /* A4 width */
+            display: block;
+            margin: 0 auto; /* Center the page horizontally */
+            margin-bottom: 0.5cm; /* Space between multiple pages in a long scroll */
+            box-shadow: 0 0 0.5cm rgba(0, 0, 0, 0.5); /* Adds a subtle shadow for depth */
+            box-sizing: border-box; /* Ensures padding/border are included in the specified width/height */
+            padding: 1cm 1.5cm; /* Example internal margins/padding for content */
+        }
+
+        @media print {
+            .a4-page {
+                background: white; /* The page color */
+                width: 21cm; /* A4 width */
+                display: block;
+                margin: 0 auto; /* Center the page horizontally */
+                margin-bottom: 0.5cm; /* Space between multiple pages in a long scroll */
+                box-shadow: none !important; /* Adds a subtle shadow for depth */
+                box-sizing: border-box; /* Ensures padding/border are included in the specified width/height */
+                padding: 1cm 1.5cm; /* Example internal margins/padding for content */
+            }
+
+            .no-print {
+                display: none;
+            }
+        }
+    </style>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0 auto;
+            padding: 15px;
+            font-size: 12px;
+            width: 21cm; /* A4 paper width */
+            max-width: 100%;
+        }
+
+        .page-container {
+            width: 100%;
+            margin: 0 auto;
+            box-sizing: border-box;
+        }
+
+        .header {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .company-logo img {
+            height: 60px;
+            width: auto;
+        }
+
+        .company-name {
+            font-weight: bold;
+            font-size: 24px;
+            line-height: 1.2;
+        }
+
+        .company-address {
+            font-size: 12px;
+            line-height: 1.4;
+        }
+
+        .po-title {
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+            margin: 15px 0;
+            text-decoration: underline;
+        }
+
+        .po-info {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+            margin-bottom: 10px;
+        }
+
+            .po-info td {
+                padding: 4px 8px;
+                vertical-align: top;
+                border: none;
+            }
+
+            .po-info tr:not(:last-child) td {
+                padding-bottom: 6px;
+            }
+
+        .contact-info {
+            margin: 10px 0;
+            font-size: 12px;
+        }
+
+        .greeting {
+            margin: 10px 0;
+            font-size: 12px;
+            line-height: 1.4;
+            padding: 5px;
+        }
+
+        .terms-section {
+            margin-top: 15px;
+            font-size: 12px;
+        }
+
+        .terms-table {
+            width: 70%;
+            font-size: 12px;
+            margin-bottom: 10px;
+        }
+
+            .terms-table td {
+                padding: 4px;
+                vertical-align: top;
+            }
+
+        .signature-section {
+            margin-top: 20px;
+            font-size: 12px;
+        }
+
+        .signature-table {
+            width: 100%;
+            font-size: 12px;
+        }
+
+            .signature-table td {
+                padding: 8px;
+                vertical-align: top;
+            }
+
+        .signature-line {
+            height: 1px;
+            border-top: 1px solid #000;
+            margin-top: 40px;
+            width: 200px;
+        }
+
+        .items-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 10px 0;
+            font-size: 12px;
+        }
+
+            .items-table th {
+                background-color: #f2f2f2;
+                border: 1px solid #ddd;
+                padding: 6px;
+                text-align: left;
+            }
+
+            .items-table td {
+                border: 1px solid #ddd;
+                padding: 6px;
+            }
+
+        .text-right {
+            text-align: right;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .note {
+            margin-top: 10px;
+            font-size: 11px;
+            font-style: italic;
+        }
+
+        @media print {
+            body {
+                font-size: 11px;
+                padding: 0;
+                margin: 0;
+            }
+
+            .page-container {
+                padding: 1cm;
+            }
+        }
+    </style>
+    <style>
+        .watermark {
+            position: fixed;
+            top: 45%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-35deg);
+            font-size: 90px;
+            font-weight: bold;
+            color: rgba(255, 0, 0, 0.25);
+            font-size: 120px;
+            font-family: Arial, sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 10px;
+            z-index: 9999;
+            pointer-events: none;
+            user-select: none;
+            white-space: nowrap;
+        }
+    </style>
+</head>
+<body style="background-color:white">
+    <div class="no-print">
+        <button onclick="window.print()">Print</button>
+    </div>
+    <center>
+        <div class='a4-page'>
+            
+            <div class="page-container">
+                <div class="header">
+                    <div class="header-content">
+                        <div>
+                            <div class="company-name">
+                                PT QUALIS INDONESIA
+                            </div>
+                            <div class="company-address">
+                                JL. Pajajaran No. 17, Desa Gandasari,<br />
+                                Kecamatan Jatiuwung, Tangerang 15137
+                            </div>
+                        </div>
+                        <div class="company-logo">
+                            <img src="./assets/img/logo.png" alt="Company Logo">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="po-title">
+                    PURCHASE ORDER
+                </div>
+
+                <table class="po-info">
+                    <tr>
+                        <td style="width:20% !important">Kepada Yth / To</td>
+                        <td style="width:30% !important"><strong>: SINAR SENTOSA TOKO</strong></td>
+                        <td style="width:20% !important">PO No.</td>
+                        <td style="width:30% !important"><strong>: 0036-09-2026/PQI-PO-MTC</strong></td>
+                    </tr>
+                    <tr>
+                        <td>Alamat / Address</td>
+                        <td rowspan="2">
+                            : Jln Gatot Subroto no 124 Cimone  <br>
+                            TANGERANG - BANTEN
+                        </td>
+                        <td>Tgl. / Date</td>
+                        <td>: 04/Sep/2026</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>PR/PP No.</td>
+                        <td>: 0818/08/2026/MTC</td>
+                    </tr>
+                    <tr>
+                        <td>Telp</td>
+                        <td>: +62 81295767773</td>
+                        <td>Quot. No.</td>
+                        <td>: <a href='GenerateVendorQuotation.aspx?ID=126&type=28260' target='_blank'>VendorQuotation-28260126</a></td>
+                    </tr>
+                    <tr>
+                        <td>Fax</td>
+                        <td>: </td>
+                    </tr>
+                    <tr>
+                        <td>Email</td>
+                        <td>: sinarsentosa_tgrg@yahoo.com</td>
+                    </tr>
+                    <tr>
+                        <td>U.P / Attention</td>
+                        <td colspan="3">: Irwan Sinar Sentosa</td>
+                    </tr>
+                </table>
+
+                <div class="greeting" style="text-align:left">
+                    <strong>Dear Sir,</strong><br>
+                    Bersama ini kami bermaksud untuk membeli dari saudara, barang - barang dengan rincian sebagai berikut:<br>
+                    <em>We confirm having from you the following goods, subject th the term's and conditions stated here in :</em>
+                </div>
+
+                <table style='width:100%; border-collapse:collapse; font-family:Arial; font-size:12px; margin-top:10px;'><thead><tr style='background-color:#f2f2f2;'><th style='border:1px solid #ddd; padding:5px; text-align:center; width:5%;'>No</th><th style='border:1px solid #ddd; padding:5px; text-align:center; width:5%;'>PP#</th><th style='border:1px solid #ddd; padding:5px; text-align:center; width:45%;'>Keterangan</th><th style='border:1px solid #ddd; padding:5px; text-align:center; width:10%;'>kuantitas</th><th style='border:1px solid #ddd; padding:5px; text-align:center; width:20%;'>Harga Sat (IDR)</th><th style='border:1px solid #ddd; padding:5px; text-align:center; width:10%;'>Disc. (%)</th><th style='border:1px solid #ddd; padding:5px; text-align:center; width:10%;'>Jumlah (IDR)</th></tr></thead><tbody><tr><td style='border:1px solid #ddd; padding:5px;text-align:center;'>1</td><td style='border:1px solid #ddd; padding:5px;text-align:center;'><a href='GeneratePurchaseRequisitionReport.aspx?ID=41722' target='_blank'>0818/08/2026/MTC</a></td><td style='border:1px solid #ddd; padding:5px;'>  Kabel Scun 120 - 12</td><td style='border:1px solid #ddd; padding:5px; text-align:center;'>10.00</td><td style='border:1px solid #ddd; padding:5px; text-align:right;'>21.000,00</td><td style='border:1px solid #ddd; padding:5px; text-align:right;font-weight:bold;'>0.00</td><td style='border:1px solid #ddd; padding:5px; text-align:right;'>210.000,00</td></tr><tr><td style='border:1px solid #ddd; padding:5px;text-align:center;'>2</td><td style='border:1px solid #ddd; padding:5px;text-align:center;'><a href='GeneratePurchaseRequisitionReport.aspx?ID=41722' target='_blank'>0818/08/2026/MTC</a></td><td style='border:1px solid #ddd; padding:5px;'>  kabel scun   95 - 10</td><td style='border:1px solid #ddd; padding:5px; text-align:center;'>10.00</td><td style='border:1px solid #ddd; padding:5px; text-align:right;'>14.000,00</td><td style='border:1px solid #ddd; padding:5px; text-align:right;font-weight:bold;'>0.00</td><td style='border:1px solid #ddd; padding:5px; text-align:right;'>140.000,00</td></tr><tr><td colspan='6' style='border:1px solid #ddd; padding:5px; text-align:right; font-weight:bold;'>Sub Total</td><td colspan='1' style='border:1px solid #ddd; padding:5px; text-align:right;'>350.000,00</td></tr><tr><td colspan='6' style='border:1px solid #ddd; padding:5px; text-align:right; font-weight:bold;'>PPN</td><td colspan='1' style='border:1px solid #ddd; padding:5px; text-align:right;'>0,00</td></tr><tr><td colspan='6' style='border:1px solid #ddd; padding:5px; text-align:right; font-weight:bold;'>Total</td><td colspan='1' style='border:1px solid #ddd; padding:5px; text-align:right; font-weight:bold;'>350.000,00</td></tr></tbody></table>
+
+                <div class="terms-section" style="text-align:left">
+                    <table class="terms-table">
+                        <tr>
+                            <td style="width:22% !important">Pembayaran / Payment</td>
+                            <td style="width:50% !important">: Cash</td>
+                        </tr>
+                        <tr>
+                            <td style="width:22% !important">Penyerahan / Delivery</td>
+                            <td style="width:50% !important">: Barang sudah di terima</td>
+                        </tr>
+                        <tr>
+                            <td style="width:22% !important">Keterangan / Remarks</td>
+                            <td style="width:50% !important"><strong>: </strong></td>
+                        </tr>
+                    </table>
+                    <table class="terms-table">
+                        <tr>
+                            <td style="font-size: 12px; padding-top: 10px;">
+                                Sertifikat pemeriksaan barang harus diserahkan pada saat penyerahan barang kepada kami / <em>The test certificate must be submitted upon delivery of the goods to our address</em>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="font-size: 12px;">
+                                Copy dari surat pesanan ini agar dikembalikan pada kami setelah distempel dan ditanda-tangani / <em>Please return copy of this purchase order duly stamped and signed</em>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="signature-section">
+                    <table class="signature-table">
+                        <tr>
+                            <td style="width: 50%; text-align:center">
+                                <div>Diterima Oleh /<em> Accepted by,</em></div>
+                                <div></div>
+                                <div style="margin-top:30%"><u><b>SINAR SENTOSA TOKO</b></u></div>
+                                <div>Penjual /<em> Seller</em></div>
+                            </td>
+                            <td style="width: 50%; text-align:center">
+                                <div>Hormat kami / <em>Yours</em></div>
+                                <div style="margin-top:5%"><div style='text-align:center;font-family:Times New Roman;'><div><img src='/Signatures/1/PO.jpeg' style='height:100px;' /></div><div style='font-size:10px;font-weight:bold;'>Date/Time: 10-Sep-2026 09:19</div></div><br /><br /><u><b></b></u></div>
+                                <div>Pembeli / <em>Buyer</em></div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div style="margin-top: 12px; font-size: 12px; padding-left:5px">
+                    Note: Setiap penagihan harap mencantumkan copy Surat Pesanan PT. Qualis Indonesia<br />
+                    <em>Note: For each billing, please include a copy of the PT. Qualis Indonesia Purchase Order Letter.</em>
+                </div>
+            </div>
+        </div>
+            </center>
+            </body>
+</html>

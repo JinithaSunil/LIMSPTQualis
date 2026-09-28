@@ -542,7 +542,8 @@
                                                                     <ItemTemplate>
                                                                         <tr>
                                                                             <td>
-                                                                                <asp:HyperLink ID="hypItemRate" runat="server" Target="_blank" Text=' <%#Eval("ItemDescription") + " " + Eval("Specification")  + " " + Eval("ModelNo") %>'></asp:HyperLink>
+                                                                                <asp:HyperLink ID="hypItemRate" runat="server" Target="_blank" Text=' <%#Eval("ItemDescription") %>'></asp:HyperLink><br />
+                                                                                <span><%#Eval("ItemSpecification") %></span>
                                                                             </td>
                                                                             <td style="text-align: center"><%#Convert.ToInt32(Eval("AvailableQuantity")) %></td>
                                                                             <td style="text-align: center"><%#Eval("UOMName") %></td>
@@ -558,6 +559,14 @@
                                                                     <td colspan="7"><b>Sub Total</b></td>
                                                                     <td style="text-align: right">
                                                                         <asp:Label ID="lblSubTotal" runat="server"></asp:Label>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr class="total-row">
+                                                                    <td colspan="7">
+                                                                        <asp:Label ID="lblAdditionalChargeDescription" runat="server"></asp:Label>
+                                                                    </td>
+                                                                    <td style="text-align: right">
+                                                                        <asp:Label ID="lblAdditionalCharges" runat="server"></asp:Label>
                                                                     </td>
                                                                 </tr>
                                                                 <tr class="total-row">

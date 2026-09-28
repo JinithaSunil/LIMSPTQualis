@@ -120,83 +120,84 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="col-md-6">
-                                    <div class="card">
-                                        <div class="header">
-                                            <h5>DISABLE/ENABLE PURCHASE GROUP</h5>
-                                        </div>
-                                        <div class="body">
+    <div class="card">
+        <div class="header">
+            <h5>ADD PURCHASE SUB GROUP</h5>
+        </div>
+        <div class="body">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <div class="form-line">
+                            <label for="ddlpurchaseGroup">Purchase Group</label>
+                            <asp:DropDownList runat="server" ID="ddlpurchaseGroup" Height="35px" CssClass="form-control" OnSelectedIndexChanged="ddlpurchaseGroup_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6" id="divitemtype" runat="server" visible="false">
+                    <div class="form-group">
+                        <div class="form-line">
+                            <label for="ddlitemtypefrosubgroup">Item Type</label>
+                            <asp:DropDownList runat="server" ID="ddlitemtypefrosubgroup" Height="35px" CssClass="form-control"></asp:DropDownList>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <div class="form-line">
+                            <label for="txtpurchasesubgroup">Purchase SubGroup</label>
+                            <asp:TextBox ID="txtpurchasesubgroup" runat="server" CssClass="form-control"></asp:TextBox>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12" style="text-align: center">
+                    <asp:Button ID="btnAddsubgroup" runat="server" Text="Add-PurchaseSubGroup" CssClass="btn btn-secondary" OnClick="btnAddsubgroup_Click" />
+                </div>
+            </div>
+        </div>
 
-                                            <!-- NEW ROW: Disable Purchase Group -->
-                                            <div class="row">
-                                                <div class="col-sm-12">
-                                                    <div class="form-group">
-                                                        <div class="form-line">
-                                                            <label for="ddlDisablePurchaseGroup">Select Purchase Group to Disable/Enable</label>
-                                                            <asp:DropDownList runat="server" ID="ddlDisablePurchaseGroup" Height="35px" CssClass="form-control"></asp:DropDownList>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-12" style="text-align: center">
-                                                    <asp:Button ID="btnDisablePurchaseGroup" runat="server" Text="Disable/EnableGroup" CssClass="btn btn-warning" OnClick="btnDisablePurchaseGroup_Click" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+    </div>
+</div>
+                            
                             </div>
                             </div>
 
 
 
                             <%--/************Item Name and description***********/--%>
-                            <div class="row" style="padding: 10px">
-                                <div class="col-md-6">
-                                    <div class="card">
-                                        <div class="header">
-                                            <h5>ADD PURCHASE SUB GROUP</h5>
-                                        </div>
-                                        <div class="body">
-                                            <div class="row">
-                                                <div class="col-sm-6">
-                                                    <div class="form-group">
-                                                        <div class="form-line">
-                                                            <label for="ddlpurchaseGroup">Purchase Group</label>
-                                                            <asp:DropDownList runat="server" ID="ddlpurchaseGroup" Height="35px" CssClass="form-control" OnSelectedIndexChanged="ddlpurchaseGroup_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6" id="divitemtype" runat="server" visible="false">
-                                                    <div class="form-group">
-                                                        <div class="form-line">
-                                                            <label for="ddlitemtypefrosubgroup">Item Type</label>
-                                                            <asp:DropDownList runat="server" ID="ddlitemtypefrosubgroup" Height="35px" CssClass="form-control"></asp:DropDownList>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-sm-12">
-                                                    <div class="form-group">
-                                                        <div class="form-line">
-                                                            <label for="txtpurchasesubgroup">Purchase SubGroup</label>
-                                                            <asp:TextBox ID="txtpurchasesubgroup" runat="server" CssClass="form-control"></asp:TextBox>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-12" style="text-align: center">
-                                                    <asp:Button ID="btnAddsubgroup" runat="server" Text="Add-PurchaseSubGroup" CssClass="btn btn-secondary" OnClick="btnAddsubgroup_Click" />
-                                                </div>
-                                            </div>
-                                        </div>
+                            <div class="row" style="padding: 10px; visibility:hidden" >
+                                    <div class="col-md-6">
+        <div class="card">
+            <div class="header">
+                <h5>DISABLE/ENABLE PURCHASE GROUP</h5>
+            </div>
+            <div class="body">
 
-                                    </div>
-                                </div>
+                <!-- NEW ROW: Disable Purchase Group -->
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <div class="form-line">
+                                <label for="ddlDisablePurchaseGroup">Select Purchase Group to Disable/Enable</label>
+                                <asp:DropDownList runat="server" ID="ddlDisablePurchaseGroup" Height="35px" CssClass="form-control"></asp:DropDownList>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12" style="text-align: center">
+                        <asp:Button ID="btnDisablePurchaseGroup" runat="server" Text="Disable/EnableGroup" CssClass="btn btn-warning" OnClick="btnDisablePurchaseGroup_Click" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+                                
                                 <!-- NEW ROW: Disable Purchase SubGroup -->
                                                                 <div class="col-md-6">
                                     <div class="card">

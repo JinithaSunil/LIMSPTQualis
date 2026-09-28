@@ -862,7 +862,8 @@
                                                                 <tr>
                                                                     <td style="width: 22%; padding-left: 6%;">
                                                                         <asp:Label ID="lblPanCard" runat="server" Text="NPWP"></asp:Label>
-                                                                        <span id="Span8" style="color: Red" runat="server">*</span></td>
+                                                                        <%--<span id="Span8" style="color: Red" runat="server">*</span>--%>
+                                                                    </td>
                                                                     <td style="width: 20%">
                                                                         <asp:FileUpload ID="fpPanCard" runat="server" class="btn btn-primary" />
                                                                         <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" Display="Dynamic" ControlToValidate="fpPanCard" ErrorMessage="Please select a .pdf, .doc/.docx, .eps, .jpeg, .jpg, .png   file" ForeColor="Red" ValidationExpression="^([a-zA-Z].*|[1-9].*)\.(((p|P)(d|D)(f|F))|((d|D)(o|O)(c|C))|((d|D)(o|O)(c|C)(x|X))|((e|E)(p|P)(s|S))|((p|P)(n|N)(g|G))|((j|J)(p|P)(e|E)(g|G))|((j|J)(p|P)(g|G)))$"></asp:RegularExpressionValidator>

@@ -60,8 +60,9 @@
                                         <asp:BoundField DataField="RequisitionDate" HeaderText="Request Date" DataFormatString="{0:dd-MMM-yyyy}" />
                                     </Columns>
                                 </asp:GridView>
-                                <asp:GridView ID="gvCompleted" runat="server" DataKeyNames="PaymentRequisitionID" Visible="false" AutoGenerateColumns="False" Font-Bold="True"
-                                    AllowSorting="true"
+                                <asp:GridView ID="gvCompleted" runat="server" DataKeyNames="PaymentRequisitionID" Visible="false" 
+                                    AutoGenerateColumns="False" Font-Bold="True"
+                                    AllowSorting="true" OnRowDataBound="gvCompleted_RowDataBound"
                                     class="table table-bordered table-striped table-hover js-basic-example dataTable">
                                     <Columns>
                                         <asp:TemplateField HeaderText="Sl#">
@@ -72,7 +73,7 @@
                                         <%--                                    <asp:BoundField DataField="PR" HeaderText="PR#" />--%>
                                         <asp:TemplateField HeaderText="PR#">
                                             <ItemTemplate>
-                                                <asp:HyperLink ID="hypPR" runat="server" Text='<%#Eval("RequisitionNumber") %>' NavigateUrl='<%#"PaymentRequisition/" + Eval("PaymentRequisitionID") + ".htm" %>' Target="_blank"></asp:HyperLink>
+                                                <asp:HyperLink ID="hypPR" runat="server" Text='<%#Eval("RequisitionNumber") %>' Target="_blank"></asp:HyperLink>
                                             </ItemTemplate>
                                         </asp:TemplateField>
                                         <asp:BoundField DataField="EmployeeName" HeaderText="Emp. Name" />

@@ -590,6 +590,7 @@ namespace LIMS
                         _cm.inquiryStatusId = 1;
                         _cm.created = DateTime.Now;
                         _cm.employeeDepartmentID = Convert.ToInt32(ddlDepartment.SelectedValue);
+                      
                         if ((ddlProductSubGroup.SelectedIndex != -1) && (ddlProductSubGroup.SelectedIndex != 0))
                         {
                             _cm.subgroupid = Convert.ToInt32(ddlProductSubGroup.SelectedValue);

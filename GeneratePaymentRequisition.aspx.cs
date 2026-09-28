@@ -43,7 +43,7 @@ namespace LIMS
                 string RequisitionBy = "";
                 string Remarks = "";
                 string CurrencyCode = "";
-                string Document = "", DocumentName = "", url="";
+                string Document = "",url="";
 
                 // Get the quotation details
                 DataTable dtQD = _cm.GetPaymentRequisitionDetails(Convert.ToInt32(PaymentRequisitionID));

@@ -305,15 +305,18 @@
                                                 <asp:Label ID="lblVendorQuotationDetailsID" Text='<%# Eval("VendorQuotationDetailsID").ToString()%>' runat="server" Visible="false"></asp:Label>
                                                 <asp:Label ID="lblEnquiryDetailsID" Text='<%# Eval("EnquiryDetailsID").ToString()%>' runat="server" Visible="false"></asp:Label>
                                                 <asp:Label ID="lblPODetails" Text='<%# Eval("PODetailsID").ToString()%>' runat="server" Visible="false"></asp:Label>
-                                                <asp:Label ID="lblItemDescription" Text='<%# Eval("ItemDescription").ToString().ToUpper() %>' runat="server" />
+                                                <asp:Label ID="lblItemDescription" Text='<%# Eval("ItemDescription").ToString().ToUpper() %>' runat="server" /><br />
+                                                <asp:Label ID="lblItemSpecification" Text='<%# Eval("ItemSpecification").ToString().ToUpper() %>' runat="server" />
                                             </ItemTemplate>
                                             <ItemStyle Width="5%"></ItemStyle>
                                         </asp:TemplateField>
                                         <asp:TemplateField HeaderText="Delivery Date">
                                             <ItemTemplate>
                                                 <asp:Label ID="lblDeliveryDate" Text='<%#Eval("DeliveryDate", "{0:dd/MMM/yyyy}") %>' runat="server"></asp:Label>
-                                                <asp:TextBox ID="txtDeliveryDate" Visible="false" runat="server" CssClass="form-control" Text='<%#Eval("DeliveryDate", "{0:dd/MMM/yyyy}") %>' AutoComplete="false"></asp:TextBox>
+                                                <asp:TextBox ID="txtDeliveryDate" Visible="false" runat="server" CssClass="form-control" Text='<%#Eval("DeliveryDate", "{0:dd/MMM/yyyy}") %>' AutoComplete="false" Font-Size="11px"></asp:TextBox>
                                                 <ajaxToolkit:CalendarExtender ID="CalendarExtender2" runat="server" TargetControlID="txtDeliveryDate" Format="dd/MMM/yyyy"></ajaxToolkit:CalendarExtender>
+                                                <asp:Label ID="lblAdditionalChargeDescription" Text='<%# Eval("AdditionalChargeDescription").ToString().ToUpper() %>' runat="server" Visible="false" />
+                                                <asp:Label ID="lblAdditionalChargesValue" Text='<%# Eval("AdditionalCharges").ToString().ToUpper() %>' runat="server" Visible="false"/>
                                             </ItemTemplate>
                                             <ItemStyle Width="6%"></ItemStyle>
                                         </asp:TemplateField>
@@ -337,8 +340,9 @@
                                         </asp:TemplateField>
                                         <asp:TemplateField HeaderText="Qty">
                                             <ItemTemplate>
-                                                <asp:TextBox ID="txtQty" runat="server" Text='<%# Eval("EnqQty").ToString() %>' OnTextChanged="txtQty_TextChanged" AutoPostBack="true" Width="100%" CssClass="form-control" />
+                                                <asp:TextBox ID="txtQty" runat="server" Text='<%# Eval("Quantity").ToString() %>' OnTextChanged="txtQty_TextChanged" AutoPostBack="true" Width="100%" CssClass="form-control" />
                                                 <ajaxToolkit:FilteredTextBoxExtender ID="FilteredTextBoxExtender1" runat="server" FilterType="Numbers, Custom" ValidChars="." TargetControlID="txtQty" />
+                                                <asp:HiddenField ID="hdRemainingQty" runat="server" Text='<%# Eval("RemainingQty").ToString() %>' />
                                             </ItemTemplate>
                                             <ItemStyle Width="5%"></ItemStyle>
                                         </asp:TemplateField>
@@ -352,6 +356,15 @@
                                             <ItemTemplate>
                                                 <asp:Label ID="lbldiscount" runat="server" Font-Bold="true" />
                                             </ItemTemplate>
+                                            <FooterTemplate>
+                                                <asp:Label ID="lblSubTotal1" runat="server" Text="SUB-TOTAL" Font-Bold="true"></asp:Label><br />
+                                                <asp:Label ID="lblAdditionalCharges1" runat="server" Font-Bold="true"></asp:Label><br />
+                                                <asp:Panel ID="pnlVATFooter" runat="server" Visible="false">
+                                                    <asp:Label ID="lblVATPercentText" runat="server" Text="VAT %" Font-Bold="true"></asp:Label><br />
+                                                    <asp:Label ID="lblVATText" runat="server" Text="VAT" Font-Bold="true"></asp:Label><br />
+                                                </asp:Panel>
+                                                <asp:Label ID="lblTotal1" runat="server" Text="GRAND TOTAL" Font-Bold="true"></asp:Label>
+                                            </FooterTemplate>
                                             <ItemStyle Width="2%"></ItemStyle>
                                         </asp:TemplateField>
                                         <asp:TemplateField HeaderText="Dis. (Amt.)">
@@ -359,12 +372,7 @@
                                                 <asp:Label ID="lblDiscountAmount" runat="server" />
                                             </ItemTemplate>
                                             <FooterTemplate>
-                                                <asp:Label ID="lblSubTotal1" runat="server" Text="SUB-TOTAL" Font-Bold="true"></asp:Label><br />
-                                                <asp:Panel ID="pnlVATFooter" runat="server" Visible="false">
-                                                    <asp:Label ID="lblVATPercentText" runat="server" Text="VAT %" Font-Bold="true"></asp:Label><br />
-                                                    <asp:Label ID="lblVATText" runat="server" Text="VAT" Font-Bold="true"></asp:Label><br />
-                                                </asp:Panel>
-                                                <asp:Label ID="lblTotal1" runat="server" Text="GRAND TOTAL" Font-Bold="true"></asp:Label>
+                                                <%-- Empty because footer is merged with previous column --%>
                                             </FooterTemplate>
 
                                             <ItemStyle Width="5%"></ItemStyle>
@@ -376,6 +384,7 @@
                                             </ItemTemplate>
                                             <FooterTemplate>
                                                 <asp:Label ID="lblSubtotal" runat="server" Font-Bold="true"></asp:Label><br />
+                                                <asp:Label ID="lblAdditionalCharges" runat="server" Font-Bold="true"></asp:Label><br />
                                                 <asp:Panel ID="pnlVATFooterValues" runat="server" Visible="false">
                                                     <asp:Label ID="lblVATpercentage" runat="server" Font-Bold="true"></asp:Label><br />
                                                     <asp:Label ID="lblVAT" runat="server" Font-Bold="true"></asp:Label><br />

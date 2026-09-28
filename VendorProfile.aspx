@@ -9,32 +9,65 @@
         });
     </script>
     <style>
-/* Remove default spacing */
-.aspNetTreeView table {
-    border-collapse: collapse;
-}
+        .profile-field {
+            display: flex;
+            align-items: center;
+            margin: 15px 0;
+            font-size: 22px;
+        }
 
-.aspNetTreeView td {
-    padding: 0 !important;
-}
+        .profile-label {
+            width: 360px;
+            color: #444;
+        }
 
-/* Reduce space between expand icon and checkbox */
-.aspNetTreeView input[type="checkbox"] {
-    margin-left: -11px !important;
-    margin-right: 4px !important;
-    vertical-align: middle;
-}
+        .profile-value {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #444;
+        }
 
-/* Align expand (+) icon */
-.aspNetTreeView img {
-    margin-right: 2px !important;
-    vertical-align: middle;
-}
-/* Fix indentation alignment */
-.aspNetTreeView span {
-    margin-left: 2px !important;
-}
-       
+        .tin-input {
+            width: 260px;
+            display: inline-block;
+        }
+
+        .edit-icon {
+            padding: 5px 8px;
+            display: inline-flex;
+            align-items: center;
+        }
+
+            .edit-icon i {
+                font-size: 20px;
+            }
+        /* Remove default spacing */
+        .aspNetTreeView table {
+            border-collapse: collapse;
+        }
+
+        .aspNetTreeView td {
+            padding: 0 !important;
+        }
+
+        /* Reduce space between expand icon and checkbox */
+        .aspNetTreeView input[type="checkbox"] {
+            margin-left: -11px !important;
+            margin-right: 4px !important;
+            vertical-align: middle;
+        }
+
+        /* Align expand (+) icon */
+        .aspNetTreeView img {
+            margin-right: 2px !important;
+            vertical-align: middle;
+        }
+        /* Fix indentation alignment */
+        .aspNetTreeView span {
+            margin-left: 2px !important;
+        }
+
 
         .tab-content > .tab-pane {
             display: none;
@@ -373,10 +406,49 @@
                                                             <asp:Label ID="lblVendorName" runat="server"></asp:Label></a>
                                                         <span class="uprofile-status online"></span>
                                                     </h3>
-                                                    <p class="uprofile-title">
-                                                        <asp:Label ID="lblBusinessType" runat="server"></asp:Label>
-                                                    </p>
                                                 </div>
+                                                <table width="75%" style="text-align: left !important; font-size: 16px; font-weight: 200">
+                                                    <tr>
+                                                        <td style="width:35%">Business Type
+                                                        </td>
+                                                        <td>:
+                                                            <asp:Label ID="lblBusinessType" runat="server"></asp:Label>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Tax Identity Number(TIN)
+                                                        </td>
+                                                        <td>:
+                                                            <asp:Label ID="lblPAN" runat="server"></asp:Label>
+                                                            <asp:Panel ID="pnlTINEdit" runat="server"
+                                                                Visible="false">
+
+                                                                <asp:TextBox ID="txtTIN" runat="server"
+                                                                    CssClass="form-control tin-input">
+            </asp:TextBox>
+
+                                                                <asp:Button ID="btnSaveTIN" runat="server"
+                                                                    Text="Save"
+                                                                    CssClass="btn btn-success btn-sm"
+                                                                    OnClick="btnSaveTIN_Click" />
+
+                                                                <asp:Button ID="btnCancelTIN" runat="server"
+                                                                    Text="Cancel"
+                                                                    CssClass="btn btn-secondary btn-sm"
+                                                                    OnClick="btnCancelTIN_Click"
+                                                                    CausesValidation="false" />
+
+                                                            </asp:Panel>
+
+                                                            <asp:LinkButton ID="btnEditTIN" runat="server"
+                                                                ToolTip="Edit Tax Identity Number"
+                                                                OnClick="btnEditTIN_Click">
+                                                                <img src="assets/img/Edit.png" width="20px" class="me-1" />
+                                                            </asp:LinkButton>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+
                                             </div>
                                         </div>
                                     </div>
@@ -474,23 +546,23 @@
                                                                     <asp:ListItem>Manufacturing Office</asp:ListItem>
                                                                 </asp:DropDownList><br />
                                                                 <b>Address:</b>
-                            <asp:TextBox ID="txtAddress1" runat="server" CssClass="form-control" Text='<%# Eval("AddressLine1")%>' placeholder="Enter Address Line 1"></asp:TextBox>
+                                                                <asp:TextBox ID="txtAddress1" runat="server" CssClass="form-control" Text='<%# Eval("AddressLine1")%>' placeholder="Enter Address Line 1"></asp:TextBox>
                                                                 <ajaxToolkit:FilteredTextBoxExtender ID="FilteredTextBoxExtender25" runat="server" FilterType="Numbers, LowercaseLetters, UppercaseLetters, Custom" ValidChars="#,-/ " TargetControlID="txtAddress1" />
-                            <asp:TextBox ID="txtAddress2" runat="server" CssClass="form-control" Text='<%# Eval("AddressLine2")%>' placeholder="Enter Address Line 2"></asp:TextBox>
+                                                                <asp:TextBox ID="txtAddress2" runat="server" CssClass="form-control" Text='<%# Eval("AddressLine2")%>' placeholder="Enter Address Line 2"></asp:TextBox>
                                                                 <ajaxToolkit:FilteredTextBoxExtender ID="FilteredTextBoxExtender7" runat="server" FilterType="Numbers, LowercaseLetters, UppercaseLetters, Custom" ValidChars="#,-/ " TargetControlID="txtAddress2" />
-                            <asp:TextBox ID="txtAddress3" runat="server" CssClass="form-control" Text='<%# Eval("AddressLine3")%>' placeholder="Enter Address Line 3"></asp:TextBox>
+                                                                <asp:TextBox ID="txtAddress3" runat="server" CssClass="form-control" Text='<%# Eval("AddressLine3")%>' placeholder="Enter Address Line 3"></asp:TextBox>
                                                                 <ajaxToolkit:FilteredTextBoxExtender ID="FilteredTextBoxExtender8" runat="server" FilterType="Numbers, LowercaseLetters, UppercaseLetters, Custom" ValidChars="#,-/ " TargetControlID="txtAddress3" />
                                                                 <asp:Label ID="lblAddressID" runat="server" Text='<%# Eval("VendorLocationID") %>' Visible="false"></asp:Label>
                                                                 <br />
                                                                 <b>City: </b>
-                            <asp:TextBox ID="txtCity" runat="server" CssClass="form-control" Text='<%# Eval("City") %>' placeholder="Enter City"></asp:TextBox>
+                                                                <asp:TextBox ID="txtCity" runat="server" CssClass="form-control" Text='<%# Eval("City") %>' placeholder="Enter City"></asp:TextBox>
                                                                 <ajaxToolkit:FilteredTextBoxExtender ID="FilteredTextBoxExtender9" runat="server" FilterType="LowercaseLetters, UppercaseLetters, Custom" ValidChars=" " TargetControlID="txtCity" />
                                                                 <br />
                                                                 <b>State:</b>
-                            <asp:TextBox ID="txtState" runat="server" CssClass="form-control" Text='<%# Eval("State") %>' placeholder="Enter State"></asp:TextBox>
+                                                                <asp:TextBox ID="txtState" runat="server" CssClass="form-control" Text='<%# Eval("State") %>' placeholder="Enter State"></asp:TextBox>
                                                                 <ajaxToolkit:FilteredTextBoxExtender ID="FilteredTextBoxExtender11" runat="server" FilterType="LowercaseLetters, UppercaseLetters, Custom" ValidChars=" " TargetControlID="txtState" />
                                                                 <b>Pincode:</b>
-                            <asp:TextBox ID="txtPincode" runat="server" CssClass="form-control" Text='<%# Eval("Pincode") %>' placeholder="Enter Pincode"></asp:TextBox>
+                                                                <asp:TextBox ID="txtPincode" runat="server" CssClass="form-control" Text='<%# Eval("Pincode") %>' placeholder="Enter Pincode"></asp:TextBox>
                                                                 <ajaxToolkit:FilteredTextBoxExtender ID="FilteredTextBoxExtender24" runat="server" FilterType="Numbers" FilterMode="ValidChars" TargetControlID="txtPincode" />
                                                                 <br />
                                                                 <b>Country: </b>
@@ -544,28 +616,28 @@
                                                                     <asp:ListItem Value="Miss.">Miss.</asp:ListItem>
                                                                     <asp:ListItem Value="Mrs.">Mrs.</asp:ListItem>
                                                                 </asp:DropDownList><br />
-                            <asp:TextBox ID="txtFirstName" runat="server" CssClass="form-control" Text='<%# Eval("FirstName") %>' placeholder="Enter First Name"></asp:TextBox><br />
+                                                                <asp:TextBox ID="txtFirstName" runat="server" CssClass="form-control" Text='<%# Eval("FirstName") %>' placeholder="Enter First Name"></asp:TextBox><br />
                                                                 <ajaxToolkit:FilteredTextBoxExtender ID="FilteredTextBoxExtender2" runat="server" Enabled="True" TargetControlID="txtFirstName" FilterType="UppercaseLetters,LowercaseLetters,Custom" ValidChars=" "></ajaxToolkit:FilteredTextBoxExtender>
-                            <asp:TextBox ID="txtMiddleName" runat="server" CssClass="form-control" Text='<%# Eval("MiddleName") %>' placeholder="Enter Middle Name"></asp:TextBox><br />
+                                                                <asp:TextBox ID="txtMiddleName" runat="server" CssClass="form-control" Text='<%# Eval("MiddleName") %>' placeholder="Enter Middle Name"></asp:TextBox><br />
                                                                 <ajaxToolkit:FilteredTextBoxExtender ID="FilteredTextBoxExtender1" runat="server" Enabled="True" TargetControlID="txtMiddleName" FilterType="UppercaseLetters,LowercaseLetters" ValidChars=" "></ajaxToolkit:FilteredTextBoxExtender>
-                            <asp:TextBox ID="txtLastName" runat="server" CssClass="form-control" Text='<%# Eval("LastName") %>' placeholder="Enter Last Name"></asp:TextBox><br />
+                                                                <asp:TextBox ID="txtLastName" runat="server" CssClass="form-control" Text='<%# Eval("LastName") %>' placeholder="Enter Last Name"></asp:TextBox><br />
                                                                 <ajaxToolkit:FilteredTextBoxExtender ID="FilteredTextBoxExtender3" runat="server" Enabled="True" TargetControlID="txtLastName" FilterType="UppercaseLetters,LowercaseLetters" ValidChars=" "></ajaxToolkit:FilteredTextBoxExtender>
                                                                 <asp:Label ID="lblVendorContactPersonID" runat="server" CssClass="form-control" Text='<%# Eval("VendorContactPersonID") %>' Visible="false"></asp:Label>
                                                                 <asp:Label ID="lblVendorContactID" runat="server" CssClass="form-control" Text='<%# Eval("VendorContactID") %>' Visible="false"></asp:Label><br />
                                                                 <asp:Label ID="Label1" runat="server" Text='<%# Eval("VendorID") %>' Visible="false"></asp:Label>
                                                             </li>
                                                             <li><b>Designation:</b>
-                            <asp:TextBox ID="txtDesignation" runat="server" CssClass="form-control" Text='<%# Eval("Designation") %>' placeholder="Enter Designation"></asp:TextBox>
+                                                                <asp:TextBox ID="txtDesignation" runat="server" CssClass="form-control" Text='<%# Eval("Designation") %>' placeholder="Enter Designation"></asp:TextBox>
                                                                 <ajaxToolkit:FilteredTextBoxExtender ID="FilteredTextBoxExtender4" runat="server" Enabled="True" TargetControlID="txtDesignation" FilterType="UppercaseLetters,LowercaseLetters,Custom" ValidChars=" "></ajaxToolkit:FilteredTextBoxExtender>
                                                             </li>
                                                             <br />
                                                             <li><b>Department:</b>
-                            <asp:TextBox ID="txtDepartment" runat="server" CssClass="form-control" Text='<%# Eval("Department") %>' placeholder="Enter Department"></asp:TextBox>
-                            <ajaxToolkit:FilteredTextBoxExtender ID="FilteredTextBoxExtender5" runat="server" Enabled="True" TargetControlID="txtDepartment" FilterType="UppercaseLetters,LowercaseLetters,Custom" ValidChars=" "></ajaxToolkit:FilteredTextBoxExtender>
+                                                                <asp:TextBox ID="txtDepartment" runat="server" CssClass="form-control" Text='<%# Eval("Department") %>' placeholder="Enter Department"></asp:TextBox>
+                                                                <ajaxToolkit:FilteredTextBoxExtender ID="FilteredTextBoxExtender5" runat="server" Enabled="True" TargetControlID="txtDepartment" FilterType="UppercaseLetters,LowercaseLetters,Custom" ValidChars=" "></ajaxToolkit:FilteredTextBoxExtender>
                                                             </li>
                                                             <br />
                                                             <li><b>Mobile:</b>
-                            <asp:TextBox ID="txtMobile" runat="server" CssClass="form-control" Text='<%# Eval("ContactMobile") %>' MaxLength="14" placeholder="Enter Mobile Number"></asp:TextBox>
+                                                                <asp:TextBox ID="txtMobile" runat="server" CssClass="form-control" Text='<%# Eval("ContactMobile") %>' MaxLength="14" placeholder="Enter Mobile Number"></asp:TextBox>
                                                                 <ajaxToolkit:FilteredTextBoxExtender ID="FilteredTextBoxExtender6" runat="server" Enabled="True" TargetControlID="txtMobile" FilterType="Numbers,Custom" ValidChars="+ "></ajaxToolkit:FilteredTextBoxExtender>
                                                             </li>
                                                             <br />
@@ -577,7 +649,7 @@
                                                             </li>
                                                             <br />
                                                             <li><b>Email:</b>
-                            <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" Text='<%# Eval("ContactEmail") %>' placeholder="Enter Email Address"></asp:TextBox>
+                                                                <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" Text='<%# Eval("ContactEmail") %>' placeholder="Enter Email Address"></asp:TextBox>
                                                                 <%--<ajaxToolkit:FilteredTextBoxExtender ID="FilteredTextBoxExtender10" runat="server" FilterType="LowercaseLetters, UppercaseLetters,Custom" TargetControlID="txtEmail" ValidChars=".@,-_" />--%>
                                                                 <asp:LinkButton ID="lnkUpdateContact" runat="server" CommandName="Update" Text="Update"><img src="assets/img/accept1.png" style="font-size:smaller" /></asp:LinkButton>
                                                                 <asp:LinkButton ID="lnkCancelContact" runat="server" CommandName="Cancel" Text="Cancel"><img src="assets/img/cross.png" style="font-size:smaller" /></asp:LinkButton>
@@ -642,7 +714,7 @@
                                                     <table style="width: 100%">
                                                         <tr>
                                                             <td>
-                                                                <asp:TreeView ID="tvTables" runat="server" ForeColor="#767676" Font-Size="14px"  CssClass="aspNetTreeView" ShowCheckBoxes="All" OnClick="OnTreeClick(event)">
+                                                                <asp:TreeView ID="tvTables" runat="server" ForeColor="#767676" Font-Size="14px" CssClass="aspNetTreeView" ShowCheckBoxes="All" OnClick="OnTreeClick(event)">
                                                                 </asp:TreeView>
                                                             </td>
                                                             <td>

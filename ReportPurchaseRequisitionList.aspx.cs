@@ -275,6 +275,9 @@ namespace LIMS
                     lnk.CommandName = "GRN";
                     lnk.CommandArgument = DataBinder.Eval(e.Row.DataItem, "GRNID").ToString();
                     break;
+                case "Quotation Received":
+                    lnk.Text = "<span class='status-dot dot-green'></span> Quotation Received";                    
+                    break;
             }
         }
 

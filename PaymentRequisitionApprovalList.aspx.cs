@@ -320,5 +320,19 @@ namespace LIMS
                 BindAllPR();
             }
         }
+
+        protected void gvCompleted_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                int rowIndex = e.Row.RowIndex;
+
+                // Get DataKey value
+                var paymentReqId = gvCompleted.DataKeys[rowIndex].Value;
+                HyperLink hypPR = (HyperLink)e.Row.FindControl("hypPR");
+                string encodedID = _cm.Encode(paymentReqId.ToString());
+                hypPR.NavigateUrl = $"GeneratePaymentRequisition.aspx?ID={encodedID}";
+            }
+        }
     }
 }

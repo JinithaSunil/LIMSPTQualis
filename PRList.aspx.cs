@@ -57,9 +57,10 @@ namespace LIMS
 
             switch (RoleID)
             {
-                case "2":
-                case "9":
-                case "16":
+                case "2"://Manager
+                case "7"://Sales Manager
+                case "9"://Purchase Manager
+                case "16"://Accounts Manager
                     Role = "Manager";
                     BindGrid(currentDepartment);
                     break;
@@ -136,7 +137,8 @@ namespace LIMS
                                 sda.Fill(dt);
                                 gvCompleted.DataSource = dt;
                                 gvCompleted.DataBind();
-
+                                ViewState["dirState"] = dt;
+                                ViewState["sortdr"] = "Asc";
                             }
                         }
                     }
@@ -347,6 +349,28 @@ namespace LIMS
                 gvRequests.Visible = false;
                 gvCompleted.Visible = true;
                 BindAllPR();
+            }
+        }
+
+        protected void gvCompleted_Sorting(object sender, GridViewSortEventArgs e)
+        {
+            DataTable dtrslt = (DataTable)ViewState["dirState"];
+            if (dtrslt.Rows.Count > 0)
+            {
+                if (Convert.ToString(ViewState["sortdr"]) == "Asc")
+                {
+                    dtrslt.DefaultView.Sort = e.SortExpression + " Desc";
+                    ViewState["sortdr"] = "Desc";
+                }
+                else
+                {
+                    dtrslt.DefaultView.Sort = e.SortExpression + " Asc";
+                    ViewState["sortdr"] = "Asc";
+                }
+                gvCompleted.DataSource = dtrslt;
+                gvCompleted.DataBind();
+
+
             }
         }
     }

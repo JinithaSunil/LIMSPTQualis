@@ -1,6 +1,20 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/PTQualisMasterFull.Master" AutoEventWireup="true" MaintainScrollPositionOnPostback="true" CodeBehind="RequisitionPayments.aspx.cs" Inherits="LIMS.RequisitionPayments" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <script type="text/javascript">
+
+        function selectAllPRs(source) {
+
+            var checkboxes = document.querySelectorAll(
+            '#<%= gvPaymentRequisitions.ClientID %> input.chkPR'
+            );
+
+            for (var i = 0; i < checkboxes.length; i++) {
+                checkboxes[i].checked = source.checked;
+            }
+        }
+
+    </script>
     <style>
         .subheader {
             color: #b34788;
@@ -85,6 +99,12 @@
                         </div>
                         <div class="card-body">
                             <div class="row">
+                                <asp:RadioButtonList ID="radOption" runat="server" RepeatDirection="Horizontal" OnSelectedIndexChanged="radOption_SelectedIndexChanged" AutoPostBack="true">
+                                    <asp:ListItem Selected="True">Single</asp:ListItem>
+                                    <asp:ListItem>Multiple</asp:ListItem>
+                                </asp:RadioButtonList>
+                            </div>
+                            <div class="row">
                                 <div class="col-sm-3">
                                     <b>Payment Date</b>
                                     <asp:TextBox ID="txtDate" runat="server" CssClass="form-control" TextMode="Date"></asp:TextBox>
@@ -102,43 +122,105 @@
                                         <asp:ListItem>Employee</asp:ListItem>
                                     </asp:DropDownList>
                                 </div>
-                                <div class="col-sm-4">
+                                <div class="col-sm-3">
                                     <b>Pay To</b>
-                                    <asp:DropDownList ID="ddlPayee" runat="server" CssClass="form-control"></asp:DropDownList>
+                                    <asp:DropDownList ID="ddlPayee" runat="server" OnSelectedIndexChanged="ddlPayee_SelectedIndexChanged" AutoPostBack="true" CssClass="form-control"></asp:DropDownList>
                                     <asp:HiddenField ID="hdPayeeID" runat="server" />
                                 </div>
-                                <div class="col-sm-4">
+                                <div class="col-sm-3">
                                     <b>Payment Requisition</b>
                                     <asp:DropDownList ID="ddlPaymentRequisition" runat="server" CssClass="form-control" OnSelectedIndexChanged="ddlPaymentRequisition_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
                                     <asp:HiddenField ID="hdPaymentRequisitionID" runat="server" />
+                                </div>
+                                <div class="col-sm-2">
+                                    <br />
+                                    <asp:Button ID="btnAdd" runat="server" Text="+" OnClick="btnAdd_Click" CssClass="btn btn-primary" />
+                                    <asp:Button ID="btnAddAll" runat="server" Text="+ All" OnClick="btnAddAll_Click" CssClass="btn btn-primary" />
+                                    <asp:Button ID="btnClear" runat="server" Text="X" OnClick="btnClear_Click" CssClass="btn btn-primary" />
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-sm-2">
                                     <b>Total Amount</b>
-                                    <asp:TextBox ID="txtTotalAmount" runat="server" CssClass="form-control" Enabled="false" Placeholder="Total Amount" OnTextChanged="txtAmount_TextChanged"></asp:TextBox>
+                                    <asp:TextBox ID="txtTotalAmount" runat="server" CssClass="form-control" Enabled="false" Placeholder="Total Amount" OnTextChanged="txtTotalAmount_TextChanged"></asp:TextBox>
                                 </div>
                                 <div class="col-sm-2">
                                     <b>Amount Paid</b>
                                     <asp:TextBox ID="txtAmountPaid" runat="server" CssClass="form-control" Enabled="false" Placeholder="Previous Paid"></asp:TextBox>
                                 </div>
-                                <div class="col-sm-2">
-                                    <b>Pay Amount</b>
-                                    <asp:TextBox ID="txtAmount" runat="server" CssClass="form-control" Placeholder="Amount" OnTextChanged="txtAmount_TextChanged" AutoPostBack="true"></asp:TextBox>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="card" style="padding: 15px; height:150px">
+                                        <div class="card-header subheader">
+                                            <h5>Debit</h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="col-sm-4">
+                                                <b>Pay Amount</b>
+                                                <asp:TextBox ID="txtPayAmount" runat="server" CssClass="form-control" Placeholder="Amount" OnTextChanged="txtPayAmount_TextChanged" AutoPostBack="true"></asp:TextBox>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <b>Bank Account</b>
+                                                <asp:DropDownList ID="ddlBank" runat="server" CssClass="form-control"></asp:DropDownList>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <b>COA Account</b>
+                                                <asp:DropDownList ID="ddlCOADr" runat="server" CssClass="form-control"></asp:DropDownList>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="card" style="padding: 15px;height:150px">
+                                        <div class="card-header subheader">
+                                            <h5>Credit</h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="col-sm-6">
+                                                <b>Balance Amount</b>
+                                                <asp:TextBox ID="txtBalanceAmount" runat="server" CssClass="form-control" Enabled="false" Placeholder="Current Payment"></asp:TextBox>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <b>COA Account</b>
+                                                <asp:DropDownList ID="ddlCOACr" runat="server" CssClass="form-control"></asp:DropDownList>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="col-sm-2">
-                                    <b>Difference</b>
-                                    <asp:TextBox ID="txtDifference"
-                                        runat="server"
-                                        CssClass="form-control"
-                                        Enabled="false"></asp:TextBox>
-                                </div>
-                                <div class="col-sm-2">
-                                    <b>Balance Amount</b>
-                                    <asp:TextBox ID="txtBalance" runat="server" CssClass="form-control" Enabled="false" Placeholder="Current Payment"></asp:TextBox>
+                                    <br />
+                                    <asp:Button ID="btnSaveDraft" runat="server" CssClass="btn btn-primary" Text="Save" OnClick="btnSaveDraft_Click" Visible="true" />
                                 </div>
                             </div>
+                            <div class="row">
+                                <asp:GridView ID="gvPaymentRequisitions" runat="server" CssClass="table" DataKeyNames="PaymentRequisitionID,TotalAmount,AmountPaid"
+                                    AutoGenerateColumns="false" ShowFooter="True">
+                                    <Columns>
+                                        <asp:TemplateField HeaderText="Select" HeaderStyle-Width="60px">
+                                            <HeaderTemplate>
+                                                <asp:CheckBox ID="chkSelectAll" runat="server" OnCheckedChanged="chkSelectAll_CheckedChanged" AutoPostBack="true" />
+                                            </HeaderTemplate>
 
+                                            <ItemTemplate>
+                                                <asp:CheckBox ID="chkPR" runat="server"
+                                                    CssClass="chkPR"
+                                                    AutoPostBack="true"
+                                                    OnCheckedChanged="chkPR_CheckedChanged" />
+                                                <asp:Label ID="lblRowNumber" Text='<%# Container.DataItemIndex + 1 %>' runat="server" />
+                                                <asp:HiddenField ID="hfPaymentRequisitionID" runat="server" Value='<%# Eval("PaymentRequisitionID") %>' />
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:BoundField DataField="RequisitionNumber"
+                                            HeaderText="RequisitionNumber" />
+
+                                        <asp:BoundField DataField="TotalAmount"
+                                            HeaderText="TotalAmount"
+                                            DataFormatString="{0:N2}" />
+                                    </Columns>
+                                </asp:GridView>
+                                <asp:HiddenField ID="hdTotal" runat="server" />
+                            </div>
                         </div>
                     </div>
 
@@ -155,7 +237,7 @@
                 <div class="row-clearfix">
                     <div class="col-sm-12">
                         <asp:Label ID="lblMessage" runat="server"></asp:Label>
-                        <asp:GridView ID="gvPaymentRequisition"
+                        <%--                        <asp:GridView ID="gvPaymentRequisition"
                             runat="server"
                             AutoGenerateColumns="False"
                             DataKeyNames="PaymentRequisitionDetailsID"
@@ -387,8 +469,7 @@
                                     </ItemTemplate>
                                 </asp:TemplateField>
                             </Columns>
-                        </asp:GridView>
-
+                        </asp:GridView>--%>
                     </div>
                 </div>
                 <div class="row-clearfix">
@@ -396,20 +477,17 @@
                         <b>Notes</b>
                         <asp:TextBox ID="txtNotes" runat="server" CssClass="form-control" TextMode="MultiLine" Rows="3"></asp:TextBox>
                     </div>
-                    <div class="col-sm-3">
-                        <br />
-                        <asp:Button ID="btnSaveDraft" runat="server" CssClass="btn btn-primary" Text="Save" OnClick="btnSaveDraft_Click" Visible="true" />
-                    </div>
+
                     <div class="col-sm-3">
                         <br />
                         <asp:Button ID="btnSave"
-    runat="server"
-    Text="SAVE TEST"
-    CssClass="btn btn-danger"
-    CausesValidation="false"
-    UseSubmitBehavior="false"
-    OnClick="btnSave_Click1" Visible="true"  />
-                        
+                            runat="server"
+                            Text="SAVE TEST"
+                            CssClass="btn btn-danger"
+                            CausesValidation="false"
+                            UseSubmitBehavior="false"
+                            OnClick="btnSave_Click1" Visible="true" />
+
                     </div>
                     <br>
                 </div>
@@ -465,12 +543,12 @@
             });
 
             var payAmount =
-                parseFloat($('#<%= txtAmount.ClientID %>').val()) || 0;
+                parseFloat($('#<%= txtPayAmount.ClientID %>').val()) || 0;
 
-    var difference =
-        payAmount - totalDebit;
+            var difference =
+                payAmount - totalDebit;
 
-            $('#<%= txtDifference.ClientID %>').val(
+            $('#<%= txtBalanceAmount.ClientID %>').val(
                 difference.toFixed(2)
             );
 

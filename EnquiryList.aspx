@@ -140,6 +140,7 @@
                                 <asp:Button ID="btnNew" runat="server" Text="NEW" CssClass="btn btn-primary" OnClick="btnNew_Click" />
                                 <asp:Button ID="btnQuoteReceived" runat="server" Text="QUOTE RECEIVED" CssClass="btn btn-primary" OnClick="btnQuoteReceived_Click" />
                                 <asp:Button ID="btnAccepted" runat="server" Text="ACCEPTED" CssClass="btn btn-primary" OnClick="btnAccepted_Click" />
+                                <asp:Button ID="btnPartialPOGenerated" runat="server" Text="PARTIAL PO GENERATED" CssClass="btn btn-primary" OnClick="btnPartialPOGenerated_Click" Visible="true" />
                                 <asp:Button ID="btnPOGenerated" runat="server" Text="PO GENERATED" CssClass="btn btn-primary" OnClick="btnPOGenerated_Click" Visible="true" />
                                 <asp:Button ID="btnOthers" runat="server" Text="OTHERS" CssClass="btn btn-primary" OnClick="btnOthers_Click" />
                                 <asp:HiddenField ID="hdStatusID" runat="server" />
@@ -241,6 +242,7 @@
                                             <ItemTemplate>
                                                 <asp:HyperLink ID="hypEnquiryID" runat="server" Text='<%# Eval("EnquiryID").ToString().ToUpper() %>'
                                                     NavigateUrl='<%# Eval("EnquiryID", "QuoteAnalysis.aspx?ID={0}") %>' Target="_blank"></asp:HyperLink>
+                                                <asp:HiddenField ID="hdEnquiryDetailsID" runat="server" Value='<%#Eval("EnquiryDetailsID") %>' />
                                             </ItemTemplate>
                                             <ItemStyle HorizontalAlign="Center" />
                                         </asp:TemplateField>

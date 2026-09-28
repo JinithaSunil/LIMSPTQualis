@@ -60,8 +60,9 @@
                                         <asp:BoundField DataField="RequestDate" HeaderText="Request Date" DataFormatString="{0:dd-MMM-yyyy}" />
                                     </Columns>
                                 </asp:GridView>
-                                <asp:GridView ID="gvCompleted" runat="server" DataKeyNames="PRID" Visible="false" AutoGenerateColumns="False" Font-Bold="True"
-                                    AllowSorting="true"
+                                <asp:GridView ID="gvCompleted" runat="server" DataKeyNames="PRID" Visible="false" 
+                                    AutoGenerateColumns="False" Font-Bold="True"
+                                    AllowSorting="true" OnSorting="gvCompleted_Sorting"
                                     class="table table-bordered table-striped table-hover js-basic-example dataTable">
                                     <Columns>
                                         <asp:TemplateField HeaderText="Sl#">
@@ -79,7 +80,7 @@
                                         </asp:TemplateField>
                                         <asp:BoundField DataField="EmployeeName" HeaderText="Emp. Name" />
                                         <asp:BoundField DataField="EmployeeDepartmentName" HeaderText="Dpt. Name" />
-                                        <asp:BoundField DataField="RequestDate" HeaderText="Request Date" DataFormatString="{0:dd-MMM-yyyy}" />
+                                        <asp:BoundField DataField="RequestDate" HeaderText="Request Date" SortExpression="RequestDate" DataFormatString="{0:dd-MMM-yyyy}" />
                                     </Columns>
                                 </asp:GridView>
                             </div>

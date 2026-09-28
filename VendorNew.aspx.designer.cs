@@ -1563,15 +1563,6 @@ namespace LIMS
         protected global::System.Web.UI.WebControls.Label lblPanCard;
 
         /// <summary>
-        /// Span8 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Span8;
-
-        /// <summary>
         /// fpPanCard control.
         /// </summary>
         /// <remarks>

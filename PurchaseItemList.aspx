@@ -148,7 +148,7 @@
                                     </div>
                                     <asp:GridView ID="gvPurchaseItem" runat="server" AutoGenerateColumns="false" class="table table-bordered table-striped table-hover dt-responsive display" Width="100%"
                                         OnRowCommand="gvPurchaseItem_RowCommand" DataKeyNames="ItemID" OnRowUpdating="gvPurchaseItem_RowUpdating"
-                                        OnRowDataBound="gvPurchaseItem_RowDataBound" OnPageIndexChanging="gvPurchaseItem_PageIndexChanging"
+                                        OnPageIndexChanging="gvPurchaseItem_PageIndexChanging"
                                         AllowPaging="true" AllowCustomPaging="true">
                                         <Columns>
                                             <asp:TemplateField HeaderText="Sl No">
@@ -212,8 +212,8 @@
                                                     <div class="btn-group">
                                                         <asp:Label ID="lblDisabled" runat="server" Text='<%# Eval("DisabledItem") %>' Visible="false"></asp:Label>
                                                         <asp:Button ID="btnUpdate" runat="server" Text="Update" CommandName="update" CommandArgument='<%# DataBinder.Eval(Container, "RowIndex") %>' CssClass="btn btn-primary" Visible="false" />
-                                                        <asp:Button ID="btnDisable" runat="server" Text="Disable" CommandName="disable" CommandArgument='<%# DataBinder.Eval(Container, "RowIndex") %>' CssClass="btn btn-danger" />
-                                                        <asp:Button ID="btnEnable" runat="server" Text="Enable" CommandName="enable" CommandArgument='<%# DataBinder.Eval(Container, "RowIndex") %>' CssClass="btn" BackColor="#3fa08d" />
+                                                        <asp:Button ID="btnDisable" runat="server" Text="Disable" CommandName="disable" CommandArgument='<%# DataBinder.Eval(Container, "RowIndex") %>' CssClass="btn btn-danger" Visible="false" />
+                                                        <asp:Button ID="btnEnable" runat="server" Text="Enable" CommandName="enable" CommandArgument='<%# DataBinder.Eval(Container, "RowIndex") %>' CssClass="btn" BackColor="#3fa08d" Visible="false" />
                                                     </div>
                                                 </ItemTemplate>
                                                 <ItemStyle Width="10%" />

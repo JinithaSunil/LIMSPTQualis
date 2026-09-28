@@ -265,6 +265,7 @@ namespace LIMS
             if (gvItems.Rows.Count == 0) { flag = 2; }
             if (flag == 0)
             {
+                if (Session["EmployeeID"] != null) { _cm.EmployeeID = Convert.ToInt32(Session["EmployeeID"]); }
                 _cm.companyId = Convert.ToInt32(hdCustomerMasterID.Value);
                 _cm.InvoiceDate = Convert.ToDateTime(txtInvoiceDate.Text);
                 _cm.DueDate = Convert.ToDateTime(txtDueDate.Text);

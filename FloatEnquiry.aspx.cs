@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LIMS.DAL;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -141,15 +142,40 @@ namespace LIMS
                 string PurchaseGroupID = ddlPurchaseGroup.SelectedValue.ToString();
                 Session["PurchaseGroupID"] = PurchaseGroupID;
                 BindPurchaseSubGroup(PurchaseGroupID);
+                BindSupplierListByGroup(PurchaseGroupID);
             }
             catch (Exception ex)
             {
                 string s1 = ex.Message;
                 Response.Write(s1);
                 LogExceptionToFile(ex);
-
             }
 
+        }
+        private void BindSupplierListByGroup(string purchaseGroupID)
+        {
+            // Get the vendor list using the existing method
+            DataTable dtVendors = _cm.GetVendorListByPurchaseGroup(purchaseGroupID);
+
+            if (dtVendors != null && dtVendors.Rows.Count > 0)
+            {
+                gvSuppliers.DataSource = dtVendors;
+                gvSuppliers.DataBind();
+                gvSuppliers.Visible = true;
+                chkSelectAll.Visible = true;
+                chkSelectAll.Checked = false; // Reset the select all checkbox
+            }
+            else
+            {
+                gvSuppliers.DataSource = null;
+                gvSuppliers.DataBind();
+                gvSuppliers.Visible = false;
+                chkSelectAll.Visible = false;
+
+                // Show message when no suppliers found
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "noSuppliers",
+                    "alert('No suppliers found for the selected sub group.');", true);
+            }
         }
         private void LogExceptionToFile(Exception ex)
         {
@@ -592,7 +618,7 @@ namespace LIMS
                         }
 
                         // Update enquiry in purchase requisition details for each item
-                        UpdateEnquiryInPurchaseRequisitionDetails(item.PurchaseRequisitionID, enquiryID);
+                        UpdateEnquiryInPurchaseRequisitionDetails(item.PurchaseRequisitionID, enquiryID); 
                     }
 
                     // Update enquiry vendors once for the entire enquiry
@@ -1225,7 +1251,7 @@ namespace LIMS
                             if (!string.IsNullOrEmpty(vendorID))
                             {
                                 // Send mail to this vendor for this specific enquiry ID
-                                SendMail(vendorID, enquiryID);
+                                //SendMail(vendorID, enquiryID);
                                 emailsSent++;
                             }
                             else
@@ -1347,5 +1373,61 @@ namespace LIMS
             gvEnquiry.PageIndex = e.NewPageIndex;
             BindFilteredData(e.NewPageIndex);
         }
+
+        protected void chkFloat_CheckedChanged(object sender, EventArgs e)
+        {
+            List<int> selectedPRIDs = new List<int>();
+
+            foreach (GridViewRow row in gvEnquiry.Rows)
+            {
+                if (row.RowType == DataControlRowType.DataRow)
+                {
+                    CheckBox chk = row.FindControl("chkFloat") as CheckBox;
+
+                    if (chk != null && chk.Checked)
+                    {
+                        HiddenField hdPurchaseRequisitionID = row.FindControl("hdPurchaseRequisitionID") as HiddenField;
+
+                        if (hdPurchaseRequisitionID != null)
+                        {
+                            int prID;
+
+                            if (int.TryParse(hdPurchaseRequisitionID.Value, out prID))
+                            {
+                                selectedPRIDs.Add(prID);
+                            }
+                        }
+                    }
+                }
+            }
+
+            // All currently checked PurchaseRequisitionIDs
+            // Example: 101, 102, 105
+
+            string selectedIDs = string.Join(",", selectedPRIDs);
+            DataTable dtVendors = _cm.GetVendorListByPP(selectedIDs);
+            if (dtVendors != null && dtVendors.Rows.Count > 0)
+            {
+                gvSuppliers.DataSource = dtVendors;
+                gvSuppliers.DataBind();
+                gvSuppliers.Visible = true;
+                chkSelectAll.Visible = true;
+                chkSelectAll.Checked = false; // Reset the select all checkbox
+            }
+            else
+            {
+                gvSuppliers.DataSource = null;
+                gvSuppliers.DataBind();
+                gvSuppliers.Visible = false;
+                chkSelectAll.Visible = false;
+
+                // Show message when no suppliers found
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "noSuppliers",
+                    "alert('No suppliers found for the selected sub group.');", true);
+            }
+
+            // Use selectedIDs for further processing
+        }
+
     }
 }

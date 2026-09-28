@@ -213,6 +213,33 @@ namespace LIMS
         protected global::System.Web.UI.WebControls.Label lblSubTotal;
 
         /// <summary>
+        /// txtAdditionalChargeDescription control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtAdditionalChargeDescription;
+
+        /// <summary>
+        /// txtAdditionalCharge control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtAdditionalCharge;
+
+        /// <summary>
+        /// lblTotalBeforeVAT control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblTotalBeforeVAT;
+
+        /// <summary>
         /// ddlVAT control.
         /// </summary>
         /// <remarks>
@@ -220,6 +247,15 @@ namespace LIMS
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlVAT;
+
+        /// <summary>
+        /// lblVat control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblVat;
 
         /// <summary>
         /// lblGrandTotal control.
@@ -231,15 +267,6 @@ namespace LIMS
         protected global::System.Web.UI.WebControls.Label lblGrandTotal;
 
         /// <summary>
-        /// hdQuotationTotal control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hdQuotationTotal;
-
-        /// <summary>
         /// txtSpecialInstruction control.
         /// </summary>
         /// <remarks>
@@ -247,6 +274,15 @@ namespace LIMS
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtSpecialInstruction;
+
+        /// <summary>
+        /// hdQuotationTotal control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdQuotationTotal;
 
         /// <summary>
         /// txtRemarks control.

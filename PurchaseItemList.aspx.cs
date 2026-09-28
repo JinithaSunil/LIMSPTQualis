@@ -190,6 +190,8 @@ namespace LIMS
                     btnEnable.Visible = false;
                     btnDisable.Visible = true;
                 }
+                //23Sep26 - blocking disable option
+                btnDisable.Visible = false;
             }
         }
         protected void gvPurchaseItem_RowUpdating(object sender, GridViewUpdateEventArgs e)

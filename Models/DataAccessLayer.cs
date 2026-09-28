@@ -4566,7 +4566,7 @@ namespace LIMS.Models
                                                 FROM TransactionMaster gm
                                                 INNER JOIN Transactiondetails gd ON gd.InwardID = gm.InwardID
                                                 INNER JOIN PurchaseOrder po ON po.PurchaseOrderID = gm.PurchaseOrderID
-                                                INNER JOIN PurchaseOrderDetails pod ON pod.PurchaseOrderID = po.PurchaseOrderID
+                                                INNER JOIN PurchaseOrderDetails pod ON pod.PurchaseOrderID = po.PurchaseOrderID and gd.ItemID = pod.ItemID
                                                 INNER JOIN Items itm ON itm.ItemId = gd.ItemID
                                                 INNER JOIN ItemType it ON it.ItemTypeID = itm.ItemTypeID
                                                 INNER JOIN VendorDetails vds ON vds.VendorId = po.VendorID

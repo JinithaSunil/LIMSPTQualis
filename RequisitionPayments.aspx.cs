@@ -1,5 +1,6 @@
 ﻿using DocumentFormat.OpenXml.Math;
 using LIMS.DAL;
+using PuppeteerSharp.Mobile;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -27,7 +28,7 @@ namespace LIMS
             {
                 if (Session["prVariables"] != null)
                 {
-                    BindRequisition();
+                    //BindRequisition();
                     LoadPayeeDetails();
                     ToggleSaveButton();
                 }
@@ -35,25 +36,40 @@ namespace LIMS
                 {
                     LoadPayments();
                 }
+                LoadBanks();
+                BindCOA(ddlCOADr,"Accounts Payable");
+                BindCOA(ddlCOACr, "Accounts Receivable");
             }
         }
-        private void BindRequisition()
+        protected void LoadBanks()
         {
-            _ap.prVar = (APModule.PRVariables)Session["PRVariables"];
-            hdPaymentRequisitionID.Value = _ap.prVar.PaymentRequisitionID;
-            int PaymentRequisitionID = 0;
-            if (_ap.prVar.PaymentRequisitionID != "")
+            DataTable dt = _cm.GetCOAAccountDetails("Bank");
+            if (dt.Rows.Count > 0)
             {
-                PaymentRequisitionID = Convert.ToInt32(_ap.prVar.PaymentRequisitionID);
-                DataTable dt = _cm.GetPaymentRequisitionDetails(PaymentRequisitionID);
-                if (dt.Rows.Count > 0)
-                {
-                    gvPaymentRequisition.DataSource = dt;
-                    gvPaymentRequisition.DataBind();
-                }
+                ddlBank.DataSource= dt;
+                ddlBank.DataTextField = "AccountName";
+                ddlBank.DataValueField = "AccountID";
+                ddlBank.DataBind();
+                ddlBank.Items.Insert(0, "Select Bank");
             }
-            LoadPaymentRequisitionItems(PaymentRequisitionID);
         }
+        //private void BindRequisition()
+        //{
+        //    _ap.prVar = (APModule.PRVariables)Session["PRVariables"];
+        //    hdPaymentRequisitionID.Value = _ap.prVar.PaymentRequisitionID;
+        //    int PaymentRequisitionID = 0;
+        //    if (_ap.prVar.PaymentRequisitionID != "")
+        //    {
+        //        PaymentRequisitionID = Convert.ToInt32(_ap.prVar.PaymentRequisitionID);
+        //        DataTable dt = _cm.GetPaymentRequisitionDetails(PaymentRequisitionID);
+        //        if (dt.Rows.Count > 0)
+        //        {
+        //            gvPaymentRequisition.DataSource = dt;
+        //            gvPaymentRequisition.DataBind();
+        //        }
+        //    }
+        //    LoadPaymentRequisitionItems(PaymentRequisitionID);
+        //}
         private void LoadPayments()
         {
             if (Request.QueryString["a"] != null)
@@ -83,25 +99,19 @@ namespace LIMS
             ddlPayee.ClearSelection();
             ddlPayee.Items.FindByText(_ap.prVar.PayeeName).Selected = true;
             hdPayeeID.Value = ddlPayee.SelectedValue;
-            DataTable dtPR = _ap.GetEmployeePaymentRequisition(hdPayeeID.Value);
-            if (dtPR.Rows.Count > 0)
-            {
-                ddlPaymentRequisition.DataSource = dtPR;
-                ddlPaymentRequisition.DataTextField = "RequisitionNumber";
-                ddlPaymentRequisition.DataValueField = "PaymentRequisitionID";
-                ddlPaymentRequisition.DataBind();
-                ddlPaymentRequisition.Items.Insert(0, "Select Payment Requisition");
-            }
+            BindPaymentRequisitions();
             ddlPaymentRequisition.ClearSelection();
             ddlPaymentRequisition.Items.FindByText(_ap.prVar.PaymentRequisitionNumber).Selected = true;
             txtDate.Text = DateTime.Now.ToString("yyyy-MM-dd");
             ddlPaymentRequisition.Items.FindByText(_ap.prVar.PaymentRequisitionNumber);
-            txtTotalAmount.Text = _ap.prVar.TotalAmount.ToString();
-            txtAmountPaid.Text = _ap.prVar.PrevAmountPaid.ToString();
-            txtAmount.Text = (_ap.prVar.TotalAmount - _ap.prVar.PrevAmountPaid).ToString("0.00");
-            txtBalance.Text = (_ap.prVar.TotalAmount - _ap.prVar.PrevAmountPaid).ToString("0.00");
+            ddlPaymentRequisition.Enabled = false;
+            //txtTotalAmount.Text = _ap.prVar.TotalAmount.ToString();
+            //txtAmountPaid.Text = _ap.prVar.PrevAmountPaid.ToString();
+            //txtPayAmount.Text = (_ap.prVar.TotalAmount - _ap.prVar.PrevAmountPaid).ToString("0.00");
+            //txtBalance.Text = (_ap.prVar.TotalAmount - _ap.prVar.PrevAmountPaid).ToString("0.00");
             BindDetails();
         }
+       
 
         protected void BindDetails()
         {
@@ -127,7 +137,7 @@ namespace LIMS
         {
             int flag = 0;
             if (txtDate.Text == "") { txtDate.BackColor = Color.LightPink; flag = 1; } else { txtDate.BackColor = Color.Empty; }
-            if (txtAmount.Text == "") { txtAmount.BackColor = Color.LightPink; flag = 1; } else { txtAmount.BackColor = Color.Empty; }
+            if (txtPayAmount.Text == "") { txtPayAmount.BackColor = Color.LightPink; flag = 1; } else { txtPayAmount.BackColor = Color.Empty; }
             if (txtReference.Text == "") { txtReference.BackColor = Color.LightPink; flag = 1; } else { txtReference.BackColor = Color.Empty; }
             //if (ddlPayeeType.SelectedIndex == 0) { ddlPayeeType.BackColor = Color.LightPink; flag = 1; } else { ddlPayeeType.BackColor = Color.Empty; }
             if (ddlPayee.SelectedIndex == 0) { ddlPayee.BackColor = Color.LightPink; flag = 1; } else { ddlPayee.BackColor = Color.Empty; }
@@ -161,7 +171,7 @@ namespace LIMS
 
                 //DataTable journalLines = _jl.JournalLines();
 
-                ////journalLines.Rows.Add("", Convert.ToDecimal(txtAmount.Text), 0, "Accounts Payable", _jl.AccountID);
+                ////journalLines.Rows.Add("", Convert.ToDecimal(txtPayAmount.Text), 0, "Accounts Payable", _jl.AccountID);
                 //decimal amount = Convert.ToDecimal(txtAmountPaid.Text);
                 //journalLines.Rows.Add(
                 //        "",
@@ -204,10 +214,10 @@ namespace LIMS
                 //            _bk.ClosingBalance = 0;
                 //        }
                 //        DataTable bankingHeader = _bk.BankingHeader();
-                //        bankingHeader.Rows.Add(_bk.BankAccountId, _bk.StatementDate, _bk.ClosingBalance, _bk.ClosingBalance - Convert.ToDecimal(txtAmount.Text), DateTime.Now);
+                //        bankingHeader.Rows.Add(_bk.BankAccountId, _bk.StatementDate, _bk.ClosingBalance, _bk.ClosingBalance - Convert.ToDecimal(txtPayAmount.Text), DateTime.Now);
 
                 //        DataTable bankingLines = _bk.BankingLines();
-                //        bankingLines.Rows.Add(Convert.ToDateTime(txtDate.Text), "Payment to Vendor", Convert.ToDecimal(txtAmount.Text), 0, _bk.ClosingBalance - Convert.ToDecimal(txtAmount.Text));
+                //        bankingLines.Rows.Add(Convert.ToDateTime(txtDate.Text), "Payment to Vendor", Convert.ToDecimal(txtPayAmount.Text), 0, _bk.ClosingBalance - Convert.ToDecimal(txtPayAmount.Text));
                 //        int StatementID = _bk.AddBankStatement(bankingHeader, bankingLines);
 
                 //        //Bank Reconcilation
@@ -225,7 +235,7 @@ namespace LIMS
 
                 _ap.PayeeId = Convert.ToInt32(ddlPayee.SelectedValue);
                 _ap.PaymentDate = Convert.ToDateTime(txtDate.Text);
-                _ap.PaymentAmount = Convert.ToDecimal(txtAmount.Text);
+                _ap.PaymentAmount = Convert.ToDecimal(txtPayAmount.Text);
                 _ap.PrevPaymentAmount = Convert.ToDecimal(txtAmountPaid.Text);
                 _ap.TotalAmount = Convert.ToDecimal(txtTotalAmount.Text);
                 _ap.PaymentMethod = "";
@@ -265,7 +275,7 @@ namespace LIMS
                     if (txtAmountPaid.Text != "")
                     {
                         //Update amount paid in Invoices and InvoiceAR tables
-                        _ap.prVar.AmountPaid = Convert.ToDecimal(txtAmountPaid.Text) + Convert.ToDecimal(txtAmount.Text);
+                        _ap.prVar.AmountPaid = Convert.ToDecimal(txtAmountPaid.Text) + Convert.ToDecimal(txtPayAmount.Text);
                         _ap.UpdatePRAmountPaid(_ap);
 
                         Response.Redirect("generateVoucher.aspx?o=2&x=" + paymentID.ToString());
@@ -289,6 +299,25 @@ namespace LIMS
             }
         }
 
+        protected void BindPaymentRequisitions()
+        {
+            ViewState.Clear();
+            DataTable dtPR = _ap.GetEmployeePaymentRequisition(hdPayeeID.Value);
+            if (dtPR.Rows.Count > 0)
+            {
+                ddlPaymentRequisition.DataSource = dtPR;
+                ddlPaymentRequisition.DataTextField = "RequisitionNumber";
+                ddlPaymentRequisition.DataValueField = "PaymentRequisitionID";
+                ddlPaymentRequisition.DataBind();
+                ddlPaymentRequisition.Items.Insert(0, "Select Payment Requisition");
+                ViewState["PaymentRequisition"] = dtPR;
+            }
+            else
+            {
+                ddlPaymentRequisition.DataSource = null;
+                ddlPaymentRequisition.DataBind();
+            }
+        }
         private bool AllRowsHaveRequiredValues()
         {
             DataTable dt = Session["GridData"] as DataTable;
@@ -297,10 +326,10 @@ namespace LIMS
                 return false;
 
             decimal diff = 0;
-            if (txtDifference.Text != "")
-            {
-                diff = Convert.ToDecimal(txtDifference.Text);
-            }
+            //if (txtDifference.Text != "")
+            //{
+            //    diff = Convert.ToDecimal(txtDifference.Text);
+            //}
             return true;
         }
 
@@ -386,7 +415,7 @@ namespace LIMS
                 e.Row.Cells[6].HorizontalAlign = HorizontalAlign.Right;
                 e.Row.Cells[6].Font.Bold = true;
 
-                txtAmount.Text = totalAmount.ToString();
+                txtPayAmount.Text = totalAmount.ToString();
             }
         }
 
@@ -407,9 +436,9 @@ namespace LIMS
             }
         }
 
-        protected void txtAmount_TextChanged(object sender, EventArgs e)
+        protected void txtPayAmount_TextChanged(object sender, EventArgs e)
         {
-
+            CalculatePaymentAmounts();
         }
 
         protected void ddlPaymentRequisition_SelectedIndexChanged(object sender, EventArgs e)
@@ -418,7 +447,7 @@ namespace LIMS
 
             // LoadPaymentInformation(paymentRequisitionID);
 
-            LoadPaymentRequisitionItems(paymentRequisitionID);
+            //LoadPaymentRequisitionItems(paymentRequisitionID);
         }
         //    private void LoadPaymentInformation(int paymentRequisitionID)
         //    {
@@ -461,19 +490,19 @@ namespace LIMS
         //        txtBalance.Text = Convert.ToDecimal(dr["BalanceAmount"]).ToString("N2");
 
         //        // Default payment amount = remaining balance
-        //        txtAmount.Text = txtBalance.Text;
+        //        txtPayAmount.Text = txtBalance.Text;
 
         //        txtDifference.Text = "0.00";
 
         //        txtNotes.Text = dr["Notes"].ToString();
         //    }
-        private void LoadPaymentRequisitionItems(int paymentRequisitionID)
-        {
-            DataTable dt = _cm.GetPaymentRequisitionDetails(paymentRequisitionID);
+        //private void LoadPaymentRequisitionItems(int paymentRequisitionID)
+        //{
+        //    DataTable dt = _cm.GetPaymentRequisitionDetails(paymentRequisitionID);
 
-            gvPaymentRequisition.DataSource = dt;
-            gvPaymentRequisition.DataBind();
-        }
+        //    gvPaymentRequisition.DataSource = dt;
+        //    gvPaymentRequisition.DataBind();
+        //}
 
 
         private void GenerateJournal(
@@ -849,7 +878,7 @@ namespace LIMS
             }
             if (e.CommandName == "AddJournal")
             {
-                AddJournalLine(detailsID);
+               // AddJournalLine(detailsID);
             }
            
         }
@@ -907,7 +936,7 @@ namespace LIMS
                     out detailsID))
                 {
                     // Save the complete journal for this requisition
-                    SaveJournal(detailsID);
+                    //SaveJournal(detailsID);
                 }
                 if (e.CommandName == "SaveJournal")
                 {
@@ -923,7 +952,7 @@ namespace LIMS
                     }
 
                     // Save the complete journal for this requisition
-                    SaveJournal(detailsID);
+                   // SaveJournal(detailsID);
                 }
                 else if (e.CommandName == "DeleteJournal")
                 {
@@ -972,7 +1001,7 @@ namespace LIMS
                         if (ddl == null)
                             return;
 
-                        BindCOA(ddl);
+                        //BindCOA(ddl);
 
                         DataRowView row =
                             (DataRowView)e.Row.DataItem;
@@ -988,9 +1017,9 @@ namespace LIMS
                             }
                         }
                     }
-        private void BindCOA(DropDownList ddl)
+        private void BindCOA(DropDownList ddl, string AccountType)
         {
-            DataTable dt = _gl.GetCOA("Accounts Payable");
+            DataTable dt = _gl.GetCOA(AccountType);
 
             ddl.Items.Clear();
             ddl.Items.Add(
@@ -1012,328 +1041,328 @@ namespace LIMS
             }
         }
 
-        private void AddJournalLine(long detailsID)
-        {
-            try
-            {
-                // Get JournalID from JournalHeader
-                long journalID = _cm.GetJournalIDForPayment(detailsID);
-
-                if (journalID <= 0)
-                {
-                    string createdBy = Session["UserName"] != null
-                            ? Session["UserName"].ToString()
-                            : "System";
-                    journalID = _cm.CreatePaymentJournalHeader(detailsID, createdBy);
-
-                    if (journalID <= 0)
-                    {
-                        lblMessage.Text = "Unable to create Journal Header.";
-                        lblMessage.Visible = true;
-                        lblMessage.ForeColor = Color.Red;
-                        return;
-                    }
-                }
-
-                // Get next sequence for this journal
-                int nextSequence = _cm.GetNextJournalSequence(journalID);
-
-                // Insert blank journal line
-                long journalLineID = _cm.AddJournalLine(
-                    journalID,
-                    detailsID,
-                    nextSequence);
-
-                if (journalLineID <= 0)
-                {
-                    lblMessage.Text = "Unable to add journal line.";
-                    lblMessage.Visible = true;
-                    return;
-                }
-
-                // Rebind payment requisition GridView
-                BindRequisition();
-
-                // Find the newly created parent row
-                foreach (GridViewRow row in gvPaymentRequisition.Rows)
-                {
-                    HiddenField hf =
-                        row.FindControl("hfPaymentRequisitionDetailsID")
-                        as HiddenField;
-
-                    if (hf == null)
-                        continue;
-
-                    long rowDetailsID;
-
-                    if (!long.TryParse(hf.Value, out rowDetailsID))
-                        continue;
-
-                    if (rowDetailsID != detailsID)
-                        continue;
-
-                    // Open journal panel
-                    Panel pnl =
-                        row.FindControl("pnlLineJournal")
-                        as Panel;
-
-                    if (pnl != null)
-                        pnl.Visible = true;
-
-                    // Get nested journal GridView
-                    GridView gvJournal =
-                        row.FindControl("gvLineJournal")
-                        as GridView;
-
-                    if (gvJournal != null)
-                    {
-                        BindLineJournal(
-                            gvJournal,
-                            detailsID);
-                    }
-
-                    break;
-                }
-            }
-            catch (Exception ex)
-            {
-                lblMessage.Text =
-                    "Unable to add journal entry: " + ex.Message;
-
-                lblMessage.Visible = true;
-            }
-        }
-
-        private void SaveJournal(long detailsID)
-        {
-            try
-            {
-                GridViewRow parentRow = null;
-
-                // Find the payment requisition row
-                foreach (GridViewRow row in gvPaymentRequisition.Rows)
-                {
-                    HiddenField hfDetailsID =
-                        row.FindControl("hfPaymentRequisitionDetailsID")
-                        as HiddenField;
-
-                    if (hfDetailsID == null)
-                        continue;
-
-                    long rowDetailsID;
-
-                    if (!long.TryParse(
-                        hfDetailsID.Value,
-                        out rowDetailsID))
-                        continue;
-
-                    if (rowDetailsID == detailsID)
-                    {
-                        parentRow = row;
-                        break;
-                    }
-                }
-
-                if (parentRow == null)
-                {
-                    ShowMessage(
-                        "Payment requisition line not found.",
-                        "danger");
-
-                    return;
-                }
-
-
-                // Find nested journal GridView
-                GridView gvJournal =
-                    parentRow.FindControl("gvLineJournal")
-                    as GridView;
-
-                if (gvJournal == null)
-                {
-                    ShowMessage(
-                        "Journal grid not found.",
-                        "danger");
-
-                    return;
-                }
-
-
-                decimal totalDebit = 0;
-                decimal totalCredit = 0;
-
-                foreach (GridViewRow row in gvJournal.Rows)
-                {
-                    TextBox txtDebit =
-                        row.FindControl("txtDebit") as TextBox;
-
-                    TextBox txtCredit =
-                        row.FindControl("txtCredit") as TextBox;
-
-                    decimal debit = 0;
-                    decimal credit = 0;
-
-                    if (txtDebit != null)
-                    {
-                        decimal.TryParse(
-                            txtDebit.Text,
-                            out debit);
-                    }
-
-                    if (txtCredit != null)
-                    {
-                        decimal.TryParse(
-                            txtCredit.Text,
-                            out credit);
-                    }
-
-                    totalDebit += debit;
-                    totalCredit += credit;
-                }
-
-                decimal payAmount = 0;
-
-                decimal.TryParse(
-                    txtAmount.Text,
-                    out payAmount);
-
-                decimal difference = payAmount - totalDebit;
-
-                if (Math.Abs(difference) > 0.01m)
-                {
-                    ShowMessage(
-                        "Total Debit must equal Pay Amount. " +
-                        "Pay Amount = " + payAmount.ToString("N2") +
-                        ", Total Debit = " + totalDebit.ToString("N2") +
-                        ", Difference = " + difference.ToString("N2"),
-                        "danger");
-
-                    return;
-                }
-                // Must have at least one journal line
-                if (gvJournal.Rows.Count == 0)
-                {
-                    ShowMessage(
-                        "Please add at least one journal entry.",
-                        "danger");
+        //private void AddJournalLine(long detailsID)
+        //{
+        //    try
+        //    {
+        //        // Get JournalID from JournalHeader
+        //        long journalID = _cm.GetJournalIDForPayment(detailsID);
+
+        //        if (journalID <= 0)
+        //        {
+        //            string createdBy = Session["UserName"] != null
+        //                    ? Session["UserName"].ToString()
+        //                    : "System";
+        //            journalID = _cm.CreatePaymentJournalHeader(detailsID, createdBy);
+
+        //            if (journalID <= 0)
+        //            {
+        //                lblMessage.Text = "Unable to create Journal Header.";
+        //                lblMessage.Visible = true;
+        //                lblMessage.ForeColor = Color.Red;
+        //                return;
+        //            }
+        //        }
+
+        //        // Get next sequence for this journal
+        //        int nextSequence = _cm.GetNextJournalSequence(journalID);
+
+        //        // Insert blank journal line
+        //        long journalLineID = _cm.AddJournalLine(
+        //            journalID,
+        //            detailsID,
+        //            nextSequence);
+
+        //        if (journalLineID <= 0)
+        //        {
+        //            lblMessage.Text = "Unable to add journal line.";
+        //            lblMessage.Visible = true;
+        //            return;
+        //        }
+
+        //        // Rebind payment requisition GridView
+        //        BindRequisition();
+
+        //        // Find the newly created parent row
+        //        foreach (GridViewRow row in gvPaymentRequisition.Rows)
+        //        {
+        //            HiddenField hf =
+        //                row.FindControl("hfPaymentRequisitionDetailsID")
+        //                as HiddenField;
+
+        //            if (hf == null)
+        //                continue;
+
+        //            long rowDetailsID;
+
+        //            if (!long.TryParse(hf.Value, out rowDetailsID))
+        //                continue;
+
+        //            if (rowDetailsID != detailsID)
+        //                continue;
+
+        //            // Open journal panel
+        //            Panel pnl =
+        //                row.FindControl("pnlLineJournal")
+        //                as Panel;
+
+        //            if (pnl != null)
+        //                pnl.Visible = true;
+
+        //            // Get nested journal GridView
+        //            GridView gvJournal =
+        //                row.FindControl("gvLineJournal")
+        //                as GridView;
+
+        //            if (gvJournal != null)
+        //            {
+        //                BindLineJournal(
+        //                    gvJournal,
+        //                    detailsID);
+        //            }
+
+        //            break;
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        lblMessage.Text =
+        //            "Unable to add journal entry: " + ex.Message;
+
+        //        lblMessage.Visible = true;
+        //    }
+        //}
+
+//        private void SaveJournal(long detailsID)
+//        {
+//            try
+//            {
+//                GridViewRow parentRow = null;
+
+//                // Find the payment requisition row
+//                foreach (GridViewRow row in gvPaymentRequisition.Rows)
+//                {
+//                    HiddenField hfDetailsID =
+//                        row.FindControl("hfPaymentRequisitionDetailsID")
+//                        as HiddenField;
+
+//                    if (hfDetailsID == null)
+//                        continue;
+
+//                    long rowDetailsID;
+
+//                    if (!long.TryParse(
+//                        hfDetailsID.Value,
+//                        out rowDetailsID))
+//                        continue;
+
+//                    if (rowDetailsID == detailsID)
+//                    {
+//                        parentRow = row;
+//                        break;
+//                    }
+//                }
+
+//                if (parentRow == null)
+//                {
+//                    ShowMessage(
+//                        "Payment requisition line not found.",
+//                        "danger");
+
+//                    return;
+//                }
+
+
+//                // Find nested journal GridView
+//                GridView gvJournal =
+//                    parentRow.FindControl("gvLineJournal")
+//                    as GridView;
+
+//                if (gvJournal == null)
+//                {
+//                    ShowMessage(
+//                        "Journal grid not found.",
+//                        "danger");
+
+//                    return;
+//                }
+
+
+//                decimal totalDebit = 0;
+//                decimal totalCredit = 0;
+
+//                foreach (GridViewRow row in gvJournal.Rows)
+//                {
+//                    TextBox txtDebit =
+//                        row.FindControl("txtDebit") as TextBox;
+
+//                    TextBox txtCredit =
+//                        row.FindControl("txtCredit") as TextBox;
+
+//                    decimal debit = 0;
+//                    decimal credit = 0;
+
+//                    if (txtDebit != null)
+//                    {
+//                        decimal.TryParse(
+//                            txtDebit.Text,
+//                            out debit);
+//                    }
+
+//                    if (txtCredit != null)
+//                    {
+//                        decimal.TryParse(
+//                            txtCredit.Text,
+//                            out credit);
+//                    }
+
+//                    totalDebit += debit;
+//                    totalCredit += credit;
+//                }
+
+//                decimal payAmount = 0;
+
+//                decimal.TryParse(
+//                    txtPayAmount.Text,
+//                    out payAmount);
+
+//                decimal difference = payAmount - totalDebit;
+
+//                if (Math.Abs(difference) > 0.01m)
+//                {
+//                    ShowMessage(
+//                        "Total Debit must equal Pay Amount. " +
+//                        "Pay Amount = " + payAmount.ToString("N2") +
+//                        ", Total Debit = " + totalDebit.ToString("N2") +
+//                        ", Difference = " + difference.ToString("N2"),
+//                        "danger");
+
+//                    return;
+//                }
+//                // Must have at least one journal line
+//                if (gvJournal.Rows.Count == 0)
+//                {
+//                    ShowMessage(
+//                        "Please add at least one journal entry.",
+//                        "danger");
 
-                    return;
-                }
-
-/*
-                // Journal must balance
-                difference =
-                    Math.Abs(totalDebit - totalCredit);
+//                    return;
+//                }
+
+///*
+//                // Journal must balance
+//                difference =
+//                    Math.Abs(totalDebit - totalCredit);
 
-
-                if (difference > 0.01m)
-                {
-                    ShowMessage(
-                        "Journal is not balanced. " +
-                        "Debit = " +
-                        totalDebit.ToString("N2") +
-                        ", Credit = " +
-                        totalCredit.ToString("N2") +
-                        ", Difference = " +
-                        difference.ToString("N2"),
-                        "danger");
-
-                    return;
-                }
-*/
-
-                // Save all journal lines
-                foreach (GridViewRow row in gvJournal.Rows)
-                {
-                    DropDownList ddlAccount =
-                        row.FindControl("ddlAccount")
-                        as DropDownList;
-
-                    TextBox txtDescription =
-                        row.FindControl("txtJournalDescription")
-                        as TextBox;
-
-                    TextBox txtDebit =
-                        row.FindControl("txtDebit")
-                        as TextBox;
-
-                    TextBox txtCredit =
-                        row.FindControl("txtCredit")
-                        as TextBox;
-
-                    HiddenField hfJournalLineID =
-                        row.FindControl("hfJournalLineID")
-                        as HiddenField;
-
-
-                    long journalLineID;
-
-                    if (!long.TryParse(
-                        hfJournalLineID.Value,
-                        out journalLineID))
-                    {
-                        continue;
-                    }
-
-
-                    long accountID =
-                        Convert.ToInt64(
-                            ddlAccount.SelectedValue);
-
-
-                    decimal debit = 0;
-                    decimal credit = 0;
-
-
-                    decimal.TryParse(
-                        txtDebit.Text,
-                        out debit);
-
-                    decimal.TryParse(
-                        txtCredit.Text,
-                        out credit);
-
-
-                    string description =
-                        txtDescription != null
-                            ? txtDescription.Text.Trim()
-                            : "";
-
-
-                    _cm.UpdateJournalLine(
-                        journalLineID,
-                        accountID,
-                        description,
-                        debit,
-                        credit);
-                }
-
-
-                // Update journal totals
-                _cm.UpdateJournalTotals(
-                    detailsID,
-                    totalDebit,
-                    totalCredit);
-
-
-                // Successfully saved
-                ShowMessage(
-                    "Journal saved successfully.",
-                    "success");
-
-
-                // Refresh the journal
-                BindLineJournal(
-                    gvJournal,
-                    detailsID);
-            }
-            catch (Exception ex)
-            {
-                ShowMessage(
-                    "Error saving journal: " + ex.Message,
-                    "danger");
-            }
-        }
+
+//                if (difference > 0.01m)
+//                {
+//                    ShowMessage(
+//                        "Journal is not balanced. " +
+//                        "Debit = " +
+//                        totalDebit.ToString("N2") +
+//                        ", Credit = " +
+//                        totalCredit.ToString("N2") +
+//                        ", Difference = " +
+//                        difference.ToString("N2"),
+//                        "danger");
+
+//                    return;
+//                }
+//*/
+
+//                // Save all journal lines
+//                foreach (GridViewRow row in gvJournal.Rows)
+//                {
+//                    DropDownList ddlAccount =
+//                        row.FindControl("ddlAccount")
+//                        as DropDownList;
+
+//                    TextBox txtDescription =
+//                        row.FindControl("txtJournalDescription")
+//                        as TextBox;
+
+//                    TextBox txtDebit =
+//                        row.FindControl("txtDebit")
+//                        as TextBox;
+
+//                    TextBox txtCredit =
+//                        row.FindControl("txtCredit")
+//                        as TextBox;
+
+//                    HiddenField hfJournalLineID =
+//                        row.FindControl("hfJournalLineID")
+//                        as HiddenField;
+
+
+//                    long journalLineID;
+
+//                    if (!long.TryParse(
+//                        hfJournalLineID.Value,
+//                        out journalLineID))
+//                    {
+//                        continue;
+//                    }
+
+
+//                    long accountID =
+//                        Convert.ToInt64(
+//                            ddlAccount.SelectedValue);
+
+
+//                    decimal debit = 0;
+//                    decimal credit = 0;
+
+
+//                    decimal.TryParse(
+//                        txtDebit.Text,
+//                        out debit);
+
+//                    decimal.TryParse(
+//                        txtCredit.Text,
+//                        out credit);
+
+
+//                    string description =
+//                        txtDescription != null
+//                            ? txtDescription.Text.Trim()
+//                            : "";
+
+
+//                    _cm.UpdateJournalLine(
+//                        journalLineID,
+//                        accountID,
+//                        description,
+//                        debit,
+//                        credit);
+//                }
+
+
+//                // Update journal totals
+//                _cm.UpdateJournalTotals(
+//                    detailsID,
+//                    totalDebit,
+//                    totalCredit);
+
+
+//                // Successfully saved
+//                ShowMessage(
+//                    "Journal saved successfully.",
+//                    "success");
+
+
+//                // Refresh the journal
+//                BindLineJournal(
+//                    gvJournal,
+//                    detailsID);
+//            }
+//            catch (Exception ex)
+//            {
+//                ShowMessage(
+//                    "Error saving journal: " + ex.Message,
+//                    "danger");
+//            }
+//        }
 
         private void ShowMessage(string message, string type)
         {
@@ -1387,7 +1416,7 @@ namespace LIMS
                 return;
             }
 
-            SaveJournal(detailsID);
+            //SaveJournal(detailsID);
         }
         protected void lnkSaveJournal_Click(
      object sender,
@@ -1414,7 +1443,7 @@ namespace LIMS
                     return;
                 }
 
-                SaveJournal(detailsID);
+                //SaveJournal(detailsID);
             }
             catch (Exception ex)
             {
@@ -1428,7 +1457,7 @@ namespace LIMS
         {
             int flag = 0;
             if (txtDate.Text == "") { txtDate.BackColor = Color.LightPink; flag = 1; } else { txtDate.BackColor = Color.Empty; }
-            if (txtAmount.Text == "") { txtAmount.BackColor = Color.LightPink; flag = 1; } else { txtAmount.BackColor = Color.Empty; }
+            if (txtPayAmount.Text == "") { txtPayAmount.BackColor = Color.LightPink; flag = 1; } else { txtPayAmount.BackColor = Color.Empty; }
             if (txtReference.Text == "") { txtReference.BackColor = Color.LightPink; flag = 1; } else { txtReference.BackColor = Color.Empty; }
             //if (ddlPayeeType.SelectedIndex == 0) { ddlPayeeType.BackColor = Color.LightPink; flag = 1; } else { ddlPayeeType.BackColor = Color.Empty; }
             if (ddlPayee.SelectedIndex == 0) { ddlPayee.BackColor = Color.LightPink; flag = 1; } else { ddlPayee.BackColor = Color.Empty; }
@@ -1462,7 +1491,7 @@ namespace LIMS
 
                 //DataTable journalLines = _jl.JournalLines();
 
-                ////journalLines.Rows.Add("", Convert.ToDecimal(txtAmount.Text), 0, "Accounts Payable", _jl.AccountID);
+                ////journalLines.Rows.Add("", Convert.ToDecimal(txtPayAmount.Text), 0, "Accounts Payable", _jl.AccountID);
                 //decimal amount = Convert.ToDecimal(txtAmountPaid.Text);
                 //journalLines.Rows.Add(
                 //        "",
@@ -1505,10 +1534,10 @@ namespace LIMS
                 //            _bk.ClosingBalance = 0;
                 //        }
                 //        DataTable bankingHeader = _bk.BankingHeader();
-                //        bankingHeader.Rows.Add(_bk.BankAccountId, _bk.StatementDate, _bk.ClosingBalance, _bk.ClosingBalance - Convert.ToDecimal(txtAmount.Text), DateTime.Now);
+                //        bankingHeader.Rows.Add(_bk.BankAccountId, _bk.StatementDate, _bk.ClosingBalance, _bk.ClosingBalance - Convert.ToDecimal(txtPayAmount.Text), DateTime.Now);
 
                 //        DataTable bankingLines = _bk.BankingLines();
-                //        bankingLines.Rows.Add(Convert.ToDateTime(txtDate.Text), "Payment to Vendor", Convert.ToDecimal(txtAmount.Text), 0, _bk.ClosingBalance - Convert.ToDecimal(txtAmount.Text));
+                //        bankingLines.Rows.Add(Convert.ToDateTime(txtDate.Text), "Payment to Vendor", Convert.ToDecimal(txtPayAmount.Text), 0, _bk.ClosingBalance - Convert.ToDecimal(txtPayAmount.Text));
                 //        int StatementID = _bk.AddBankStatement(bankingHeader, bankingLines);
 
                 //        //Bank Reconcilation
@@ -1526,7 +1555,7 @@ namespace LIMS
 
                 _ap.PayeeId = Convert.ToInt32(ddlPayee.SelectedValue);
                 _ap.PaymentDate = Convert.ToDateTime(txtDate.Text);
-                _ap.PaymentAmount = Convert.ToDecimal(txtAmount.Text);
+                _ap.PaymentAmount = Convert.ToDecimal(txtPayAmount.Text);
                 _ap.PrevPaymentAmount = Convert.ToDecimal(txtAmountPaid.Text);
                 _ap.TotalAmount = Convert.ToDecimal(txtTotalAmount.Text);
                 _ap.PaymentMethod = "";
@@ -1566,13 +1595,219 @@ namespace LIMS
                     if (txtAmountPaid.Text != "")
                     {
                         //Update amount paid in Invoices and InvoiceAR tables
-                        _ap.prVar.AmountPaid = Convert.ToDecimal(txtAmountPaid.Text) + Convert.ToDecimal(txtAmount.Text);
+                        _ap.prVar.AmountPaid = Convert.ToDecimal(txtAmountPaid.Text) + Convert.ToDecimal(txtPayAmount.Text);
                         _ap.UpdatePRAmountPaid(_ap);
 
                         Response.Redirect("generateVoucher.aspx?o=2&x=" + paymentID.ToString());
                     }
                 }
             }
+        }
+
+        protected void radOption_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(radOption.SelectedItem.ToString() == "Single") { ddlPaymentRequisition.Enabled = false; }
+            if (radOption.SelectedItem.ToString() == "Multiple") { ddlPaymentRequisition.Enabled = true; }
+        }
+
+        protected void btnAdd_Click(object sender, EventArgs e)
+        {
+            DataTable dt = new DataTable();
+            if (ddlPaymentRequisition.SelectedIndex != 0)
+            {
+                dt = _cm.GetPaymentRequisitionMaster(Convert.ToInt32(ddlPaymentRequisition.SelectedValue));
+                DataTable dtSession;
+
+                if (Session["DT"] == null)
+                {
+                    Session["DT"] = dt;
+                }
+                else
+                {
+                    dtSession = (DataTable)Session["DT"];
+                    bool grnExists = dtSession.AsEnumerable()
+                       .Any(r => r.Field<string>("RequisitionNumber") == ddlPaymentRequisition.SelectedItem.ToString());
+
+                    if (!grnExists)
+                    {
+                        foreach (DataRow row in dt.Rows)
+                        {
+                            dtSession.ImportRow(row);
+                        }
+
+                        Session["DT"] = dtSession;
+                    }
+                }
+                dt = (DataTable)Session["DT"];
+                if (dt.Rows.Count > 0)
+                {
+                    gvPaymentRequisitions.DataSource = dt;
+                    gvPaymentRequisitions.DataBind();
+                }
+                else
+                {
+                    gvPaymentRequisitions.DataSource = null;
+                    gvPaymentRequisitions.DataBind();
+                }
+            }
+            ClearAmounts();
+        }
+
+        protected void btnClear_Click(object sender, EventArgs e)
+        {
+            Session.Remove("DT");
+            gvPaymentRequisitions.DataSource = null;
+            gvPaymentRequisitions.DataBind();
+
+            ClearAmounts();
+        }
+
+        protected void ddlPayee_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (ddlPayee.SelectedIndex != 0)
+            {
+
+            }
+        }
+
+        protected void btnAddAll_Click(object sender, EventArgs e)
+        {
+            DataTable dt = new DataTable();
+            if (ViewState["PaymentRequisition"] != null)
+            {
+                dt = (DataTable)ViewState["PaymentRequisition"];
+                gvPaymentRequisitions.DataSource= dt;
+                gvPaymentRequisitions.DataBind();
+            }
+            else
+            {
+                gvPaymentRequisitions.DataSource = null;
+                gvPaymentRequisitions.DataBind();
+            }
+            ClearAmounts();
+        }
+        protected void ClearAmounts()
+        {
+            txtTotalAmount.Text = "0.0";
+            txtAmountPaid.Text = "0.0";
+            txtPayAmount.Text = "0.0";
+            txtBalanceAmount.Text = "0.0";
+        }
+        private List<int> GetSelectedPRIds()
+        {
+            List<int> selectedPRIds = new List<int>();
+
+            foreach (GridViewRow row in gvPaymentRequisitions.Rows)
+            {
+                CheckBox chk = row.FindControl("chkPR") as CheckBox;
+
+                if (chk != null && chk.Checked)
+                {
+                    int prId = Convert.ToInt32(
+                        gvPaymentRequisitions.DataKeys[row.RowIndex].Value
+                    );
+
+                    selectedPRIds.Add(prId);
+                }
+            }
+
+            return selectedPRIds;
+        }
+
+        protected void chkPR_CheckedChanged(object sender, EventArgs e)
+        {
+            GetSelectedPRIds();
+            CalculatePaymentAmounts();
+        }
+        private void CalculatePaymentAmounts()
+        {
+            decimal totalAmount = 0;
+            decimal amountPaid = 0;
+            decimal payAmount = 0;
+            decimal difference = 0;
+
+            foreach (GridViewRow row in gvPaymentRequisitions.Rows)
+            {
+                if (row.RowType != DataControlRowType.DataRow)
+                    continue;
+
+                CheckBox chkPR = row.FindControl("chkPR") as CheckBox;
+
+                if (chkPR == null || !chkPR.Checked)
+                    continue;
+
+                // Get the PR amount from the GridView
+                decimal prAmount = 0;
+                decimal prAmountPaid = 0;
+
+                if (gvPaymentRequisitions.DataKeys[row.RowIndex]["TotalAmount"] != null)
+                {
+                    decimal.TryParse(
+                        gvPaymentRequisitions.DataKeys[row.RowIndex]["TotalAmount"].ToString(),
+                        out prAmount
+                    );
+                }
+
+                if (gvPaymentRequisitions.DataKeys[row.RowIndex]["AmountPaid"] != null)
+                {
+                    decimal.TryParse(
+                        gvPaymentRequisitions.DataKeys[row.RowIndex]["AmountPaid"].ToString(),
+                        out prAmountPaid
+                    );
+                }
+
+                totalAmount += prAmount;
+                amountPaid += prAmountPaid;
+            }
+
+            // Outstanding amount for selected PRs
+
+            decimal balanceAmount = totalAmount - amountPaid;
+
+            // Default payment amount = outstanding amount
+            if (txtPayAmount.Text != "")
+            {
+                payAmount = Convert.ToDecimal(txtPayAmount.Text);
+            }
+            else
+            {
+                payAmount = balanceAmount;
+            }
+
+            // Difference
+            balanceAmount = balanceAmount - payAmount;
+
+            // Display
+            txtTotalAmount.Text = totalAmount.ToString("#,##0.00");
+            txtAmountPaid.Text = amountPaid.ToString("#,##0.00");
+            txtPayAmount.Text = payAmount.ToString("#,##0.00");
+            txtBalanceAmount.Text = balanceAmount.ToString("#,##0.00");
+        }
+        protected void chkSelectAll_CheckedChanged(object sender, EventArgs e)
+        {
+            CheckBox chkSelectAll = sender as CheckBox;
+
+            if (chkSelectAll == null)
+                return;
+
+            foreach (GridViewRow row in gvPaymentRequisitions.Rows)
+            {
+                if (row.RowType == DataControlRowType.DataRow)
+                {
+                    CheckBox chkPR = row.FindControl("chkPR") as CheckBox;
+
+                    if (chkPR != null)
+                    {
+                        chkPR.Checked = chkSelectAll.Checked;
+                    }
+                }
+            }
+            CalculatePaymentAmounts();
+        }
+
+        protected void txtTotalAmount_TextChanged(object sender, EventArgs e)
+        {
+            CalculatePaymentAmounts();
         }
     }
 

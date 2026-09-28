@@ -7,7 +7,10 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Globalization;
+using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -787,7 +790,7 @@ namespace LIMS.DAL
         public string PODetails { get { return _PODetails; } set { _PODetails = value; } }
         public decimal ReceivedQty { get { return _ReceivedQty; } set { _ReceivedQty = value; } }
         public int _PRID; public int PRID { get { return _PRID; } set { _PRID = value; } }
-        public int _highestApprovalOrgTreeID; public int highestApprovalOrgTreeID { get { return _highestApprovalOrgTreeID; } set { _highestApprovalOrgTreeID = value; } }        
+        public int _highestApprovalOrgTreeID; public int highestApprovalOrgTreeID { get { return _highestApprovalOrgTreeID; } set { _highestApprovalOrgTreeID = value; } }
         public int PurchaseRequisitionID { get { return _PurchaseRequisitionID; } set { _PurchaseRequisitionID = value; } }
         public int CurrentTier { get; set; }
         public string CurrentApproverRole { get; set; }
@@ -939,6 +942,7 @@ namespace LIMS.DAL
         public string Description { get { return _Description; } set { _Description = value; } }
         public int ItemTypeID { get { return _ItemTypeID; } set { _ItemTypeID = value; } }
         public string ItemDescription { get { return _ItemDescription; } set { _ItemDescription = value; } }
+        public string _ItemSpecification = ""; public string ItemSpecification { get { return _ItemSpecification; } set { _ItemSpecification = value; } }
         public int PurchaseGroupID { get { return _PurchaseGroupID; } set { _PurchaseGroupID = value; } }
         public int PurchaseSubGroupID { get { return _PurchaseSubGroupID; } set { _PurchaseSubGroupID = value; } }
         public string Specification { get { return _Specification; } set { _Specification = value; } }
@@ -997,8 +1001,9 @@ namespace LIMS.DAL
         decimal _DPPAmount; public decimal DPPAmount { get { return _DPPAmount; } set { _DPPAmount = value; } }
         decimal _VATAmount; public decimal VATAmount { get { return _VATAmount; } set { _VATAmount = value; } }
         decimal _BalanceDue; public decimal BalanceDue { get { return _BalanceDue; } set { _BalanceDue = value; } }
-
+        public string _AdditionalChargeDescription; public string AdditionalChargeDescription { get { return _AdditionalChargeDescription; } set { _AdditionalChargeDescription = value; } }
         public decimal DiscountApplied { get { return _DiscountApplied; } set { _DiscountApplied = value; } }
+        public decimal _AdditionalCharges; public decimal AdditionalCharges { get { return _AdditionalCharges; } set { _AdditionalCharges = value; } }
         public decimal TotalAfterDiscount { get { return _TotalAfterDiscount; } set { _TotalAfterDiscount = value; } }
         public decimal Subtotal { get { return _Subtotal; } set { _Subtotal = value; } }
 
@@ -1973,6 +1978,15 @@ namespace LIMS.DAL
         public int SentStatus { get { return _SentStatus; } set { _SentStatus = value; } }
         public string SampleFileName { get { return _SampleFileName; } set { _SampleFileName = value; } }
         public string SampleText { get { return _SampleText; } set { _SampleText = value; } }
+        public class ItemDetails
+        {
+            public string ItemCode { get; set; }
+            public string Description { get; set; }
+            public string UOMName { get; set; }
+            public string CategoryName { get; set; }
+            public string Stock { get; set; }
+            public string ItemType { get; set; }
+        }
         public int AddCustomer(DAL.CM obj)
         {
             //Start Reseed to avoid identity jump
@@ -2158,7 +2172,7 @@ namespace LIMS.DAL
                     cmd.Parameters.AddWithValue("@RequiredCredit", obj.RequiredCredit);
                     cmd.Parameters.AddWithValue("@ApprovedCredit", obj.ApprovedCredit);
                     cmd.Parameters.AddWithValue("@CreatedDate", DateTime.Now.AddHours(12.5));
-                    //cmd.Parameters.AddWithValue("@PanNumber", obj.PanNumber);
+                    cmd.Parameters.AddWithValue("@PanNumber", obj.PanNumber);
                     // cmd.Parameters.AddWithValue("@AdharNumber", obj.AdharNumber);
                     cmd.Parameters.AddWithValue("@EstablishmentID", obj.TypeofEstablishment);
                     cmd.Parameters.AddWithValue("@RegistrationNumber", obj.RegistrationNumber);
@@ -5025,7 +5039,7 @@ namespace LIMS.DAL
             sQuery = @"select distinct a.PersonId,(a.Title + ' ' + a.FirstName + ' ' + a.LastName) as CustomerName from ContactPersonDetails a 
                                 inner join CustomerDetails b on a.CustomerMasterId = b.CustomerMasterId 
                                 inner join CustomerInquiry c on b.CustomerMasterId = c.CustomerMasterId 
-                                where c.InquiryId = '" + InquiryId + "' and c.OrganizationID ='" + HttpContext.Current.Session["OrganizationID"].ToString() + "' and a.isActive=1" +
+                                where c.InquiryId = '" + InquiryId + "' and a.isActive=1" +
                                 @" union select distinct a.PersonId,(a.Title + ' ' + a.FirstName + ' ' + a.LastName) as CustomerName from ContactPersonDetails a
                                 inner join CompanyDetails b on a.CustomerMasterId = b.CustomerMasterId 
                                 inner join CustomerInquiry c on b.CustomerMasterId = c.CustomerMasterId 
@@ -6699,7 +6713,12 @@ namespace LIMS.DAL
 
         public DataTable GetConclusionRow_LED(int sampleID, int reportID)
         {
-            string query = @"SELECT ce.ClauseNumber, ce.ClauseTitle, STRING_AGG(s.StandardName, ', ') AS StandardName, trl.Result 
+            string query = @"SELECT ce.ClauseNumber, ce.ClauseTitle, STRING_AGG(s.StandardName, ', ') AS StandardName, 
+                        CASE 
+                            WHEN LTRIM(RTRIM(trl.Result)) = '' OR trl.Result IS NULL 
+                            THEN trl.Remark 
+                            ELSE trl.Result 
+                        END AS Result
                     FROM TestResultsLED trl
                     CROSS APPLY STRING_SPLIT(trl.StandardID, ',') AS splitStd
                     INNER JOIN Standards s ON s.StandardID = TRY_CAST(splitStd.value AS INT)
@@ -6710,10 +6729,11 @@ namespace LIMS.DAL
                       AND LTRIM(RTRIM(ce.ClauseNumber)) <> ''
                       AND ce.ClauseNumber NOT LIKE '%.%.%'    
                       AND ce.ClauseNumber NOT LIKE '%(%.%)'  
-                    GROUP BY ce.ClauseNumber, ce.ClauseTitle, trl.Result
+                    GROUP BY ce.ClauseNumber, ce.ClauseTitle, trl.Result, trl.Remark
                     ORDER BY ce.ClauseNumber";
             return GetDataUsingQuery(query);
         }
+
         public DataTable GetFeedbackWeightage(string FeedbackValue)
         {
             DataTable dt = new DataTable();
@@ -8024,6 +8044,12 @@ CustomerUID,departmentname,firstname + ' ' + lastname as CustomerName,ReportName
             dt = GetDataUsingQuery(sQuery);
             return dt;
         }
+        public DataTable CheckAllAllocated_LED(int CloneCRFSampleID)
+        {
+            sQuery = @"select * from CRFSampleDetails where CloneCRFSampleID=" + CloneCRFSampleID;
+            dt = GetDataUsingQuery(sQuery);
+            return dt;
+        }
 
         public DataTable GetCRFDetails(int InquiryID)
         {
@@ -8544,32 +8570,36 @@ CustomerUID,departmentname,firstname + ' ' + lastname as CustomerName,ReportName
             DataTable dt = new DataTable();
 
             string sQuery = @"SELECT DISTINCT TestReportNo, cd.CompanyName AS [Applicant],  (Title + ' ' + FirstName + ' ' + LastName) AS Attention, 
-                                    ctd.Email, CONCAT_WS(', ', NULLIF(Addressline1, ''), NULLIF(Addressline2, ''), NULLIF(AddressLine3, ''), 
-                                    NULLIF(city, ''), NULLIF(pincode, ''), NULLIF(country, '')) AS Address, samplename AS [SampleDescription], 
-                                    SampleCondition AS [SampleCondition],  CreatedDate AS [Date], AnalysisStartingDate AS [TestSample], 
-                                    AnalysisCompletionDate AS [TestPeriod], IssueDate, ColorName_Code, MaterialName_Code,
-                                    ad.BuyerCustomerName AS [Buyer'sName], ad.AgeGroup, ad.PONo, ad.Suppliername, 
-                                    BatchNo, ad.CountryOrigin AS [CountryofOrigin], ad.CountryDestination AS [CountryOfDestination], 
-                                    InquiryDetail AS [TestPackage], BrandProduct, ProductGroupName, cf.Remarks AS [Remark], ad.ProductType, 
-                                    FactoryName, FactoryAddress, ad.PersonID, DateOfExp, ArticleNumber, MaterialType, ItemStyleNo, pg.ProductGroupName, 
-                                    ad.LotNumber, ci.Remarks, sd.sampleIDSeries,cf.SizeOfSample as ProductQuantity,
-                                    t.FinalTestResult, ad.ProductName, ad.ProductSerialNo, ad.ProductSpecification, ad.Color
-                                FROM testresultdetails t
-                                INNER JOIN crfclonelist c ON c.sampleid = t.SampleId
-                                INNER JOIN customerinquiry ci ON ci.inquiryid = c.enquiryid
-                                LEFT JOIN ProductGroup pg ON pg.ProductGroupID = ci.productCategoryID
-                                LEFT JOIN CompanyDetails cd ON cd.customermasterid = ci.customermasterid
-                                INNER JOIN LocationDetails lo ON lo.customermasterid = ci.customermasterid 
-                                INNER JOIN crfsampledetails cf ON cf.clonecrfsampleid = c.clonecrfsampleid
-                                INNER JOIN AdditionalDetails ad ON ad.InquiryID = ci.InquiryId
-                                INNER JOIN ContactPersonDetails cpd ON ad.PersonID = cpd.PersonId
-                                LEFT JOIN ContactDetails ctd ON ctd.PersonId = cpd.PersonId
-                                INNER JOIN SampleDetails sd ON sd.ID = t.SampleId 
-                                WHERE t.SampleId = '" + sampleId + "' ";
+                              ctd.Email, CONCAT_WS(', ', NULLIF(Addressline1, ''), NULLIF(Addressline2, ''), NULLIF(AddressLine3, ''), 
+                              NULLIF(city, ''), NULLIF(pincode, ''), NULLIF(country, '')) AS Address, samplename AS [SampleDescription], 
+                              SampleCondition AS [SampleCondition],  CreatedDate AS [Date], AnalysisStartingDate AS [TestSample], 
+                              AnalysisCompletionDate AS [TestPeriod], IssueDate, ColorName_Code, MaterialName_Code,
+                              ad.BuyerCustomerName AS [Buyer'sName], ad.AgeGroup, ad.PONo, ad.Suppliername, 
+                              BatchNo, ad.CountryOrigin AS [CountryofOrigin], ad.CountryDestination AS [CountryOfDestination], 
+                              InquiryDetail AS [TestPackage], BrandProduct, ProductGroupName, cf.Remarks AS [Remark], ad.ProductType, 
+                              FactoryName, FactoryAddress, ad.PersonID, DateOfExp, ArticleNumber, MaterialType, ItemStyleNo, pg.ProductGroupName, 
+                              ad.LotNumber, ci.Remarks, sd.sampleIDSeries,cf.SizeOfSample as ProductQuantity,
+                              t.FinalTestResult, ad.ProductName, ad.ProductSerialNo, ad.ProductSpecification, ad.Color, cf.WorkorderNumber as WorkorderNumber,
+                              t.AuthorizedSignatoryID, e.EmployeeName AS [LabHeadName], ci.RequestNo, DateOfExp, TestStandard, TestMethod
+                         FROM testresultdetails t
+                         INNER JOIN crfclonelist c ON c.sampleid = t.SampleId
+                         INNER JOIN customerinquiry ci ON ci.inquiryid = c.enquiryid
+                         LEFT JOIN ProductGroup pg ON pg.ProductGroupID = ci.productCategoryID
+                         LEFT JOIN CompanyDetails cd ON cd.customermasterid = ci.customermasterid
+                         INNER JOIN LocationDetails lo ON lo.customermasterid = ci.customermasterid 
+                         INNER JOIN crfsampledetails cf ON cf.clonecrfsampleid = c.clonecrfsampleid
+                         INNER JOIN AdditionalDetails ad ON ad.InquiryID = ci.InquiryId
+                         INNER JOIN ContactPersonDetails cpd ON ad.PersonID = cpd.PersonId
+                         LEFT JOIN ContactDetails ctd ON ctd.PersonId = cpd.PersonId
+                         INNER JOIN SampleDetails sd ON sd.ID = t.SampleId 
+                         INNER JOIN Employees e ON e.ID = t.AuthorizedSignatoryID
+                         WHERE t.SampleId = '" + sampleId + "' ";
 
             dt = GetDataUsingQuery(sQuery);
             return dt;
         }
+
+
 
 
         public DataTable getLEDdetailsForImages(int sampleID)
@@ -9258,7 +9288,8 @@ WHERE InquiryId = '" + InquiryID + "'" +
                                     SubTotal,
                                     DownPayment,
                                     VATAmount,
-                                    BalanceDue) 
+                                    BalanceDue,
+                                    CreatedBy) 
                                 output INSERTED.InvoiceID
                                 VALUES (@CompanyID,
                                     @InvoiceDate,
@@ -9278,7 +9309,8 @@ WHERE InquiryId = '" + InquiryID + "'" +
                                     @SubTotal,
                                     @DownPayment,
                                     @VATAmount,
-                                    @BalanceDue)";
+                                    @BalanceDue,
+                                    @CreatedBy)";
 
                     SqlCommand cmd = new SqlCommand(sQuery, _sCon, trans);
                     {
@@ -9301,6 +9333,7 @@ WHERE InquiryId = '" + InquiryID + "'" +
                         cmd.Parameters.AddWithValue("@DownPayment", obj.DownPayment);
                         cmd.Parameters.AddWithValue("@VATAmount", obj.VATAmount);
                         cmd.Parameters.AddWithValue("@BalanceDue", obj.BalanceDue);
+                        cmd.Parameters.AddWithValue("@CreatedBy", obj.EmployeeID);
 
                         newID = (int)cmd.ExecuteScalar();
 
@@ -9858,6 +9891,21 @@ WHERE InquiryId = '" + InquiryID + "'" +
             int modified = UpdateSQLQuery(sQuery);
             return modified;
         }
+        public int UpdateVendorTIN(DAL.CM obj)
+        {
+
+            int modified = 0;
+            string sQuery = "Update VendorDetails set PANNumber='" + obj.PanNumber + "' where VendorID=" + obj.VendorID;
+            using (SqlConnection _sCon = new SqlConnection(cs))
+            {
+                using (SqlCommand cmd = new SqlCommand(sQuery, _sCon))
+                {
+                    _sCon.Open();
+                    modified = cmd.ExecuteNonQuery();
+                }
+            }
+            return modified;
+        }
         public DataTable GetVendorLocation(string VendorLocationID)
         {
             sQuery = @"Select * from LocationVendor where VendorLocationID='" + VendorLocationID + "'";
@@ -9900,7 +9948,7 @@ WHERE InquiryId = '" + InquiryID + "'" +
         public DataTable getVendorDetails(string vendorCode)
         {
             DataTable dt = new DataTable();
-            string sQuery = @"select vendorCode,VendorName,TypeOfBusiness from VendorDetails where VendorCode='" + vendorCode + "'";
+            string sQuery = @"select vendorCode,VendorName,TypeOfBusiness,PANNumber from VendorDetails where VendorCode='" + vendorCode + "'";
             dt = GetDataUsingQuery(sQuery);
             return dt;
         }
@@ -10188,7 +10236,6 @@ inner join Verification v on v.Code=vn.VendorCode where vq.VendorQuotationID='" 
             }
             return details;
         }
-
         public int UpdatePurchaseItems(DAL.CM obj)
         {
 
@@ -10530,7 +10577,12 @@ inner join Verification v on v.Code=vn.VendorCode where vq.VendorQuotationID='" 
                 //left join LocationVendor l 
                 //                        on v.VendorID = l.VendorID where SUBSTRING(v.vendorcode,1,3 ) = 'RMV' and VendorName like '%" + search + "%' or vendorcode like '%" + search + "%'";
                 //            break;
-                default: break;
+                default:
+                    sQuery = @"select distinct v.vendorID,v.vendorCode,v.VendorName,
+								case when vendorstatus=1 then 'N' else 'Y' end as VendorStatus from VendorDetails v 
+								left join LocationVendor l 
+                                on v.VendorID = l.VendorID where SUBSTRING(v.vendorcode,1,3 ) = 'VEN' and VendorName like '%" + search + "%' or vendorcode like '%" + search + "%'";
+                    break;
             }
             dt = GetDataUsingQuery(sQuery);
             return dt;
@@ -10763,9 +10815,9 @@ inner join Verification v on v.Code=vn.VendorCode where vq.VendorQuotationID='" 
             ReseedIdentity("VendorQuotationRevision", prevIdentity);
 
             string sQuery = "insert into VendorQuotationRevision (VendorQuotationID,VendorQuotationDetailsID,QuotationNumber," +
-                "AvailableQuantity,Rate,DeliveryTime,OrderedQty,Revision,QuoteCurrencyId,VATID,Discount,DiscountApplied,TotalAfterDiscount,Subtotal,GrandTotal) " +
+                "AvailableQuantity,Rate,DeliveryTime,OrderedQty,Revision,QuoteCurrencyId,VATID,Discount,DiscountApplied,TotalAfterDiscount,Subtotal,GrandTotal,AdditionalChargeDescription,AdditionalCharges) " +
                 "values (@VendorQuotationID,@VendorQuotationDetailsID,@QuotationNumber,@AvailableQty,@Rate,@DeliveryTime," +
-                "@OrderedQty,@Revision,@QuoteCurrencyId,@VATID,@Discount,@DiscountApplied,@TotalAfterDiscount,@Subtotal,@GrandTotal)";
+                "@OrderedQty,@Revision,@QuoteCurrencyId,@VATID,@Discount,@DiscountApplied,@TotalAfterDiscount,@Subtotal,@GrandTotal,@AdditionalChargeDescription,@AdditionalCharges)";
             using (SqlConnection _sCon = new SqlConnection(cs))
             {
                 using (SqlCommand cmd = new SqlCommand(sQuery, _sCon))
@@ -10785,6 +10837,8 @@ inner join Verification v on v.Code=vn.VendorCode where vq.VendorQuotationID='" 
                     cmd.Parameters.AddWithValue("@TotalAfterDiscount", obj.TotalAfterDiscount);
                     cmd.Parameters.AddWithValue("@Subtotal", obj.Subtotal);
                     cmd.Parameters.AddWithValue("@GrandTotal", obj.GrandTotal);
+                    cmd.Parameters.AddWithValue("@AdditionalChargeDescription", obj.AdditionalChargeDescription);
+                    cmd.Parameters.AddWithValue("@AdditionalCharges", obj.AdditionalCharges);
                     _sCon.Open();
                     cmd.ExecuteScalar();
                 }
@@ -10795,8 +10849,6 @@ inner join Verification v on v.Code=vn.VendorCode where vq.VendorQuotationID='" 
 
         public int UpdateVendorQuotation(DAL.CM obj)
         {
-
-
             string sQuery = "UPDATE VendorQuotation SET " +
                  "QuotationNumber = '" + obj.QuotationNumber + "', " +
                  "StatusID = '" + obj.QuotationStatusID + "', " +
@@ -10820,14 +10872,23 @@ inner join Verification v on v.Code=vn.VendorCode where vq.VendorQuotationID='" 
 
             int modified = UpdateSQLQuery(sQuery);
             int modified2 = UpdateVendorQuotationDetails1(obj);
+            int modified3 = UpdateVendorQuotationAdditionalCharges(obj);
             return modified;
         }
 
-
         public int UpdateVendorQuotationDetails1(DAL.CM obj)
         {
-
             string sQuery = "Update VendorQuotationDetails set QuotationNumber= '" + obj.QuotationNumber + "',StatusID='" + obj.QuotationStatusID + "' where VendorID=" + obj.VendorID + " and VendorQuotationID=(select VendorQuotationID from VendorQuotation where EnquiryID='" + obj.EnquiryID + "' AND VendorQuotationID='" + obj.VendorQuotationID + "')";
+            int modified = UpdateSQLQuery(sQuery);
+            return modified;
+        }
+        public int UpdateVendorQuotationAdditionalCharges(DAL.CM obj)
+        {
+            string sQuery = "Update VendorQuotationDetails set " +
+                "AdditionalChargeDescription= '" + obj.AdditionalChargeDescription +
+                "',AdditionalCharges='" + obj.AdditionalCharges +
+                "' where VendorID=" + obj.VendorID +
+                " and VendorQuotationID=(select VendorQuotationID from VendorQuotation where EnquiryID='" + obj.EnquiryID + "' AND VendorQuotationID='" + obj.VendorQuotationID + "')";
             int modified = UpdateSQLQuery(sQuery);
             return modified;
         }
@@ -10844,7 +10905,22 @@ inner join Verification v on v.Code=vn.VendorCode where vq.VendorQuotationID='" 
         public int UpdateVendorQuotationDetails(DAL.CM obj)
         {
 
-            string sQuery = "Update VendorQuotationDetails set VendorContactPersonID='" + obj.ContactPersonID + "',AvailableQuantity='" + obj.AvailableQuantity + "',Rate='" + obj.Rate + "',DeliveryTime='" + obj.DeliveryTime + "',PaymentTerms='" + obj.PaymentTerms + "',Discount='" + obj.Discount + "',DiscountApplied='" + obj.DiscountApplied + "',TotalAfterDiscount='" + obj.TotalAfterDiscount + "',VATID='" + obj.VATID + "',QuoteCurrencyId='" + obj.QuoteCurrencyid + "',Remarks='" + obj.Remarkforitem + "',ReceivedDate='" + obj.CreatedDate.ToString("MM/dd/yyyy") + "',StatusID='" + obj.QuotationStatusID + "',SpecialInstruction='" + obj.SpecialInstruction + "' where VendorQuotationDetailsID='" + obj.VendorQuotationDetailsID + "'";
+            string sQuery = "Update VendorQuotationDetails set VendorContactPersonID='" + obj.ContactPersonID +
+                            "',AvailableQuantity='" + obj.AvailableQuantity +
+                            "',Rate='" + obj.Rate +
+                            "',ItemSpecification='" + obj.ItemSpecification +
+                            "',DeliveryTime='" + obj.DeliveryTime +
+                            "',PaymentTerms='" + obj.PaymentTerms +
+                            "',Discount='" + obj.Discount +
+                            "',DiscountApplied='" + obj.DiscountApplied +
+                            "',TotalAfterDiscount='" + obj.TotalAfterDiscount +
+                            "',VATID='" + obj.VATID +
+                            "',QuoteCurrencyId='" + obj.QuoteCurrencyid +
+                            "',Remarks='" + obj.Remarkforitem +
+                            "',ReceivedDate='" + obj.CreatedDate.ToString("MM/dd/yyyy") +
+                            "',StatusID='" + obj.QuotationStatusID +
+                            "',SpecialInstruction='" + obj.SpecialInstruction +
+                            "' where VendorQuotationDetailsID='" + obj.VendorQuotationDetailsID + "'";
             int modified = UpdateSQLQuery(sQuery);
             return modified;
         }
@@ -10973,10 +11049,11 @@ inner join Verification v on v.Code=vn.VendorCode where vq.VendorQuotationID='" 
         {
             sQuery = @"Select distinct vd.VendorID as EnquiryVendorID,vd.Discount as Discount,
                         vd.DiscountApplied,vd.TotalAfterDiscount,vq.Subtotal,vq.GrandTotal,vd.Rate as QuoteRate,vq.Remarks,vd.Remarks AS Remarkforitem,
-                        vq.CreatedDate as QuotationRate,c.CurrencyName,vq.QuoteCurrencyId,vt.VATCode,i.ItemCode,
+                        vq.CreatedDate as QuotationRate,c.CurrencyName,vq.QuoteCurrencyId,vd.AdditionalChargeDescription,vd.AdditionalCharges,
+                        vt.VATCode,i.ItemCode,
                         vd.SpecialInstruction as Specification,
-                        i.ItemDescription,i.specification,i.ModelNo,um.UOMName,vt.VATID,vq.QuotationNumber,c.CurrencyName,
-                        ps.PurchaseSubGroupName,vd.QuotationNumber,um.UOMName,vd.DeliveryTime,vd.OrderedQty as Quantity,vt.Percentage,
+                        i.ItemDescription,i.specification,i.ModelNo,um.UOMName,vt.VATID,vq.QuotationNumber,c.CurrencyName,c.CurrencyCode,
+                        ps.PurchaseSubGroupName,vd.QuotationNumber,um.UOMName,vd.ItemSpecification,vd.DeliveryTime,vd.OrderedQty as Quantity,vt.Percentage,
                         vd.Remarks,vd.VendorQuotationDetailsID,ed.EnquiryDetailsID from VendorQuotation vq
 	                        inner join VendorQuotationDetails vd on vd.VendorQuotationID=vq.VendorQuotationID
 	                        inner join EnquiryDetails ed on ed.EnquiryDetailsID = vd.EnquiryDetailsID
@@ -10999,8 +11076,8 @@ inner join Verification v on v.Code=vn.VendorCode where vq.VendorQuotationID='" 
         public DataTable GetVendorQuotationRevisionDetails(string VendorQuotationID, string Revision, string VendorID, int VendorQuotationDetailsID)
         {
             sQuery = @"select * from VendorQuotationRevision vr 
-inner join VendorQuotationDetails vd on vd.VendorQuotationDetailsID=vr.VendorQuotationDetailsID 
-where vr.VendorQuotationID='" + VendorQuotationID + "' and vr.Revision='" + Revision + "' and vd.VendorID='" + VendorID + "' and vr.VendorQuotationDetailsID=" + VendorQuotationDetailsID;
+                        inner join VendorQuotationDetails vd on vd.VendorQuotationDetailsID=vr.VendorQuotationDetailsID 
+                        where vr.VendorQuotationID='" + VendorQuotationID + "' and vr.Revision='" + Revision + "' and vd.VendorID='" + VendorID + "' and vr.VendorQuotationDetailsID=" + VendorQuotationDetailsID;
             dt = GetDataUsingQuery(sQuery);
             return dt;
         }
@@ -11548,7 +11625,7 @@ where vr.VendorQuotationID='" + VendorQuotationID + "' and vr.Revision='" + Revi
                         left join PurchaseSubGroup psg on psg.PurchaseSubGroupID=i.PurchaseSubGroupID
                         left join PurchaseGroup pg on pg.PurchaseGroupID=psg.PurchaseGroupID 
                         left join StockFPU s on s.itemcode=i.ItemCode
-                        where pd.StatusID=1013 and pg.PurchaseGroupID='" + PurchaseGroupID + "' and pg.isActive=1 and pg.IsDisabled =0 and psg.isactive = 1 and psg.IsDisabled =0 ";
+                        where pd.StatusID in(1013,1015) and pg.PurchaseGroupID='" + PurchaseGroupID + "' and pg.isActive=1 and pg.IsDisabled =0 and psg.isactive = 1 and psg.IsDisabled =0 ";
             dt = GetDataUsingQuery(sQuery);
             return dt;
         }
@@ -11564,7 +11641,7 @@ where vr.VendorQuotationID='" + VendorQuotationID + "' and vr.Revision='" + Revi
                         left join PurchaseGroup pg on pg.PurchaseGroupID=psg.PurchaseGroupID 
                         left join StockFPU s on s.itemcode=i.ItemCode
                         inner JOIN EmployeeDepartment d ON d.EmployeeDepartmentID = pr.DepartmentID
-                        where pd.StatusID=1013 and pg.PurchaseGroupID='" + PurchaseGroupID + "' and psg.PurchaseSubGroupID = '" + PurchaseSubGroupID + "' and pg.isActive = 1 and pg.IsDisabled = 0 and psg.isactive = 1 and psg.IsDisabled = 0 ";
+                        where pd.StatusID in(1013,1015) and pg.PurchaseGroupID='" + PurchaseGroupID + "' and psg.PurchaseSubGroupID = '" + PurchaseSubGroupID + "' and pg.isActive = 1 and pg.IsDisabled = 0 and psg.isactive = 1 and psg.IsDisabled = 0 ";
             dt = GetDataUsingQuery(sQuery);
             return dt;
         }
@@ -11615,7 +11692,7 @@ where vr.VendorQuotationID='" + VendorQuotationID + "' and vr.Revision='" + Revi
                                 LEFT JOIN Division dv
                                     ON dv.DivisionID = d.DivisionID
                                 WHERE
-                                    pd.StatusID = 1013
+                                   pd.StatusID in(1013,1015)
                                     AND pg.IsActive = 1
                                     AND pg.IsDisabled = 0
                                     AND psg.IsActive = 1
@@ -11795,6 +11872,70 @@ where vr.VendorQuotationID='" + VendorQuotationID + "' and vr.Revision='" + Revi
             dt = GetDataUsingQuery(sQuery);
             return dt;
         }
+        public DataTable GetVendorListByPurchaseGroup(string purchaseGroupID)
+        {
+            string sQuery = @"SELECT DISTINCT
+                                vd.VendorID,
+                                vd.VendorName,
+                                vc.ContactEmail,
+                                vc.ContactMobile,
+                                vd.TypeOfBusiness,
+                                vc.PrimaryContact
+                            FROM VendorDetails vd
+                            LEFT JOIN ContactVendor vc
+                                ON vd.VendorID = vc.VendorID
+                                AND vc.PrimaryContact = 'Yes'
+                            WHERE EXISTS
+                            (
+                                SELECT 1
+                                FROM STRING_SPLIT(vd.PurchaseSubGroupID, ',') AS s
+                                INNER JOIN PurchaseSubGroup psg ON psg.PurchaseSubGroupID =
+                                       TRY_CAST(LTRIM(RTRIM(s.value)) AS INT)
+                                INNER JOIN PurchaseGroup pg on pg.PurchaseGroupID = psg.PurchaseGroupID
+                                WHERE pg.PurchaseGroupID = @PurchaseGroupID
+                            )";
+                                       
+            using (SqlConnection connection = new SqlConnection(System.Web.Configuration.WebConfigurationManager.ConnectionStrings["CM"].ConnectionString))
+            {
+                using (SqlCommand command = new SqlCommand(sQuery, connection))
+                {
+                    command.Parameters.AddWithValue("@PurchaseGroupID", purchaseGroupID);
+
+                    SqlDataAdapter adapter = new SqlDataAdapter(command);
+                    DataTable dt = new DataTable();
+                    adapter.Fill(dt);
+                    return dt;
+                }
+            }
+        }
+        public DataTable GetVendorListByPP(string PurchaseRequisition)
+        {
+            string sQuery = @"SELECT DISTINCT
+                                vd.VendorID,
+                                vd.VendorName,
+                                vc.ContactEmail,
+                                vc.ContactMobile,
+                                vd.TypeOfBusiness,
+                                vc.PrimaryContact
+                            FROM VendorDetails vd
+                            LEFT JOIN ContactVendor vc
+                                ON vd.VendorID = vc.VendorID
+                                AND vc.PrimaryContact = 'Yes'
+                            WHERE EXISTS
+                            (
+                                SELECT 1
+                                FROM STRING_SPLIT(vd.PurchaseSubGroupID, ',') AS s
+                                INNER JOIN PurchaseSubGroup psg ON psg.PurchaseSubGroupID =
+                                       TRY_CAST(LTRIM(RTRIM(s.value)) AS INT)
+                                INNER JOIN PurchaseGroup pg on pg.PurchaseGroupID = psg.PurchaseGroupID
+                                WHERE psg.PurchaseSubGroupID in (select distinct i.purchasesubgroupid from purchaserequisitiondetails pd
+                            inner join items i on i.ItemCode=pd.itemcode
+                            inner join purchasesubgroup ps on ps.purchasesubgroupid=i.purchasesubgroupid
+                            where pd.PurchaseRequisitionID in("+PurchaseRequisition+"))) order by VendorName asc";
+            dt = GetDataUsingQuery(sQuery);
+            return dt;
+
+        }
         public DataTable GetVendorList(string purchaseSubGroupID)
         {
             string sQuery = @"
@@ -11861,6 +12002,14 @@ where vr.VendorQuotationID='" + VendorQuotationID + "' and vr.Revision='" + Revi
             dt = GetDataUsingQuery(sQuery);
             return dt;
         }
+        public DataTable GetVendorVAT(string VendorID)
+        {
+            sQuery = @"Select * from VendorDetails vd
+                        inner join VAT v on vd.VAT = v.VATID
+                        where VendorID='" + VendorID + "'";
+            dt = GetDataUsingQuery(sQuery);
+            return dt;
+        }
         public int AddMailBoxDetails(DAL.CM obj)
         {
             int modified = 0;
@@ -11924,7 +12073,7 @@ where vr.VendorQuotationID='" + VendorQuotationID + "' and vr.Revision='" + Revi
         public DataTable GetEnquiryList()
         {
             sQuery = @"SELECT DISTINCT 
-                 eq.EnquiryID,
+                 eq.EnquiryID,ed.EnquiryDetailsID,
                  vd.VendorID as sent,
                  v.VendorName as NameValues,
                  vd.Rate,
@@ -11967,7 +12116,7 @@ where vr.VendorQuotationID='" + VendorQuotationID + "' and vr.Revision='" + Revi
             {
                 case "QuoteSent":
                     clearTables("tempenquiry");
-                    sQuery = @"select * into tempenquiry from(Select distinct eq.EnquiryID,i.ItemID,i.itemCode,i.ItemDescription,v.vendorID,v.vendorName,eq.VendorID as sent,vd.Rate,q.QuotationStatus,vd.ReportFileName,vq.VendorQuotationID,eq.Created from Enquiry eq " +
+                    sQuery = @"select * into tempenquiry from(Select distinct eq.EnquiryID,ed.EnquiryDetailsID,i.ItemID,i.itemCode,i.ItemDescription,v.vendorID,v.vendorName,eq.VendorID as sent,vd.Rate,q.QuotationStatus,vd.ReportFileName,vq.VendorQuotationID,eq.Created from Enquiry eq " +
                           @"  inner join EnquiryDetails ed on eq.EnquiryID=ed.EnquiryID 
 					inner join Items i on i.itemid = ed.itemid
                     inner join VendorQuotationDetails vd on vd.EnquiryDetailsID=ed.EnquiryDetailsID 
@@ -12014,7 +12163,7 @@ where vr.VendorQuotationID='" + VendorQuotationID + "' and vr.Revision='" + Revi
                 case "POGenerated":
                 case "Others":
                     clearTables("tempenquiry");
-                    sQuery = @"select * into tempenquiry from(Select distinct eq.EnquiryID,i.ItemID,i.ItemCode,i.ItemDescription,v.vendorID,v.vendorName,eq.VendorID as sent,vd.Rate,q.QuotationStatus,vd.ReportFileName,vq.VendorQuotationID,eq.Created from Enquiry eq " +
+                    sQuery = @"select * into tempenquiry from(Select distinct eq.EnquiryID,ed.EnquiryDetailsID,i.ItemID,i.ItemCode,i.ItemDescription,v.vendorID,v.vendorName,eq.VendorID as sent,vd.Rate,q.QuotationStatus,vd.ReportFileName,vq.VendorQuotationID,eq.Created from Enquiry eq " +
                           @"  inner join EnquiryDetails ed on eq.EnquiryID=ed.EnquiryID 
 					inner join Items i on i.itemid = ed.itemid
                     inner join VendorQuotationDetails vd on vd.EnquiryDetailsID=ed.EnquiryDetailsID 
@@ -12080,16 +12229,20 @@ where vr.VendorQuotationID='" + VendorQuotationID + "' and vr.Revision='" + Revi
         }
         public int ReleaseEnquiryItem(DAL.CM obj)
         {
-
             string sQuery = "Update PurchaserequisitionDetails set StatusID='" + obj.StatusID + "',EnquiryID=null,PurchaseOrderID=null where EnquiryID='" + obj.EnquiryID + "' and ItemCode='" + obj.ItemCode + "'";
             int modified = UpdateSQLQuery(sQuery);
+            sQuery = "Update EnquiryDetails set EnquiryDetailsStatus='" + obj.EnquiryStatusID + "',Remarks='" + obj.Remarks + "' where EnquiryID='" + obj.EnquiryID + "' and ItemCode='" + obj.ItemCode + "'";
+            modified = UpdateSQLQuery(sQuery);
+            sQuery = @"Update VendorQuotationDetails set StatusID=0 where EnquiryDetailsID=" + obj.EnquiryDetailsID;
+            modified = UpdateSQLQuery(sQuery);
             return modified;
         }
         public int UpdateEnquiryRelease(DAL.CM obj)
         {
-
             string sQuery = "Update EnquiryDetails set EnquiryDetailsStatus='" + obj.EnquiryStatusID + "',Remarks='" + obj.Remarks + "' where EnquiryID='" + obj.EnquiryID + "' and ItemID='" + obj.ItemID + "'";
             int modified = UpdateSQLQuery(sQuery);
+            sQuery = @"Update VendorQuotationDetails set StatusID=0 where EnquiryDetailsID=" + obj.EnquiryDetailsID;
+            modified = UpdateSQLQuery(sQuery);
             return modified;
         }
         public DataTable GetPendingToQuoteVendors(string EnquiryID)
@@ -12198,9 +12351,9 @@ where vr.VendorQuotationID='" + VendorQuotationID + "' and vr.Revision='" + Revi
            vq.Subtotal, vq.GrandTotal, vd.StatusID as QuotationStatus, i.ItemID, 
            i.ItemDescription, i.Specification, i.ModelNo, e.EnquiryID,
            ed.EnquiryDetailsID, v.VendorName, vd.AvailableQuantity, u.UOMName, 
-           vd.Rate, v.VendorID, vd.DeliveryTime, vd.PaymentTerms, 
+           vd.Rate, v.VendorID,vd.ItemSpecification, vd.DeliveryTime, vd.PaymentTerms, 
            vd.SpecialInstruction as Remarks, vt.VAT as VAT,
-           ed.Quantity as ItemQty
+           ed.Quantity as ItemQty,vd.AdditionalChargeDescription,vd.AdditionalCharges
            from VendorQuotation vq
            inner join VendorQuotationDetails vd on vq.VendorQuotationID=vd.VendorQuotationID
            inner join Enquiry e on e.EnquiryID=vq.EnquiryID
@@ -12217,7 +12370,7 @@ where vr.VendorQuotationID='" + VendorQuotationID + "' and vr.Revision='" + Revi
 
         public DataTable getQuoteVendors(string EnquiryID)
         {
-            sQuery = @"Select distinct vd.VendorID as Vendor,v.VendorName,pd.PurchaseOrderID,vq.QuotationNumber,e.EnquiryID,e.created as EnquiryDate,vq.QuoteCurrencyId,vd.ReportFileName
+            sQuery = @"Select distinct vd.VendorID as Vendor,v.VendorName,pd.PurchaseOrderID,vq.QuotationNumber,e.EnquiryID,e.created as EnquiryDate,vq.QuoteCurrencyId,vd.ReportFileName,vd.AdditionalChargeDescription, vd.AdditionalCharges
                      from VendorQuotation vq
                   inner join VendorQuotationDetails vd on vq.VendorQuotationID=vd.VendorQuotationID
                   inner join Enquiry e on e.EnquiryID=vq.EnquiryID
@@ -12227,7 +12380,7 @@ where vr.VendorQuotationID='" + VendorQuotationID + "' and vr.Revision='" + Revi
 			inner join VendorDetails v on v.VendorID=vq.VendorID
                      LEFT join PurchaseOrderDetails pd on pd.VendorQuotationDetailsID=vd.VendorQuotationDetailsID
                   where vq.EnquiryID='" + EnquiryID + "' and vq.QuoteCurrencyID is not null group by vd.VendorID,v.VendorName,pd.VendorQuotationDetailsID," +
-                        "pd.PurchaseOrderID,vq.QuotationNumber,e.EnquiryID,vq.QuoteCurrencyId,vd.ReportFileName,e.created";
+                        "pd.PurchaseOrderID,vq.QuotationNumber,e.EnquiryID,vq.QuoteCurrencyId,vd.ReportFileName,e.created,AdditionalChargeDescription,AdditionalCharges";
 
             dt = GetDataUsingQuery(sQuery);
             return dt;
@@ -12316,6 +12469,17 @@ where vr.VendorQuotationID='" + VendorQuotationID + "' and vr.Revision='" + Revi
                         inner join EnquiryDetails e on e.EnquiryDetailsID = pd.EnquiryDetailsID
                         inner join VendorDetails vd on vd.VendorID=po.VendorID 
                         where po.PurchaseOrderStatus=1 and po.ReportFileName is not null order by po.podate desc";
+            dt = GetDataUsingQuery(sQuery);
+            return dt;
+        }
+        public DataTable GetPOPendingDelivery(string StoreType)
+        {
+            sQuery = @"Select distinct e.enquiryid,po.PONumber,po.PODate,po.SpecialInstructions,po.StoreType,po.ReportFileName,vd.VendorName,po.PurchaseOrderID,vd.VendorID,po.reason,pd.POStatusID from PurchaseOrder po 
+                        inner join PurchaseOrderDetails pd on po.PurchaseOrderID=pd.PurchaseOrderID
+                        inner join EnquiryDetails e on e.EnquiryDetailsID = pd.EnquiryDetailsID
+                        inner join VendorDetails vd on vd.VendorID=po.VendorID 
+                        where po.PurchaseOrderStatus=6 AND ISNULL(pd.ReceivedQty,0) < pd.Quantity
+                        order by po.podate desc";
             dt = GetDataUsingQuery(sQuery);
             return dt;
         }
@@ -12415,6 +12579,19 @@ where vr.VendorQuotationID='" + VendorQuotationID + "' and vr.Revision='" + Revi
             dt = GetDataUsingQuery(sQuery);
             return dt;
         }
+        public DataTable GetVATDetails(string VAT, int dummy)
+        {
+            sQuery = "Select * from VAT where VAT='" + VAT + "'";
+            dt = GetDataUsingQuery(sQuery);
+            return dt;
+        }
+        public DataTable GetVATDetails(string VATID)
+        {
+            sQuery = "Select * from VAT where VATID='" + VATID + "'";
+            dt = GetDataUsingQuery(sQuery);
+            return dt;
+        }
+
         public DataTable CheckEnquiry(string EnquiryID)
         {
             sQuery = "Select * from Enquiry where EnquiryID='" + EnquiryID + "'";
@@ -12473,9 +12650,9 @@ where vr.VendorQuotationID='" + VendorQuotationID + "' and vr.Revision='" + Revi
         }
         public DataTable GetPurchaseItemsDetails(string PurchaseOrderID)
         {
-            sQuery = @"select pd.itemID,itemdescription,specification,ModelNo,DeliveryDate,Quantity,UOMName,pd.Rate,Amount,Discount,
-                      DiscountAmount,TotalAmount,pd.VATID,GrandTotal,
-                      TotalAmount * (CAST(REPLACE(v.VAT, '%', '') AS FLOAT) / 100.0) AS TotalVAT,v.VAT from PurchaseOrderDetails pd 
+            sQuery = @"select pd.itemID,itemdescription,itemspecification,specification,ModelNo,DeliveryDate,Quantity,UOMName,pd.Rate,Amount,Discount,
+                      DiscountAmount,TotalAmount,pd.VATID,GrandTotal,TotalVAT,v.VAT,
+                      po.additionalChargeDescription,po.additionalCharges from PurchaseOrderDetails pd 
 				      inner join PurchaseOrder po on pd.PurchaseOrderID=po.PurchaseOrderID
                       inner join Items i on i.ItemID=pd.ItemID
                       inner join UOM u on u.UOMID=i.UOMID 
@@ -12530,7 +12707,7 @@ where vr.VendorQuotationID='" + VendorQuotationID + "' and vr.Revision='" + Revi
             int prevIdentity = GetReseedIdentity("PurchaseOrderDetails", "PODetailsID");
             ReseedIdentity("PurchaseOrderDetails", prevIdentity);
 
-            string sQuery = "insert into PurchaseOrderDetails (PurchaseOrderID,Discount,DiscountAmount,TotalAmount,CreatedDate,DeliveryDate,VendorQuotationID,Quantity,Rate,Amount,ItemID,POStatusID,AllocatedStock,ReceivedQty,Tax,TaxAmount,VATID,VendorQuotationDetailsID,EnquiryDetailsID,PO_OrderedQty,PO_BalanceQty,PO_StatusForIT)output inserted.PODetailsID  values (@PurchaseOrderID,@Discount,@DiscountAmount,@TotalAmount,@CreatedDate,@DeliveryDate,@VendorQuotationID,@Quantity,@Rate,@Amount,@ItemID,@POStatusID,@AllocatedStock,@ReceivedQty,@Tax,@TaxAmount,@VATID,@VendorQuotationDetailsID,@EnquiryDetailsID,@PO_OrderedQty,@PO_BalanceQty,@PO_StatusForIT)";
+            string sQuery = "insert into PurchaseOrderDetails (PurchaseOrderID,Discount,DiscountAmount,TotalAmount,CreatedDate,DeliveryDate,VendorQuotationID,Quantity,Rate,Amount,ItemID,POStatusID,AllocatedStock,ReceivedQty,Tax,TaxAmount,VATID,VendorQuotationDetailsID,EnquiryDetailsID,PO_OrderedQty,PO_BalanceQty,PO_StatusForIT,ItemSpecification)output inserted.PODetailsID  values (@PurchaseOrderID,@Discount,@DiscountAmount,@TotalAmount,@CreatedDate,@DeliveryDate,@VendorQuotationID,@Quantity,@Rate,@Amount,@ItemID,@POStatusID,@AllocatedStock,@ReceivedQty,@Tax,@TaxAmount,@VATID,@VendorQuotationDetailsID,@EnquiryDetailsID,@PO_OrderedQty,@PO_BalanceQty,@PO_StatusForIT,@ItemSpecification)";
             using (SqlConnection _sCon = new SqlConnection(cs))
             {
                 using (SqlCommand cmd = new SqlCommand(sQuery, _sCon))
@@ -12557,6 +12734,7 @@ where vr.VendorQuotationID='" + VendorQuotationID + "' and vr.Revision='" + Revi
                     cmd.Parameters.AddWithValue("@PO_OrderedQty", obj.Quantity);
                     cmd.Parameters.AddWithValue("@PO_BalanceQty", obj.Quantity);
                     cmd.Parameters.AddWithValue("@PO_StatusForIT", 0);
+                    cmd.Parameters.AddWithValue("@ItemSpecification", obj.ItemSpecification);
                     _sCon.Open();
                     modified = (int)cmd.ExecuteScalar();
                 }
@@ -12601,12 +12779,6 @@ where vr.VendorQuotationID='" + VendorQuotationID + "' and vr.Revision='" + Revi
             }
             return modified;
         }
-        public DataTable GetVATDetails(string VATID)
-        {
-            sQuery = "Select * from VAT where VATID='" + VATID + "'";
-            dt = GetDataUsingQuery(sQuery);
-            return dt;
-        }
         public DataTable GetVQFromPO(string EnquiryDetailsID, string VendorQuotationID)
         {
             sQuery = "Select * from PurchaseOrderDetails where VendorQuotationID='" + VendorQuotationID + "' and EnquiryDetailsID='" + EnquiryDetailsID + "'";
@@ -12627,8 +12799,8 @@ where vr.VendorQuotationID='" + VendorQuotationID + "' and vr.Revision='" + Revi
             int prevIdentity = GetReseedIdentity("PurchaseOrder", "PurchaseOrderID");
             ReseedIdentity("PurchaseOrder", prevIdentity);
 
-            string sQuery = @"insert into PurchaseOrder (PONumber,PODate,VendorID,Unit,CreatedDate,SpecialInstructions,GrandTotal,UnitID,Delivery,Payment,Guarantee,Remarks,ContactPersonID,PurchaseOrderStatus,POSeries,POYear,StoreType,projectid)
-                                        output INSERTED.PurchaseOrderID  values (@PONumber,@PODate,@VendorID,@Unit,@CreatedDate,@SpecialInstructions,@GrandTotal,@UnitID,@Delivery,@Payment,@Guarantee,@Remarks,@ContactPersonID,@PurchaseOrderStatus,@POSeries,@POYear,@StoreType,@ProjectID)";
+            string sQuery = @"insert into PurchaseOrder (PONumber,PODate,VendorID,Unit,CreatedDate,SpecialInstructions,GrandTotal,UnitID,Delivery,Payment,Guarantee,Remarks,ContactPersonID,PurchaseOrderStatus,POSeries,POYear,StoreType,projectid,TotalVat,AdditionalChargeDescription,AdditionalCharges)
+                                        output INSERTED.PurchaseOrderID  values (@PONumber,@PODate,@VendorID,@Unit,@CreatedDate,@SpecialInstructions,@GrandTotal,@UnitID,@Delivery,@Payment,@Guarantee,@Remarks,@ContactPersonID,@PurchaseOrderStatus,@POSeries,@POYear,@StoreType,@ProjectID,@TotalVat,@AdditionalChargeDescription,@AdditionalCharges)";
             using (SqlConnection _sCon = new SqlConnection(cs))
             {
                 using (SqlCommand cmd = new SqlCommand(sQuery, _sCon))
@@ -12642,7 +12814,6 @@ where vr.VendorQuotationID='" + VendorQuotationID + "' and vr.Revision='" + Revi
                     cmd.Parameters.AddWithValue("@GrandTotal", obj.GrandTotal);
                     cmd.Parameters.AddWithValue("@UnitID", obj.UnitID);
                     cmd.Parameters.AddWithValue("@Delivery", obj.Delivery);
-                    //cmd.Parameters.AddWithValue("@Transportation", obj.Transportation);
                     cmd.Parameters.AddWithValue("@Payment", obj.Payment);
                     cmd.Parameters.AddWithValue("@Guarantee", obj.Guarantee);
                     cmd.Parameters.AddWithValue("@Remarks", obj.Remarks);
@@ -12652,7 +12823,9 @@ where vr.VendorQuotationID='" + VendorQuotationID + "' and vr.Revision='" + Revi
                     cmd.Parameters.AddWithValue("@POYear", obj.POYear);
                     cmd.Parameters.AddWithValue("@StoreType", obj.StoreType);
                     cmd.Parameters.AddWithValue("@ProjectID", obj.ProjectID);
-                    //cmd.Parameters.AddWithValue("@PenaltyID", obj.PenaltyID);
+                    cmd.Parameters.AddWithValue("@TotalVat", obj.VAT);
+                    cmd.Parameters.AddWithValue("@AdditionalChargeDescription", obj.AdditionalChargeDescription);
+                    cmd.Parameters.AddWithValue("@AdditionalCharges", obj.AdditionalCharges);
 
                     _sCon.Open();
                     modified = (int)cmd.ExecuteScalar();
@@ -12864,23 +13037,109 @@ where vr.VendorQuotationID='" + VendorQuotationID + "' and vr.Revision='" + Revi
         }
         public DataTable GetDetailsForPO(string EnquiryID, string VendorID)
         {
-            sQuery = @" SELECT DISTINCT
-                       i.ItemDescription,i.ItemID,i.ItemCode,
-                       i.ItemTypeID,u.UOMName,ed.EnquiryDetailsID,
-                       ed.PODetailsID,ed.Quantity AS EnqQty,
-                       vqd.AvailableQuantity AS Quantity,
-                    vqd.Rate,vqd.Discount,vqd.DiscountApplied,vq.VendorQuotationID,
-                       vqd.VendorQuotationDetailsID,vq.Payment,
-                       vq.Guarantee,vq.UnitID,vq.Delivery,vq.Transportation,vq.Remarks,
-                       DATEADD(MINUTE, 750 + (vqd.DeliveryTime * 24 * 60), GETDATE()) AS DeliveryDate
-                    FROM VendorQuotation vq
-                    INNER JOIN Enquiry eq ON eq.EnquiryID = vq.EnquiryID
-                    INNER JOIN VendorQuotationDetails vqd ON vqd.VendorQuotationID = vq.VendorQuotationID
-                    INNER JOIN EnquiryDetails ed ON ed.EnquiryDetailsID = vqd.EnquiryDetailsID
-                    INNER JOIN Items i ON i.ItemID = ed.ItemID
-                    INNER JOIN UOM u ON u.UOMID = i.UOMID
-                    LEFT JOIN VAT vt ON vt.VATID = vqd.VATID
-                       WHERE vq.EnquiryID='" + EnquiryID + "' and vqd.VendorID='" + VendorID + "' and vq.StatusID in(3,9) and DisabledItem='0'";
+            sQuery = @"SELECT DISTINCT
+                i.ItemDescription,
+                i.ItemID,
+                i.ItemCode,
+                i.ItemTypeID,
+                u.UOMName,
+                ed.EnquiryDetailsID,
+                ed.PODetailsID,
+                ed.Quantity AS EnqQty,
+
+                vqd.ItemSpecification,
+
+                -- Remaining quantity available for this enquiry detail
+                CASE 
+                    WHEN vqd.AvailableQuantity <
+                         (ed.Quantity - ISNULL(po.TotalPOQty, 0))
+                    THEN vqd.AvailableQuantity
+                    ELSE
+                         (ed.Quantity - ISNULL(po.TotalPOQty, 0))
+                END AS Quantity,
+
+                vqd.AvailableQuantity AS VendorQuotationQty,
+
+                vqd.Rate,
+                vqd.Discount,
+                vqd.DiscountApplied,
+                vq.VendorQuotationID,
+                vqd.VendorQuotationDetailsID,
+                vq.Payment,
+                vq.Guarantee,
+                vq.UnitID,
+                vq.Delivery,
+                vq.Transportation,
+                vq.Remarks,
+
+                DATEADD(
+                    MINUTE,
+                    750 + (vqd.DeliveryTime * 24 * 60),
+                    GETDATE()
+                ) AS DeliveryDate,
+
+                vqd.AdditionalChargeDescription,
+                vqd.AdditionalCharges,
+
+                ISNULL(po.TotalPOQty, 0) AS AlreadyPOQty,
+
+                ed.Quantity - ISNULL(po.TotalPOQty, 0) AS RemainingQty
+
+            FROM VendorQuotation vq
+
+            INNER JOIN Enquiry eq
+                ON eq.EnquiryID = vq.EnquiryID
+
+            INNER JOIN VendorQuotationDetails vqd
+                ON vqd.VendorQuotationID = vq.VendorQuotationID
+
+            INNER JOIN EnquiryDetails ed
+                ON ed.EnquiryDetailsID = vqd.EnquiryDetailsID
+
+            INNER JOIN Items i
+                ON i.ItemID = ed.ItemID
+
+            INNER JOIN UOM u
+                ON u.UOMID = i.UOMID
+
+            LEFT JOIN VAT vt
+                ON vt.VATID = vqd.VATID
+
+            -- Total quantity already used in previous POs
+            LEFT JOIN
+            (
+                SELECT
+                    pod.EnquiryDetailsID,
+                    SUM(pod.Quantity) AS TotalPOQty
+                FROM PurchaseOrderDetails pod
+                GROUP BY pod.EnquiryDetailsID
+            ) po
+                ON po.EnquiryDetailsID = ed.EnquiryDetailsID
+
+            WHERE
+                vq.EnquiryID = '" + EnquiryID +
+              "'  AND vqd.VendorID = '" + VendorID +
+              "'  AND vq.StatusID IN (3,9) " +
+              @"  AND DisabledItem = '0'
+                  AND ed.Quantity - ISNULL(po.TotalPOQty, 0) > 0;";
+            //sQuery = @" SELECT DISTINCT
+            //           i.ItemDescription,i.ItemID,i.ItemCode,
+            //           i.ItemTypeID,u.UOMName,ed.EnquiryDetailsID,
+            //           ed.PODetailsID,ed.Quantity AS EnqQty,vqd.ItemSpecification,
+            //           vqd.AvailableQuantity AS Quantity,
+            //        vqd.Rate,vqd.Discount,vqd.DiscountApplied,vq.VendorQuotationID,
+            //           vqd.VendorQuotationDetailsID,vq.Payment,
+            //           vq.Guarantee,vq.UnitID,vq.Delivery,vq.Transportation,vq.Remarks,
+            //           DATEADD(MINUTE, 750 + (vqd.DeliveryTime * 24 * 60), GETDATE()) AS DeliveryDate,
+            //            vqd.AdditionalChargeDescription,vqd.AdditionalCharges
+            //        FROM VendorQuotation vq
+            //        INNER JOIN Enquiry eq ON eq.EnquiryID = vq.EnquiryID
+            //        INNER JOIN VendorQuotationDetails vqd ON vqd.VendorQuotationID = vq.VendorQuotationID
+            //        INNER JOIN EnquiryDetails ed ON ed.EnquiryDetailsID = vqd.EnquiryDetailsID
+            //        INNER JOIN Items i ON i.ItemID = ed.ItemID
+            //        INNER JOIN UOM u ON u.UOMID = i.UOMID
+            //        LEFT JOIN VAT vt ON vt.VATID = vqd.VATID
+            //           WHERE vq.EnquiryID='" + EnquiryID + "' and vqd.VendorID='" + VendorID + "' and vq.StatusID in(3,9) and DisabledItem='0'";
             dt = GetDataUsingQuery(sQuery);
             return dt;
         }
@@ -13919,6 +14178,60 @@ where cl.enquiryId='" + InquiryID + "' and cl.sampleID='" + sampleidID + "'";
             dt = GetDataUsingQuery(sQuery);
             return dt;
         }
+        public string ToAnyCurrency(string currencyCode, decimal amount)
+        {
+            string s = "";
+            DataTable dt = GetCurrencyDetails(currencyCode);
+            if (dt.Rows.Count > 0)
+            {
+                // USD
+                CultureInfo Culture = new CultureInfo(dt.Rows[0]["CultureInfo"].ToString());
+                s = amount.ToString("N2", Culture);
+            }
+
+            return s;
+        }
+        public string ToAnyCurrency(decimal amount, int currencyID)
+        {
+            string s = "";
+            DataTable dt = GetCurrencyDetails(currencyID);
+            if (dt.Rows.Count > 0)
+            {
+                // USD
+                CultureInfo Culture = new CultureInfo(dt.Rows[0]["CultureInfo"].ToString());
+                s = amount.ToString("N2", Culture);
+            }
+
+            return s;
+        }
+        public decimal ToAnyCurrencyToDecimal(string amount, string currencyCode)
+        {
+            string s = ""; 
+            DataTable dt = GetCurrencyDetails(currencyCode);
+            if (dt.Rows.Count > 0)
+            {
+                CultureInfo Culture = new CultureInfo(dt.Rows[0]["CultureInfo"].ToString());
+
+                decimal value = decimal.Parse(amount, NumberStyles.Number, Culture);
+                s = value.ToString("0.00", CultureInfo.InvariantCulture);
+            }
+
+            return Convert.ToDecimal(s);
+        }
+        public decimal ToAnyCurrencyToDecimal(string amount, int currencyID)
+        {
+            string s = "";
+            DataTable dt = GetCurrencyDetails(currencyID);
+            if (dt.Rows.Count > 0)
+            {
+                CultureInfo Culture = new CultureInfo(dt.Rows[0]["CultureInfo"].ToString());
+                
+                decimal value = decimal.Parse(amount, NumberStyles.Number, Culture);
+                s = value.ToString("0.00", CultureInfo.InvariantCulture);
+            }
+
+            return Convert.ToDecimal(s);
+        }
         public string ToUSD(decimal amount)
         {
             // USD
@@ -13932,6 +14245,14 @@ where cl.enquiryId='" + InquiryID + "' and cl.sampleID='" + sampleidID + "'";
             CultureInfo rupiahCulture = new CultureInfo("id-ID");
             //return string.Format(rupiahCulture, "{0:C}", amount); // do not show curreny sybmol - aldiyan 2Feb26
             return amount.ToString("N2", rupiahCulture);
+        }
+        public string ToRMB(decimal amount)
+        {
+            // RMB / Chinese Yuan
+            CultureInfo rmbCulture = new CultureInfo("zh-CN");
+
+            // No currency symbol
+            return amount.ToString("N2", rmbCulture);
         }
         public decimal ConvertCurrencyStringToDecimal(string input)
         {
@@ -14163,6 +14484,12 @@ where cl.enquiryId='" + InquiryID + "' and cl.sampleID='" + sampleidID + "'";
             dt = GetDataUsingQuery(sQuery);
             return dt;
         }
+        public DataTable GetCurrencyDetails(string currencyCode)
+        {
+            sQuery = "Select * from Currency where currencyCode='" + currencyCode + "'";
+            dt = GetDataUsingQuery(sQuery);
+            return dt;
+        }
         public DataTable GetVQ(string EnquiryID, string VendorID)
         {
             if (string.IsNullOrEmpty(VendorID))
@@ -14220,9 +14547,7 @@ where cl.enquiryId='" + InquiryID + "' and cl.sampleID='" + sampleidID + "'";
         }
         public DataTable getPOVendor()
         {
-            sQuery = @"SELECT DISTINCT v.vendorID,VendorName,
-                           po.PurchaseOrderID,
-                           po.PONumber
+            sQuery = @"SELECT DISTINCT v.vendorID,VendorName
                     FROM PurchaseOrder po
                     INNER JOIN TransactionMaster t ON t.PurchaseOrderID = po.PurchaseOrderID
                     INNER JOIN VendorDetails v on v.VendorID = po.VendorID
@@ -14230,7 +14555,8 @@ where cl.enquiryId='" + InquiryID + "' and cl.sampleID='" + sampleidID + "'";
                         SELECT CAST(value AS INT)
                         FROM InvoiceAP
                         CROSS APPLY STRING_SPLIT(GRNID, ',')
-                        WHERE GRNID IS NOT NULL) and t.GRNStatus=13";
+                        WHERE GRNID IS NOT NULL) and t.GRNStatus=13
+                        order by VendorName asc";
             dt = GetDataUsingQuery(sQuery);
             return dt;
         }
@@ -14480,7 +14806,7 @@ where cl.enquiryId='" + InquiryID + "' and cl.sampleID='" + sampleidID + "'";
                  left join PurchaseGroup pg on pg.PurchaseGroupID=psg.PurchaseGroupID 
                  left join StockFPU s on s.itemcode=i.ItemCode
                  inner JOIN EmployeeDepartment d ON d.EmployeeDepartmentID = pr.DepartmentID
-                 where pd.StatusID=1013 and pg.isActive=1 and pg.IsDisabled =0 and psg.isactive = 1 
+                 where pd.StatusID in(1013,1015) and pg.isActive=1 and pg.IsDisabled =0 and psg.isactive = 1 
                  and psg.IsDisabled =0 
                  ORDER BY
                     pr.RequestDate DESC, pd.PurchaseRequisitionID DESC
@@ -18902,6 +19228,14 @@ WHERE ad.InquiryID  = '" + InquiryID + "'ORDER BY cf.WorkOrderNumber, sampleIDSe
             dt = GetDataUsingQuery(sQuery);
             return dt;
         }
+        public DataTable GetPaymentRequisitionMaster(int PaymentRequisitionID)
+        {
+            sQuery = @"SELECT distinct dm.PaymentRequisitionID,dm.RequisitionNumber,TotalAmount,AmountPaid 
+                        FROM PaymentRequisitionMaster dm 
+                        where dm.PaymentRequisitionID = " + PaymentRequisitionID;
+            dt = GetDataUsingQuery(sQuery);
+            return dt;
+        }
         public DataTable GetPaymentRequisitionFileUpload(string PaymentRequisitionID)
         {
             sQuery = @"select * from PaymentRequisitionFileUpload
@@ -19564,6 +19898,13 @@ ReceiptDate =@ReceiptDate,
         {
             DataTable dt = new DataTable();
             string sQuery = @"select * from ChartOfAccountsDetail where AccountID=" + accountID;
+            dt = GetDataUsingQuery(sQuery);
+            return dt;
+        }
+		public DataTable GetCOAAccountDetails(string accountName)
+        {
+            DataTable dt = new DataTable();
+            string sQuery = @"select * from ChartOfAccountsDetail where AccountNameEng='" + accountName + "'";
             dt = GetDataUsingQuery(sQuery);
             return dt;
         }
@@ -20561,12 +20902,14 @@ ReceiptDate =@ReceiptDate,
         public DataTable GetPIHeader(int PIInvoiceID)//Purchase InvoiceID
         {
             DataTable dt = new DataTable();
-            string sQuery = @"select v.VendorName, ap.InvoiceDate,ap.PINumber, po.PurchaseOrderID,
-                                po.PONumber,ap.currencyCode,c.CurrencyName
-                                from InvoiceAP ap 
+            string sQuery = @"select v.VendorName,v.PanNumber, ap.InvoiceDate,ap.PINumber, po.PurchaseOrderID,
+                                po.PONumber,ap.currencyCode,c.CurrencyName,VendorTaxInvoiceNumber,InvoiceNumber,
+                                EmployeeName,DesignationName from InvoiceAP ap 
                                 inner join PurchaseOrder po on ap.PurchaseOrderID = po.PurchaseOrderID
 								inner join VendorDetails v on v.VendorID = po.VendorID
 								left join Currency c on c.CurrencyCode = ap.CurrencyCode
+                                inner join Employees e on e.ID = ap.CreatedBy
+                                inner join designation d on d.DesignationID=e.DesignationID
                                 where ap.InvoiceId=" + PIInvoiceID;
             dt = GetDataUsingQuery(sQuery);
             return dt;
@@ -22282,6 +22625,29 @@ ISNULL(ad.CountryDestination,'') AS CountryDestination,
 
             return dt;
         }
+        public DataTable GetPREnquiryQuotePOPending(string PendingType)
+        {
+            DataTable dt = new DataTable();
+
+            using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["CM"].ConnectionString))
+            {
+                using (SqlCommand cmd = new SqlCommand("usp_GetPREnquiryQuotePOReport", con))
+                {
+                    con.Open();
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    // ✅ Handle NULL properly
+                    cmd.Parameters.AddWithValue("@PendingType", PendingType);
+
+                    using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                    {
+                        da.Fill(dt);
+                    }
+                }
+            }
+
+            return dt;
+        }
         public DataTable GetPaymentRequisitionList(DAL.CM obj)
         {
             DataTable dt = new DataTable();
@@ -23269,6 +23635,103 @@ INNER join ReportFormat rf on rf.ReportFormatID = ci.ReportFormat
             }
             return dt;
         }
+        public void CreatePRApproval(int PRID, int EmployeeID)
+        {
+            DataTable dtHierarchy = BindApprovalHierarchy(EmployeeID);
+
+            if (dtHierarchy == null || dtHierarchy.Rows.Count <= 1)
+                return;
+
+            foreach (DataRow row in dtHierarchy.Rows)
+            {
+                int hierarchyLevel = Convert.ToInt32(row["ApprovalLevel"]);
+
+                // Skip requester
+                if (hierarchyLevel == 0)
+                    continue;
+
+                int approvalLevel;
+
+                // First two reporting levels remain unchanged
+                if (hierarchyLevel <= 2)
+                {
+                    approvalLevel = hierarchyLevel;
+                }
+                else
+                {
+                    // Reserve Level 3 for functional-manager selection
+                    approvalLevel = hierarchyLevel + 1;
+                }
+
+                int status = approvalLevel == 1 ? 1 : 0;
+
+                int approverID = Convert.ToInt32(row["ID"]);
+
+                string sql = @"
+            INSERT INTO PRApproval
+            (
+                PRID,
+                ApprovalLevel,
+                ApproverID,
+                Status,
+                CreatedDate
+            )
+            VALUES
+            (
+                @PRID,
+                @ApprovalLevel,
+                @ApproverID,
+                @Status,
+                GETDATE()
+            )";
+
+                using (SqlConnection con = new SqlConnection(cs))
+                using (SqlCommand cmd = new SqlCommand(sql, con))
+                {
+                    cmd.Parameters.Add("@PRID", SqlDbType.Int).Value = PRID;
+                    cmd.Parameters.Add("@ApprovalLevel", SqlDbType.Int).Value = approvalLevel;
+                    cmd.Parameters.Add("@ApproverID", SqlDbType.Int).Value = approverID;
+                    cmd.Parameters.Add("@Status", SqlDbType.Int).Value = status;
+
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+                }
+            }
+
+            // Create Level 3 routing placeholder only
+            // if there is a Level 2 manager.
+            bool hasLevel2 = dtHierarchy.AsEnumerable()
+                .Any(r => Convert.ToInt32(r["ApprovalLevel"]) == 2);
+
+            if (hasLevel2)
+            {
+                string sql = @"
+            INSERT INTO PRApproval
+            (
+                PRID,
+                ApprovalLevel,
+                ApproverID,
+                Status,
+                CreatedDate
+            )
+            VALUES
+            (
+                @PRID,
+                3,
+                NULL,
+                0,
+                GETDATE())";
+
+                using (SqlConnection con = new SqlConnection(cs))
+                using (SqlCommand cmd = new SqlCommand(sql, con))
+                {
+                    cmd.Parameters.Add("@PRID", SqlDbType.Int).Value = PRID;
+
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
         public void UpdateHighestApproval(DAL.CM obj)
         {
             string sql = @"
@@ -23292,6 +23755,395 @@ INNER join ReportFormat rf on rf.ReportFormatID = ci.ReportFormat
                     _sCon.Close();
                 }
             }
+        }
+        private string GenerateTemporaryPassword()
+        {
+            const string chars =
+                "ABCDEFGHJKLMNPQRSTUVWXYZ" +
+                "abcdefghijkmnopqrstuvwxyz" +
+                "23456789@#$%";
+
+            char[] password = new char[12];
+
+            using (RandomNumberGenerator rng = RandomNumberGenerator.Create())
+            {
+                byte[] bytes = new byte[12];
+                rng.GetBytes(bytes);
+
+                for (int i = 0; i < password.Length; i++)
+                {
+                    password[i] = chars[bytes[i] % chars.Length];
+                }
+            }
+
+            return new string(password);
+        }
+        private bool IsValidEmail(string email)
+        {
+            if (string.IsNullOrWhiteSpace(email))
+                return false;
+
+            try
+            {
+                MailAddress address = new MailAddress(email);
+
+                return address.Address.Equals(
+                    email,
+                    StringComparison.OrdinalIgnoreCase);
+            }
+            catch
+            {
+                return false;
+            }
+        }
+        private void SendTemporaryPasswordEmail(
+                    string email,
+                    string username,
+                    string temporaryPassword)
+        {
+            string FromAddress = "jinitha.s@rni-solutions.com";
+
+            string Subject = "RNI ERP - Temporary Password";
+
+            StringBuilder Body = new StringBuilder();
+            DAL.mailer objEmail = new DAL.mailer();
+            string body = string.Empty;
+            using (StreamReader reader = new StreamReader(HttpContext.Current.Server.MapPath("~/ForgotPassword.html")))
+            {
+                body = reader.ReadToEnd();
+            }
+            body = body.Replace("{username}", username);
+            body = body.Replace("{temporaryPassword}", temporaryPassword);
+
+            objEmail.SendMail(FromAddress, email, Subject, body);
+
+        }
+        private string HashPassword(string password)
+        {
+            byte[] salt = new byte[16];
+
+            using (RandomNumberGenerator rng =
+                RandomNumberGenerator.Create())
+            {
+                rng.GetBytes(salt);
+            }
+
+            using (var pbkdf2 = new Rfc2898DeriveBytes(
+                password,
+                salt,
+                100000,
+                HashAlgorithmName.SHA256))
+            {
+                byte[] hash = pbkdf2.GetBytes(32);
+
+                return Convert.ToBase64String(salt)
+                     + ":"
+                     + Convert.ToBase64String(hash);
+            }
+        }
+        public string ResetPassword(string username)
+        {
+            if (string.IsNullOrWhiteSpace(username))
+                return "Please enter a username.";
+
+            string email = "";
+            string dbUsername = "";
+            int employeeId;
+
+            // Generate a temporary password
+            string temporaryPassword = GenerateTemporaryPassword();
+
+            using (SqlConnection con = new SqlConnection(
+                System.Configuration.ConfigurationManager
+                .ConnectionStrings["CM"].ConnectionString))
+            {
+                con.Open();
+
+                string sql = @"
+            SELECT 
+                u.Username,
+                u.EmployeeID,
+                e.Email
+            FROM Users u
+            LEFT JOIN Employees e 
+                ON e.ID = u.EmployeeID
+            WHERE u.Username = @Username";
+
+                using (SqlCommand cmd = new SqlCommand(sql, con))
+                {
+                    cmd.Parameters.Add("@Username", SqlDbType.VarChar, 100)
+                                  .Value = username.Trim();
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        if (!dr.Read())
+                        {
+                            return "Username does not exist.";
+                        }
+
+                        dbUsername = dr["Username"].ToString();
+                        employeeId = Convert.ToInt32(dr["EmployeeID"]);
+
+                        if (dr["Email"] == DBNull.Value)
+                        {
+                            return "No email address is registered for this user.";
+                        }
+
+                        email = dr["Email"].ToString().Trim();
+                    }
+                }
+
+                // Validate email
+                if (!IsValidEmail(email))
+                {
+                    return "The email address registered for this user is invalid.";
+                }
+
+                // Hash the password before storing it
+                string passwordHash = temporaryPassword;// HashPassword(temporaryPassword);
+
+                string updateSql = @"
+            UPDATE Users
+            SET Password = @Password,
+                PasswordResetRequired = 1
+            WHERE Username = @Username";
+
+                using (SqlCommand cmd = new SqlCommand(updateSql, con))
+                {
+                    cmd.Parameters.Add("@Password", SqlDbType.VarChar, 500)
+                                  .Value = passwordHash;
+
+                    cmd.Parameters.Add("@Username", SqlDbType.VarChar, 100)
+                                  .Value = dbUsername;
+
+                    int rows = cmd.ExecuteNonQuery();
+
+                    if (rows == 0)
+                    {
+                        return "Unable to reset password.";
+                    }
+                }
+            }
+
+            // Send email only after successful database update
+            SendTemporaryPasswordEmail(
+                email,
+                dbUsername,
+                temporaryPassword);
+
+            return "A temporary password has been sent to the registered email address.";
+        }
+        public string GetCurrencySymbol(int currencyId)
+        {
+            try
+            {
+                DataTable dt = GetCurrencyDetails(currencyId);
+
+                if (dt != null && dt.Rows.Count > 0)
+                {
+                    DataRow row = dt.Rows[0];
+                    string currencyCode = row["CurrencyCode"].ToString();
+
+                    return $"{currencyCode}";
+                }
+
+                return $"Currency {currencyId}";
+            }
+            catch (Exception ex)
+            {
+                // Log the error
+                return $"Error retrieving currency: {currencyId}";
+            }
+        }
+        public string FormatCurrency(decimal amount, int currencyId)
+        {
+            string selectedCurrency = GetCurrencySymbol(currencyId)?.ToUpper();
+            if (string.IsNullOrEmpty(selectedCurrency))
+                return amount.ToString("N2");
+
+            switch (selectedCurrency)
+            {
+                case "USD":
+                    return ToUSD(amount);
+                case "IDR":
+                    return ToIDR(amount);
+                case "CNY":
+                    return ToCNY(amount);
+                default:
+                    return amount.ToString("N2");
+            }
+        }
+        public string FormatCurrency(decimal amount, string currencyCode)
+        {
+            switch (currencyCode)
+            {
+                case "USD":
+                    return ToUSD(amount);
+                case "IDR":
+                    return ToIDR(amount);
+                case "CNY":
+                    return ToCNY(amount);
+                default:
+                    return amount.ToString("N2");
+            }
+        }
+        public string ToCNY(decimal amount)
+        {
+            CultureInfo cnyCulture = new CultureInfo("zh-CN");
+            return string.Format(cnyCulture, "{0:C}", amount);
+        }
+        public decimal ExtractNumericValueFromCurrency(string currencyText, int currencyId)
+        {
+            if (string.IsNullOrEmpty(currencyText))
+                return 0;
+            try
+            {
+                string currencyCode = GetCurrencySymbol(currencyId)?.ToUpper();
+
+                switch (currencyCode)
+                {
+                    case "IDR":
+                        // Indonesian Rupiah format: "Rp 8.080.800"
+                        return ExtractIDRValue(currencyText);
+
+                    case "USD":
+                        // US Dollar format: "$8,080.80"
+                        return ExtractUSDValue(currencyText);
+
+                    case "CNY":
+
+                        return ExtractCNYValue(currencyText);
+
+                    default:
+                        // Generic extraction for unknown currencies
+                        return ExtractGenericValue(currencyText);
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Error extracting currency value: {ex.Message}");
+                return 0;
+            }
+        }
+        public decimal ExtractNumericValueFromCurrency(string currencyText, string currencyCode)
+        {
+            if (string.IsNullOrEmpty(currencyText))
+                return 0;
+            try
+            {
+                switch (currencyCode)
+                {
+                    case "IDR":
+                        // Indonesian Rupiah format: "Rp 8.080.800"
+                        return ExtractIDRValue(currencyText);
+
+                    case "USD":
+                        // US Dollar format: "$8,080.80"
+                        return ExtractUSDValue(currencyText);
+
+                    case "CNY":
+                        return ExtractCNYValue(currencyText);
+
+                    default:
+                        // Generic extraction for unknown currencies
+                        return ExtractGenericValue(currencyText);
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Error extracting currency value: {ex.Message}");
+                return 0;
+            }
+        }
+        public decimal ExtractIDRValue(string currencyText)
+        {
+            // Remove "Rp" and spaces, then handle Indonesian number format
+            string cleaned = currencyText
+                .Replace("Rp", "")
+                .Replace("\u00A0", "") // Non-breaking space
+                .Replace(" ", "")
+                .Trim();
+
+            if (cleaned.Contains(","))
+            {
+                // Has decimal part
+                string[] parts = cleaned.Split(',');
+                if (parts.Length == 2)
+                {
+                    string wholePart = parts[0].Replace(".", "");
+                    string decimalPart = parts[1];
+
+                    if (decimal.TryParse($"{wholePart}.{decimalPart}", NumberStyles.Number, CultureInfo.InvariantCulture, out decimal result))
+                        return result;
+                }
+            }
+            else
+            {
+                // No decimal part, just remove dots (thousand separators)
+                string wholePart = cleaned.Replace(".", "");
+                if (decimal.TryParse(wholePart, NumberStyles.Number, CultureInfo.InvariantCulture, out decimal result))
+                    return result;
+            }
+
+            return 0;
+        }
+        public decimal ExtractUSDValue(string currencyText)
+        {
+            // Remove "$" and parse using US culture
+            string cleaned = currencyText
+                .Replace("$", "")
+                .Replace("\u00A0", "") // Non-breaking space
+                .Replace(" ", "")
+                .Trim();
+
+            if (decimal.TryParse(cleaned, NumberStyles.Currency, new CultureInfo("en-US"), out decimal result))
+                return result;
+
+            return 0;
+        }
+        public decimal ExtractCNYValue(string currencyText)
+        {
+            // Remove "¥" or "CN¥" and parse
+            string cleaned = currencyText
+                .Replace("CN¥", "")
+                .Replace("¥", "")
+                .Replace("\u00A0", "") // Non-breaking space
+                .Replace(" ", "")
+                .Trim();
+
+            if (decimal.TryParse(cleaned, NumberStyles.Currency, new CultureInfo("zh-CN"), out decimal result))
+                return result;
+
+            return 0;
+        }
+        public decimal ExtractGenericValue(string currencyText)
+        {
+            // Generic extraction - remove common currency symbols and formatting
+            string cleaned = currencyText;
+
+            // Remove common currency symbols
+            string[] currencySymbols = { "Rp", "$", "¥", "€", "£", "₹", "CN¥", "US$" };
+            foreach (string symbol in currencySymbols)
+            {
+                cleaned = cleaned.Replace(symbol, "");
+            }
+
+            // Remove spaces and non-breaking spaces
+            cleaned = cleaned.Replace("\u00A0", "").Replace(" ", "").Trim();
+
+            // Try parsing with invariant culture first
+            if (decimal.TryParse(cleaned.Replace(",", "").Replace(".", ""), NumberStyles.Number, CultureInfo.InvariantCulture, out decimal result1))
+            {
+                return result1 / 100; // Assume last two digits are decimal places
+            }
+
+            // Try parsing as-is with invariant culture
+            if (decimal.TryParse(cleaned, NumberStyles.Number, CultureInfo.InvariantCulture, out decimal result2))
+            {
+                return result2;
+            }
+
+            return 0;
         }
     }
 }

@@ -358,6 +358,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AccessDenied.aspx" />
     <Content Include="AccessRights.aspx" />
     <Content Include="AccountsPayable.aspx" />
     <Content Include="AdditionalTestingOnPinsEquippedWithInsulatingSheaths.aspx" />
@@ -380,6 +381,7 @@
     <Content Include="bin\Syncfusion.Pdf.NET.dll" />
     <Content Include="bin\Syncfusion.PdfToImageConverter.NET.dll" />
     <Content Include="bin\Syncfusion.SkiaSharpHelper.NET.dll" />
+    <Content Include="BookingFormReport_Textile.html" />
     <Content Include="CalassificationLampFittingTypeTest.aspx" />
     <Content Include="ClassificationLampFittingSupervisionTest.aspx" />
     <Content Include="ClassificationLampFittingVarianceTest.aspx" />
@@ -401,9 +403,13 @@
     <Content Include="CreateRequestCloneFM_PhysicalSoftline.aspx" />
     <Content Include="CreateRequestCloneFM_ToyAndBabyWear.aspx" />
     <Content Include="CreateRequestCustomerFM_Battery.aspx" />
+    <Content Include="CreateRequestCustomerFM_IAT.aspx" />
     <Content Include="CreateRequestCustomerFM_PhysicalSoftline.aspx" />
+    <Content Include="CreateRequestCustomerFM_Textile.aspx" />
     <Content Include="CreateRequestCustomerFM_ToyAndBabyWear.aspx" />
     <Content Include="CustomerFMN_Battery.aspx" />
+    <Content Include="CustomerFMN_IAT.aspx" />
+    <Content Include="CustomerFMN_IAT_Textile.aspx" />
     <Content Include="CustomerFMN_PhysicalSoftline.aspx" />
     <Content Include="CustomerFMN_ToyAndBabyWear.aspx" />
     <Content Include="CustomerLedger.aspx" />
@@ -431,6 +437,9 @@
     <Content Include="FireDangerTypeTestConduit.aspx" />
     <Content Include="FireDangerVerificationTestConduit.aspx" />
     <Content Include="FlexibleCablesAndTheirConnections.aspx" />
+    <Content Include="ForgotPassword.aspx" />
+    <Content Include="ForgotPassword.html" />
+    <Content Include="ForgotPassword1.aspx" />
     <Content Include="generatePurchaseInvoice.aspx" />
     <Content Include="GenerateTestAllocation_Battery.aspx" />
     <Content Include="GenerateTestAllocation_PhysicalSoftline.aspx" />
@@ -441,6 +450,7 @@
     <Content Include="Global.asax" />
     <Content Include="HTMLToPDF.aspx" />
     <Content Include="htmltopdf.js" />
+    <Content Include="InspectionRequestReport_IAT.html" />
     <Content Include="InsulationResistanceAndElectricStrength.aspx" />
     <Content Include="InsulationResistanceAndElectricStrengthSupervisionTest.aspx" />
     <Content Include="InsulationResistanceAndElectricStrengthSwitchSupervisionTest.aspx" />
@@ -481,6 +491,7 @@
     <Content Include="PRToPOTracking.aspx" />
     <Content Include="PurchaseGroupManagement.aspx" />
     <Content Include="PurchaseInvoice.html" />
+    <Content Include="PurchaseRequisitionFormNew.aspx" />
     <Content Include="QualityRequirementsLampFittingSupervisionTest.aspx" />
     <Content Include="QualityRequirementsLampFittingTypeTest.aspx" />
     <Content Include="QualityRequirementsLampFittingVarianceTest.aspx" />
@@ -2228,7 +2239,9 @@
     <Content Include="QuotationCalib.aspx" />
     <Content Include="QuotationCalib.html" />
     <Content Include="QuotationCalibEditPage.aspx" />
+    <Content Include="ReportingHierarchy.aspx" />
     <Content Include="ReportPaymentRequisitionList.aspx" />
+    <Content Include="ReportProcurementTracker.aspx" />
     <Content Include="ReportPurchaseRequisitionList.aspx" />
     <Content Include="ReportRevisionDelete.aspx" />
     <Content Include="ReportRevisionDeleteSelect.aspx" />
@@ -7366,6 +7379,13 @@
     <Content Include="WebMaster.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccessDenied.aspx.cs">
+      <DependentUpon>AccessDenied.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AccessDenied.aspx.designer.cs">
+      <DependentUpon>AccessDenied.aspx</DependentUpon>
+    </Compile>
     <Compile Include="AccessRights.aspx.cs">
       <DependentUpon>AccessRights.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -7559,12 +7579,26 @@
     <Compile Include="CreateRequestCustomerFM_Battery.aspx.designer.cs">
       <DependentUpon>CreateRequestCustomerFM_Battery.aspx</DependentUpon>
     </Compile>
+    <Compile Include="CreateRequestCustomerFM_IAT.aspx.cs">
+      <DependentUpon>CreateRequestCustomerFM_IAT.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CreateRequestCustomerFM_IAT.aspx.designer.cs">
+      <DependentUpon>CreateRequestCustomerFM_IAT.aspx</DependentUpon>
+    </Compile>
     <Compile Include="CreateRequestCustomerFM_PhysicalSoftline.aspx.cs">
       <DependentUpon>CreateRequestCustomerFM_PhysicalSoftline.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="CreateRequestCustomerFM_PhysicalSoftline.aspx.designer.cs">
       <DependentUpon>CreateRequestCustomerFM_PhysicalSoftline.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CreateRequestCustomerFM_Textile.aspx.cs">
+      <DependentUpon>CreateRequestCustomerFM_Textile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CreateRequestCustomerFM_Textile.aspx.designer.cs">
+      <DependentUpon>CreateRequestCustomerFM_Textile.aspx</DependentUpon>
     </Compile>
     <Compile Include="CreateRequestCustomerFM_ToyAndBabyWear.aspx.cs">
       <DependentUpon>CreateRequestCustomerFM_ToyAndBabyWear.aspx</DependentUpon>
@@ -7579,6 +7613,20 @@
     </Compile>
     <Compile Include="CustomerFMN_Battery.aspx.designer.cs">
       <DependentUpon>CustomerFMN_Battery.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CustomerFMN_IAT.aspx.cs">
+      <DependentUpon>CustomerFMN_IAT.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CustomerFMN_IAT.aspx.designer.cs">
+      <DependentUpon>CustomerFMN_IAT.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CustomerFMN_IAT_Textile.aspx.cs">
+      <DependentUpon>CustomerFMN_IAT_Textile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CustomerFMN_IAT_Textile.aspx.designer.cs">
+      <DependentUpon>CustomerFMN_IAT_Textile.aspx</DependentUpon>
     </Compile>
     <Compile Include="CustomerFMN_PhysicalSoftline.aspx.cs">
       <DependentUpon>CustomerFMN_PhysicalSoftline.aspx</DependentUpon>
@@ -7610,6 +7658,8 @@
     </Compile>
     <Compile Include="CustomUserIdProvider.cs" />
     <Compile Include="DAL\E-MailCommunication.cs" />
+    <Compile Include="DAL\IAT.cs" />
+    <Compile Include="DAL\IATReportHelper.cs" />
     <Compile Include="DAL\Model.cs" />
     <Compile Include="DAL\PaymentRequisition.cs" />
     <Compile Include="BLL\PurchaseBLL.cs" />
@@ -7770,6 +7820,20 @@
     </Compile>
     <Compile Include="FlexibleCablesAndTheirConnections.aspx.designer.cs">
       <DependentUpon>FlexibleCablesAndTheirConnections.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ForgotPassword.aspx.cs">
+      <DependentUpon>ForgotPassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ForgotPassword.aspx.designer.cs">
+      <DependentUpon>ForgotPassword.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ForgotPassword1.aspx.cs">
+      <DependentUpon>ForgotPassword1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ForgotPassword1.aspx.designer.cs">
+      <DependentUpon>ForgotPassword1.aspx</DependentUpon>
     </Compile>
     <Compile Include="generatePurchaseInvoice.aspx.cs">
       <DependentUpon>generatePurchaseInvoice.aspx</DependentUpon>
@@ -8103,6 +8167,13 @@
     </Compile>
     <Compile Include="PurchaseGroupManagement.aspx.designer.cs">
       <DependentUpon>PurchaseGroupManagement.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PurchaseRequisitionFormNew.aspx.cs">
+      <DependentUpon>PurchaseRequisitionFormNew.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PurchaseRequisitionFormNew.aspx.designer.cs">
+      <DependentUpon>PurchaseRequisitionFormNew.aspx</DependentUpon>
     </Compile>
     <Compile Include="QualityRequirementsLampFittingSupervisionTest.aspx.cs">
       <DependentUpon>QualityRequirementsLampFittingSupervisionTest.aspx</DependentUpon>
@@ -10754,12 +10825,26 @@
     <Compile Include="QuotationCalibEditPage.aspx.designer.cs">
       <DependentUpon>QuotationCalibEditPage.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ReportingHierarchy.aspx.cs">
+      <DependentUpon>ReportingHierarchy.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ReportingHierarchy.aspx.designer.cs">
+      <DependentUpon>ReportingHierarchy.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ReportPaymentRequisitionList.aspx.cs">
       <DependentUpon>ReportPaymentRequisitionList.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="ReportPaymentRequisitionList.aspx.designer.cs">
       <DependentUpon>ReportPaymentRequisitionList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ReportProcurementTracker.aspx.cs">
+      <DependentUpon>ReportProcurementTracker.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ReportProcurementTracker.aspx.designer.cs">
+      <DependentUpon>ReportProcurementTracker.aspx</DependentUpon>
     </Compile>
     <Compile Include="ReportPurchaseRequisitionList.aspx.cs">
       <DependentUpon>ReportPurchaseRequisitionList.aspx</DependentUpon>

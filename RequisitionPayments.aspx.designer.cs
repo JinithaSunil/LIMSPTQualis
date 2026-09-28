@@ -24,6 +24,15 @@ namespace LIMS
         protected global::System.Web.UI.ScriptManager ScriptManager1;
 
         /// <summary>
+        /// radOption control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButtonList radOption;
+
+        /// <summary>
         /// txtDate control.
         /// </summary>
         /// <remarks>
@@ -87,6 +96,33 @@ namespace LIMS
         protected global::System.Web.UI.WebControls.HiddenField hdPaymentRequisitionID;
 
         /// <summary>
+        /// btnAdd control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnAdd;
+
+        /// <summary>
+        /// btnAddAll control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnAddAll;
+
+        /// <summary>
+        /// btnClear control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnClear;
+
+        /// <summary>
         /// txtTotalAmount control.
         /// </summary>
         /// <remarks>
@@ -105,31 +141,76 @@ namespace LIMS
         protected global::System.Web.UI.WebControls.TextBox txtAmountPaid;
 
         /// <summary>
-        /// txtAmount control.
+        /// txtPayAmount control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtAmount;
+        protected global::System.Web.UI.WebControls.TextBox txtPayAmount;
 
         /// <summary>
-        /// txtDifference control.
+        /// ddlBank control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDifference;
+        protected global::System.Web.UI.WebControls.DropDownList ddlBank;
 
         /// <summary>
-        /// txtBalance control.
+        /// ddlCOADr control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtBalance;
+        protected global::System.Web.UI.WebControls.DropDownList ddlCOADr;
+
+        /// <summary>
+        /// txtBalanceAmount control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtBalanceAmount;
+
+        /// <summary>
+        /// ddlCOACr control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlCOACr;
+
+        /// <summary>
+        /// btnSaveDraft control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSaveDraft;
+
+        /// <summary>
+        /// gvPaymentRequisitions control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvPaymentRequisitions;
+
+        /// <summary>
+        /// hdTotal control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdTotal;
 
         /// <summary>
         /// Label1 control.
@@ -150,15 +231,6 @@ namespace LIMS
         protected global::System.Web.UI.WebControls.Label lblMessage;
 
         /// <summary>
-        /// gvPaymentRequisition control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvPaymentRequisition;
-
-        /// <summary>
         /// txtNotes control.
         /// </summary>
         /// <remarks>
@@ -166,15 +238,6 @@ namespace LIMS
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtNotes;
-
-        /// <summary>
-        /// btnSaveDraft control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSaveDraft;
 
         /// <summary>
         /// btnSave control.

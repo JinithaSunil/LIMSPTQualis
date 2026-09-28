@@ -92,7 +92,10 @@ namespace LIMS
                 // Find controls
                 HyperLink hypEnquiryID = (HyperLink)e.Row.FindControl("hypEnquiryID");
                 Label lblVendors = (Label)e.Row.FindControl("lblVendors");
+                Label lblStatus = (Label)e.Row.FindControl("lblStatus");
                 HyperLink hypVendor = (HyperLink)e.Row.FindControl("hypVendor");
+                Button btnRelease = (e.Row.FindControl("btnRelease") as Button);
+
                 string VendorID = lblVendors.Text;
                 DataTable dtVendor = _cm.GetVendorReference(VendorID);
                 if (dtVendor.Rows.Count > 0)
@@ -100,7 +103,13 @@ namespace LIMS
                     string reference = dtVendor.Rows[0]["Reference"].ToString();
                     hypVendor.NavigateUrl = "EnquiryForm.aspx?Reference=" + reference + "&Enquiry=" + hypEnquiryID.Text;
                 }
-            }
+                switch (lblStatus.Text)
+                {
+                    case "New":
+                        btnRelease.Visible = true;
+                        break;
+                }
+                }
         }
         protected void btnNew_Click(object sender, EventArgs e)
         {
@@ -159,6 +168,9 @@ namespace LIMS
                 }
                 switch (lblStatus.Text)
                 {
+                    case "New":
+                        btnRelease.Visible = true;
+                        break;
                     case "Quotation Received"://2
                         if (hypVendor.Text == "0" || hypVendor.Text == "")
                         {
@@ -173,7 +185,7 @@ namespace LIMS
                             {
                                 hyRegerenate.Visible = true;
                                 btnResend.Visible = true;
-                                btnRelease.Visible = true;
+                               // btnRelease.Visible = true;
                             }
                         }
                         break;
@@ -203,7 +215,7 @@ namespace LIMS
                             {
                                 hyRegerenate.Visible = true;
                                 btnResend.Visible = true;
-                                btnRelease.Visible = true;
+                                //btnRelease.Visible = true;
                             }
                         }
                         break;
@@ -318,7 +330,10 @@ namespace LIMS
                 int rowIndex = int.Parse(e.CommandArgument.ToString());
                 Label lblEnquiryID = (Label)gvOtherEnquiry.Rows[rowIndex].FindControl("lblEnquiryID");
                 Label lblItemCode = (Label)gvOtherEnquiry.Rows[rowIndex].FindControl("lblItemCode");
+                HiddenField hdEnquiryDetailsID = (HiddenField)gvOtherEnquiry.Rows[rowIndex].FindControl("hdEnquiryDetailsID");
+
                 _cm.EnquiryID = Convert.ToInt32(lblEnquiryID.Text);
+                _cm.EnquiryDetailsID = Convert.ToInt32(hdEnquiryDetailsID.Value);
                 _cm.StatusID = 2;//Approve by Purchase
                 _cm.ItemCode = lblItemCode.Text;
                 try
@@ -333,7 +348,7 @@ namespace LIMS
                     {
                         _cm.Remarks = "Enquiry Released";
                     }
-                    _cm.UpdateEnquiryRelease(_cm);
+                   // _cm.UpdateEnquiryRelease(_cm);
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Item Released to Float!');", true);
 
                 }
@@ -648,6 +663,11 @@ namespace LIMS
                 }
 
             }
+        }
+
+        protected void btnPartialPOGenerated_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

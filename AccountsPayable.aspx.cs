@@ -31,7 +31,7 @@ namespace LIMS
         }
         private void Populate()
         {
-            DataTable dt = _cm.getPaymentTerms();
+            DataTable dt = _cm.getPurchasePaymentTerms();
             if (dt.Rows.Count > 0)
             {
                 ddlPaymentTerms.DataSource = dt;
@@ -98,6 +98,7 @@ namespace LIMS
                 if (ddlCurrency.SelectedIndex == 0) { flag = 1; ddlCurrency.BackColor = Color.LightPink; } else { ddlCurrency.BackColor = Color.Empty; }
                 if (flag == 0)
                 {
+                    if (Session["EmployeeID"] != null) { _ap.EmployeeID = Convert.ToInt32(Session["EmployeeID"]);  }
                     _ap.VendorID = int.Parse(ddlVendors.SelectedValue);
                     _ap.VendorTaxInvoiceNumber = txtVendorTaxInvoiceNumber.Text;
                     _ap.InvoiceNumber = txtInvoiceNumber.Text;
@@ -311,20 +312,7 @@ namespace LIMS
         {
             LoadInvoices();
         }
-        public string ToUSD(decimal amount)
-        {
-            // USD
-            CultureInfo usdCulture = new CultureInfo("en-US");
-            //return string.Format(usdCulture, "{0:C}", amount);// do not show curreny sybmol - aldiyan 2Feb26
-            return amount.ToString("N2", usdCulture);
-        }
-        public string ToIDR(decimal amount)
-        {
-            // IDR
-            CultureInfo rupiahCulture = new CultureInfo("id-ID");
-            //return string.Format(rupiahCulture, "{0:C}", amount); // do not show curreny sybmol - aldiyan 2Feb26
-            return amount.ToString("N2", rupiahCulture);
-        }
+        
         protected void btnAdd_Click(object sender, EventArgs e)
         {
             DataTable dt = new DataTable();
@@ -423,9 +411,9 @@ namespace LIMS
 
                 // Amount column
                 e.Row.Cells[8].Text =
-                    $"Rp {ToIDR(subTotal)}<br/>" +
-                    $"Rp {ToIDR(ppn)}<br/>" +
-                    $"<b>Rp {ToIDR(total)}</b>";
+                    $"Rp {_cm.ToAnyCurrency("IDR", subTotal)}<br/>" +
+                    $"Rp {_cm.ToAnyCurrency("IDR", ppn)}<br/>" +
+                    $"<b>Rp {_cm.ToAnyCurrency("IDR", total)}</b>";
 
                 e.Row.Cells[7].HorizontalAlign = HorizontalAlign.Right;
             }
@@ -437,6 +425,10 @@ namespace LIMS
             {
                 getPOList(ddlVendors.SelectedValue);
             }            
+        }
+        protected string ToIDR(decimal value)
+        {
+            return _cm.ToAnyCurrency("IDR", value);
         }
     }
 }

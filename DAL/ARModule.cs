@@ -37,6 +37,7 @@ namespace LIMS.DAL
         }
         string cs = ConfigurationManager.ConnectionStrings["CM"].ConnectionString;
         int _CustomerID; public int CustomerID { get { return _CustomerID; } set { _CustomerID = value; } }
+        int _EmployeeID; public int EmployeeID { get { return _EmployeeID; } set { _EmployeeID = value; } }
         DateTime _InvoiceDate; public DateTime InvoiceDate { get { return _InvoiceDate; } set { _InvoiceDate = value; } }
         DateTime _DueDate; public DateTime DueDate { get { return _DueDate; } set { _DueDate = value; } }
         string _CurrencyCode; public string CurrencyCode { get { return _CurrencyCode; } set { _CurrencyCode = value; } }
@@ -404,19 +405,23 @@ namespace LIMS.DAL
                 "TotalAmount," +
                 "Status," +
                 "InvoiceID," +
-                "AmountPaid) OUTPUT INSERTED.InvoiceARID VALUES (@CustomerId," +
+                "AmountPaid," +
+                "CreatedBy) OUTPUT INSERTED.InvoiceARID VALUES (@CustomerId," +
                 "@CurrencyCode," +
                 "@TotalAmount," +
                 "@Status," +
                 "@InvoiceID," +
-                "@AmountPaid)";
+                "@AmountPaid," +
+                "@CreatedBy)";
             SqlParameter[] param = {
                 new SqlParameter("@CustomerID", obj.CustomerID),
                 new SqlParameter("@CurrencyCode", obj.CurrencyCode),
                 new SqlParameter("@TotalAmount", obj.TotalAmount),
                 new SqlParameter("@Status", obj.Status),
                 new SqlParameter("@InvoiceID", obj.InvoiceID),
-                new SqlParameter("@AmountPaid", obj.AmountPaid) };
+                new SqlParameter("@AmountPaid", obj.AmountPaid),
+                new SqlParameter("@CreatedBy", obj.EmployeeID),
+            new SqlParameter("@InvoiceID", obj.InvoiceID)};
             int InvoiceARID = Convert.ToInt32(DbHelper.ExecuteInsertWithReturn(sql, param));
             return InvoiceARID.ToString();
         }

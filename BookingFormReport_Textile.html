@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Booking Form - {DocNo}</title>
+<style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 11pt;
+        color: #000;
+        margin: 0;
+        padding: 0;
+        background: #e5e5e5;
+    }
+
+    .page {
+        background: #fff;
+        width: 210mm;
+        min-height: 297mm;
+        margin: 12px auto;
+        padding: 18mm 16mm;
+        box-sizing: border-box;
+        box-shadow: 0 0 6px rgba(0,0,0,0.15);
+    }
+
+    .header { display: table; width: 100%; margin-bottom: 6px; }
+    .header .logo-cell { display: table-cell; width: 90px; vertical-align: middle; }
+    .header .logo-cell img { height: 60px; }
+    .header .text-cell { display: table-cell; vertical-align: middle; text-align: center; }
+    .header h1 { font-size: 14pt; margin: 0 0 2px 0; letter-spacing: 0.5px; }
+    .header .company { font-weight: bold; font-size: 11pt; }
+    .header .company-addr { font-size: 9pt; color: #333; }
+
+    .hr-thick { border: none; border-top: 3px solid #000; margin: 6px 0 14px 0; }
+
+    table.top-info { width: 100%; border-collapse: collapse; margin-bottom: 10px; font-size: 10.5pt; }
+    table.top-info td { padding: 2px 4px; }
+    table.top-info td.label { font-weight: bold; width: 22%; }
+
+    table.form-table { width: 100%; border-collapse: collapse; margin-bottom: 14px; font-size: 10.5pt; }
+    table.form-table td { border: 1px solid #000; padding: 6px 8px; vertical-align: top; }
+    table.form-table td.label { font-weight: bold; width: 22%; background: #fafafa; }
+    table.form-table td.label-sm { font-weight: bold; width: 14%; background: #fafafa; }
+
+    .section-title {
+        text-align: center;
+        font-weight: bold;
+        font-size: 10.5pt;
+        border: 1px solid #000;
+        border-bottom: none;
+        padding: 6px;
+        background: #fafafa;
+    }
+
+    .chk { display: inline-block; margin-right: 4px; white-space: nowrap; }
+    .chk-glyph { font-family: "Segoe UI Symbol", "Segoe UI", Arial, sans-serif; font-size: 12.5pt; vertical-align: -1px; }
+    .chk-label { font-size: 10.5pt; }
+    .chk-sep { display: inline-block; width: 22px; }
+
+    .footer {
+        margin-top: 18px;
+        padding-top: 6px;
+        border-top: 1px solid #000;
+        font-size: 8.5pt;
+        display: table;
+        width: 100%;
+    }
+    .footer .f-cell { display: table-cell; width: 33.33%; }
+    .footer .f-center { text-align: center; }
+    .footer .f-right { text-align: right; }
+
+    .remark-box { border: 1px solid #000; padding: 10px 12px; font-size: 9.5pt; margin-top: 10px; }
+    .remark-box ol { margin: 0; padding-left: 18px; }
+    .remark-box li { margin-bottom: 4px; }
+
+    table.tc-table { width: 100%; border-collapse: collapse; font-size: 9pt; margin-top: 8px; }
+    table.tc-table th, table.tc-table td { border: 1px solid #000; padding: 5px 7px; text-align: left; vertical-align: top; }
+    table.tc-table th { background: #fafafa; }
+    table.tc-table td.desc-col { width: 20%; font-weight: bold; }
+
+    @media print {
+        body { background: #fff; }
+        .page { margin: 0; box-shadow: none; page-break-after: always; }
+        .page:last-child { page-break-after: avoid; }
+    }
+</style>
+</head>
+<body>
+
+<!-- ============================== PAGE 1 ============================== -->
+<div class="page">
+
+    <div class="header">
+        <div class="text-cell">
+            <h1>Booking Form &ndash; Inspection Services</h1>
+            <div class="company">PT QUALIS INDONESIA</div>
+            <div class="company-addr">Jl. Pajajaran No.17 Kel. Gandasari, Kec. Jatiuwung, Tangerang, Banten 15137</div>
+            <div class="company-addr">Phone: (021) 55652583 &ndash; 55652586&nbsp;&nbsp;&nbsp;Fax.: (021) 55652489</div>
+        </div>
+        <div class="logo-cell"><img src="assets/img/logo.png" alt="PT Qualis Indonesia" /></div>
+
+    </div>
+    <hr class="hr-thick" />
+
+    <table class="top-info">
+        <tr><td class="label">Commodity</td><td>: {Commodity}</td></tr>
+        <tr><td class="label">Booking Form No.</td><td>: {BookingNo}</td></tr>
+        <tr><td class="label">Date</td><td>: {RequestDate}</td></tr>
+    </table>
+
+    <table class="form-table">
+        <tr>
+            <td class="label-sm">To</td>
+            <td>: PT Qualis Indonesia</td>
+            <td class="label-sm">Attn</td>
+            <td>: {Attn}</td>
+        </tr>
+        <tr>
+            <td class="label">Applicant (Company Name)</td>
+            <td colspan="3">{ApplicantName}</td>
+        </tr>
+        <tr>
+            <td class="label">Address</td>
+            <td colspan="3">{Address}</td>
+        </tr>
+        <tr>
+            <td class="label">Contact Person</td>
+            <td>{ContactPerson}</td>
+            <td class="label-sm">Tel / Fax</td>
+            <td>{Phone} / {Fax}</td>
+        </tr>
+        <tr>
+            <td class="label">Email</td>
+            <td colspan="3">{Email}</td>
+        </tr>
+        <tr>
+            <td class="label">Report Sent To</td>
+            <td>{ReportRecipientBoxes}</td>
+            <td class="label-sm">CC To</td>
+            <td>{CC}</td>
+        </tr>
+        <tr>
+            <td class="label">Invoice To</td>
+            <td>{InvoiceRecipientBoxes}</td>
+            <td class="label-sm">Email</td>
+            <td>{InvoiceEmail}</td>
+        </tr>
+        <tr>
+            <td class="label">Other Instructions<br/><span style="font-weight:normal; font-style:italic; font-size:9pt;">(Please specify)</span></td>
+            <td colspan="3">{OtherInstructions}</td>
+        </tr>
+        <tr>
+            <td class="label">Buyer Name</td>
+            <td>{BuyerName}</td>
+            <td class="label-sm">Country</td>
+            <td>{BuyerCountry}</td>
+        </tr>
+    </table>
+
+    <div class="section-title">Type of Services</div>
+    <table class="form-table" style="margin-top:0;">
+        <tr>
+            <td style="width:33%;">{Chk_IPI}</td>
+            <td style="width:33%;">{Chk_DPI}</td>
+            <td style="width:34%;">{Chk_FRI}</td>
+        </tr>
+        <tr>
+            <td>{Chk_LoadingSupervision}</td>
+            <td>{Chk_SampleSealing}</td>
+            <td>{Chk_ReInspection} {PreviousReportNo}</td>
+        </tr>
+        <tr>
+            <td>{Chk_FabricInspection}</td>
+            <td colspan="2">{Chk_Other} {OtherService}</td>
+        </tr>
+    </table>
+
+    <div class="section-title">Other Details</div>
+    <table class="form-table" style="margin-top:0;">
+        <tr>
+            <td class="label">Product Description</td>
+            <td colspan="3">{ProductDescription}</td>
+        </tr>
+        <tr>
+            <td class="label">Shipment Qty</td>
+            <td>{ShipmentQty}</td>
+            <td class="label-sm">Item / Style No.</td>
+            <td>{ItemStyleNo}</td>
+        </tr>
+        <tr>
+            <td class="label">% Ready</td>
+            <td>{PercentReady}</td>
+            <td class="label-sm">PO Number</td>
+            <td>{PONumber}</td>
+        </tr>
+        <tr>
+            <td class="label">Shipping Date</td>
+            <td colspan="3">{ShippingDate}</td>
+        </tr>
+    </table>
+
+    <div class="section-title">Reference Material Provided to Inspection Office</div>
+    <table class="form-table" style="margin-top:0;">
+        <tr>
+            <td colspan="3">{ReferenceYesBox} {ReferenceNoBox}</td>
+        </tr>
+        <tr>
+            <td>{Chk_RefApprovedSamples}</td>
+            <td>{Chk_RefProductSpec}</td>
+            <td>{Chk_RefDigitalImages}</td>
+        </tr>
+        <tr>
+            <td>{Chk_RefSwatchCard}</td>
+            <td>{Chk_RefPOCopy}</td>
+            <td>{Chk_RefPackingListInvoice}</td>
+        </tr>
+        <tr>
+            <td>{Chk_RefLCCopy}</td>
+            <td>{Chk_RefClientInstructionSheet}</td>
+            <td>{Chk_RefRoadMap}</td>
+        </tr>
+        <tr>
+            <td>{Chk_RefCertificate}</td>
+            <td>{Chk_RefConstructionDataForm}</td>
+            <td>{Chk_RefOther} {OtherReference}</td>
+        </tr>
+    </table>
+
+    <div class="footer">
+        <div class="f-cell">No.Dok: {DocNo}</div>
+        <div class="f-cell f-center">No.Revisi: {RevNo}</div>
+        <div class="f-cell f-right">Tgl Efektif: {EffectiveDate} &mdash; Page 1 of 3</div>
+    </div>
+</div>
+
+<!-- ============================== PAGE 2 ============================== -->
+<div class="page">
+
+    <div class="header">
+        <div class="text-cell">
+            <h1>Booking Form &ndash; Inspection Services</h1>
+            <div class="company">PT QUALIS INDONESIA</div>
+            <div class="company-addr">Jl. Pajajaran No.17 Kel. Gandasari, Kec. Jatiuwung, Tangerang, Banten 15137</div>
+            <div class="company-addr">Phone: (021) 55652583 &ndash; 55652586&nbsp;&nbsp;&nbsp;Fax.: (021) 55652489</div>
+        </div>
+        <div class="logo-cell"><img src="~\assets\img\logo.png" alt="PT Qualis Indonesia" /></div>
+
+    </div>
+    <hr class="hr-thick" />
+
+    <p style="font-style: italic; font-size: 9.5pt;">*) filled by officers</p>
+
+    <div class="section-title">Additional Requirement / Amendments</div>
+    <table class="form-table" style="margin-top:0;">
+        <tr>
+            <td class="label">Inspection Location</td>
+            <td colspan="3">{InspectionLocation}</td>
+        </tr>
+        <tr>
+            <td class="label">Factory / Supplier Name</td>
+            <td colspan="3">{FactorySupplierName}</td>
+        </tr>
+        <tr>
+            <td class="label">Address</td>
+            <td colspan="3">{FactoryAddress}</td>
+        </tr>
+        <tr>
+            <td class="label">Contact Person</td>
+            <td>{FactoryContactPerson}</td>
+            <td class="label-sm">Tel / Fax</td>
+            <td>{FactoryPhone} / {FactoryFax}</td>
+        </tr>
+        <tr>
+            <td class="label">Requested Inspection Date</td>
+            <td colspan="3">{RequestedInspectionDate}</td>
+        </tr>
+    </table>
+
+    <div class="remark-box">
+        <strong>Remark:</strong>
+        <ol>
+            <li>Inspection requests shall be made at least 5 working days prior to the scheduled date of inspection.</li>
+            <li>To make sure QUALIS receives the booking form, kindly follow up with a phone call.</li>
+            <li>Re-send this form to QUALIS for any amendment.</li>
+            <li>Make sure the goods are ready for inspection according to the client's requirement upon QUALIS's inspector(s) arrival, otherwise the inspection will be aborted and you will be required to absorb the abortive inspection fee of the agreed man-day rate &times; number of inspectors, plus any expenses incurred.</li>
+        </ol>
+    </div>
+
+    <div class="footer">
+        <div class="f-cell">No.Dok: {DocNo}</div>
+        <div class="f-cell f-center">No.Revisi: {RevNo}</div>
+        <div class="f-cell f-right">Tgl Efektif: {EffectiveDate} &mdash; Page 2 of 3</div>
+    </div>
+</div>
+
+<!-- ============================== PAGE 3 ============================== -->
+<div class="page">
+
+    <div class="header">
+        <div class="text-cell">
+            <h1>Booking Form &ndash; Inspection Services</h1>
+            <div class="company">PT QUALIS INDONESIA</div>
+            <div class="company-addr">Jl. Pajajaran No.17 Kel. Gandasari, Kec. Jatiuwung, Tangerang, Banten 15137</div>
+            <div class="company-addr">Phone: (021) 55652583 &ndash; 55652586&nbsp;&nbsp;&nbsp;Fax.: (021) 55652489</div>
+        </div>
+        <div class="logo-cell"><img src="assets/img/logo.png" alt="PT Qualis Indonesia" /></div>
+
+    </div>
+    <hr class="hr-thick" />
+
+    <h2 style="text-align:center; font-size:12pt;">Term and Conditions</h2>
+
+    <table class="tc-table">
+        <tr><th>Description</th><th>Definition/Conditions</th></tr>
+        <tr><td class="desc-col">Booking Lead Time</td><td>Inspection requests shall be made at least 5 working days prior to the scheduled date of inspection.</td></tr>
+        <tr><td class="desc-col">Pre-Shipment Inspection (PSI)</td><td>PSI (Final Random Inspection / FRI) is a random sampling inspection carried out when a shipment is 100% produced and at least 80% packed. It covers type identification, function, markings, quality/workmanship, quantity, packing, unit completeness, and compliance with the agreed specification.</td></tr>
+        <tr><td class="desc-col">Initial Production Inspection (IPI)</td><td>Conducted when up to 20% of the total order quantity is produced, normally at the start of the production cycle. Depending on the product and process, IPI may cover raw materials, partially completed products, and/or (as in PSI) finished products and packing. Production status is verified at this stage.</td></tr>
+        <tr><td class="desc-col">During Production Inspection (DPI)</td><td>Conducted when approximately 20%&ndash;40% of the total order quantity is produced, normally at the start of the production cycle. Depending on the product and process, DPI may cover raw materials, partially completed products, and/or (as in PSI) finished products and packing. Production status is verified at this stage.</td></tr>
+        <tr><td class="desc-col">Loading Supervision</td><td>The shipment lot is loaded into the container under supervision. Container condition, packing, quantity, and products loaded are checked to ensure correct, good-condition delivery.</td></tr>
+        <tr><td class="desc-col">Sample Sealing</td><td>Samples are randomly selected and sealed from a lot at a factory or other location by the inspector, for lab testing, customer reference, or other purposes. May be performed as part of an inspection or as a separate service.</td></tr>
+        <tr><td class="desc-col">Fabric Inspection</td><td>A systematic fabric evaluation (fabric checking) in which defects that could affect the quality of the final garment are visually identified.</td></tr>
+        <tr><td class="desc-col">Re-Inspection</td><td>The re-inspection quantity should be equal to or less than the quantity in the previous Final Inspection. Conducted when the reworked product is 100% produced and 100% packed, unless otherwise confirmed in writing by the client.</td></tr>
+        <tr><td class="desc-col">Man-day</td><td>8 working hours (09:00&ndash;18:00, including 1 hour for lunch, UTC+08:00), covering inspection, reporting, and/or travelling within a normal working day. Minimum charge: 1 man-day. Rate as agreed with the customer.</td></tr>
+        <tr><td class="desc-col">Travelling Time Charge</td><td>Applies if round-trip travelling time exceeds 4 hours. Rate: an extra 0.5 man-day for every additional 4 hours (round trip).</td></tr>
+        <tr><td class="desc-col">Travelling Expense</td><td>Cost of transportation, charged as per quotation.</td></tr>
+        <tr><td class="desc-col">Accommodation</td><td>Applies if travel is required the day before or after the inspection, or the inspection requires 2 or more days to complete. Charged as per quotation.</td></tr>
+        <tr><td class="desc-col">Postage</td><td>Postage for samples and document delivery as requested by the customer; collected on delivery.</td></tr>
+        <tr><td class="desc-col">Overtime</td><td>Hours worked outside normal working hours (09:00&ndash;18:00, UTC+08:00). Rate as agreed with the customer: man-hour = man-day rate / 8 hours &times; 1.5.</td></tr>
+        <tr><td class="desc-col">Working/Travelling on Holidays</td><td>Weekends and local public holidays. Saturday: 1.5&times; the agreed man-day rate. Sunday &amp; public holidays: 2&times; the agreed man-day rate.</td></tr>
+        <tr><td class="desc-col">Abortive Inspection Charge</td><td>QUALIS will abort an inspection, loading supervision, sample sealing, or other customized service on arrival if conditions do not meet the agreed requirements (e.g. goods not 100% produced/packed as required). QUALIS will wait up to 2 hours to contact the customer before aborting. Charge: man-day rate &times; number of inspectors, plus any expenses incurred.</td></tr>
+        <tr><td class="desc-col">Late Booking</td><td>For online bookings received after 12:00pm on the working day before the requested inspection date, inspection cannot be guaranteed and is subject to manpower availability. An administrative fee of USD 80 applies unless instructed otherwise by QUALIS.</td></tr>
+        <tr><td class="desc-col">Late Cancellation</td><td>For cancellation or rescheduling received after 12:00pm on the working day before the confirmed inspection date, an administrative fee of USD 80 applies unless instructed otherwise by QUALIS.</td></tr>
+        <tr><td class="desc-col">Document</td><td>Documents that are not provided will not be inspected. No conclusion can be made without sufficient documentation. Documents must be provided to QUALIS at least 3 days before the inspection date. Services are otherwise governed by QUALIS's standard procedures.</td></tr>
+        <tr><td class="desc-col">Liability</td><td>The customer must give written notice within 30 days of discovering the relevant facts, with supporting documentation. PT. QUALIS INDONESIA is not liable for direct or indirect loss or damage to the client or its representatives, except where liability is established by law &mdash; in which case liability is limited to the fees paid for the technical services concerned.</td></tr>
+        <tr><td class="desc-col">Confidentiality</td><td>PT. Qualis Indonesia ensures its personnel keep customer information confidential. If disclosure to the public domain is required, the customer will be informed and consent obtained, except as required under ISO/IEC 17020:2012 or by law.</td></tr>
+        <tr><td class="desc-col">Payment Terms</td><td>Inspection fees are payable in advance or as agreed with the customer; otherwise no schedule will be arranged.</td></tr>
+        <tr><td class="desc-col">Sample Storage Period</td><td>Approval samples (provided by customer): max. 6 months. Shipment samples (drawn by inspector): max. 6 months. Defective samples (drawn by inspector): max. 6 months. Or another retention period agreed with the customer.</td></tr>
+    </table>
+
+    <div class="footer">
+        <div class="f-cell">No.Dok: {DocNo}</div>
+        <div class="f-cell f-center">No.Revisi: {RevNo}</div>
+        <div class="f-cell f-right">Tgl Efektif: {EffectiveDate} &mdash; Page 3 of 3</div>
+    </div>
+</div>
+
+</body>
+</html>

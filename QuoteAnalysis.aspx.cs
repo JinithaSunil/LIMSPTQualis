@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LIMS.DAL;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
@@ -240,12 +241,11 @@ namespace LIMS
                 {
                     string statusId = row["StatusID"].ToString();
 
-                    if (statusId != "2") // Accepted
+                    if (statusId == "3")// Quotation accepted
                     {
                         hasAcceptedQuote = true;
                     }
-
-                    if (statusId != "2") // Not "Quote Received"
+                    if(statusId != "2" && statusId != "7") // Not "Quote Received"
                     {
                         allQuotesReceived = false;
                     }
@@ -294,7 +294,8 @@ namespace LIMS
                                 case "1": // Pending
                                     break;
 
-                                case "2": 
+                                case "2":
+                                case "7":
                                     if (!hasAcceptedQuote && allQuotesReceived)
                                     {
                                         btnAccept.Visible = true;
@@ -354,6 +355,7 @@ namespace LIMS
             if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
             {
                 decimal SubTotal = 0;
+                decimal AdditionalCharges = 0;
                 decimal VATAmount = 0;
                 decimal VAT = 0;
                 decimal GrandTotal = 0;
@@ -364,6 +366,8 @@ namespace LIMS
                 Button btnAccept = (Button)e.Item.FindControl("btnAccept");
                 Button btnGeneratePO = (Button)e.Item.FindControl("btnGeneratePO");
                 Label lblSubTotal = (Label)e.Item.FindControl("lblSubTotal");
+                Label lblAdditionalChargeDescription = (Label)e.Item.FindControl("lblAdditionalChargeDescription");
+                Label lblAdditionalCharges = (Label)e.Item.FindControl("lblAdditionalCharges");
                 Label lblVATAmount = (Label)e.Item.FindControl("lblVATAmount");
                 Label lblGrandTotal = (Label)e.Item.FindControl("lblGrandTotal");
                 Label lblPayment = (Label)e.Item.FindControl("lblPayment");
@@ -381,7 +385,7 @@ namespace LIMS
                     // Display currency symbol
                     if (lblCurrencyDisplay != null)
                     {
-                        lblCurrencyDisplay.Text = GetCurrencySymbol(currencyId);
+                        lblCurrencyDisplay.Text = _cm.GetCurrencySymbol(currencyId);
                     }
 
                     // Bind quote details
@@ -396,6 +400,10 @@ namespace LIMS
                             if (dr1["TotalAfterDiscount"] != DBNull.Value && dr1["TotalAfterDiscount"].ToString() != "")
                             {
                                 SubTotal += Convert.ToDecimal(dr1["TotalAfterDiscount"].ToString());
+                            }
+                            if (dr1["AdditionalCharges"] != DBNull.Value && dr1["AdditionalCharges"].ToString() != "")
+                            {
+                                AdditionalCharges = Convert.ToDecimal(dr1["AdditionalCharges"].ToString());
                             }
 
                             // Only calculate VAT if currencyId == 1(IDR)
@@ -415,23 +423,25 @@ namespace LIMS
                         // VAT & GrandTotal only if INR (currencyId=1)
                         if (currencyId == 1 && VAT > 0)
                         {
-                            VATAmount = (SubTotal * VAT) / 100;
-                            GrandTotal = SubTotal + VATAmount;
+                            VATAmount = ((SubTotal+AdditionalCharges) * VAT) / 100;
+                            GrandTotal = SubTotal + AdditionalCharges + VATAmount;
                         }
                         else
                         {
                             VATAmount = 0;
-                            GrandTotal = SubTotal;
+                            GrandTotal = SubTotal + AdditionalCharges;
                         }
 
                         // Set label values with currency formatting
                         int selectedCurrency = Session["SelectedCurrency"] != null ?
                             Convert.ToInt32(Session["SelectedCurrency"]) : 1;
-                        string currencySymbol = GetCurrencySymbol(selectedCurrency);
+                        string currencySymbol = _cm.GetCurrencySymbol(selectedCurrency);
 
-                        lblSubTotal.Text = FormatCurrency(SubTotal, currencyId);
-                        lblVATAmount.Text = (currencyId == 1) ? FormatCurrency(VATAmount, currencyId) : "-";
-                        lblGrandTotal.Text = FormatCurrency(GrandTotal, currencyId);
+                        lblSubTotal.Text = _cm.FormatCurrency(SubTotal, currencyId);
+                        lblAdditionalChargeDescription.Text= dtQuoteDetails.Rows[0]["AdditionalChargeDescription"].ToString();
+                        lblAdditionalCharges.Text = _cm.FormatCurrency(AdditionalCharges, currencyId);
+                        lblVATAmount.Text = (currencyId == 1) ? _cm.FormatCurrency(VATAmount, currencyId) : "-";
+                        lblGrandTotal.Text = _cm.FormatCurrency(GrandTotal, currencyId);
 
                         lblPayment.Text = dtQuoteDetails.Rows[0]["PaymentTerms"].ToString();
                         lblRemarks.Text = dtQuoteDetails.Rows[0]["Remarks"].ToString();
@@ -453,6 +463,7 @@ namespace LIMS
                                 btnGeneratePO.Visible = false;
                                 break;
                             case "2":
+                            case "7":
                                 btnAccept.Visible = true;
                                 btnGeneratePO.Visible = false;
                                 break;
@@ -474,62 +485,7 @@ namespace LIMS
                 }
             }
         }
-        public string FormatCurrency(decimal amount, int currencyId)
-        {
-            string selectedCurrency = GetCurrencySymbol(currencyId)?.ToUpper();
-            if (string.IsNullOrEmpty(selectedCurrency))
-                return amount.ToString("N2");
-
-            switch (selectedCurrency)
-            {
-                case "USD":
-                    return ToUSD(amount);
-                case "IDR":
-                    return ToIDR(amount);
-                case "CNY":
-                    return ToCNY(amount);
-                default:
-                    return amount.ToString("N2");
-            }
-        }
-        public string ToUSD(decimal amount)
-        {
-            CultureInfo usdCulture = new CultureInfo("en-US");
-            return string.Format(usdCulture, "{0:C}", amount);
-        }
-        public string ToIDR(decimal amount)
-        {
-            CultureInfo idrCulture = new CultureInfo("id-ID");
-            return string.Format(idrCulture, "{0:C}", amount);
-        }
-        public string ToCNY(decimal amount)
-        {
-            CultureInfo cnyCulture = new CultureInfo("zh-CN");
-            return string.Format(cnyCulture, "{0:C}", amount);
-        }
-        private string GetCurrencySymbol(int currencyId)
-        {
-            try
-            {
-                DataTable dt = _cm.GetCurrencyDetails(currencyId);
-
-                if (dt != null && dt.Rows.Count > 0)
-                {
-                    DataRow row = dt.Rows[0];
-                    string currencyCode = row["CurrencyCode"].ToString();
-
-                    return $"{currencyCode}";
-                }
-
-                return $"Currency {currencyId}";
-            }
-            catch (Exception ex)
-            {
-                // Log the error
-                return $"Error retrieving currency: {currencyId}";
-            }
-        }
-
+       
         private void CalculateRankings(string EnquiryID)
         {
             try
@@ -555,7 +511,7 @@ namespace LIMS
                             int currencyId = Convert.ToInt32(lblCurrencyId.Text);
 
                             // Extract numeric value from formatted currency
-                            decimal grandTotal = ExtractNumericValueFromCurrency(lblGrandTotal.Text, currencyId);
+                            decimal grandTotal = _cm.ExtractNumericValueFromCurrency(lblGrandTotal.Text, currencyId);
 
                             DataRow dr = dtRanking.NewRow();
                             dr["VendorID"] = vendorId;
@@ -696,131 +652,7 @@ namespace LIMS
                 }
             }
         }
-        private decimal ExtractNumericValueFromCurrency(string currencyText, int currencyId)
-        {
-            if (string.IsNullOrEmpty(currencyText))
-                return 0;
-
-            try
-            {
-                string currencyCode = GetCurrencySymbol(currencyId)?.ToUpper();
-
-                switch (currencyCode)
-                {
-                    case "IDR":
-                        // Indonesian Rupiah format: "Rp 8.080.800"
-                        return ExtractIDRValue(currencyText);
-
-                    case "USD":
-                        // US Dollar format: "$8,080.80"
-                        return ExtractUSDValue(currencyText);
-
-                    case "CNY":
-               
-                        return ExtractCNYValue(currencyText);
-
-                    default:
-                        // Generic extraction for unknown currencies
-                        return ExtractGenericValue(currencyText);
-                }
-            }
-            catch (Exception ex)
-            {
-                System.Diagnostics.Debug.WriteLine($"Error extracting currency value: {ex.Message}");
-                return 0;
-            }
-        }
-
-        private decimal ExtractIDRValue(string currencyText)
-        {
-            // Remove "Rp" and spaces, then handle Indonesian number format
-            string cleaned = currencyText
-                .Replace("Rp", "")
-                .Replace("\u00A0", "") // Non-breaking space
-                .Replace(" ", "")
-                .Trim();
-
-            if (cleaned.Contains(","))
-            {
-                // Has decimal part
-                string[] parts = cleaned.Split(',');
-                if (parts.Length == 2)
-                {
-                    string wholePart = parts[0].Replace(".", "");
-                    string decimalPart = parts[1];
-
-                    if (decimal.TryParse($"{wholePart}.{decimalPart}", NumberStyles.Number, CultureInfo.InvariantCulture, out decimal result))
-                        return result;
-                }
-            }
-            else
-            {
-                // No decimal part, just remove dots (thousand separators)
-                string wholePart = cleaned.Replace(".", "");
-                if (decimal.TryParse(wholePart, NumberStyles.Number, CultureInfo.InvariantCulture, out decimal result))
-                    return result;
-            }
-
-            return 0;
-        }
-        private decimal ExtractUSDValue(string currencyText)
-        {
-            // Remove "$" and parse using US culture
-            string cleaned = currencyText
-                .Replace("$", "")
-                .Replace("\u00A0", "") // Non-breaking space
-                .Replace(" ", "")
-                .Trim();
-
-            if (decimal.TryParse(cleaned, NumberStyles.Currency, new CultureInfo("en-US"), out decimal result))
-                return result;
-
-            return 0;
-        }
-        private decimal ExtractCNYValue(string currencyText)
-        {
-            // Remove "¥" or "CN¥" and parse
-            string cleaned = currencyText
-                .Replace("CN¥", "")
-                .Replace("¥", "")
-                .Replace("\u00A0", "") // Non-breaking space
-                .Replace(" ", "")
-                .Trim();
-
-            if (decimal.TryParse(cleaned, NumberStyles.Currency, new CultureInfo("zh-CN"), out decimal result))
-                return result;
-
-            return 0;
-        }
-        private decimal ExtractGenericValue(string currencyText)
-        {
-            // Generic extraction - remove common currency symbols and formatting
-            string cleaned = currencyText;
-
-            // Remove common currency symbols
-            string[] currencySymbols = { "Rp", "$", "¥", "€", "£", "₹", "CN¥", "US$" };
-            foreach (string symbol in currencySymbols)
-            {
-                cleaned = cleaned.Replace(symbol, "");
-            }
-
-            // Remove spaces and non-breaking spaces
-            cleaned = cleaned.Replace("\u00A0", "").Replace(" ", "").Trim();
-
-            // Try parsing with invariant culture first
-            if (decimal.TryParse(cleaned.Replace(",", "").Replace(".", ""), NumberStyles.Number, CultureInfo.InvariantCulture, out decimal result1))
-            {
-                return result1 / 100; // Assume last two digits are decimal places
-            }
-
-            // Try parsing as-is with invariant culture
-            if (decimal.TryParse(cleaned, NumberStyles.Number, CultureInfo.InvariantCulture, out decimal result2))
-            {
-                return result2;
-            }
-
-            return 0;
-        }
+       
         private DataTable GetQuoteDetails(int VendorID, string EnquiryID)
         {
             return _cm.GetVendorQuoteDetails(VendorID, EnquiryID);

@@ -252,7 +252,7 @@
                                     <div class="form-group">
                                         <div class="form-line">
                                             <label>Item Type</label>
-                                            <asp:DropDownList ID="ddlStoreType" runat="server" CssClass="form-control" OnSelectedIndexChanged="ddlStoreType_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
+                                            <asp:DropDownList ID="ddlStoreType" runat="server" CssClass="form-control"></asp:DropDownList>
                                             <asp:RequiredFieldValidator
                                                 ID="RequiredFieldValidator13"
                                                 runat="server"

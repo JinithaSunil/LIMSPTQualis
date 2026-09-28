@@ -438,15 +438,6 @@ namespace LIMS
         protected global::System.Web.UI.WebControls.TextBox txtLuminance;
 
         /// <summary>
-        /// clauseContainerT1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl clauseContainerT1;
-
-        /// <summary>
         /// txtProductTypeResult control.
         /// </summary>
         /// <remarks>

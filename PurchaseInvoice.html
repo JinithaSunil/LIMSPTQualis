@@ -171,9 +171,11 @@
                         </td>
                         <td>&nbsp;</td>
                         <td style="font-size: 22px; float: right;">
-                            PURCHASE INVOICE
+                            PURCHASE INVOICE <br />
+                        <span style="float:right; font-size:14px!important">No: {PINo}</span>
                         </td>
                     </tr>
+                   
                     <tr><td></td><td></td><td colspan="2" style="border-bottom: 4px solid #b34788"></td></tr>
                 </thead>
                 <tbody>
@@ -186,31 +188,38 @@
                     <tr><td colspan="4">&nbsp;</td></tr>
                     <tr><td colspan="4">&nbsp;</td></tr>
                     <tr>
-                        <td colspan="2">Vendor Name :{VendorName}</td>
-                        <td rowspan="4" colspan="2">
-                            <table>
+                        <td colspan="4">
+                            <table width="100%">
                                 <tr>
-                                    <td>Date:</td>
-                                    <td>{Date}</td>
+                                    <td>Vendor Name</td>
+                                    <td>: {VendorName}</td>
+                                    <td>Date</td>
+                                    <td>: {Date}</td>
                                 </tr>
                                 <tr>
-                                    <td>No. Purchase Invoice:</td>
-                                    <td>{PINo}</td>
+                                    <td>Vendor Invoice#</td>
+                                    <td>: {VendorInvoiceNumber}</td>
+                                    <td>No. Purchase Order</td>
+                                    <td>: {PONo}</td>
+                                </tr>
+
+                                <tr>
+                                    <td>Vendor TIN#</td>
+                                    <td>: {TIN}</td>
+                                    <td>No. Purchase Requisition</td>
+                                    <td>: {PRNo}</td>
                                 </tr>
                                 <tr>
-                                    <td>No. Purchase Order:</td>
-                                    <td>{PONo}</td>
-                                </tr>
-                                <tr>
-                                    <td>No. Purchase Requisition:</td>
-                                    <td>{PRNo}</td>
+                                    <td>No. Delivery Order</td>
+                                    <td>: {DeliveryOrder}{Documents}</td>
+                                   
                                 </tr>
                             </table>
                         </td>
+
+
                     </tr>
-                    <tr>
-                        <td colspan="4">No. Delivery Order:{DeliveryOrder}</td>
-                    </tr>
+                  
                     <tr><td>&nbsp;</td></tr>
                     <tr><td>&nbsp;</td></tr>
                     <tr>
@@ -221,7 +230,8 @@
                 <tfoot>
                     <tr>
                         <td colspan="4" style="text-align:center">
-                            <table width="100%" style="font-size:12px; text-align:center !important" class="tab1">
+                            {Approval}
+                            <!--<table width="100%" style="font-size:12px; text-align:center !important" class="tab1">
                                 <tr>
                                     <td>Created By:</td>
                                     <td>Authorized By:</td>
@@ -229,12 +239,12 @@
                                     <td>Receipt By:</td>
                                 </tr>
                                 <tr>
-                                    <td><br /><br /><br /><br /></td>
+                                    <td>{CreatedBy}<br /><br /><br /></td>
                                     <td><br /><br /><br /><br /></td>
                                     <td><br /><br /><br /><br /></td>
                                     <td><br /><br /><br /><br /></td>
                                 </tr>
-                            </table>
+                            </table>-->
                         </td>
                     </tr>
                 </tfoot>

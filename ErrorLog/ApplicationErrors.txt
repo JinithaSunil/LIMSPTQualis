@@ -113,3 +113,1202 @@ InnerException: System.Data.SqlClient.SqlException (0x80131904): There is alread
 ClientConnectionId:4a4894b5-c1be-4268-8773-574ba8d72a9e
 Error Number:2714,State:6,Class:16
 --------------------------------------------------
+Date: 9/3/2026 2:59:23 PM
+URL: http://localhost:41413/MetalCookware.aspx
+User: Anonymous
+Error: Exception of type 'System.Web.HttpUnhandledException' was thrown.
+StackTrace:    at System.Web.UI.Page.HandleError(Exception e)
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+   at System.Web.UI.Page.ProcessRequest(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+   at System.Web.UI.Page.ProcessRequest()
+   at System.Web.UI.Page.ProcessRequest(HttpContext context)
+   at ASP.metalcookware_aspx.ProcessRequest(HttpContext context) in c:\Users\JUPITER3\AppData\Local\Temp\Temporary ASP.NET Files\vs\17c02d5e\1336ec9d\App_Web_metalcookware.aspx.cdcab7d2.cqu6zd5x.0.cs:line 0
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.<>c__DisplayClass285_0.<ExecuteStepImpl>b__0()
+   at System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+InnerException: System.NullReferenceException: Object reference not set to an instance of an object.
+   at LIMS.MetalCookware.BindEquipmentCheckboxes() in D:\Projects\LIMSPTQualis\MetalCookware.aspx.cs:line 426
+   at LIMS.MetalCookware.Page_Load(Object sender, EventArgs e) in D:\Projects\LIMSPTQualis\MetalCookware.aspx.cs:line 41
+   at System.Web.UI.Control.OnLoad(EventArgs e)
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+--------------------------------------------------
+Date: 9/3/2026 3:01:22 PM
+URL: http://localhost:41413/MetalCookware.aspx?s=901&r=6422
+User: LabAnalyst_PS
+Error: Exception of type 'System.Web.HttpUnhandledException' was thrown.
+StackTrace:    at System.Web.UI.Page.HandleError(Exception e)
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+   at System.Web.UI.Page.ProcessRequest(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+   at System.Web.UI.Page.ProcessRequest()
+   at System.Web.UI.Page.ProcessRequest(HttpContext context)
+   at ASP.metalcookware_aspx.ProcessRequest(HttpContext context) in c:\Users\JUPITER3\AppData\Local\Temp\Temporary ASP.NET Files\vs\17c02d5e\1336ec9d\App_Web_metalcookware.aspx.cdcab7d2.cqu6zd5x.0.cs:line 0
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.<>c__DisplayClass285_0.<ExecuteStepImpl>b__0()
+   at System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+InnerException: System.Exception: File exists. Size=34049, ReadOnly=False, Path=D:\Projects\LIMSPTQualis\InputFiles\MetalCookwareTestRecord_1.docx
+   at LIMS.MetalCookware.btnSave_Click(Object sender, EventArgs e) in D:\Projects\LIMSPTQualis\MetalCookware.aspx.cs:line 963
+   at System.Web.UI.WebControls.Button.OnClick(EventArgs e)
+   at System.Web.UI.WebControls.Button.RaisePostBackEvent(String eventArgument)
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+--------------------------------------------------
+Date: 9/3/2026 3:13:03 PM
+URL: http://localhost:41413/MetalCookware.aspx
+User: Anonymous
+Error: Exception of type 'System.Web.HttpUnhandledException' was thrown.
+StackTrace:    at System.Web.UI.Page.HandleError(Exception e)
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+   at System.Web.UI.Page.ProcessRequest(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+   at System.Web.UI.Page.ProcessRequest()
+   at System.Web.UI.Page.ProcessRequest(HttpContext context)
+   at ASP.metalcookware_aspx.ProcessRequest(HttpContext context) in c:\Users\JUPITER3\AppData\Local\Temp\Temporary ASP.NET Files\vs\17c02d5e\1336ec9d\App_Web_metalcookware.aspx.cdcab7d2.gxebtg3o.0.cs:line 0
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.<>c__DisplayClass285_0.<ExecuteStepImpl>b__0()
+   at System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+InnerException: System.NullReferenceException: Object reference not set to an instance of an object.
+   at LIMS.MetalCookware.BindEquipmentCheckboxes() in D:\Projects\LIMSPTQualis\MetalCookware.aspx.cs:line 426
+   at LIMS.MetalCookware.Page_Load(Object sender, EventArgs e) in D:\Projects\LIMSPTQualis\MetalCookware.aspx.cs:line 41
+   at System.Web.UI.Control.OnLoad(EventArgs e)
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+--------------------------------------------------
+Date: 9/3/2026 3:19:36 PM
+URL: http://localhost:41413/MetalCookware.aspx
+User: Anonymous
+Error: Exception of type 'System.Web.HttpUnhandledException' was thrown.
+StackTrace:    at System.Web.UI.Page.HandleError(Exception e)
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+   at System.Web.UI.Page.ProcessRequest(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+   at System.Web.UI.Page.ProcessRequest()
+   at System.Web.UI.Page.ProcessRequest(HttpContext context)
+   at ASP.metalcookware_aspx.ProcessRequest(HttpContext context) in c:\Users\JUPITER3\AppData\Local\Temp\Temporary ASP.NET Files\vs\17c02d5e\1336ec9d\App_Web_metalcookware.aspx.cdcab7d2.pyycm3gi.0.cs:line 0
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.<>c__DisplayClass285_0.<ExecuteStepImpl>b__0()
+   at System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+InnerException: System.NullReferenceException: Object reference not set to an instance of an object.
+   at LIMS.MetalCookware.BindEquipmentCheckboxes() in D:\Projects\LIMSPTQualis\MetalCookware.aspx.cs:line 426
+   at LIMS.MetalCookware.Page_Load(Object sender, EventArgs e) in D:\Projects\LIMSPTQualis\MetalCookware.aspx.cs:line 41
+   at System.Web.UI.Control.OnLoad(EventArgs e)
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+--------------------------------------------------
+Date: 9/3/2026 3:24:34 PM
+URL: http://localhost:41413/MetalCookware.aspx
+User: Anonymous
+Error: Exception of type 'System.Web.HttpUnhandledException' was thrown.
+StackTrace:    at System.Web.UI.Page.HandleError(Exception e)
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+   at System.Web.UI.Page.ProcessRequest(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+   at System.Web.UI.Page.ProcessRequest()
+   at System.Web.UI.Page.ProcessRequest(HttpContext context)
+   at ASP.metalcookware_aspx.ProcessRequest(HttpContext context) in c:\Users\JUPITER3\AppData\Local\Temp\Temporary ASP.NET Files\vs\17c02d5e\1336ec9d\App_Web_metalcookware.aspx.cdcab7d2.2kx0m27e.0.cs:line 0
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.<>c__DisplayClass285_0.<ExecuteStepImpl>b__0()
+   at System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+InnerException: System.NullReferenceException: Object reference not set to an instance of an object.
+   at LIMS.MetalCookware.BindEquipmentCheckboxes() in D:\Projects\LIMSPTQualis\MetalCookware.aspx.cs:line 426
+   at LIMS.MetalCookware.Page_Load(Object sender, EventArgs e) in D:\Projects\LIMSPTQualis\MetalCookware.aspx.cs:line 41
+   at System.Web.UI.Control.OnLoad(EventArgs e)
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+--------------------------------------------------
+Date: 9/3/2026 3:32:19 PM
+URL: http://localhost:41413/MetalCookware.aspx
+User: Anonymous
+Error: Exception of type 'System.Web.HttpUnhandledException' was thrown.
+StackTrace:    at System.Web.UI.Page.HandleError(Exception e)
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+   at System.Web.UI.Page.ProcessRequest(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+   at System.Web.UI.Page.ProcessRequest()
+   at System.Web.UI.Page.ProcessRequest(HttpContext context)
+   at ASP.metalcookware_aspx.ProcessRequest(HttpContext context) in c:\Users\JUPITER3\AppData\Local\Temp\Temporary ASP.NET Files\vs\17c02d5e\1336ec9d\App_Web_metalcookware.aspx.cdcab7d2.q4lyt2as.0.cs:line 0
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.<>c__DisplayClass285_0.<ExecuteStepImpl>b__0()
+   at System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+InnerException: System.NullReferenceException: Object reference not set to an instance of an object.
+   at LIMS.MetalCookware.BindEquipmentCheckboxes() in D:\Projects\LIMSPTQualis\MetalCookware.aspx.cs:line 426
+   at LIMS.MetalCookware.Page_Load(Object sender, EventArgs e) in D:\Projects\LIMSPTQualis\MetalCookware.aspx.cs:line 41
+   at System.Web.UI.Control.OnLoad(EventArgs e)
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+--------------------------------------------------
+Date: 9/3/2026 3:33:12 PM
+URL: http://localhost:41413/MetalCookware.aspx?s=901&r=6422
+User: LabAnalyst_PS
+Error: Exception of type 'System.Web.HttpUnhandledException' was thrown.
+StackTrace:    at System.Web.UI.Page.HandleError(Exception e)
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+   at System.Web.UI.Page.ProcessRequest(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+   at System.Web.UI.Page.ProcessRequest()
+   at System.Web.UI.Page.ProcessRequest(HttpContext context)
+   at ASP.metalcookware_aspx.ProcessRequest(HttpContext context) in c:\Users\JUPITER3\AppData\Local\Temp\Temporary ASP.NET Files\vs\17c02d5e\1336ec9d\App_Web_metalcookware.aspx.cdcab7d2.q4lyt2as.0.cs:line 0
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.<>c__DisplayClass285_0.<ExecuteStepImpl>b__0()
+   at System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+InnerException: System.Exception: WORD DOCUMENT ERROR: SUCCESS - TestClean.docx opened ---> System.Exception: SUCCESS - TestClean.docx opened
+   at LIMS.MetalCookware.btnSave_Click(Object sender, EventArgs e) in D:\Projects\LIMSPTQualis\MetalCookware.aspx.cs:line 944
+   --- End of inner exception stack trace ---
+   at LIMS.MetalCookware.btnSave_Click(Object sender, EventArgs e) in D:\Projects\LIMSPTQualis\MetalCookware.aspx.cs:line 995
+   at System.Web.UI.WebControls.Button.OnClick(EventArgs e)
+   at System.Web.UI.WebControls.Button.RaisePostBackEvent(String eventArgument)
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+--------------------------------------------------
+Date: 9/3/2026 5:23:45 PM
+URL: http://localhost:41413/MetalCookware.aspx
+User: Anonymous
+Error: Exception of type 'System.Web.HttpUnhandledException' was thrown.
+StackTrace:    at System.Web.UI.Page.HandleError(Exception e)
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+   at System.Web.UI.Page.ProcessRequest(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+   at System.Web.UI.Page.ProcessRequest()
+   at System.Web.UI.Page.ProcessRequest(HttpContext context)
+   at ASP.metalcookware_aspx.ProcessRequest(HttpContext context) in c:\Users\JUPITER3\AppData\Local\Temp\Temporary ASP.NET Files\vs\17c02d5e\1336ec9d\App_Web_metalcookware.aspx.cdcab7d2.eispnc1i.0.cs:line 0
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.<>c__DisplayClass285_0.<ExecuteStepImpl>b__0()
+   at System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+InnerException: System.NullReferenceException: Object reference not set to an instance of an object.
+   at LIMS.MetalCookware.BindEquipmentCheckboxes() in D:\Projects\LIMSPTQualis\MetalCookware.aspx.cs:line 426
+   at LIMS.MetalCookware.Page_Load(Object sender, EventArgs e) in D:\Projects\LIMSPTQualis\MetalCookware.aspx.cs:line 41
+   at System.Web.UI.Control.OnLoad(EventArgs e)
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+--------------------------------------------------
+Date: 9/3/2026 5:25:17 PM
+URL: http://localhost:41413/MetalCookware.aspx?s=901&r=6422
+User: LabAnalyst_PS
+Error: Exception of type 'System.Web.HttpUnhandledException' was thrown.
+StackTrace:    at System.Web.UI.Page.HandleError(Exception e)
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+   at System.Web.UI.Page.ProcessRequest(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+   at System.Web.UI.Page.ProcessRequest()
+   at System.Web.UI.Page.ProcessRequest(HttpContext context)
+   at ASP.metalcookware_aspx.ProcessRequest(HttpContext context) in c:\Users\JUPITER3\AppData\Local\Temp\Temporary ASP.NET Files\vs\17c02d5e\1336ec9d\App_Web_metalcookware.aspx.cdcab7d2.eispnc1i.0.cs:line 0
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.<>c__DisplayClass285_0.<ExecuteStepImpl>b__0()
+   at System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+InnerException: System.Exception: WORD COM ERROR
+HRESULT: 0x800A1066
+Message: Command failed ---> System.Runtime.InteropServices.COMException: Command failed
+   at Microsoft.Office.Interop.Word.Documents.Open(Object& FileName, Object& ConfirmConversions, Object& ReadOnly, Object& AddToRecentFiles, Object& PasswordDocument, Object& PasswordTemplate, Object& Revert, Object& WritePasswordDocument, Object& WritePasswordTemplate, Object& Format, Object& Encoding, Object& Visible, Object& OpenAndRepair, Object& DocumentDirection, Object& NoEncodingDialog, Object& XMLTransform)
+   at LIMS.MetalCookware.btnSave_Click(Object sender, EventArgs e) in D:\Projects\LIMSPTQualis\MetalCookware.aspx.cs:line 915
+   --- End of inner exception stack trace ---
+   at LIMS.MetalCookware.btnSave_Click(Object sender, EventArgs e) in D:\Projects\LIMSPTQualis\MetalCookware.aspx.cs:line 995
+   at System.Web.UI.WebControls.Button.OnClick(EventArgs e)
+   at System.Web.UI.WebControls.Button.RaisePostBackEvent(String eventArgument)
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+--------------------------------------------------
+Date: 9/4/2026 12:31:12 PM
+URL: http://localhost:41413/ForgotPassword.aspx
+User: Anonymous
+Error: Exception of type 'System.Web.HttpUnhandledException' was thrown.
+StackTrace:    at System.Web.UI.Page.HandleError(Exception e)
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+   at System.Web.UI.Page.ProcessRequest(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+   at System.Web.UI.Page.ProcessRequest()
+   at System.Web.UI.Page.ProcessRequest(HttpContext context)
+   at ASP.forgotpassword_aspx.ProcessRequest(HttpContext context) in c:\Users\JUPITER3\AppData\Local\Temp\Temporary ASP.NET Files\vs\17c02d5e\1336ec9d\App_Web_forgotpassword.aspx.cdcab7d2.pljrrkto.0.cs:line 0
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.<>c__DisplayClass285_0.<ExecuteStepImpl>b__0()
+   at System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+InnerException: System.Data.SqlClient.SqlException (0x80131904): String or binary data would be truncated in table 'LIMSPTQualis.dbo.Users', column 'Password'. Truncated value: 'W8yuObFIRt2rOsr4fUzICg==:kbgGG40axS3pbhwehh2wVdRqC'.
+The statement has been terminated.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at LIMS.DAL.CM.ResetPassword(String username)
+   at LIMS.ForgotPassword.btnSubmit_Click(Object sender, EventArgs e)
+   at System.Web.UI.WebControls.Button.OnClick(EventArgs e)
+   at System.Web.UI.WebControls.Button.RaisePostBackEvent(String eventArgument)
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+ClientConnectionId:acbdfa17-2cb8-4004-8b02-60c47b205928
+Error Number:2628,State:1,Class:16
+--------------------------------------------------
+Date: 9/4/2026 1:11:56 PM
+URL: http://localhost:41413/ForgotPassword.aspx
+User: Anonymous
+Error: Exception of type 'System.Web.HttpUnhandledException' was thrown.
+StackTrace:    at System.Web.UI.Page.HandleError(Exception e)
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+   at System.Web.UI.Page.ProcessRequest(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+   at System.Web.UI.Page.ProcessRequest()
+   at System.Web.UI.Page.ProcessRequest(HttpContext context)
+   at ASP.forgotpassword_aspx.ProcessRequest(HttpContext context) in c:\Users\JUPITER3\AppData\Local\Temp\Temporary ASP.NET Files\vs\17c02d5e\1336ec9d\App_Web_forgotpassword.aspx.cdcab7d2.r2zmrz1c.0.cs:line 0
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.<>c__DisplayClass285_0.<ExecuteStepImpl>b__0()
+   at System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+InnerException: System.FormatException: An invalid character was found in the mail header: '@'.
+   at System.Net.Mail.DotAtomReader.ReadReverse(String data, Int32 index)
+   at System.Net.Mail.MailAddressParser.ParseLocalPart(String data, Int32& index, Boolean expectAngleBracket, Boolean expectMultipleAddresses)
+   at System.Net.Mail.MailAddressParser.ParseAddress(String data, Boolean expectMultipleAddresses, Int32& index)
+   at System.Net.Mail.MailAddressParser.ParseAddress(String data)
+   at System.Net.Mail.MailAddress..ctor(String address, String displayName, Encoding displayNameEncoding)
+   at LIMS.DAL.mailer.BuildMessageWith(String fromAddress, String toAddress, String subject, String body) in D:\Projects\LIMSPTQualis\DAL\mailer.cs:line 185
+   at LIMS.DAL.mailer.SendMail(String fromAddress, String toAddress, String subject, String body) in D:\Projects\LIMSPTQualis\DAL\mailer.cs:line 64
+   at LIMS.DAL.CM.SendTemporaryPasswordEmail(String email, String username, String temporaryPassword) in D:\Projects\LIMSPTQualis\DAL\CM.cs:line 23373
+   at LIMS.DAL.CM.ResetPassword(String username) in D:\Projects\LIMSPTQualis\DAL\CM.cs:line 23484
+   at LIMS.ForgotPassword.btnSubmit_Click(Object sender, EventArgs e) in D:\Projects\LIMSPTQualis\ForgotPassword.aspx.cs:line 25
+   at System.Web.UI.WebControls.Button.OnClick(EventArgs e)
+   at System.Web.UI.WebControls.Button.RaisePostBackEvent(String eventArgument)
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+--------------------------------------------------
+Date: 9/8/2026 9:48:05 AM
+URL: http://localhost:41413/sampleverification.aspx
+User: mmahtum_sidiq@qualis-indonesia.com
+Error: Exception of type 'System.Web.HttpUnhandledException' was thrown.
+StackTrace:    at System.Web.UI.Page.HandleError(Exception e)
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+   at System.Web.UI.Page.ProcessRequest(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+   at System.Web.UI.Page.ProcessRequest()
+   at System.Web.UI.Page.ProcessRequest(HttpContext context)
+   at ASP.sampleverification_aspx.ProcessRequest(HttpContext context) in c:\Users\JUPITER3\AppData\Local\Temp\Temporary ASP.NET Files\vs\17c02d5e\1336ec9d\App_Web_sampleverification.aspx.cdcab7d2.ose9n_vq.0.cs:line 0
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.<>c__DisplayClass285_0.<ExecuteStepImpl>b__0()
+   at System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+InnerException: System.Data.SqlClient.SqlException (0x80131904): Conversion failed when converting the varchar value 'Luminer' to data type int.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryHasMoreRows(Boolean& moreRows)
+   at System.Data.SqlClient.SqlDataReader.TryReadInternal(Boolean setTimeout, Boolean& more)
+   at System.Data.SqlClient.SqlDataReader.Read()
+   at System.Data.Common.DataAdapter.FillLoadDataRow(SchemaMapping mapping)
+   at System.Data.Common.DataAdapter.FillFromReader(DataSet dataset, DataTable datatable, String srcTable, DataReaderContainer dataReader, Int32 startRecord, Int32 maxRecords, DataColumn parentChapterColumn, Object parentChapterValue)
+   at System.Data.Common.DataAdapter.Fill(DataTable[] dataTables, IDataReader dataReader, Int32 startRecord, Int32 maxRecords)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataTable[] dataTables, Int32 startRecord, Int32 maxRecords, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataTable dataTable)
+   at LIMS.DAL.CM.GetDataUsingQuery(String sQuery) in D:\Projects\LIMSPTQualis\DAL\CM.cs:line 7631
+   at LIMS.DAL.CM.GetProductCategoryDetails(String ProductCategory) in D:\Projects\LIMSPTQualis\DAL\CM.cs:line 5979
+   at LIMS.SampleManagement.txtSampleReceivedDate_TextChanged(Object sender, EventArgs e) in D:\Projects\LIMSPTQualis\SampleVerification.aspx.cs:line 745
+   at System.Web.UI.WebControls.TextBox.OnTextChanged(EventArgs e)
+   at System.Web.UI.Page.RaiseChangedEvents()
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+ClientConnectionId:6e2c5dc7-b826-45d6-aa4d-5b8c7e47cda5
+Error Number:245,State:1,Class:16
+--------------------------------------------------
+Date: 9/8/2026 9:49:20 AM
+URL: http://localhost:41413/sampleverification.aspx
+User: deanissatrw@gmail.com
+Error: Exception of type 'System.Web.HttpUnhandledException' was thrown.
+StackTrace:    at System.Web.UI.Page.HandleError(Exception e)
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+   at System.Web.UI.Page.ProcessRequest(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+   at System.Web.UI.Page.ProcessRequest()
+   at System.Web.UI.Page.ProcessRequest(HttpContext context)
+   at ASP.sampleverification_aspx.ProcessRequest(HttpContext context) in c:\Users\JUPITER3\AppData\Local\Temp\Temporary ASP.NET Files\vs\17c02d5e\1336ec9d\App_Web_sampleverification.aspx.cdcab7d2.ose9n_vq.0.cs:line 0
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.<>c__DisplayClass285_0.<ExecuteStepImpl>b__0()
+   at System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+InnerException: System.Data.SqlClient.SqlException (0x80131904): Conversion failed when converting the varchar value 'Water' to data type int.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryHasMoreRows(Boolean& moreRows)
+   at System.Data.SqlClient.SqlDataReader.TryReadInternal(Boolean setTimeout, Boolean& more)
+   at System.Data.SqlClient.SqlDataReader.Read()
+   at System.Data.Common.DataAdapter.FillLoadDataRow(SchemaMapping mapping)
+   at System.Data.Common.DataAdapter.FillFromReader(DataSet dataset, DataTable datatable, String srcTable, DataReaderContainer dataReader, Int32 startRecord, Int32 maxRecords, DataColumn parentChapterColumn, Object parentChapterValue)
+   at System.Data.Common.DataAdapter.Fill(DataTable[] dataTables, IDataReader dataReader, Int32 startRecord, Int32 maxRecords)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataTable[] dataTables, Int32 startRecord, Int32 maxRecords, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataTable dataTable)
+   at LIMS.DAL.CM.GetDataUsingQuery(String sQuery) in D:\Projects\LIMSPTQualis\DAL\CM.cs:line 7631
+   at LIMS.DAL.CM.GetProductCategoryDetails(String ProductCategory) in D:\Projects\LIMSPTQualis\DAL\CM.cs:line 5979
+   at LIMS.SampleManagement.txtSampleReceivedDate_TextChanged(Object sender, EventArgs e) in D:\Projects\LIMSPTQualis\SampleVerification.aspx.cs:line 745
+   at System.Web.UI.WebControls.TextBox.OnTextChanged(EventArgs e)
+   at System.Web.UI.Page.RaiseChangedEvents()
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+ClientConnectionId:403578f9-73ff-4265-ae00-58f2d3e68459
+Error Number:245,State:1,Class:16
+--------------------------------------------------
+Date: 9/8/2026 9:50:17 AM
+URL: http://localhost:41413/sampleverification.aspx
+User: deanissatrw@gmail.com
+Error: Exception of type 'System.Web.HttpUnhandledException' was thrown.
+StackTrace:    at System.Web.UI.Page.HandleError(Exception e)
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+   at System.Web.UI.Page.ProcessRequest(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+   at System.Web.UI.Page.ProcessRequest()
+   at System.Web.UI.Page.ProcessRequest(HttpContext context)
+   at ASP.sampleverification_aspx.ProcessRequest(HttpContext context) in c:\Users\JUPITER3\AppData\Local\Temp\Temporary ASP.NET Files\vs\17c02d5e\1336ec9d\App_Web_sampleverification.aspx.cdcab7d2.ose9n_vq.0.cs:line 0
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.<>c__DisplayClass285_0.<ExecuteStepImpl>b__0()
+   at System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+InnerException: System.Data.SqlClient.SqlException (0x80131904): Conversion failed when converting the varchar value 'Water' to data type int.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryHasMoreRows(Boolean& moreRows)
+   at System.Data.SqlClient.SqlDataReader.TryReadInternal(Boolean setTimeout, Boolean& more)
+   at System.Data.SqlClient.SqlDataReader.Read()
+   at System.Data.Common.DataAdapter.FillLoadDataRow(SchemaMapping mapping)
+   at System.Data.Common.DataAdapter.FillFromReader(DataSet dataset, DataTable datatable, String srcTable, DataReaderContainer dataReader, Int32 startRecord, Int32 maxRecords, DataColumn parentChapterColumn, Object parentChapterValue)
+   at System.Data.Common.DataAdapter.Fill(DataTable[] dataTables, IDataReader dataReader, Int32 startRecord, Int32 maxRecords)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataTable[] dataTables, Int32 startRecord, Int32 maxRecords, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataTable dataTable)
+   at LIMS.DAL.CM.GetDataUsingQuery(String sQuery) in D:\Projects\LIMSPTQualis\DAL\CM.cs:line 7631
+   at LIMS.DAL.CM.GetProductCategoryDetails(String ProductCategory) in D:\Projects\LIMSPTQualis\DAL\CM.cs:line 5979
+   at LIMS.SampleManagement.txtSampleReceivedDate_TextChanged(Object sender, EventArgs e) in D:\Projects\LIMSPTQualis\SampleVerification.aspx.cs:line 745
+   at System.Web.UI.WebControls.TextBox.OnTextChanged(EventArgs e)
+   at System.Web.UI.Page.RaiseChangedEvents()
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+ClientConnectionId:403578f9-73ff-4265-ae00-58f2d3e68459
+Error Number:245,State:1,Class:16
+--------------------------------------------------
+Date: 9/11/2026 11:35:27 AM
+URL: http://localhost:41413/ReportProcurementTracker.aspx
+User: Anonymous
+Error: Exception of type 'System.Web.HttpUnhandledException' was thrown.
+StackTrace:    at System.Web.UI.Page.HandleError(Exception e)
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+   at System.Web.UI.Page.ProcessRequest(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+   at System.Web.UI.Page.ProcessRequest()
+   at System.Web.UI.Page.ProcessRequest(HttpContext context)
+   at ASP.reportprocurementtracker_aspx.ProcessRequest(HttpContext context) in c:\Users\JUPITER3\AppData\Local\Temp\Temporary ASP.NET Files\vs\17c02d5e\1336ec9d\App_Web_reportprocurementtracker.aspx.cdcab7d2.ijsei-hr.0.cs:line 0
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.<>c__DisplayClass285_0.<ExecuteStepImpl>b__0()
+   at System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+InnerException: System.Web.HttpException (0x80004005): A field or property with the name 'ItemCode' was not found on the selected data source.
+   at System.Web.UI.WebControls.BoundField.TryGetSimplePropertyValue(Object dataItem, Object& data)
+   at System.Web.UI.WebControls.BoundField.GetValue(Control controlContainer)
+   at System.Web.UI.WebControls.BoundField.OnDataBindField(Object sender, EventArgs e)
+   at System.Web.UI.Control.OnDataBinding(EventArgs e)
+   at System.Web.UI.Control.DataBind(Boolean raiseOnDataBinding)
+   at System.Web.UI.Control.DataBindChildren()
+   at System.Web.UI.Control.DataBind(Boolean raiseOnDataBinding)
+   at System.Web.UI.WebControls.GridView.CreateRow(Int32 rowIndex, Int32 dataSourceIndex, DataControlRowType rowType, DataControlRowState rowState, Boolean dataBind, Object dataItem, DataControlField[] fields, TableRowCollection rows, PagedDataSource pagedDataSource)
+   at System.Web.UI.WebControls.GridView.CreateChildControls(IEnumerable dataSource, Boolean dataBinding)
+   at System.Web.UI.WebControls.CompositeDataBoundControl.PerformDataBinding(IEnumerable data)
+   at System.Web.UI.WebControls.GridView.PerformDataBinding(IEnumerable data)
+   at System.Web.UI.WebControls.DataBoundControl.OnDataSourceViewSelectCallback(IEnumerable data)
+   at LIMS.ReportProcurementTracker.BindList(Int32 index) in D:\Projects\LIMSPTQualis\ReportProcurementTracker.aspx.cs:line 53
+   at LIMS.ReportProcurementTracker.Page_Load(Object sender, EventArgs e) in D:\Projects\LIMSPTQualis\ReportProcurementTracker.aspx.cs:line 30
+   at System.Web.UI.Control.OnLoad(EventArgs e)
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+--------------------------------------------------
+Date: 9/11/2026 11:39:11 AM
+URL: http://localhost:41413/ReportProcurementTracker.aspx
+User: purchaseemployee
+Error: Exception of type 'System.Web.HttpUnhandledException' was thrown.
+StackTrace:    at System.Web.UI.Page.HandleError(Exception e)
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+   at System.Web.UI.Page.ProcessRequest(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+   at System.Web.UI.Page.ProcessRequest()
+   at System.Web.UI.Page.ProcessRequest(HttpContext context)
+   at ASP.reportprocurementtracker_aspx.ProcessRequest(HttpContext context) in c:\Users\JUPITER3\AppData\Local\Temp\Temporary ASP.NET Files\vs\17c02d5e\1336ec9d\App_Web_reportprocurementtracker.aspx.cdcab7d2.eorxfhtd.0.cs:line 0
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.<>c__DisplayClass285_0.<ExecuteStepImpl>b__0()
+   at System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+InnerException: System.Web.HttpException (0x80004005): A field or property with the name 'ItemCode' was not found on the selected data source.
+   at System.Web.UI.WebControls.BoundField.TryGetSimplePropertyValue(Object dataItem, Object& data)
+   at System.Web.UI.WebControls.BoundField.GetValue(Control controlContainer)
+   at System.Web.UI.WebControls.BoundField.OnDataBindField(Object sender, EventArgs e)
+   at System.Web.UI.Control.OnDataBinding(EventArgs e)
+   at System.Web.UI.Control.DataBind(Boolean raiseOnDataBinding)
+   at System.Web.UI.Control.DataBindChildren()
+   at System.Web.UI.Control.DataBind(Boolean raiseOnDataBinding)
+   at System.Web.UI.WebControls.GridView.CreateRow(Int32 rowIndex, Int32 dataSourceIndex, DataControlRowType rowType, DataControlRowState rowState, Boolean dataBind, Object dataItem, DataControlField[] fields, TableRowCollection rows, PagedDataSource pagedDataSource)
+   at System.Web.UI.WebControls.GridView.CreateChildControls(IEnumerable dataSource, Boolean dataBinding)
+   at System.Web.UI.WebControls.CompositeDataBoundControl.PerformDataBinding(IEnumerable data)
+   at System.Web.UI.WebControls.GridView.PerformDataBinding(IEnumerable data)
+   at System.Web.UI.WebControls.DataBoundControl.OnDataSourceViewSelectCallback(IEnumerable data)
+   at LIMS.ReportProcurementTracker.BindList(Int32 index) in D:\Projects\LIMSPTQualis\ReportProcurementTracker.aspx.cs:line 53
+   at LIMS.ReportProcurementTracker.Page_Load(Object sender, EventArgs e) in D:\Projects\LIMSPTQualis\ReportProcurementTracker.aspx.cs:line 30
+   at System.Web.UI.Control.OnLoad(EventArgs e)
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+--------------------------------------------------
+Date: 9/16/2026 11:19:09 AM
+URL: http://localhost:41413/GeneratePaymentRequisition.aspx?ID=NjM5
+User: Anonymous
+Error: Exception of type 'System.Web.HttpUnhandledException' was thrown.
+StackTrace:    at System.Web.UI.Page.HandleError(Exception e)
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+   at System.Web.UI.Page.ProcessRequest(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+   at System.Web.UI.Page.ProcessRequest()
+   at System.Web.UI.Page.ProcessRequest(HttpContext context)
+   at ASP.generatepaymentrequisition_aspx.ProcessRequest(HttpContext context) in c:\Users\JUPITER3\AppData\Local\Temp\Temporary ASP.NET Files\vs\17c02d5e\1336ec9d\App_Web_generatepaymentrequisition.aspx.cdcab7d2.izuqet9a.0.cs:line 0
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.<>c__DisplayClass285_0.<ExecuteStepImpl>b__0()
+   at System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+InnerException: System.FormatException: Input string was not in a correct format.
+   at System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   at System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   at System.Convert.ToInt32(String value)
+   at LIMS.GeneratePaymentRequisition.Page_Load(Object sender, EventArgs e) in D:\Projects\LIMSPTQualis\GeneratePaymentRequisition.aspx.cs:line 49
+   at System.Web.UI.Control.OnLoad(EventArgs e)
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+--------------------------------------------------
+Date: 9/16/2026 1:56:01 PM
+URL: http://localhost:41413/GeneratePO.aspx?POID=126
+User: purchaseemployee
+Error: Exception of type 'System.Web.HttpUnhandledException' was thrown.
+StackTrace:    at System.Web.UI.Page.HandleError(Exception e)
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+   at System.Web.UI.Page.ProcessRequest(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+   at System.Web.UI.Page.ProcessRequest()
+   at System.Web.UI.Page.ProcessRequest(HttpContext context)
+   at ASP.generatepo_aspx.ProcessRequest(HttpContext context) in c:\Users\JUPITER3\AppData\Local\Temp\Temporary ASP.NET Files\vs\17c02d5e\1336ec9d\App_Web_generatepo.aspx.cdcab7d2.k8flsx7m.0.cs:line 0
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.<>c__DisplayClass285_0.<ExecuteStepImpl>b__0()
+   at System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+InnerException: System.FormatException: Input string was not in a correct format.
+   at System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   at System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   at System.Convert.ToInt32(String value)
+   at LIMS.GeneratePO.Page_Load(Object sender, EventArgs e) in D:\Projects\LIMSPTQualis\GeneratePO.aspx.cs:line 198
+   at System.Web.UI.Control.OnLoad(EventArgs e)
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+--------------------------------------------------
+Date: 9/17/2026 9:37:37 AM
+URL: http://localhost:41413/PRApproval.aspx?p=44938
+User: Dir
+Error: Exception of type 'System.Web.HttpUnhandledException' was thrown.
+StackTrace:    at System.Web.UI.Page.HandleError(Exception e)
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+   at System.Web.UI.Page.ProcessRequest(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+   at System.Web.UI.Page.ProcessRequest()
+   at System.Web.UI.Page.ProcessRequest(HttpContext context)
+   at ASP.prapproval_aspx.ProcessRequest(HttpContext context) in c:\Users\JUPITER3\AppData\Local\Temp\Temporary ASP.NET Files\vs\17c02d5e\1336ec9d\App_Web_prapproval.aspx.cdcab7d2.gmlmtlkl.0.cs:line 0
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.<>c__DisplayClass285_0.<ExecuteStepImpl>b__0()
+   at System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+InnerException: System.NullReferenceException: Object reference not set to an instance of an object.
+   at LIMS.PRApproval.SetNextApprover() in D:\Projects\LIMSPTQualis\PRApproval.aspx.cs:line 701
+   at LIMS.PRApproval.btnSubmitStatus_Click(Object sender, EventArgs e) in D:\Projects\LIMSPTQualis\PRApproval.aspx.cs:line 635
+   at System.Web.UI.WebControls.Button.OnClick(EventArgs e)
+   at System.Web.UI.WebControls.Button.RaisePostBackEvent(String eventArgument)
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+--------------------------------------------------
+Date: 9/17/2026 9:38:29 AM
+URL: http://localhost:41413/PRApproval.aspx?p=44938
+User: Dir
+Error: Exception of type 'System.Web.HttpUnhandledException' was thrown.
+StackTrace:    at System.Web.UI.Page.HandleError(Exception e)
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+   at System.Web.UI.Page.ProcessRequest(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+   at System.Web.UI.Page.ProcessRequest()
+   at System.Web.UI.Page.ProcessRequest(HttpContext context)
+   at ASP.prapproval_aspx.ProcessRequest(HttpContext context) in c:\Users\JUPITER3\AppData\Local\Temp\Temporary ASP.NET Files\vs\17c02d5e\1336ec9d\App_Web_prapproval.aspx.cdcab7d2.gmlmtlkl.0.cs:line 0
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.<>c__DisplayClass285_0.<ExecuteStepImpl>b__0()
+   at System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+InnerException: System.NullReferenceException: Object reference not set to an instance of an object.
+   at LIMS.PRApproval.SetNextApprover() in D:\Projects\LIMSPTQualis\PRApproval.aspx.cs:line 701
+   at LIMS.PRApproval.btnSubmitStatus_Click(Object sender, EventArgs e) in D:\Projects\LIMSPTQualis\PRApproval.aspx.cs:line 635
+   at System.Web.UI.WebControls.Button.OnClick(EventArgs e)
+   at System.Web.UI.WebControls.Button.RaisePostBackEvent(String eventArgument)
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+--------------------------------------------------
+Date: 9/17/2026 9:39:22 AM
+URL: http://localhost:41413/PRApproval.aspx?p=44938
+User: Dir
+Error: Exception of type 'System.Web.HttpUnhandledException' was thrown.
+StackTrace:    at System.Web.UI.Page.HandleError(Exception e)
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+   at System.Web.UI.Page.ProcessRequest(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+   at System.Web.UI.Page.ProcessRequest()
+   at System.Web.UI.Page.ProcessRequest(HttpContext context)
+   at ASP.prapproval_aspx.ProcessRequest(HttpContext context) in c:\Users\JUPITER3\AppData\Local\Temp\Temporary ASP.NET Files\vs\17c02d5e\1336ec9d\App_Web_prapproval.aspx.cdcab7d2.gmlmtlkl.0.cs:line 0
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.<>c__DisplayClass285_0.<ExecuteStepImpl>b__0()
+   at System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+InnerException: System.NullReferenceException: Object reference not set to an instance of an object.
+   at LIMS.PRApproval.SetNextApprover() in D:\Projects\LIMSPTQualis\PRApproval.aspx.cs:line 701
+   at LIMS.PRApproval.btnSubmitStatus_Click(Object sender, EventArgs e) in D:\Projects\LIMSPTQualis\PRApproval.aspx.cs:line 635
+   at System.Web.UI.WebControls.Button.OnClick(EventArgs e)
+   at System.Web.UI.WebControls.Button.RaisePostBackEvent(String eventArgument)
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+--------------------------------------------------
+Date: 9/17/2026 9:55:50 AM
+URL: http://localhost:41413/EnquiryForm.aspx?Reference=30610915&Enquiry=30222
+User: purchaseemployee
+Error: Exception of type 'System.Web.HttpUnhandledException' was thrown.
+StackTrace:    at System.Web.UI.Page.HandleError(Exception e)
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+   at System.Web.UI.Page.ProcessRequest(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+   at System.Web.UI.Page.ProcessRequest()
+   at System.Web.UI.Page.ProcessRequest(HttpContext context)
+   at ASP.enquiryform_aspx.ProcessRequest(HttpContext context) in c:\Users\JUPITER3\AppData\Local\Temp\Temporary ASP.NET Files\vs\17c02d5e\1336ec9d\App_Web_enquiryform.aspx.cdcab7d2.nowcyfpc.0.cs:line 0
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.<>c__DisplayClass285_0.<ExecuteStepImpl>b__0()
+   at System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+InnerException: System.Data.SqlClient.SqlException (0x80131904): Invalid column name 'AdditionalChargeDescription'.
+Invalid column name 'AdditionalCharges'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlCommand.RunExecuteNonQueryTds(String methodName, Boolean async, Int32 timeout, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at LIMS.DAL.CM.UpdateSQLQuery(String sQuery)
+   at LIMS.DAL.CM.UpdateVendorQuotationAdditionalCharges(CM obj)
+   at LIMS.DAL.CM.UpdateVendorQuotation(CM obj)
+   at LIMS.EnquiryForm.btnSave_Click(Object sender, EventArgs e)
+   at System.Web.UI.WebControls.Button.OnClick(EventArgs e)
+   at System.Web.UI.WebControls.Button.RaisePostBackEvent(String eventArgument)
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+ClientConnectionId:82f3cb4f-3ce9-4e5b-b9f2-461d80902d67
+Error Number:207,State:1,Class:16
+--------------------------------------------------
+Date: 9/17/2026 12:13:31 PM
+URL: http://localhost:41413/generatevendorQuotation.aspx?type=28257&ID=105
+User: purchaseemployee
+Error: Exception of type 'System.Web.HttpUnhandledException' was thrown.
+StackTrace:    at System.Web.UI.Page.HandleError(Exception e)
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+   at System.Web.UI.Page.ProcessRequest(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+   at System.Web.UI.Page.ProcessRequest()
+   at System.Web.UI.Page.ProcessRequest(HttpContext context)
+   at ASP.generatevendorquotation_aspx.ProcessRequest(HttpContext context) in c:\Users\JUPITER3\AppData\Local\Temp\Temporary ASP.NET Files\vs\17c02d5e\1336ec9d\App_Web_generatevendorquotation.aspx.cdcab7d2.c6gj5ljx.0.cs:line 0
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.<>c__DisplayClass285_0.<ExecuteStepImpl>b__0()
+   at System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+InnerException: System.Data.SqlClient.SqlException (0x80131904): Invalid column name 'AdditionalChargesDescription'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataTable[] dataTables, Int32 startRecord, Int32 maxRecords, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataTable dataTable)
+   at LIMS.DAL.CM.GetDataUsingQuery(String sQuery) in D:\Projects\LIMSPTQualis\DAL\CM.cs:line 7633
+   at LIMS.DAL.CM.GetVendorQuotationDetails(String VendorQuotationID, String VendorID) in D:\Projects\LIMSPTQualis\DAL\CM.cs:line 11035
+   at LIMS.GenerateVendorQuotation.Page_Load(Object sender, EventArgs e) in D:\Projects\LIMSPTQualis\GenerateVendorQuotation.aspx.cs:line 221
+   at System.Web.UI.Control.OnLoad(EventArgs e)
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+ClientConnectionId:9721a730-0633-4ee1-a156-2d185643b46d
+Error Number:207,State:1,Class:16
+--------------------------------------------------
+Date: 9/17/2026 12:17:46 PM
+URL: http://localhost:41413/generatevendorQuotation.aspx?type=29313&ID=0
+User: purchaseemployee
+Error: Exception of type 'System.Web.HttpUnhandledException' was thrown.
+StackTrace:    at System.Web.UI.Page.HandleError(Exception e)
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+   at System.Web.UI.Page.ProcessRequest(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+   at System.Web.UI.Page.ProcessRequest()
+   at System.Web.UI.Page.ProcessRequest(HttpContext context)
+   at ASP.generatevendorquotation_aspx.ProcessRequest(HttpContext context) in c:\Users\JUPITER3\AppData\Local\Temp\Temporary ASP.NET Files\vs\17c02d5e\1336ec9d\App_Web_generatevendorquotation.aspx.cdcab7d2.53a4znsy.0.cs:line 0
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.<>c__DisplayClass285_0.<ExecuteStepImpl>b__0()
+   at System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+InnerException: System.Data.SqlClient.SqlException (0x80131904): Invalid column name 'AdditionalChargesDescription'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataTable[] dataTables, Int32 startRecord, Int32 maxRecords, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataTable dataTable)
+   at LIMS.DAL.CM.GetDataUsingQuery(String sQuery) in D:\Projects\LIMSPTQualis\DAL\CM.cs:line 7633
+   at LIMS.DAL.CM.GetVendorQuotationDetails(String VendorQuotationID, String VendorID) in D:\Projects\LIMSPTQualis\DAL\CM.cs:line 11035
+   at LIMS.GenerateVendorQuotation.Page_Load(Object sender, EventArgs e) in D:\Projects\LIMSPTQualis\GenerateVendorQuotation.aspx.cs:line 221
+   at System.Web.UI.Control.OnLoad(EventArgs e)
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+ClientConnectionId:b2b0b6a1-e562-4acc-834a-95a547f29388
+Error Number:207,State:1,Class:16
+--------------------------------------------------
+Date: 9/17/2026 12:32:13 PM
+URL: http://localhost:41413/QuoteAnalysis.aspx?ID=30222
+User: purchaseemployee
+Error: Exception of type 'System.Web.HttpUnhandledException' was thrown.
+StackTrace:    at System.Web.UI.Page.HandleError(Exception e)
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+   at System.Web.UI.Page.ProcessRequest(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+   at System.Web.UI.Page.ProcessRequest()
+   at System.Web.UI.Page.ProcessRequest(HttpContext context)
+   at ASP.quoteanalysis_aspx.ProcessRequest(HttpContext context) in c:\Users\JUPITER3\AppData\Local\Temp\Temporary ASP.NET Files\vs\17c02d5e\1336ec9d\App_Web_quoteanalysis.aspx.cdcab7d2.ivua5xhf.0.cs:line 0
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.<>c__DisplayClass285_0.<ExecuteStepImpl>b__0()
+   at System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+InnerException: System.Data.SqlClient.SqlException (0x80131904): Incorrect syntax near the keyword 'from'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataTable[] dataTables, Int32 startRecord, Int32 maxRecords, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataTable dataTable)
+   at LIMS.DAL.CM.GetDataUsingQuery(String sQuery)
+   at LIMS.DAL.CM.getQuoteVendors(String EnquiryID)
+   at LIMS.QuoteAnalysis.LoadQuotesWithCurrencyCheck(String EnquiryID)
+   at LIMS.QuoteAnalysis.Page_Load(Object sender, EventArgs e)
+   at System.Web.UI.Control.OnLoad(EventArgs e)
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+ClientConnectionId:878a1b70-8692-4f81-918b-42840d0e43f2
+Error Number:156,State:1,Class:15
+--------------------------------------------------
+Date: 9/17/2026 6:03:58 PM
+URL: http://localhost:41413/PurchaseOrder.aspx?e=29169&v=126
+User: purchaseemployee
+Error: Exception of type 'System.Web.HttpUnhandledException' was thrown.
+StackTrace:    at System.Web.UI.Page.HandleError(Exception e)
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+   at System.Web.UI.Page.ProcessRequest(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+   at System.Web.UI.Page.ProcessRequest()
+   at System.Web.UI.Page.ProcessRequest(HttpContext context)
+   at ASP.purchaseorder_aspx.ProcessRequest(HttpContext context) in c:\Users\JUPITER3\AppData\Local\Temp\Temporary ASP.NET Files\vs\17c02d5e\1336ec9d\App_Web_purchaseorder.aspx.cdcab7d2.xd2cmzvr.0.cs:line 0
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.<>c__DisplayClass285_0.<ExecuteStepImpl>b__0()
+   at System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+InnerException: System.FormatException: Input string was not in a correct format.
+   at System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   at System.Number.ParseDecimal(String value, NumberStyles options, NumberFormatInfo numfmt)
+   at System.Convert.ToDecimal(String value)
+   at LIMS.PurchaseOrder1.CalculateFooterTotals(Boolean calculateVAT) in D:\Projects\LIMSPTQualis\PurchaseOrder.aspx.cs:line 433
+   at LIMS.PurchaseOrder1.GetPODetails(String EnquiryID) in D:\Projects\LIMSPTQualis\PurchaseOrder.aspx.cs:line 316
+   at LIMS.PurchaseOrder1.Page_Load(Object sender, EventArgs e) in D:\Projects\LIMSPTQualis\PurchaseOrder.aspx.cs:line 42
+   at System.Web.UI.Control.OnLoad(EventArgs e)
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+--------------------------------------------------
+Date: 9/18/2026 11:10:36 AM
+URL: http://localhost:41413/DashboardApprovals.aspx
+User: Dir
+Error: Exception of type 'System.Web.HttpUnhandledException' was thrown.
+StackTrace:    at System.Web.UI.Page.HandleError(Exception e)
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+   at System.Web.UI.Page.ProcessRequest(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+   at System.Web.UI.Page.ProcessRequest()
+   at System.Web.UI.Page.ProcessRequest(HttpContext context)
+   at ASP.dashboardapprovals_aspx.ProcessRequest(HttpContext context) in c:\Users\JUPITER3\AppData\Local\Temp\Temporary ASP.NET Files\vs\17c02d5e\1336ec9d\App_Web_dashboardapprovals.aspx.cdcab7d2.u1vz0iqm.0.cs:line 0
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.<>c__DisplayClass285_0.<ExecuteStepImpl>b__0()
+   at System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+InnerException: System.Data.SqlClient.SqlException (0x80131904): A transport-level error has occurred when receiving results from the server. (provider: TCP Provider, error: 0 - The semaphore timeout period has expired.) ---> System.ComponentModel.Win32Exception (0x80004005): The semaphore timeout period has expired
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParserStateObject.ReadSniError(TdsParserStateObject stateObj, UInt32 error)
+   at System.Data.SqlClient.TdsParserStateObject.ReadSniSyncOverAsync()
+   at System.Data.SqlClient.TdsParserStateObject.TryReadNetworkPacket()
+   at System.Data.SqlClient.TdsParserStateObject.TryPrepareBuffer()
+   at System.Data.SqlClient.TdsParserStateObject.TryReadByte(Byte& value)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataTable[] dataTables, Int32 startRecord, Int32 maxRecords, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataTable dataTable)
+   at LIMS.DAL.CM.GetDataUsingQuery(String sQuery) in D:\Projects\LIMSPTQualis\DAL\CM.cs:line 7633
+   at LIMS.DAL.CM.getPRCount(String Role, Int32 CurrentTier, String Period) in D:\Projects\LIMSPTQualis\DAL\CM.cs:line 19382
+   at LIMS.DashboardApprovals.BindPR() in D:\Projects\LIMSPTQualis\DashboardApprovals.aspx.cs:line 102
+   at LIMS.DashboardApprovals.Page_Load(Object sender, EventArgs e) in D:\Projects\LIMSPTQualis\DashboardApprovals.aspx.cs:line 42
+   at System.Web.UI.Control.OnLoad(EventArgs e)
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+ClientConnectionId:12c3493e-2090-42e6-92cc-9c8f6559adba
+Error Number:121,State:0,Class:20
+--------------------------------------------------
+Date: 9/21/2026 12:48:30 PM
+URL: http://localhost:41413/PurchaseOrder.aspx?e=29169&v=126
+User: purchaseemployee
+Error: Exception of type 'System.Web.HttpUnhandledException' was thrown.
+StackTrace:    at System.Web.UI.Page.HandleError(Exception e)
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+   at System.Web.UI.Page.ProcessRequest(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+   at System.Web.UI.Page.ProcessRequest()
+   at System.Web.UI.Page.ProcessRequest(HttpContext context)
+   at ASP.purchaseorder_aspx.ProcessRequest(HttpContext context) in c:\Users\JUPITER3\AppData\Local\Temp\Temporary ASP.NET Files\vs\17c02d5e\1336ec9d\App_Web_purchaseorder.aspx.cdcab7d2.xysshvbl.0.cs:line 0
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.<>c__DisplayClass285_0.<ExecuteStepImpl>b__0()
+   at System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+InnerException: System.FormatException: Input string was not in a correct format.
+   at System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   at System.Number.ParseDecimal(String value, NumberStyles options, NumberFormatInfo numfmt)
+   at System.Convert.ToDecimal(String value)
+   at LIMS.PurchaseOrder1.CalculateFooterTotals(Boolean calculateVAT) in D:\Projects\LIMSPTQualis\PurchaseOrder.aspx.cs:line 433
+   at LIMS.PurchaseOrder1.GetPODetails(String EnquiryID) in D:\Projects\LIMSPTQualis\PurchaseOrder.aspx.cs:line 316
+   at LIMS.PurchaseOrder1.Page_Load(Object sender, EventArgs e) in D:\Projects\LIMSPTQualis\PurchaseOrder.aspx.cs:line 42
+   at System.Web.UI.Control.OnLoad(EventArgs e)
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+--------------------------------------------------
+Date: 9/21/2026 4:53:32 PM
+URL: http://localhost:41413/FloatEnquiry.aspx
+User: purchaseemployee
+Error: Exception of type 'System.Web.HttpUnhandledException' was thrown.
+StackTrace:    at System.Web.UI.Page.HandleError(Exception e)
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+   at System.Web.UI.Page.ProcessRequest(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+   at System.Web.UI.Page.ProcessRequest()
+   at System.Web.UI.Page.ProcessRequest(HttpContext context)
+   at ASP.floatenquiry_aspx.ProcessRequest(HttpContext context) in c:\Users\JUPITER3\AppData\Local\Temp\Temporary ASP.NET Files\vs\17c02d5e\1336ec9d\App_Web_floatenquiry.aspx.cdcab7d2.qookbrtv.0.cs:line 0
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.<>c__DisplayClass285_0.<ExecuteStepImpl>b__0()
+   at System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+InnerException: System.Data.SqlClient.SqlException (0x80131904): Conversion failed when converting the nvarchar value 'NA' to data type int.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryHasMoreRows(Boolean& moreRows)
+   at System.Data.SqlClient.SqlDataReader.TryReadInternal(Boolean setTimeout, Boolean& more)
+   at System.Data.SqlClient.SqlDataReader.Read()
+   at System.Data.Common.DataAdapter.FillLoadDataRow(SchemaMapping mapping)
+   at System.Data.Common.DataAdapter.FillFromReader(DataSet dataset, DataTable datatable, String srcTable, DataReaderContainer dataReader, Int32 startRecord, Int32 maxRecords, DataColumn parentChapterColumn, Object parentChapterValue)
+   at System.Data.Common.DataAdapter.Fill(DataTable[] dataTables, IDataReader dataReader, Int32 startRecord, Int32 maxRecords)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataTable[] dataTables, Int32 startRecord, Int32 maxRecords, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataTable dataTable)
+   at LIMS.DAL.CM.GetDataUsingQuery(String sQuery, List`1 parameters) in D:\Projects\LIMSPTQualis\DAL\CM.cs:line 7663
+   at LIMS.DAL.CM.GetDetailsForFloatEnquiries(Int32 StartIndex, Int32 PageSize, String PurchaseGroupID, String PurchaseSubGroupID, String DivisionID, Nullable`1 FromDate, Nullable`1 ToDate, String PRNumber) in D:\Projects\LIMSPTQualis\DAL\CM.cs:line 11740
+   at LIMS.FloatEnquiry.BindFilteredData(Int32 index) in D:\Projects\LIMSPTQualis\FloatEnquiry.aspx.cs:line 1321
+   at LIMS.FloatEnquiry.ddlPageSize_SelectedIndexChanged(Object sender, EventArgs e) in D:\Projects\LIMSPTQualis\FloatEnquiry.aspx.cs:line 1367
+   at System.Web.UI.WebControls.ListControl.OnSelectedIndexChanged(EventArgs e)
+   at System.Web.UI.Page.RaiseChangedEvents()
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+ClientConnectionId:781e74f1-050c-4460-acb2-17ea42c5584e
+Error Number:245,State:1,Class:16
+--------------------------------------------------
+Date: 9/22/2026 9:00:06 AM
+URL: http://localhost:41413/PRList.aspx
+User: AccountsManager
+Error: Exception of type 'System.Web.HttpUnhandledException' was thrown.
+StackTrace:    at System.Web.UI.Page.HandleError(Exception e)
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+   at System.Web.UI.Page.ProcessRequest(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+   at System.Web.UI.Page.ProcessRequest()
+   at System.Web.UI.Page.ProcessRequest(HttpContext context)
+   at ASP.prlist_aspx.ProcessRequest(HttpContext context) in c:\Users\JUPITER3\AppData\Local\Temp\Temporary ASP.NET Files\vs\17c02d5e\1336ec9d\App_Web_prlist.aspx.cdcab7d2.oxil0evc.0.cs:line 0
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.<>c__DisplayClass285_0.<ExecuteStepImpl>b__0()
+   at System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+InnerException: System.Web.HttpException (0x80004005): The GridView 'gvCompleted' fired event Sorting which wasn't handled.
+   at System.Web.UI.WebControls.GridView.OnSorting(GridViewSortEventArgs e)
+   at System.Web.UI.WebControls.GridView.HandleSort(String sortExpression, SortDirection sortDirection)
+   at System.Web.UI.WebControls.GridView.HandleEvent(EventArgs e, Boolean causesValidation, String validationGroup)
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+--------------------------------------------------
+Date: 9/22/2026 9:00:08 AM
+URL: http://localhost:41413/PRList.aspx
+User: AccountsManager
+Error: Exception of type 'System.Web.HttpUnhandledException' was thrown.
+StackTrace:    at System.Web.UI.Page.HandleError(Exception e)
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+   at System.Web.UI.Page.ProcessRequest(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+   at System.Web.UI.Page.ProcessRequest()
+   at System.Web.UI.Page.ProcessRequest(HttpContext context)
+   at ASP.prlist_aspx.ProcessRequest(HttpContext context) in c:\Users\JUPITER3\AppData\Local\Temp\Temporary ASP.NET Files\vs\17c02d5e\1336ec9d\App_Web_prlist.aspx.cdcab7d2.oxil0evc.0.cs:line 0
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.<>c__DisplayClass285_0.<ExecuteStepImpl>b__0()
+   at System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+InnerException: System.Web.HttpException (0x80004005): The GridView 'gvCompleted' fired event Sorting which wasn't handled.
+   at System.Web.UI.WebControls.GridView.OnSorting(GridViewSortEventArgs e)
+   at System.Web.UI.WebControls.GridView.HandleSort(String sortExpression, SortDirection sortDirection)
+   at System.Web.UI.WebControls.GridView.HandleEvent(EventArgs e, Boolean causesValidation, String validationGroup)
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+--------------------------------------------------
+Date: 9/22/2026 9:00:09 AM
+URL: http://localhost:41413/PRList.aspx
+User: AccountsManager
+Error: Exception of type 'System.Web.HttpUnhandledException' was thrown.
+StackTrace:    at System.Web.UI.Page.HandleError(Exception e)
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+   at System.Web.UI.Page.ProcessRequest(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+   at System.Web.UI.Page.ProcessRequest()
+   at System.Web.UI.Page.ProcessRequest(HttpContext context)
+   at ASP.prlist_aspx.ProcessRequest(HttpContext context) in c:\Users\JUPITER3\AppData\Local\Temp\Temporary ASP.NET Files\vs\17c02d5e\1336ec9d\App_Web_prlist.aspx.cdcab7d2.oxil0evc.0.cs:line 0
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.<>c__DisplayClass285_0.<ExecuteStepImpl>b__0()
+   at System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+InnerException: System.Web.HttpException (0x80004005): The GridView 'gvCompleted' fired event Sorting which wasn't handled.
+   at System.Web.UI.WebControls.GridView.OnSorting(GridViewSortEventArgs e)
+   at System.Web.UI.WebControls.GridView.HandleSort(String sortExpression, SortDirection sortDirection)
+   at System.Web.UI.WebControls.GridView.HandleEvent(EventArgs e, Boolean causesValidation, String validationGroup)
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+--------------------------------------------------
+Date: 9/22/2026 9:00:21 AM
+URL: http://localhost:41413/PRList.aspx
+User: AccountsManager
+Error: Exception of type 'System.Web.HttpUnhandledException' was thrown.
+StackTrace:    at System.Web.UI.Page.HandleError(Exception e)
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+   at System.Web.UI.Page.ProcessRequest(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+   at System.Web.UI.Page.ProcessRequest()
+   at System.Web.UI.Page.ProcessRequest(HttpContext context)
+   at ASP.prlist_aspx.ProcessRequest(HttpContext context) in c:\Users\JUPITER3\AppData\Local\Temp\Temporary ASP.NET Files\vs\17c02d5e\1336ec9d\App_Web_prlist.aspx.cdcab7d2.oxil0evc.0.cs:line 0
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.<>c__DisplayClass285_0.<ExecuteStepImpl>b__0()
+   at System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+InnerException: System.Web.HttpException (0x80004005): The GridView 'gvCompleted' fired event Sorting which wasn't handled.
+   at System.Web.UI.WebControls.GridView.OnSorting(GridViewSortEventArgs e)
+   at System.Web.UI.WebControls.GridView.HandleSort(String sortExpression, SortDirection sortDirection)
+   at System.Web.UI.WebControls.GridView.HandleEvent(EventArgs e, Boolean causesValidation, String validationGroup)
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+--------------------------------------------------
+Date: 9/22/2026 9:13:08 AM
+URL: http://localhost:41413/AccountsPayable.aspx
+User: AccountsEmployee
+Error: Exception of type 'System.Web.HttpUnhandledException' was thrown.
+StackTrace:    at System.Web.UI.Page.HandleError(Exception e)
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+   at System.Web.UI.Page.ProcessRequest(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+   at System.Web.UI.Page.ProcessRequest()
+   at System.Web.UI.Page.ProcessRequest(HttpContext context)
+   at ASP.accountspayable_aspx.ProcessRequest(HttpContext context) in c:\Users\JUPITER3\AppData\Local\Temp\Temporary ASP.NET Files\vs\17c02d5e\1336ec9d\App_Web_accountspayable.aspx.cdcab7d2.6-x_re9e.0.cs:line 0
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.<>c__DisplayClass285_0.<ExecuteStepImpl>b__0()
+   at System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+InnerException: System.IndexOutOfRangeException: There is no row at position 0.
+   at System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   at System.Data.DataRowCollection.get_Item(Int32 index)
+   at LIMS.AP.ddlPO_SelectedIndexChanged(Object sender, EventArgs e) in D:\Projects\LIMSPTQualis\AccountsPayable.aspx.cs:line 203
+   at System.Web.UI.WebControls.ListControl.OnSelectedIndexChanged(EventArgs e)
+   at System.Web.UI.Page.RaiseChangedEvents()
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+--------------------------------------------------
+Date: 9/22/2026 9:19:09 AM
+URL: http://localhost:41413/AccountsPayable.aspx
+User: AccountsEmployee
+Error: Exception of type 'System.Web.HttpUnhandledException' was thrown.
+StackTrace:    at System.Web.UI.Page.HandleError(Exception e)
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+   at System.Web.UI.Page.ProcessRequest(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+   at System.Web.UI.Page.ProcessRequest()
+   at System.Web.UI.Page.ProcessRequest(HttpContext context)
+   at ASP.accountspayable_aspx.ProcessRequest(HttpContext context) in c:\Users\JUPITER3\AppData\Local\Temp\Temporary ASP.NET Files\vs\17c02d5e\1336ec9d\App_Web_accountspayable.aspx.cdcab7d2.6-x_re9e.0.cs:line 0
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.<>c__DisplayClass285_0.<ExecuteStepImpl>b__0()
+   at System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+InnerException: System.Data.SqlClient.SqlException (0x80131904): Invalid column name 'DayCount'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataTable[] dataTables, Int32 startRecord, Int32 maxRecords, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataTable dataTable)
+   at LIMS.DAL.DbHelper.ExecuteQuery(String query, SqlParameter[] parameters)
+   at LIMS.DAL.APModule.GetPO(String PurchaseOrderID)
+   at LIMS.AP.ddlPO_SelectedIndexChanged(Object sender, EventArgs e)
+   at System.Web.UI.WebControls.ListControl.OnSelectedIndexChanged(EventArgs e)
+   at System.Web.UI.Page.RaiseChangedEvents()
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+ClientConnectionId:83d01bb8-b1d0-4854-bbf5-cbe8b7d66b94
+Error Number:207,State:1,Class:16
+--------------------------------------------------
+Date: 9/22/2026 1:09:49 PM
+URL: http://localhost:41413/VendorList.aspx
+User: Dir
+Error: Exception of type 'System.Web.HttpUnhandledException' was thrown.
+StackTrace:    at System.Web.UI.Page.HandleError(Exception e)
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+   at System.Web.UI.Page.ProcessRequest(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+   at System.Web.UI.Page.ProcessRequest()
+   at System.Web.UI.Page.ProcessRequest(HttpContext context)
+   at ASP.vendorlist_aspx.ProcessRequest(HttpContext context) in c:\Users\JUPITER3\AppData\Local\Temp\Temporary ASP.NET Files\vs\17c02d5e\1336ec9d\App_Web_vendorlist.aspx.cdcab7d2.0il8rsuu.0.cs:line 0
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.<>c__DisplayClass285_0.<ExecuteStepImpl>b__0()
+   at System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+InnerException: System.InvalidOperationException: ExecuteReader: CommandText property has not been initialized
+   at System.Data.SqlClient.SqlCommand.ValidateCommand(String method, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataTable[] dataTables, Int32 startRecord, Int32 maxRecords, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataTable dataTable)
+   at LIMS.DAL.CM.GetDataUsingQuery(String sQuery) in D:\Projects\LIMSPTQualis\DAL\CM.cs:line 7642
+   at LIMS.DAL.CM.GetVendorSearch(String search, String Department) in D:\Projects\LIMSPTQualis\DAL\CM.cs:line 10579
+   at LIMS.VendorList.BindVendors(String search, String department) in D:\Projects\LIMSPTQualis\VendorList.aspx.cs:line 59
+   at LIMS.VendorList.txtSearch_TextChanged(Object sender, EventArgs e) in D:\Projects\LIMSPTQualis\VendorList.aspx.cs:line 87
+   at System.Web.UI.WebControls.TextBox.OnTextChanged(EventArgs e)
+   at System.Web.UI.Page.RaiseChangedEvents()
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+--------------------------------------------------
+Date: 9/22/2026 1:09:59 PM
+URL: http://localhost:41413/VendorList.aspx
+User: Dir
+Error: Exception of type 'System.Web.HttpUnhandledException' was thrown.
+StackTrace:    at System.Web.UI.Page.HandleError(Exception e)
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+   at System.Web.UI.Page.ProcessRequest(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+   at System.Web.UI.Page.ProcessRequest()
+   at System.Web.UI.Page.ProcessRequest(HttpContext context)
+   at ASP.vendorlist_aspx.ProcessRequest(HttpContext context) in c:\Users\JUPITER3\AppData\Local\Temp\Temporary ASP.NET Files\vs\17c02d5e\1336ec9d\App_Web_vendorlist.aspx.cdcab7d2.0il8rsuu.0.cs:line 0
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.<>c__DisplayClass285_0.<ExecuteStepImpl>b__0()
+   at System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+InnerException: System.InvalidOperationException: ExecuteReader: CommandText property has not been initialized
+   at System.Data.SqlClient.SqlCommand.ValidateCommand(String method, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataTable[] dataTables, Int32 startRecord, Int32 maxRecords, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataTable dataTable)
+   at LIMS.DAL.CM.GetDataUsingQuery(String sQuery) in D:\Projects\LIMSPTQualis\DAL\CM.cs:line 7642
+   at LIMS.DAL.CM.GetVendorSearch(String search, String Department) in D:\Projects\LIMSPTQualis\DAL\CM.cs:line 10579
+   at LIMS.VendorList.BindVendors(String search, String department) in D:\Projects\LIMSPTQualis\VendorList.aspx.cs:line 59
+   at LIMS.VendorList.txtSearch_TextChanged(Object sender, EventArgs e) in D:\Projects\LIMSPTQualis\VendorList.aspx.cs:line 87
+   at System.Web.UI.WebControls.TextBox.OnTextChanged(EventArgs e)
+   at System.Web.UI.Page.RaiseChangedEvents()
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+--------------------------------------------------
+Date: 9/22/2026 3:11:18 PM
+URL: http://localhost:41413/generatepurchaseinvoice.aspx?i=19
+User: Anonymous
+Error: Exception of type 'System.Web.HttpUnhandledException' was thrown.
+StackTrace:    at System.Web.UI.Page.HandleError(Exception e)
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+   at System.Web.UI.Page.ProcessRequest(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+   at System.Web.UI.Page.ProcessRequest()
+   at System.Web.UI.Page.ProcessRequest(HttpContext context)
+   at ASP.generatepurchaseinvoice_aspx.ProcessRequest(HttpContext context) in c:\Users\JUPITER3\AppData\Local\Temp\Temporary ASP.NET Files\vs\17c02d5e\1336ec9d\App_Web_generatepurchaseinvoice.aspx.cdcab7d2.yuwcuxbi.0.cs:line 0
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.<>c__DisplayClass285_0.<ExecuteStepImpl>b__0()
+   at System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+InnerException: System.Data.SqlClient.SqlException (0x80131904): Invalid column name 'VendorInvoiceNumber'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataTable[] dataTables, Int32 startRecord, Int32 maxRecords, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataTable dataTable)
+   at LIMS.DAL.CM.GetDataUsingQuery(String sQuery)
+   at LIMS.DAL.CM.GetPIHeader(Int32 PIInvoiceID)
+   at LIMS.generatePurchaseInvoice.BindPI()
+   at LIMS.generatePurchaseInvoice.Page_Load(Object sender, EventArgs e)
+   at System.Web.UI.Control.OnLoad(EventArgs e)
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+ClientConnectionId:2d32a14f-5d67-434f-8a67-eb3f81a3c1a7
+Error Number:207,State:1,Class:16
+--------------------------------------------------
+Date: 9/23/2026 10:53:12 AM
+URL: http://localhost:41413/CustomerFMN_IAT.aspx?ID=1152
+User: sales
+Error: Exception of type 'System.Web.HttpUnhandledException' was thrown.
+StackTrace:    at System.Web.UI.Page.HandleError(Exception e)
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+   at System.Web.UI.Page.ProcessRequest(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+   at System.Web.UI.Page.ProcessRequest()
+   at System.Web.UI.Page.ProcessRequest(HttpContext context)
+   at ASP.customerfmn_iat_aspx.ProcessRequest(HttpContext context) in c:\Users\JUPITER3\AppData\Local\Temp\Temporary ASP.NET Files\vs\17c02d5e\1336ec9d\App_Web_customerfmn_iat.aspx.cdcab7d2.hxiff2vi.0.cs:line 0
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.<>c__DisplayClass285_0.<ExecuteStepImpl>b__0()
+   at System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+InnerException: System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at LIMS.CustomerFMN_IAT.Page_Load(Object sender, EventArgs e) in D:\Projects\LIMSPTQualis\CustomerFMN_IAT.aspx.cs:line 38
+   at System.Web.UI.Control.OnLoad(EventArgs e)
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+--------------------------------------------------
+Date: 9/27/2026 9:20:28 PM
+URL: http://localhost:41413/RequisitionPayments.aspx
+User: AccountsEmployee
+Error: Exception of type 'System.Web.HttpUnhandledException' was thrown.
+StackTrace:    at System.Web.UI.Page.HandleError(Exception e)
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+   at System.Web.UI.Page.ProcessRequest(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+   at System.Web.UI.Page.ProcessRequest()
+   at System.Web.UI.Page.ProcessRequest(HttpContext context)
+   at ASP.requisitionpayments_aspx.ProcessRequest(HttpContext context) in c:\Users\JUPITER3\AppData\Local\Temp\Temporary ASP.NET Files\vs\17c02d5e\1336ec9d\App_Web_requisitionpayments.aspx.cdcab7d2.t4kwtcso.0.cs:line 0
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.<>c__DisplayClass285_0.<ExecuteStepImpl>b__0()
+   at System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+InnerException: System.Web.HttpException (0x80004005): DataBinding: 'System.Data.DataRowView' does not contain a property with the name 'PurchaseRequisitionID'.
+   at System.Web.UI.DataBinder.GetPropertyValue(Object container, String propName)
+   at System.Web.UI.WebControls.GridView.CreateChildControls(IEnumerable dataSource, Boolean dataBinding)
+   at System.Web.UI.WebControls.CompositeDataBoundControl.PerformDataBinding(IEnumerable data)
+   at System.Web.UI.WebControls.GridView.PerformDataBinding(IEnumerable data)
+   at System.Web.UI.WebControls.DataBoundControl.OnDataSourceViewSelectCallback(IEnumerable data)
+   at LIMS.RequisitionPayments.btnAddAll_Click(Object sender, EventArgs e) in D:\Projects\LIMSPTQualis\RequisitionPayments.aspx.cs:line 1661
+   at System.Web.UI.WebControls.Button.OnClick(EventArgs e)
+   at System.Web.UI.WebControls.Button.RaisePostBackEvent(String eventArgument)
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+--------------------------------------------------
+Date: 9/28/2026 9:31:53 AM
+URL: http://localhost:41413/EnquiryList.aspx
+User: purchaseemployee
+Error: Exception of type 'System.Web.HttpUnhandledException' was thrown.
+StackTrace:    at System.Web.UI.Page.HandleError(Exception e)
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+   at System.Web.UI.Page.ProcessRequest(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+   at System.Web.UI.Page.ProcessRequest()
+   at System.Web.UI.Page.ProcessRequest(HttpContext context)
+   at ASP.enquirylist_aspx.ProcessRequest(HttpContext context) in c:\Users\JUPITER3\AppData\Local\Temp\Temporary ASP.NET Files\vs\17c02d5e\1336ec9d\App_Web_enquirylist.aspx.cdcab7d2.ix8zf0tm.0.cs:line 0
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.<>c__DisplayClass285_0.<ExecuteStepImpl>b__0()
+   at System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+InnerException: System.Web.HttpException (0x80004005): DataBinding: 'System.Data.DataRowView' does not contain a property with the name 'EnquiryDetailsID'.
+   at System.Web.UI.DataBinder.GetPropertyValue(Object container, String propName)
+   at System.Web.UI.DataBinder.Eval(Object container, String[] expressionParts)
+   at ASP.enquirylist_aspx.__DataBinding__control84(Object sender, EventArgs e) in d:\Projects\LIMSPTQualis\EnquiryList.aspx:line 244
+   at System.Web.UI.Control.OnDataBinding(EventArgs e)
+   at System.Web.UI.Control.DataBind(Boolean raiseOnDataBinding)
+   at System.Web.UI.Control.DataBindChildren()
+   at System.Web.UI.Control.DataBind(Boolean raiseOnDataBinding)
+   at System.Web.UI.Control.DataBindChildren()
+   at System.Web.UI.Control.DataBind(Boolean raiseOnDataBinding)
+   at System.Web.UI.WebControls.GridView.CreateRow(Int32 rowIndex, Int32 dataSourceIndex, DataControlRowType rowType, DataControlRowState rowState, Boolean dataBind, Object dataItem, DataControlField[] fields, TableRowCollection rows, PagedDataSource pagedDataSource)
+   at System.Web.UI.WebControls.GridView.CreateChildControls(IEnumerable dataSource, Boolean dataBinding)
+   at System.Web.UI.WebControls.CompositeDataBoundControl.PerformDataBinding(IEnumerable data)
+   at System.Web.UI.WebControls.GridView.PerformDataBinding(IEnumerable data)
+   at System.Web.UI.WebControls.DataBoundControl.OnDataSourceViewSelectCallback(IEnumerable data)
+   at LIMS.EnquiryList.GetEnquiryList(String statusIDs, String enquiryType) in D:\Projects\LIMSPTQualis\EnquiryList.aspx.cs:line 257
+   at LIMS.EnquiryList.btnOthers_Click(Object sender, EventArgs e) in D:\Projects\LIMSPTQualis\EnquiryList.aspx.cs:line 141
+   at System.Web.UI.WebControls.Button.OnClick(EventArgs e)
+   at System.Web.UI.WebControls.Button.RaisePostBackEvent(String eventArgument)
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+--------------------------------------------------
+Date: 9/28/2026 9:32:44 AM
+URL: http://localhost:41413/EnquiryList.aspx
+User: purchaseemployee
+Error: Exception of type 'System.Web.HttpUnhandledException' was thrown.
+StackTrace:    at System.Web.UI.Page.HandleError(Exception e)
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+   at System.Web.UI.Page.ProcessRequest(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+   at System.Web.UI.Page.ProcessRequest()
+   at System.Web.UI.Page.ProcessRequest(HttpContext context)
+   at ASP.enquirylist_aspx.ProcessRequest(HttpContext context) in c:\Users\JUPITER3\AppData\Local\Temp\Temporary ASP.NET Files\vs\17c02d5e\1336ec9d\App_Web_enquirylist.aspx.cdcab7d2.ix8zf0tm.0.cs:line 0
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.<>c__DisplayClass285_0.<ExecuteStepImpl>b__0()
+   at System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+InnerException: System.Web.HttpException (0x80004005): DataBinding: 'System.Data.DataRowView' does not contain a property with the name 'EnquiryDetailsID'.
+   at System.Web.UI.DataBinder.GetPropertyValue(Object container, String propName)
+   at System.Web.UI.DataBinder.Eval(Object container, String[] expressionParts)
+   at ASP.enquirylist_aspx.__DataBinding__control84(Object sender, EventArgs e) in d:\Projects\LIMSPTQualis\EnquiryList.aspx:line 244
+   at System.Web.UI.Control.OnDataBinding(EventArgs e)
+   at System.Web.UI.Control.DataBind(Boolean raiseOnDataBinding)
+   at System.Web.UI.Control.DataBindChildren()
+   at System.Web.UI.Control.DataBind(Boolean raiseOnDataBinding)
+   at System.Web.UI.Control.DataBindChildren()
+   at System.Web.UI.Control.DataBind(Boolean raiseOnDataBinding)
+   at System.Web.UI.WebControls.GridView.CreateRow(Int32 rowIndex, Int32 dataSourceIndex, DataControlRowType rowType, DataControlRowState rowState, Boolean dataBind, Object dataItem, DataControlField[] fields, TableRowCollection rows, PagedDataSource pagedDataSource)
+   at System.Web.UI.WebControls.GridView.CreateChildControls(IEnumerable dataSource, Boolean dataBinding)
+   at System.Web.UI.WebControls.CompositeDataBoundControl.PerformDataBinding(IEnumerable data)
+   at System.Web.UI.WebControls.GridView.PerformDataBinding(IEnumerable data)
+   at System.Web.UI.WebControls.DataBoundControl.OnDataSourceViewSelectCallback(IEnumerable data)
+   at LIMS.EnquiryList.GetEnquiryList(String statusIDs, String enquiryType) in D:\Projects\LIMSPTQualis\EnquiryList.aspx.cs:line 257
+   at LIMS.EnquiryList.btnOthers_Click(Object sender, EventArgs e) in D:\Projects\LIMSPTQualis\EnquiryList.aspx.cs:line 141
+   at System.Web.UI.WebControls.Button.OnClick(EventArgs e)
+   at System.Web.UI.WebControls.Button.RaisePostBackEvent(String eventArgument)
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+--------------------------------------------------
+Date: 9/28/2026 9:32:56 AM
+URL: http://localhost:41413/EnquiryList.aspx
+User: purchaseemployee
+Error: Exception of type 'System.Web.HttpUnhandledException' was thrown.
+StackTrace:    at System.Web.UI.Page.HandleError(Exception e)
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+   at System.Web.UI.Page.ProcessRequest(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+   at System.Web.UI.Page.ProcessRequest()
+   at System.Web.UI.Page.ProcessRequest(HttpContext context)
+   at ASP.enquirylist_aspx.ProcessRequest(HttpContext context) in c:\Users\JUPITER3\AppData\Local\Temp\Temporary ASP.NET Files\vs\17c02d5e\1336ec9d\App_Web_enquirylist.aspx.cdcab7d2.ix8zf0tm.0.cs:line 0
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.<>c__DisplayClass285_0.<ExecuteStepImpl>b__0()
+   at System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+InnerException: System.Web.HttpException (0x80004005): DataBinding: 'System.Data.DataRowView' does not contain a property with the name 'EnquiryDetailsID'.
+   at System.Web.UI.DataBinder.GetPropertyValue(Object container, String propName)
+   at System.Web.UI.DataBinder.Eval(Object container, String[] expressionParts)
+   at ASP.enquirylist_aspx.__DataBinding__control84(Object sender, EventArgs e) in d:\Projects\LIMSPTQualis\EnquiryList.aspx:line 244
+   at System.Web.UI.Control.OnDataBinding(EventArgs e)
+   at System.Web.UI.Control.DataBind(Boolean raiseOnDataBinding)
+   at System.Web.UI.Control.DataBindChildren()
+   at System.Web.UI.Control.DataBind(Boolean raiseOnDataBinding)
+   at System.Web.UI.Control.DataBindChildren()
+   at System.Web.UI.Control.DataBind(Boolean raiseOnDataBinding)
+   at System.Web.UI.WebControls.GridView.CreateRow(Int32 rowIndex, Int32 dataSourceIndex, DataControlRowType rowType, DataControlRowState rowState, Boolean dataBind, Object dataItem, DataControlField[] fields, TableRowCollection rows, PagedDataSource pagedDataSource)
+   at System.Web.UI.WebControls.GridView.CreateChildControls(IEnumerable dataSource, Boolean dataBinding)
+   at System.Web.UI.WebControls.CompositeDataBoundControl.PerformDataBinding(IEnumerable data)
+   at System.Web.UI.WebControls.GridView.PerformDataBinding(IEnumerable data)
+   at System.Web.UI.WebControls.DataBoundControl.OnDataSourceViewSelectCallback(IEnumerable data)
+   at LIMS.EnquiryList.GetEnquiryList(String statusIDs, String enquiryType) in D:\Projects\LIMSPTQualis\EnquiryList.aspx.cs:line 257
+   at LIMS.EnquiryList.btnOthers_Click(Object sender, EventArgs e) in D:\Projects\LIMSPTQualis\EnquiryList.aspx.cs:line 141
+   at System.Web.UI.WebControls.Button.OnClick(EventArgs e)
+   at System.Web.UI.WebControls.Button.RaisePostBackEvent(String eventArgument)
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+--------------------------------------------------

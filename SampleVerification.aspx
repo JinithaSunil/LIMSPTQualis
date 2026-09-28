@@ -1,7 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/PTQualisMaster.Master" AutoEventWireup="true" CodeBehind="SampleVerification.aspx.cs" Inherits="LIMS.SampleManagement" %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
-
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
         .cb label {
@@ -235,7 +234,101 @@
                                         </div>
                                     </div>                                    
                                 </div>
-                               
+                                <div class="row clearfix">
+                                        <div class="col-sm-2">
+                                            <div class="form-group" style="margin-left: 20px;">
+                                                <label>Image Name: </label>
+                                                <asp:TextBox ID="txtSampleName" runat="server"></asp:TextBox>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <asp:FileUpload ID="fpSampleImage" runat="server" Width="100%" Style="margin-top: 23px;" EnableViewState="true" />
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <asp:Button ID="btnUpload" runat="server" Text="Upload Image" OnClick="btnUpload_Click" CssClass="btn btn-info" Style="margin-top: 20px;" />
+                                        </div>
+                                    </div>
+
+                                 <asp:Label ID="lblMessage" runat="server" ForeColor="Red"></asp:Label>
+
+                                    <%--<asp:GridView ID="GridView1" runat="server"
+                                        AutoGenerateColumns="false"
+                                        CssClass="gridview"
+                                        OnRowCommand="GridView1_RowCommand"
+                                        OnRowDataBound="GridView1_RowDataBound">
+                                        <Columns>
+                                            <asp:TemplateField HeaderText="#">
+                                                <ItemTemplate>
+                                                    <asp:Label ID="lblRowNumber" runat="server"
+                                                        Text='<%# Container.DataItemIndex + 1 %>'></asp:Label>
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+
+                                        <asp:TemplateField HeaderText="Image">
+                                            <ItemTemplate>
+                                                <asp:Image ID="imgSample" runat="server"
+                                                    CssClass="img-thumbnail"
+                                                    AlternateText='<%# Eval("SampleText") %>' />
+                                                <br />
+                                                <asp:Label ID="lblFileName" runat="server"
+                                                    Text='<%# Eval("filename") %>'></asp:Label>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+
+                                        <asp:BoundField DataField="SampleText" HeaderText="Sample Name" />
+
+                                        <asp:TemplateField HeaderText="Action">
+                                            <ItemTemplate>
+                                                <asp:Button ID="btnDelete" runat="server"
+                                                    Text="Delete"
+                                                    CssClass="delete-button"
+                                                    CommandName="DeleteRow"
+                                                    CommandArgument='<%# Eval("ID") %>'
+                                                    OnClientClick="return confirm('Are you sure you want to delete this image?');" />
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                    </Columns>
+                                    </asp:GridView>--%>
+
+                                    <asp:GridView ID="GridView1" runat="server"
+                                        AutoGenerateColumns="false"
+                                        CssClass="gridview"
+                                        DataKeyNames="ID, filename"
+                                        OnRowCommand="GridView1_RowCommand"
+                                        OnRowDataBound="GridView1_RowDataBound">
+                                        <Columns>
+                                            <asp:TemplateField HeaderText="#">
+                                                <ItemTemplate>
+                                                    <asp:Label ID="lblRowNumber" runat="server"
+                                                        Text='<%# Container.DataItemIndex + 1 %>'></asp:Label>
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+
+                                            <asp:TemplateField HeaderText="Image">
+                                                <ItemTemplate>
+                                                    <asp:Image ID="imgSample" runat="server"
+                                                        CssClass="img-thumbnail"
+                                                        AlternateText='<%# Eval("SampleText") %>' />
+                                                    <br />
+                                                    <asp:Label ID="lblFileName" runat="server"
+                                                        Text='<%# Eval("filename") %>'></asp:Label>
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+
+                                            <asp:BoundField DataField="SampleText" HeaderText="Sample Name" />
+
+                                            <asp:TemplateField HeaderText="Action">
+                                                <ItemTemplate>
+                                                    <asp:Button ID="btnDelete" runat="server"
+                                                        Text="Delete"
+                                                        CssClass="delete-button"
+                                                        CommandName="DeleteRow"
+                                                        CommandArgument='<%# Container.DisplayIndex %>'
+                                                        OnClientClick="return confirm('Are you sure you want to delete this image?');" />
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+                                        </Columns>
+                                </asp:GridView>
                                 <table style="width: 100%">
                                     <tr>
                                         <td style="text-align: center">
@@ -258,6 +351,9 @@
             </div>
             </div>
         </ContentTemplate>
+        <Triggers>
+            <asp:PostBackTrigger ControlID="btnUpload" />
+        </Triggers>
     </asp:UpdatePanel>
     <asp:HiddenField ID="hdSampleHistory" runat="server" />
     <asp:HiddenField ID="hdSampleCategory" runat="server" />

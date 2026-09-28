@@ -276,8 +276,9 @@
                                     </asp:TemplateField>
                                     <asp:TemplateField HeaderText="Select to Float" HeaderStyle-Width="3%">
                                         <ItemTemplate>
-                                            <asp:CheckBox ID="chkFloat" runat="server" AutoPostBack="false"
+                                            <asp:CheckBox ID="chkFloat" runat="server" OnCheckedChanged="chkFloat_CheckedChanged" AutoPostBack="true"
                                                 Text='<%# "PR-ID:" + Eval("PurchaseRequisitionID").ToString() %>' />
+                                            <asp:HiddenField ID="hdPurchaseRequisitionID" runat="server" Value='<%# Eval("PurchaseRequisitionID") %>' />
                                             <asp:HiddenField ID="hdnItemCode" runat="server" Value='<%# Eval("ItemCode") %>' />
                                             <asp:HiddenField ID="hdnItemID" runat="server" Value='<%# Eval("ItemID") %>' />
                                         </ItemTemplate>
