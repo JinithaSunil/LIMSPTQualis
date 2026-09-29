@@ -342,7 +342,7 @@
                                             <ItemTemplate>
                                                 <asp:TextBox ID="txtQty" runat="server" Text='<%# Eval("Quantity").ToString() %>' OnTextChanged="txtQty_TextChanged" AutoPostBack="true" Width="100%" CssClass="form-control" />
                                                 <ajaxToolkit:FilteredTextBoxExtender ID="FilteredTextBoxExtender1" runat="server" FilterType="Numbers, Custom" ValidChars="." TargetControlID="txtQty" />
-                                                <asp:HiddenField ID="hdRemainingQty" runat="server" Text='<%# Eval("RemainingQty").ToString() %>' />
+                                                <asp:HiddenField ID="hdRemainingQty" runat="server" Value='<%# Eval("RemainingQty").ToString() %>' />
                                             </ItemTemplate>
                                             <ItemStyle Width="5%"></ItemStyle>
                                         </asp:TemplateField>

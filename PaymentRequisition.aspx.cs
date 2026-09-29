@@ -159,7 +159,7 @@ namespace LIMS
                     DataTable dtLastPaymentRequisition = _cm.GetLastPaymentRequisition();
                     if (dtLastPaymentRequisition.Rows.Count > 0)
                     {
-                        PaymentRequisitionCounter = dtLastPaymentRequisition.Rows.Count + 1;
+                        PaymentRequisitionCounter = Convert.ToInt32(dtLastPaymentRequisition.Rows[0]["RequisitionCount"]) + 1;
                     }
                     else
                     {

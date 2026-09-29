@@ -402,14 +402,54 @@
                                                 </div>
                                                 <div class="uprofile-name">
                                                     <h3>
-                                                        <a href="#">
-                                                            <asp:Label ID="lblVendorName" runat="server"></asp:Label></a>
+                                                        <asp:Label ID="lblVendorName" runat="server"></asp:Label>
+                                                        <asp:Label ID="lblVendorID" runat="server" Visible="false"></asp:Label>
+                                                        <asp:LinkButton ID="btnEditVendorName"
+                                                            runat="server"
+                                                            ToolTip="Edit Vendor Name"
+                                                            OnClick="btnEditVendorName_Click"
+                                                            CausesValidation="false">
+            
+            <img src="assets/img/Edit.png"
+                 width="20px"
+                 class="me-1" />
+                                                        </asp:LinkButton>
+
                                                         <span class="uprofile-status online"></span>
                                                     </h3>
+
+                                                    <asp:Panel ID="pnlVendorNameEdit"
+                                                        runat="server"
+                                                        Visible="false"
+                                                        CssClass="mt-2">
+
+                                                        <div style="display: flex; align-items: center; gap: 5px; max-width: 500px;">
+
+                                                            <asp:TextBox ID="txtVendorName"
+                                                                runat="server"
+                                                                CssClass="form-control"
+                                                                MaxLength="200">
+                                                            </asp:TextBox>
+
+                                                            <asp:Button ID="btnSaveVendorName"
+                                                                runat="server"
+                                                                Text="Save"
+                                                                CssClass="btn btn-success btn-sm"
+                                                                OnClick="btnSaveVendorName_Click" />
+
+                                                            <asp:Button ID="btnCancelVendorName"
+                                                                runat="server"
+                                                                Text="Cancel"
+                                                                CssClass="btn btn-secondary btn-sm"
+                                                                OnClick="btnCancelVendorName_Click"
+                                                                CausesValidation="false" />
+
+                                                        </div>
+                                                    </asp:Panel>
                                                 </div>
                                                 <table width="75%" style="text-align: left !important; font-size: 16px; font-weight: 200">
                                                     <tr>
-                                                        <td style="width:35%">Business Type
+                                                        <td style="width: 35%">Business Type
                                                         </td>
                                                         <td>:
                                                             <asp:Label ID="lblBusinessType" runat="server"></asp:Label>
@@ -425,7 +465,7 @@
 
                                                                 <asp:TextBox ID="txtTIN" runat="server"
                                                                     CssClass="form-control tin-input">
-            </asp:TextBox>
+                                                                </asp:TextBox>
 
                                                                 <asp:Button ID="btnSaveTIN" runat="server"
                                                                     Text="Save"

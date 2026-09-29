@@ -151,16 +151,35 @@ namespace LIMS
                 Label lblVendorID = (e.Row.FindControl("lblVendorID") as Label);
                 Label lblPrice = (e.Row.FindControl("lblPrice") as Label);
                 HyperLink hypEnquiryID = (e.Row.FindControl("hypEnquiryID") as HyperLink);
+                HiddenField hdEnquiryDetailsID = (e.Row.FindControl("hdEnquiryDetailsID") as HiddenField);
                 HyperLink hypQuote = (e.Row.FindControl("hypQuote") as HyperLink);
                 HyperLink hypVendor = (e.Row.FindControl("hypVendor") as HyperLink);
                 HyperLink hyRegerenate = (e.Row.FindControl("hyRegerenate") as HyperLink);
                 Button btnResend = (e.Row.FindControl("btnResend") as Button);
                 Button btnRelease = (e.Row.FindControl("btnRelease") as Button);
 
-                if (hypVendor.Text == "0" || hypVendor.Text == "")
+                decimal BalanceQty = 0;
+                DataTable dtBalanceQty = new DataTable();
+                if (hdEnquiryDetailsID != null)
                 {
+                    dtBalanceQty = _cm.GetPendingQtyForPO(hdEnquiryDetailsID.Value);
+                    if (dtBalanceQty.Rows.Count > 0)
+                    {
+                        BalanceQty = Convert.ToDecimal(dtBalanceQty.Rows[0]["BalanceQty"].ToString());
+                        if (BalanceQty > 0)
+                        {
+                            hypEnquiryID.NavigateUrl = "QuoteAnalysis.aspx?ID=" + hypEnquiryID.Text;
+                        }
+                        else
+                        {
+                            hypEnquiryID.NavigateUrl = "ViewEnquiry.aspx?ID=" + hypEnquiryID.Text;
+                        }
+                    }
+                }
+                
+                if (hypVendor.Text == "0" || hypVendor.Text == "")
+                {                    
                     hypEnquiryID.Visible = true;
-                    hypEnquiryID.NavigateUrl = "ViewEnquiry.aspx?ID=" + hypEnquiryID.Text;
                 }
                 else
                 {
@@ -172,6 +191,7 @@ namespace LIMS
                         btnRelease.Visible = true;
                         break;
                     case "Quotation Received"://2
+                    case "Partial PO Generated"://1017
                         if (hypVendor.Text == "0" || hypVendor.Text == "")
                         {
                             hypEnquiryID.NavigateUrl = "ViewEnquiry.aspx?ID=" + hypEnquiryID.Text;
@@ -274,6 +294,7 @@ namespace LIMS
             btnNew.CssClass = "btn btn-primary";
             btnQuoteReceived.CssClass = "btn btn-primary";
             btnAccepted.CssClass = "btn btn-primary";
+            btnPartialPOGenerated.CssClass = "btn btn-primary";
             btnPOGenerated.CssClass = "btn btn-primary";
             btnOthers.CssClass = "btn btn-primary";
 
@@ -285,6 +306,9 @@ namespace LIMS
                     break;
                 case "Accepted":
                     btnAccepted.CssClass = "btn btn-primary active";
+                    break;
+                case "PartialPOGenerated":
+                    btnPartialPOGenerated.CssClass = "btn btn-primary active";
                     break;
                 case "POGenerated":
                     btnPOGenerated.CssClass = "btn btn-primary active";
@@ -667,7 +691,8 @@ namespace LIMS
 
         protected void btnPartialPOGenerated_Click(object sender, EventArgs e)
         {
-
+            string EnquiryType = "PartialPOGenerated";
+            GetEnquiryList("1017", EnquiryType);
         }
     }
 }

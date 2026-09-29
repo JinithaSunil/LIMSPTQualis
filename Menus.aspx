@@ -161,6 +161,7 @@
                                     </div>
                                     <div class="divider"></div>
                                     <div class="grid4">
+                                        <div class="card1"><a href="QuotationList.aspx" target="_blank"><i class="fa fa-file"></i>Quotations</a></div>
                                         <div class="card1"><a href="InvoiceList.aspx" target="_blank"><i class="fa fa-file-invoice-dollar"></i>Sales Invoices</a></div>
                                         <div class="card1"><a href="DebitNote.aspx" target="_blank"><i class="fa fa-file-circle-minus"></i>Debit Note</a></div>
                                         <div class="card1"><a href="ReceiptAdvance.aspx" target="_blank"><i class="fa fa-file-invoice-dollar"></i>Customer Advance</a></div>

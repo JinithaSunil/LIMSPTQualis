@@ -2,6 +2,38 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <script type="text/javascript">
+        function calculatePRRow(element) {
+
+            var row = $(element).closest('tr');
+
+            var totalAmount =
+                parseFloat(row.find('.total-amount').val()) || 0;
+
+            var amountPaid =
+                parseFloat(row.find('.amount-paid').val()) || 0;
+
+            var debitAmount =
+                parseFloat(row.find('.debit-amount').val()) || 0;
+
+            var remaining =
+                totalAmount - amountPaid;
+
+            var difference =
+                remaining - debitAmount;
+            alert(totalAmount + ":" + amountPaid + ":" + debitAmount + ":" + remaining);
+            // No difference
+            if (Math.abs(difference) < 0.01) {
+                difference = 0;
+            }
+
+            // Credit cannot be negative
+            var creditAmount =
+                difference > 0 ? difference : 0;
+
+            row.find('.credit-amount').val(
+                creditAmount.toFixed(2)
+            );
+        }
 
         function selectAllPRs(source) {
 
@@ -149,75 +181,179 @@
                                     <asp:TextBox ID="txtAmountPaid" runat="server" CssClass="form-control" Enabled="false" Placeholder="Previous Paid"></asp:TextBox>
                                 </div>
                             </div>
+
                             <div class="row">
-                                <div class="col-sm-6">
-                                    <div class="card" style="padding: 15px; height:150px">
-                                        <div class="card-header subheader">
-                                            <h5>Debit</h5>
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="col-sm-4">
-                                                <b>Pay Amount</b>
-                                                <asp:TextBox ID="txtPayAmount" runat="server" CssClass="form-control" Placeholder="Amount" OnTextChanged="txtPayAmount_TextChanged" AutoPostBack="true"></asp:TextBox>
-                                            </div>
-                                            <div class="col-sm-4">
-                                                <b>Bank Account</b>
-                                                <asp:DropDownList ID="ddlBank" runat="server" CssClass="form-control"></asp:DropDownList>
-                                            </div>
-                                            <div class="col-sm-4">
-                                                <b>COA Account</b>
-                                                <asp:DropDownList ID="ddlCOADr" runat="server" CssClass="form-control"></asp:DropDownList>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4">
-                                    <div class="card" style="padding: 15px;height:150px">
-                                        <div class="card-header subheader">
-                                            <h5>Credit</h5>
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="col-sm-6">
-                                                <b>Balance Amount</b>
-                                                <asp:TextBox ID="txtBalanceAmount" runat="server" CssClass="form-control" Enabled="false" Placeholder="Current Payment"></asp:TextBox>
-                                            </div>
-                                            <div class="col-sm-6">
-                                                <b>COA Account</b>
-                                                <asp:DropDownList ID="ddlCOACr" runat="server" CssClass="form-control"></asp:DropDownList>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-2">
-                                    <br />
-                                    <asp:Button ID="btnSaveDraft" runat="server" CssClass="btn btn-primary" Text="Save" OnClick="btnSaveDraft_Click" Visible="true" />
-                                </div>
-                            </div>
-                            <div class="row">
-                                <asp:GridView ID="gvPaymentRequisitions" runat="server" CssClass="table" DataKeyNames="PaymentRequisitionID,TotalAmount,AmountPaid"
-                                    AutoGenerateColumns="false" ShowFooter="True">
+                                <asp:GridView
+                                    ID="gvPaymentRequisitions"
+                                    runat="server"
+                                    CssClass="table table-bordered table-hover"
+                                    DataKeyNames="PaymentRequisitionID,TotalAmount,AmountPaid"
+                                    AutoGenerateColumns="false"
+                                    ShowFooter="True"
+                                    OnRowDataBound="gvPaymentRequisitions_RowDataBound">
+
                                     <Columns>
-                                        <asp:TemplateField HeaderText="Select" HeaderStyle-Width="60px">
+
+                                        <asp:TemplateField
+                                            HeaderText="Select"
+                                            HeaderStyle-Width="60px">
+
                                             <HeaderTemplate>
-                                                <asp:CheckBox ID="chkSelectAll" runat="server" OnCheckedChanged="chkSelectAll_CheckedChanged" AutoPostBack="true" />
+                                                <asp:CheckBox
+                                                    ID="chkSelectAll"
+                                                    runat="server"
+                                                    AutoPostBack="true"
+                                                    OnCheckedChanged="chkSelectAll_CheckedChanged" />
                                             </HeaderTemplate>
 
                                             <ItemTemplate>
-                                                <asp:CheckBox ID="chkPR" runat="server"
+
+                                                <asp:CheckBox
+                                                    ID="chkPR"
+                                                    runat="server"
                                                     CssClass="chkPR"
                                                     AutoPostBack="true"
                                                     OnCheckedChanged="chkPR_CheckedChanged" />
-                                                <asp:Label ID="lblRowNumber" Text='<%# Container.DataItemIndex + 1 %>' runat="server" />
-                                                <asp:HiddenField ID="hfPaymentRequisitionID" runat="server" Value='<%# Eval("PaymentRequisitionID") %>' />
+
+                                                <asp:Label
+                                                    ID="lblRowNumber"
+                                                    runat="server"
+                                                    Text='<%# Container.DataItemIndex + 1 %>' />
+
+                                                <asp:HiddenField
+                                                    ID="hfPaymentRequisitionID"
+                                                    runat="server"
+                                                    Value='<%# Eval("PaymentRequisitionID") %>' />
+
+                                            </ItemTemplate>
+
+                                        </asp:TemplateField>
+
+
+                                        <asp:BoundField
+                                            DataField="RequisitionNumber"
+                                            HeaderText="Requisition Number" />
+                                        <asp:TemplateField HeaderText="Total Amt.">
+                                            <ItemTemplate>
+                                                <asp:Label
+                                                    ID="lblTotalAmount"
+                                                    runat="server"
+                                                    CssClass="total-amount"
+                                                    Text='<%# Eval("TotalAmount") == DBNull.Value ? "0" : Eval("TotalAmount", "{0:0.00}") %>' />
                                             </ItemTemplate>
                                         </asp:TemplateField>
-                                        <asp:BoundField DataField="RequisitionNumber"
-                                            HeaderText="RequisitionNumber" />
+                                        <asp:TemplateField HeaderText="Amt. Paid">
+                                            <ItemTemplate>
+                                                <asp:Label
+                                                    ID="lblAmountPaid"
+                                                    runat="server"
+                                                    CssClass="amount-paid"
+                                                    Text='<%# Eval("AmountPaid") == DBNull.Value ? "0" : Eval("AmountPaid", "{0:0.00}") %>' />
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="Debit" ItemStyle-BackColor="lightPink" HeaderStyle-HorizontalAlign="Center">
 
-                                        <asp:BoundField DataField="TotalAmount"
-                                            HeaderText="TotalAmount"
-                                            DataFormatString="{0:N2}" />
+                                            <ItemTemplate>
+
+                                                <div class="row g-2">
+
+                                                    <div class="col-md-4">
+
+
+
+
+                                                        <label class="form-label">
+                                                            Pay Amount
+                                                        </label>
+
+                                                        <asp:TextBox
+                                                            ID="txtDebitPayAmount"
+                                                            runat="server"
+                                                            CssClass="form-control form-control-sm debit-amount"
+                                                            onkeyup="calculatePRRow(this)"
+                                                            onchange="calculatePRRow(this)">
+                                                            </asp:TextBox>
+                                                    </div>
+
+
+                                                    <div class="col-md-4">
+
+                                                        <label class="form-label">
+                                                            Debit COA
+                                                        </label>
+
+                                                        <asp:DropDownList
+                                                            ID="ddlDebitCOA"
+                                                            runat="server"
+                                                            CssClass="form-control form-control-sm">
+                                                        </asp:DropDownList>
+
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <label class="form-label">
+                                                            Bank
+                                                        </label>
+
+                                                        <asp:DropDownList
+                                                            ID="ddlBank"
+                                                            runat="server"
+                                                            CssClass="form-control form-control-sm">
+                                                        </asp:DropDownList>
+
+                                                    </div>
+
+                                                </div>
+
+                                            </ItemTemplate>
+
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="Credit" ItemStyle-BackColor="lightGreen">
+                                            <ItemTemplate>
+
+                                                <div class="row g-2">
+
+                                                    <div class="col-md-6">
+
+                                                        <label class="form-label">
+                                                            Pay Amount
+                                                        </label>
+
+                                                        <asp:TextBox
+                                                            ID="txtCreditPayAmount"
+                                                            runat="server"
+                                                            CssClass="form-control form-control-sm credit-amount"
+                                                            Text='<%# Eval("TotalAmount", "{0:0.00}") %>'
+                                                            onkeyup="calculatePRRow(this)"
+                                                            onchange="calculatePRRow(this)">
+                                                        </asp:TextBox>
+
+                                                    </div>
+
+
+                                                    <div class="col-md-6">
+
+                                                        <label class="form-label">
+                                                            Credit COA
+                                                        </label>
+
+                                                        <asp:DropDownList
+                                                            ID="ddlCreditCOA"
+                                                            runat="server"
+                                                            CssClass="form-control form-control-sm">
+                                                        </asp:DropDownList>
+
+                                                    </div>
+
+                                                </div>
+
+                                            </ItemTemplate>
+
+                                        </asp:TemplateField>
+
+
+
                                     </Columns>
+
                                 </asp:GridView>
                                 <asp:HiddenField ID="hdTotal" runat="server" />
                             </div>
@@ -237,246 +373,9 @@
                 <div class="row-clearfix">
                     <div class="col-sm-12">
                         <asp:Label ID="lblMessage" runat="server"></asp:Label>
-                        <%--                        <asp:GridView ID="gvPaymentRequisition"
-                            runat="server"
-                            AutoGenerateColumns="False"
-                            DataKeyNames="PaymentRequisitionDetailsID"
-                            OnRowCommand="gvPaymentRequisition_RowCommand"
-                            OnRowDataBound="gvPaymentRequisition_RowDataBound"
-                            class="table table-bordered table-striped table-hover js-basic-example dataTable">
-                            <Columns>
-
-                                <asp:TemplateField HeaderText="Sl#">
-                                    <ItemTemplate>
-                                        <asp:Label ID="lblRowNumber" Text='<%# Container.DataItemIndex + 1 %>' runat="server" />
-                                        <asp:HiddenField ID="hfPaymentRequisitionDetailsID" runat="server" Value='<%# Eval("PaymentRequisitionDetailsID") %>' />
-                                    </ItemTemplate>
-                                    <ItemStyle Width="2%"></ItemStyle>
-                                </asp:TemplateField>
-
-                                <asp:BoundField DataField="ItemDescription"
-                                    HeaderText="Description" />
-
-                                <asp:BoundField DataField="Quantity"
-                                    HeaderText="Qty" />
-
-                                <asp:BoundField DataField="TotalPrice"
-                                    HeaderText="Amount"
-                                    DataFormatString="{0:N2}" />
-                                <asp:TemplateField HeaderText="Journal">
-                                    <ItemTemplate>
-
-                                        <!-- JOURNAL CONTAINER -->
-                                        <div class="journal-container">
-
-                                            <!-- SHOW / HIDE BUTTON -->
-                                            <asp:LinkButton
-                                                ID="lnkJournal"
-                                                runat="server"
-                                                Text="View Journal"
-                                                CommandName="Journal"
-                                                CommandArgument='<%# Eval("PaymentRequisitionDetailsID") %>'
-                                                CssClass="btn btn-sm"
-                                                Style="background: #b34788; color: white;">
-                                            </asp:LinkButton>
-
-                                            <!-- JOURNAL PANEL -->
-                                            <asp:Panel
-                                                ID="pnlLineJournal"
-                                                runat="server"
-                                                Visible="false"
-                                                CssClass="journal-panel mt-2">
-
-                                                <div class="card">
-
-                                                    <div class="card-header d-flex justify-content-between align-items-center">
-
-                                                        <b>Journal Entries</b>
-
-                                                        <!-- ADD JOURNAL ENTRY BUTTON -->
-                                                        <asp:Button
-                                                            ID="btnAddJournal"
-                                                            runat="server"
-                                                            Text="+ Add Journal Entry"
-                                                            CssClass="btn btn-sm btn-success"
-                                                            CommandName="AddJournal"
-                                                            CommandArgument='<%# Eval("PaymentRequisitionDetailsID") %>' />
-
-                                                    </div>
-
-                                                    <div class="card-body">
-
-                                                        <!-- JOURNAL GRID -->
-                                                        <asp:GridView
-                                                            ID="gvLineJournal"
-                                                            runat="server"
-                                                            AutoGenerateColumns="False"
-                                                            CssClass="table table-bordered table-sm"
-                                                            OnRowCommand="gvLineJournal_RowCommand"
-                                                            OnRowDataBound="gvLineJournal_RowDataBound">
-
-                                                            <Columns>
-                                                                <asp:TemplateField HeaderText="Seq">
-                                                                    <ItemTemplate>
-                                                                        <asp:Label
-                                                                            ID="lblSequence"
-                                                                            runat="server"
-                                                                            Text='<%# Eval("SequenceNo") %>' />
-                                                                    </ItemTemplate>
-
-                                                                    <ItemStyle Width="5%" />
-                                                                </asp:TemplateField>
-
-                                                                <asp:TemplateField HeaderText="Account">
-
-                                                                    <ItemTemplate>
-
-                                                                        <asp:DropDownList
-                                                                            ID="ddlAccount"
-                                                                            runat="server"
-                                                                            CssClass="form-control form-control-sm">
-                                                                        </asp:DropDownList>
-
-                                                                        <asp:HiddenField
-                                                                            ID="hfJournalLineID"
-                                                                            runat="server"
-                                                                            Value='<%# Eval("LineID") %>' />
-                                                                        <asp:HiddenField ID="hfPaymentRequisitionDetailsID" runat="server" Value='<%# Eval("SourceID") %>' />
-                                                                    </ItemTemplate>
-
-                                                                    <ItemStyle Width="25%" />
-
-                                                                </asp:TemplateField>
-
-
-                                                                <asp:TemplateField HeaderText="Description">
-
-                                                                    <ItemTemplate>
-
-                                                                        <asp:TextBox
-                                                                            ID="txtJournalDescription"
-                                                                            runat="server"
-                                                                            CssClass="form-control form-control-sm"
-                                                                            Text='<%# Eval("LineDescription") %>' />
-
-                                                                    </ItemTemplate>
-
-                                                                    <ItemStyle Width="25%" />
-
-                                                                </asp:TemplateField>
-
-                                                                <asp:TemplateField HeaderText="Debit">
-
-                                                                    <ItemTemplate>
-
-                                                                        <asp:TextBox
-                                                                            ID="txtDebit"
-                                                                            runat="server"
-                                                                            CssClass="form-control form-control-sm text-end journal-debit"
-                                                                            Text='<%# Eval("Debit", "{0:0.00}") %>'
-                                                                            onkeyup="calculateJournalTotals(this)"
-                                                                            onchange="calculateJournalTotals(this)" />
-
-                                                                    </ItemTemplate>
-
-                                                                    <ItemStyle Width="15%" />
-
-                                                                </asp:TemplateField>
-
-                                                                <asp:TemplateField HeaderText="Credit">
-                                                                    <ItemTemplate>
-                                                                        <asp:TextBox
-                                                                            ID="txtCredit"
-                                                                            runat="server"
-                                                                            CssClass="form-control form-control-sm text-end journal-credit"
-                                                                            Text='<%# Eval("Credit", "{0:0.00}") %>'
-                                                                            onkeyup="calculateJournalTotals(this)"
-                                                                            onchange="calculateJournalTotals(this)" />
-                                                                    </ItemTemplate>
-                                                                    <ItemStyle Width="15%" />
-                                                                </asp:TemplateField>
-                                                                <asp:TemplateField HeaderText="Action">
-                                                                    <ItemTemplate>
-                                                                        <asp:LinkButton ID="lnkSaveJournal"
-                                                                            runat="server"
-                                                                            Text="Save Journal"
-                                                                            CssClass="btn btn-sm btn-primary"
-                                                                            CommandArgument='<%# Eval("SourceID") %>'
-                                                                            OnClick="lnkSaveJournal_Click" />
-                                                                        <asp:LinkButton
-                                                                            ID="lnkDeleteJournal"
-                                                                            runat="server"
-                                                                            Text="Delete"
-                                                                            CssClass="btn btn-sm btn-danger"
-                                                                            CommandName="DeleteJournal"
-                                                                            CommandArgument='<%# Eval("LineID") %>'
-                                                                            OnClientClick="return confirm('Delete this journal entry?');">
-                                                                        </asp:LinkButton>
-                                                                    </ItemTemplate>
-                                                                    <ItemStyle Width="10%" />
-                                                                </asp:TemplateField>
-                                                            </Columns>
-                                                        </asp:GridView>
-
-                                                        <!-- TOTALS -->
-                                                        <div class="row mt-2 p-2"
-                                                            style="background: #f8f8f8; border-radius: 4px;">
-
-                                                            <div class="col-md-4">
-                                                                <b>Debit:</b>
-
-                                                                <asp:Label
-                                                                    ID="lblLineDebit"
-                                                                    runat="server"
-                                                                    Text="0.00" />
-                                                            </div>
-
-                                                            <div class="col-md-4">
-                                                                <b>Credit:</b>
-
-                                                                <asp:Label
-                                                                    ID="lblLineCredit"
-                                                                    runat="server"
-                                                                    Text="0.00" />
-                                                            </div>
-
-                                                            <div class="col-md-4">
-                                                                <b>Difference:</b>
-
-                                                                <asp:Label
-                                                                    ID="lblLineDifference"
-                                                                    runat="server"
-                                                                    Text="0.00"
-                                                                    ForeColor="Green" />
-                                                            </div>
-
-                                                        </div>
-
-                                                    </div>
-
-                                                    <asp:Button
-                                                        ID="btnSaveJournal"
-                                                        runat="server"
-                                                        Text="Save Journal"
-                                                        CssClass="btn btn-primary"
-                                                        OnClick="btnSaveJournal_Click" Visible="false" />
-                                                </div>
-
-                                            </asp:Panel>
-
-                                        </div>
-
-                                    </ItemTemplate>
-                                </asp:TemplateField>
-                            </Columns>
-                        </asp:GridView>--%>
                     </div>
                 </div>
                 <div class="row-clearfix">
-                    <div class="col-sm-6">
-                        <b>Notes</b>
-                        <asp:TextBox ID="txtNotes" runat="server" CssClass="form-control" TextMode="MultiLine" Rows="3"></asp:TextBox>
-                    </div>
 
                     <div class="col-sm-3">
                         <br />
@@ -542,15 +441,6 @@
                 }
             });
 
-            var payAmount =
-                parseFloat($('#<%= txtPayAmount.ClientID %>').val()) || 0;
-
-            var difference =
-                payAmount - totalDebit;
-
-            $('#<%= txtBalanceAmount.ClientID %>').val(
-                difference.toFixed(2)
-            );
 
             $('#lblJournalDebit').text(
                 totalDebit.toLocaleString(

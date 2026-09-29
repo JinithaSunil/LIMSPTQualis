@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -34,6 +35,7 @@ namespace LIMS
                             string vendorCode = Request.QueryString["ID"].ToString();
                             DataTable dt = _cm.GetVendorCode(vendorCode);
                             int vendorID = Convert.ToInt32(dt.Rows[0]["vendorID"].ToString());
+                            lblVendorID.Text = vendorID.ToString();
                             Session["vendorID"] = vendorID;
                             BindVendorDetails(vendorCode);
                             BindVendorAddress(vendorCode);
@@ -58,15 +60,79 @@ namespace LIMS
 
         protected void BindVendorDetails(string vendorCode)
         {
-            DataTable dtVendor = _cm.getVendorDetails(vendorCode);
-            if (dtVendor.Rows.Count > 0)
+            if (lblVendorID.Text != "")
             {
-                lblVendorName.Text = dtVendor.Rows[0]["VendorName"].ToString();
-                lblBusinessType.Text = dtVendor.Rows[0]["TypeOfBusiness"].ToString();
-                lblPAN.Text= dtVendor.Rows[0]["PANNumber"].ToString();
+                int vendorID = Convert.ToInt32(lblVendorID.Text);
+                DataTable dtVendor = _cm.getVendorDetails(vendorCode);
+                if (dtVendor.Rows.Count > 0)
+                {
+                    lblVendorName.Text = dtVendor.Rows[0]["VendorName"].ToString();
+                    lblBusinessType.Text = dtVendor.Rows[0]["TypeOfBusiness"].ToString();
+                    lblPAN.Text = dtVendor.Rows[0]["PANNumber"].ToString();
+
+                    int enquiryCount = _cm.GetVendorEnquiryCount(vendorID);
+
+                    btnEditVendorName.Visible = enquiryCount == 0;
+                }
+            }           
+        }
+        protected void btnSaveVendorName_Click(object sender, EventArgs e)
+        {
+            // Important: check again before UPDATE
+            if (lblVendorID.Text != "")
+            {
+                int vendorID = Convert.ToInt32(lblVendorID.Text);
+                // Recheck on the server
+                if (_cm.GetVendorEnquiryCount(vendorID) > 0)
+                {
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Vendor name cannot be changed because enquiries already exist for this vendor.');", true);
+                    return;
+                }
+
+
+                string vendorName = txtVendorName.Text.Trim();
+
+                if (string.IsNullOrWhiteSpace(vendorName))
+                {
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Vendor name cannot be blank.');", true);
+                    return;
+                }
+
+                _cm.UpdateVendorName(vendorID, vendorName);
+
+                lblVendorName.Text = vendorName;
+
+                pnlVendorNameEdit.Visible = false;
+                lblVendorName.Visible = true;
+
+                btnEditVendorName.Visible = true;
             }
         }
+        protected void btnCancelVendorName_Click(object sender, EventArgs e)
+        {
+            pnlVendorNameEdit.Visible = false;
+            lblVendorName.Visible = true;
+            btnEditVendorName.Visible = true;
+        }
+        protected void btnEditVendorName_Click(object sender, EventArgs e)
+        {
+            if (lblVendorID.Text != "")
+            {
+                int vendorID = Convert.ToInt32(lblVendorID.Text);
+                // Recheck on the server
+                if (_cm.GetVendorEnquiryCount(vendorID) > 0)
+                {
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Vendor name cannot be changed because enquiries already exist for this vendor.');", true);
+                    return;
+                }
 
+                txtVendorName.Text = lblVendorName.Text;
+
+                pnlVendorNameEdit.Visible = true;
+                btnEditVendorName.Visible = false;
+                lblVendorName.Visible = false;
+            }
+        }
         protected void BindVendorAddress(string vendorCode)
         {
             DataTable dtVendorAddress = _cm.getVendorAddress(vendorCode);

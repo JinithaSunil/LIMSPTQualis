@@ -12072,31 +12072,100 @@ inner join Verification v on v.Code=vn.VendorCode where vq.VendorQuotationID='" 
         //---------enquiry list----------
         public DataTable GetEnquiryList()
         {
-            sQuery = @"SELECT DISTINCT 
-                 eq.EnquiryID,ed.EnquiryDetailsID,
-                 vd.VendorID as sent,
-                 v.VendorName as NameValues,
-                 vd.Rate,
-                 q.QuotationStatus,
-                 eq.created,
-                 i.ItemID,
-                 i.ItemCode,
-                 i.ItemDescription
-             FROM Enquiry eq 
-             INNER JOIN EnquiryDetails ed ON eq.EnquiryID = ed.EnquiryID 
-             INNER JOIN Items i ON i.itemid = ed.itemid
-             INNER JOIN VendorQuotationDetails vd ON vd.EnquiryDetailsID = ed.EnquiryDetailsID 
-             INNER JOIN VendorDetails v ON vd.VendorID = v.VendorID
-             INNER JOIN PurchaseRequisitionDetails pd ON pd.EnquiryId = eq.EnquiryID
-             INNER JOIN PurchaseRequisition pr ON pr.prid = pd.prid
-             LEFT JOIN QuotationStatus q ON q.QuotationStatusID = vd.statusID
-             WHERE eq.EnquiryID NOT IN (
-                 SELECT e.EnquiryID 
-                 FROM Enquiry e 
-                 INNER JOIN PurchaseOrder po ON e.PurchaseOrderID = po.PurchaseOrderID
-             )
-             AND vd.statusID = 1 
-             ORDER BY eq.EnquiryID DESC, v.VendorName";
+            //            sQuery = @"SELECT DISTINCT 
+            //    eq.EnquiryID,
+            //    ed.EnquiryDetailsID,
+            //    vd.VendorID AS sent,
+            //    v.VendorName AS NameValues,
+            //    vd.Rate,
+            //    q.QuotationStatus,
+            //    eq.created,
+            //    i.ItemID,
+            //    i.ItemCode,
+            //    i.ItemDescription,
+            //    ed.Quantity AS EnquiryQty,
+            //    ISNULL(po.POQty, 0) AS POQty,
+            //    ed.Quantity - ISNULL(po.POQty, 0) AS BalanceQty
+            //FROM Enquiry eq 
+            //INNER JOIN EnquiryDetails ed 
+            //    ON eq.EnquiryID = ed.EnquiryID 
+            //INNER JOIN Items i 
+            //    ON i.ItemID = ed.ItemID
+            //INNER JOIN VendorQuotationDetails vd 
+            //    ON vd.EnquiryDetailsID = ed.EnquiryDetailsID 
+            //INNER JOIN VendorDetails v 
+            //    ON vd.VendorID = v.VendorID
+            //INNER JOIN PurchaseRequisitionDetails pd 
+            //    ON pd.EnquiryId = eq.EnquiryID
+            //INNER JOIN PurchaseRequisition pr 
+            //    ON pr.prid = pd.prid
+            //LEFT JOIN QuotationStatus q 
+            //    ON q.QuotationStatusID = vd.statusID
+
+            //LEFT JOIN (
+            //    SELECT 
+            //        pod.EnquiryDetailsID,
+            //        SUM(ISNULL(pod.Quantity, 0)) AS POQty
+            //    FROM PurchaseOrderDetails pod
+            //    GROUP BY pod.EnquiryDetailsID
+            //) po 
+            //    ON po.EnquiryDetailsID = ed.EnquiryDetailsID
+
+            //WHERE vd.statusID = 1
+
+            //-- Include only if there is still quantity available
+            //AND ed.Quantity > ISNULL(po.POQty, 0)
+
+            //ORDER BY 
+            //    eq.EnquiryID DESC, 
+            //    v.VendorName;";
+            sQuery = @" SELECT DISTINCT 
+    eq.EnquiryID,
+    ed.EnquiryDetailsID,
+    vd.VendorID AS sent,
+    v.VendorName AS NameValues,
+    vd.Rate,
+    q.QuotationStatus,
+    eq.created,
+    i.ItemID,
+    i.ItemCode,
+    i.ItemDescription,
+    ed.Quantity AS EnquiryQty,
+    ISNULL(po.POQty, 0) AS POQty,
+    ed.Quantity - ISNULL(po.POQty, 0) AS BalanceQty
+FROM Enquiry eq 
+INNER JOIN EnquiryDetails ed 
+    ON eq.EnquiryID = ed.EnquiryID 
+INNER JOIN Items i 
+    ON i.ItemID = ed.ItemID
+INNER JOIN VendorQuotationDetails vd 
+    ON vd.EnquiryDetailsID = ed.EnquiryDetailsID 
+INNER JOIN VendorDetails v 
+    ON vd.VendorID = v.VendorID
+INNER JOIN PurchaseRequisitionDetails pd 
+    ON pd.EnquiryId = eq.EnquiryID
+INNER JOIN PurchaseRequisition pr 
+    ON pr.prid = pd.prid
+LEFT JOIN QuotationStatus q 
+    ON q.QuotationStatusID = vd.statusID
+
+LEFT JOIN (
+    SELECT 
+        pod.EnquiryDetailsID,
+        SUM(ISNULL(pod.Quantity, 0)) AS POQty
+    FROM PurchaseOrderDetails pod
+    GROUP BY pod.EnquiryDetailsID
+) po 
+    ON po.EnquiryDetailsID = ed.EnquiryDetailsID
+
+WHERE vd.statusID = 1
+
+-- Include only if there is still quantity available
+AND ed.Quantity > ISNULL(po.POQty, 0)
+
+ORDER BY 
+    eq.EnquiryID DESC, 
+    v.VendorName";
 
             dt = GetDataUsingQuery(sQuery);
             return dt;
@@ -12115,6 +12184,7 @@ inner join Verification v on v.Code=vn.VendorCode where vq.VendorQuotationID='" 
             switch (EnquiryType)
             {
                 case "QuoteSent":
+                case "PartialPOGenerated":
                     clearTables("tempenquiry");
                     sQuery = @"select * into tempenquiry from(Select distinct eq.EnquiryID,ed.EnquiryDetailsID,i.ItemID,i.itemCode,i.ItemDescription,v.vendorID,v.vendorName,eq.VendorID as sent,vd.Rate,q.QuotationStatus,vd.ReportFileName,vq.VendorQuotationID,eq.Created from Enquiry eq " +
                           @"  inner join EnquiryDetails ed on eq.EnquiryID=ed.EnquiryID 
@@ -13140,6 +13210,37 @@ inner join Verification v on v.Code=vn.VendorCode where vq.VendorQuotationID='" 
             //        INNER JOIN UOM u ON u.UOMID = i.UOMID
             //        LEFT JOIN VAT vt ON vt.VATID = vqd.VATID
             //           WHERE vq.EnquiryID='" + EnquiryID + "' and vqd.VendorID='" + VendorID + "' and vq.StatusID in(3,9) and DisabledItem='0'";
+            dt = GetDataUsingQuery(sQuery);
+            return dt;
+        }
+
+        public DataTable GetPendingQtyForPO(string EnquiryDetailsID)
+        {
+            sQuery = @"SELECT
+                            ed.EnquiryDetailsID,
+                            ed.EnquiryID,
+                            ed.Quantity AS EnquiryQty,
+                            ISNULL(po.POQty, 0) AS POQty,
+                            ed.Quantity - ISNULL(po.POQty, 0) AS BalanceQty
+                        FROM EnquiryDetails ed
+
+                        INNER JOIN VendorQuotationDetails vd
+                            ON vd.EnquiryDetailsID = ed.EnquiryDetailsID
+
+                        LEFT JOIN
+                        (
+                            SELECT
+                                vd.EnquiryDetailsID,
+                                SUM(ISNULL(pd.Quantity, 0)) AS POQty
+                            FROM VendorQuotationDetails vd
+                            INNER JOIN PurchaseOrderDetails pd
+                                ON pd.VendorQuotationDetailsID = vd.VendorQuotationDetailsID
+                            GROUP BY
+                                vd.EnquiryDetailsID
+                        ) po
+                            ON po.EnquiryDetailsID = ed.EnquiryDetailsID
+
+                        WHERE ed.EnquiryDetailsID = '" + EnquiryDetailsID +"'";
             dt = GetDataUsingQuery(sQuery);
             return dt;
         }
@@ -19230,7 +19331,7 @@ WHERE ad.InquiryID  = '" + InquiryID + "'ORDER BY cf.WorkOrderNumber, sampleIDSe
         }
         public DataTable GetPaymentRequisitionMaster(int PaymentRequisitionID)
         {
-            sQuery = @"SELECT distinct dm.PaymentRequisitionID,dm.RequisitionNumber,TotalAmount,AmountPaid 
+            sQuery = @"SELECT distinct dm.PaymentRequisitionID,dm.RequisitionNumber,TotalAmount,isnull(AmountPaid,0)AmountPaid
                         FROM PaymentRequisitionMaster dm 
                         where dm.PaymentRequisitionID = " + PaymentRequisitionID;
             dt = GetDataUsingQuery(sQuery);
@@ -20975,7 +21076,48 @@ ReceiptDate =@ReceiptDate,
             dt1 = GetDataUsingQuery(sQuery);
             return dt1;
         }
+        public int GetVendorEnquiryCount(int vendorID)
+        {
+            string sQuery = @"
+                            SELECT COUNT(DISTINCT e.EnquiryID)
+                            FROM Enquiry e
+                            CROSS APPLY STRING_SPLIT(e.VendorID, ',') s
+                            WHERE TRY_CAST(LTRIM(RTRIM(s.value)) AS INT) = @VendorID";
 
+            using (SqlConnection _sCon = new SqlConnection(cs))
+            {
+                using (SqlCommand cmd = new SqlCommand(sQuery, _sCon))
+                {
+                    cmd.Parameters.Add("@VendorID", SqlDbType.Int).Value = vendorID;
+
+                    if (_sCon.State != ConnectionState.Open)
+                        _sCon.Open();
+                    return Convert.ToInt32(cmd.ExecuteScalar());
+                }                
+            }
+        }
+        public void UpdateVendorName(int vendorID, string vendorName)
+        {
+            string sQuery = @"
+        UPDATE VendorDetails
+        SET VendorName = @VendorName
+        WHERE VendorID = @VendorID";
+
+            using (SqlConnection _sCon = new SqlConnection(cs))
+            {
+                using (SqlCommand cmd = new SqlCommand(sQuery, _sCon))
+                {
+                    cmd.Parameters.Add("@VendorName", SqlDbType.NVarChar, 200).Value = vendorName;
+                    cmd.Parameters.Add("@VendorID", SqlDbType.Int).Value = vendorID;
+
+                    if (_sCon.State != ConnectionState.Open)
+                        _sCon.Open();
+
+                    cmd.ExecuteNonQuery();
+                }
+
+            }
+        }
         public DataTable Getdataforseriesandreportid_transport(int sampleId, int reportId)
         {
             DataTable dt1 = new DataTable();

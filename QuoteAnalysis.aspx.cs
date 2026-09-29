@@ -296,17 +296,19 @@ namespace LIMS
 
                                 case "2":
                                 case "7":
-                                    if (!hasAcceptedQuote && allQuotesReceived)
-                                    {
-                                        btnAccept.Visible = true;
-                                        btnAccept.Enabled = true;
-                                    }
-                                    else if (hasAcceptedQuote)
-                                    {
+                                    btnAccept.Visible = true;
+                                    btnAccept.Enabled = true;
+                                    //if (!hasAcceptedQuote && allQuotesReceived)
+                                    //{
+                                    //    btnAccept.Visible = true;
+                                    //    btnAccept.Enabled = true;
+                                    //}
+                                    //else if (hasAcceptedQuote)
+                                    //{
     
-                                        btnAccept.Visible = false;
+                                    //    btnAccept.Visible = false;
                           
-                                    }
+                                    //}
                                     //else
                                     //{
                                     //    btnAccept.Visible = true;
